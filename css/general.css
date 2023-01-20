@@ -1,0 +1,80 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    background-color: pink;
+    background-image: url("../img/fondo.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    color: black;
+}
+
+header {
+    color: #1f091d;
+}
+
+header h1, header h2{
+    margin: 0;
+}
+
+nav::before, header::before {
+    position: absolute;
+    content: " ";
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    opacity:0.5;
+    z-index:-1;
+}
+nav ul::before {
+    position: absolute;
+    content: " ";
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity:0.3;
+    z-index:-1;
+}
+nav, header {
+    position: relative;
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+nav {
+    position: relative;
+    text-align: center;
+}
+nav ul{
+    position:relative;
+    margin: 0;
+    text-align: center;
+}
+nav ul li {
+    margin: 0;
+    padding:0;
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    width: 10%;
+}
+nav ul li a{
+    display: inline-block;
+    text-decoration: none;
+    padding: 1em;
+    background-color: #f1a7ed;
+    width: 100%;
+    color: #3d123b;
+}
+nav ul li a:hover {
+    background-color: #f9c9f6;
+    transform: scaleX(1.3);
+    transform: scaleY(1.1);
+}
