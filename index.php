@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <title>Bloom - JS</title>
         <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
         <header>
             <h1>BloomJS</h1>
-            <h2><quote>Para que puedas olvidarte del teclado</quote></h2>
+            <h2>Para que puedas olvidarte del código y centrarte en tu diseño</h2>
         </header>
         <nav>
             <ul>
@@ -21,6 +22,17 @@
             </ul>
         </nav>
         <main>
+            <div id="comentarios">
+                <p>qweqeqweqe</p>
+                <p>qweqewqeqw</p>
+                <ul>
+                    <li>awqewqeqweqeqwe</li>
+                    <li>qweqeqeqweqweqweq</li>
+                    <li>qeqeqeqweqweqwqe</li>
+                </ul>
+                <p>qweqeqweqeqeqwewqe</p>
+                <p>qweqewqesaddsadas</p>
+            </div>
             <div id="contenido">
                 <section id="bienvenida">
                     <h2>¡Bienvenido a BloomJS!</h2>
@@ -66,9 +78,6 @@
                         <email>Correo</email> ¡Bienvenido/a a BloomJS!
                     </p>
                 </section>
-            </div>
-            <div id="comentarios">
-
             </div>
         </main>
         <footer>
