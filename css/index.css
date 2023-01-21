@@ -1,0 +1,66 @@
+div#comentarios::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212121;
+    opacity: 1;
+    z-index: -1;
+}
+div#comentarios {
+    color: white;
+    position: relative;
+    width: 20%;
+    display: table-cell;
+}
+
+div#contenido {
+    position: relative;
+    display: table-cell;
+}
+
+
+div#contenido section {
+    position: relative;
+    padding: 2em;
+}
+
+div#contenido section h2 {
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
+}
+div#contenido section p {
+    font-family: "DM Serif Text";
+    font-size: 14pt;
+    margin-bottom: 2em;
+}
+
+div#contenido section::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-blend-mode: multiply;
+    opacity: 0.8;
+    z-index: -1;
+    background-size:cover;
+    background-attachment: scroll;
+    background-image: linear-gradient(black, white,white,white,white, black), 
+}
+
+div#contenido section#bienvenida::before{
+    background-image: url("../img/prueba.jpg");
+}
+
+div#contenido section#funcionalidades::before{
+    background-image:linear-gradient(black, white,white,white,white, black), url("../img/pluma.jpg");
+}
+
+div#contenido section#empezar::before {
+    background-image: url("../img/videojuego.jpg");
+}
