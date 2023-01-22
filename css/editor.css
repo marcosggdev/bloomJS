@@ -1,0 +1,139 @@
+main::before {
+    position:absolute;
+    content:" ";
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #212121;
+    opacity: 1;
+    z-index: -1;
+}
+main {
+    position: relative;
+    width: 100%;
+}
+
+div#barraContexto {
+    display: block;
+    width: 100%;
+    background-color: #212121;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}
+
+div#barraMenus{
+    display: block;
+    width: 100%;
+    border: 2px solid grey;
+    box-sizing: border-box;
+}
+
+div#barraMenus ul {
+    display: block;
+    width: 100%;
+    background-color:#303030;
+    margin: 0;
+    padding:5px;
+    box-sizing: border-box;
+}
+
+div#barraMenus ul li{
+    display: inline;
+    text-decoration: none;
+}
+
+div#barraMenus ul li button {
+    background-color: #5a5a5a;
+}
+
+div#barraMenus ul li button:hover {
+    background-color: #929292;
+    color: white;
+}
+
+div#menuArchivo {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    width: 20%;
+}
+
+div#menuArchivo ul li{
+    display: block;
+    text-decoration: none;
+    color: black;
+    background-color: #5a5a5a;
+    border: 1px solid black;
+}
+
+div#menuArchivo ul li:hover{
+    background-color: #929292;
+    color: white;
+}
+
+div#barraIconos {
+    display: table;
+    position: relative;
+    background-color: #212121;
+    width: 100%;
+    border: 2px solid grey;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+div#barraIconos img{
+    display: table-cell;
+    height: 25px;
+    border-radius: 10px;
+    background-color: #4a4a4a;
+}
+div#barraIconos img:hover {
+    background-color: #7d7d7d;
+    transform: scale(1.1,1.1);
+}
+
+div#contenido {
+    display: table-row;
+    width: 100%;
+}
+
+div#menuLateral, div#canvas, div#herramientas {
+    display: table-cell;
+    position: relative;
+}
+
+div#menuLateral {
+    background-color: #212121;
+    padding: 1%;
+    text-align: center;
+    width: 5%;
+}
+div#menuLateral img{
+    width: 90%;
+    border-radius: 10px;
+    background-color: black;
+}
+div#menuLateral img:hover {
+    background-color: #303030;
+    transform: scale(1.1,1.1);
+}
+
+div#canvas {
+    height: 800px;
+}
+
+div#canvas canvas {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+
+div#herramientas {
+    width: 20%;
+    background-color: #212121;
+}

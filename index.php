@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Bloom - JS</title>
+        <title>BloomJS - Inicio</title>
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/index.css">
     </head>
@@ -13,8 +13,8 @@
         </header>
         <nav>
             <ul>
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Editor</a></li>
+                <li id="actual">Inicio</li>
+                <li><a href="php/editor.php">Editor</a></li>
                 <li><a href="">Generador</a></li>
                 <li><a href="">Social</a></li>
                 <li><a href="">Guía de uso</a></li>
