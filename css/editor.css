@@ -19,7 +19,6 @@ div#barraContexto {
     width: 100%;
     background-color: #212121;
     box-sizing: border-box;
-    margin-bottom: 5px;
 }
 
 div#barraMenus{
@@ -60,7 +59,7 @@ div#barraMenus ul li img:hover{
 }
 
 div#menuArchivo {
-    display: block;
+    display: none;
     position: fixed;
     z-index: 1;
     width: 20%;
@@ -127,7 +126,7 @@ div#menuLateral img:hover {
 }
 
 div#canvas {
-    height: 800px;
+    /*height: 800px;*/
 }
 
 div#canvas canvas {

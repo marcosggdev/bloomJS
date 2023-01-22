@@ -36,12 +36,13 @@
                             <button id="archivo">Archivo</button>
                             <div id="menuArchivo">
                                 <ul>
-                                    <li>Crear nuevo</li>
-                                    <li>Abrir</li>
+                                    <li id="crear">Crear nuevo</li>
+                                    <li id="abrir">Abrir</li>
                                 </ul>
                             </div>
                         </li>
-                        <li><img src="../img/iconos/iconoMaximizar.png" alt=""></li>
+                        <li><img id="maximizar" src="../img/iconos/iconoMaximizar.png" alt="Icono maximizar"></li>
+                        <li><img id="minimizar" src="../img/iconos/iconoMinimizar.png" alt="Icono minimizar"></li>
                     </ul>
                 </div>
                 <div id="barraIconos">
