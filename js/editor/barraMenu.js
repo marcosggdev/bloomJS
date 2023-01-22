@@ -12,6 +12,7 @@ window.addEventListener('load', () => {
     anadirListenersIconos();
     guardarEstilos(); //seran modificados por codigo y interesa guardar los originales
     anadirListenersSubmenu();
+    maximizarEditor();
 });
 
 function anadirListenersBotones () {
@@ -99,7 +100,6 @@ function anadirListenersSubmenu () {
     for (let i = 0; i < submenus.length; i++) {
         //cada submenu tiene varias opciones en forma de li
         let opciones = submenus[i].querySelectorAll("ul li");
-        let idSubmenu = submenus[i].id;
         for (let j = 0; j < opciones.length; j++) {
             //para cada opcion del submenu
             //pasamos id del submenu para ocultarlo facilmente tras hacer click
@@ -120,7 +120,6 @@ function anadirListenersSubmenu () {
 function crear () {
     //dibujar lienzo en el canvas
     console.log("crear");
-    let lienzo = new Imagen2D();
 }
 
 function abrir () {

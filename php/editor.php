@@ -5,7 +5,6 @@
         <title>BloomJS - Editor</title>
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/editor.css">
-        <script src="../js/main.js"></script>
         <script src="../js/render/renderer.js"></script>
         <script src="../js/controles.js"></script>
         <script src="../js/utilidades.js"></script>
@@ -14,6 +13,7 @@
         <script src="../js/editor/barraMenu.js"></script>
         <script src="../js/render/imagen2D.js"></script>
         <script src="../js/render/glsl.js"></script>
+        <script src="../js/main.js"></script>
     </head>
     <body>
         <header>

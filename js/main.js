@@ -19,8 +19,9 @@ async function main () {
 
     renderer = new Renderer(0, 0, 1, 1920, 1080, controles);
 
-    let imagen = new Imagen2D();
+    let imagen = await Imagen2D.crearImagen2D();
     graficos2D = [imagen];
 
+    //setInterval("renderer.ciclo()", 1000);
     renderer.dibujar();
 }

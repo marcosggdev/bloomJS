@@ -1,12 +1,12 @@
 var VERTEX_IMAGEN_2D =
 "uniform mat4 m;\n" + 
-"uniform mat4 mv;\n" +
+"uniform mat4 v;\n" +
 "uniform sampler2D sampler;\n" +
 "attribute vec3 aPos;\n" +
 "attribute vec2 aTex;\n" +
 "varying vec2 vTex;\n" +
 "void main(){\n" +
-"   gl_Position = mv * m * vec4(aPos, 1.0);\n" +
+"   gl_Position = v * m * vec4(aPos, 1.0);\n" +
 "   vTex = aTex;\n" +
 "}\n";
 
@@ -15,7 +15,7 @@ var FRAGMENT_IMAGEN_2D =
 "uniform sampler2D sampler;\n" +
 "varying vec2 vTex;\n" +
 "void main(){\n" +
-"   gl_FragColor = vec4(1.0,1.0,1.0,1.0);\n" +
+"   gl_FragColor = texture2D(sampler, vTex);\n" +
 "}\n";
 
 

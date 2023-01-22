@@ -24,13 +24,13 @@ class Renderer {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
 
         //crear matriz perspectiva
-        this.aspecto = gl.canvas.width / gl.canvas.height;
+        //this.aspecto = gl.canvas.width / gl.canvas.height;
         this.matrizP = crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
 
         //matriz vista
         this.matrizV = new Matriz4X4();
         this.matrizV.identidad();
-        this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
+        //this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
     }
 
     crearMatrizVista () {
@@ -47,12 +47,17 @@ class Renderer {
         this.matrizV.cambiarColumna(2, d.datos);
     }
 
+    ciclo () {
+        this.actualizar();
+        this.dibujar();
+    }
+
     actualizar () {
         //actualizar matrizV
         this.matrizV = new Matriz4X4();
         this.matrizV.identidad();
         //this.matrizV.rotar(45, 0, 0);
-        this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
+        //this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
 
         this.controles.actualizar();
     }
