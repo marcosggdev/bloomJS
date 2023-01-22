@@ -17,9 +17,14 @@ window.addEventListener('load', () => {
 function anadirListenersBotones () {
     let botones = document.querySelectorAll("div#barraMenus ul li button");
     for (let i = 0; i < botones.length; i++) {
+        let menu = document.querySelector("div#barraMenus ul li button#" + botones[i].id + " ~ div");
         botones[i].addEventListener('click', () => {
-            let menu = document.querySelector("div#barraMenus ul li button#" + botones[i].id + " ~ div");
             mostrarOcultarMenu(menu);
+        });
+        botones[i].addEventListener('blur', () => {
+            if (menu.style.display != "none") {
+                menu.style.display = "none";
+            }
         });
     }
 }
@@ -41,11 +46,11 @@ function anadirListenerBarraMenus () {
 function anadirListenersIconos () {
     let imagenes = document.querySelectorAll("div#barraMenus ul li img");
     for (let i = 0; i < imagenes.length; i++) {
-        imagenes[i].addEventListener('click', controladorImagen);
+        imagenes[i].addEventListener('click', controladorIcono);
     }
 }
 
-function controladorImagen (click) {
+function controladorIcono (click) {
     let imagen = click.target;
     switch (imagen.id) {
         case "maximizar":
@@ -107,22 +112,17 @@ function anadirListenersSubmenu () {
                         abrir();
                         break;
                 }
-                ocultarSubmenu(idSubmenu);
             });
         }
     }
 }
 
 function crear () {
+    //dibujar lienzo en el canvas
     console.log("crear");
+    let lienzo = new Imagen2D();
 }
 
 function abrir () {
     console.log("abrir");
-}
-
-function ocultarSubmenu (idSubmenu) {
-    //oculta el submenu de una opcion que se clickeó
-    let submenu = document.querySelector("div#"+idSubmenu);
-    submenu.style.display = "none";
 }

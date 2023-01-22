@@ -6,12 +6,14 @@
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/editor.css">
         <script src="../js/main.js"></script>
-        <script src="../js/renderer.js"></script>
+        <script src="../js/render/renderer.js"></script>
         <script src="../js/controles.js"></script>
         <script src="../js/utilidades.js"></script>
         <script src="../js/matematicas/matriz4x4.js"></script>
         <script src="../js/matematicas/vector4x1.js"></script>
         <script src="../js/editor/barraMenu.js"></script>
+        <script src="../js/render/imagen2D.js"></script>
+        <script src="../js/render/glsl.js"></script>
     </head>
     <body>
         <header>

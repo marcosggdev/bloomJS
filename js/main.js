@@ -16,7 +16,11 @@ async function main () {
     }
 
     controles = new Controles(canvas);
-    
-    renderer = new Renderer(0, 0, 20, 1920, 1080, controles);
+
+    renderer = new Renderer(0, 0, 1, 1920, 1080, controles);
+
+    let imagen = new Imagen2D();
+    graficos2D = [imagen];
+
     renderer.dibujar();
 }

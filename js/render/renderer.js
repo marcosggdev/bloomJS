@@ -60,6 +60,10 @@ class Renderer {
     dibujar () {
         gl.clearColor(0.0, 0.0, 0.0, 1.0);  //limpiar fondo
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        for (let i = 0; i < graficos2D.length; i++) {
+            graficos2D[i].dibujar();
+        }
     }
 }
 
