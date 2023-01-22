@@ -41,6 +41,7 @@
                                 </ul>
                             </div>
                         </li>
+                        <li><img src="../img/iconos/iconoMaximizar.png" alt=""></li>
                     </ul>
                 </div>
                 <div id="barraIconos">

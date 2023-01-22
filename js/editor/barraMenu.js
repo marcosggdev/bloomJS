@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
     anadirListenersBotones();
     anadirListenerBarraMenus();
+    anadirListenersIconos();
 });
 
 function anadirListenersBotones () {
@@ -25,4 +26,15 @@ function anadirListenerBarraMenus () {
     barraMenu.addEventListener('blur', () => {
         console.log("focus perdido");
     });
+}
+
+function anadirListenersImagenes () {
+    let imagenes = document.querySelectorAll("div#barraMenus ul li img");
+    for (let i = 0; i < imagenes.length; i++) {
+        imagenes[i].addEventListener('click', controladorImagen);
+    }
+}
+
+function controladorImagen (click) {
+    let imagen = click.target;
 }

@@ -41,6 +41,7 @@ div#barraMenus ul {
 div#barraMenus ul li{
     display: inline;
     text-decoration: none;
+    vertical-align: middle;
 }
 
 div#barraMenus ul li button {
@@ -50,6 +51,12 @@ div#barraMenus ul li button {
 div#barraMenus ul li button:hover {
     background-color: #929292;
     color: white;
+}
+div#barraMenus ul li img {
+    height: 20px;
+}
+div#barraMenus ul li img:hover{
+    transform: scale(1.1,1.1);
 }
 
 div#menuArchivo {
