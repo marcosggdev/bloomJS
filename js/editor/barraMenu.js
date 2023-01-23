@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
     guardarEstilos(); //seran modificados por codigo y interesa guardar los originales
     anadirListenersSubmenu();
     maximizarEditor();
+    anadirBoton("pruebaId", "botonNuevo");
 });
 
 function anadirListenersBotones () {
@@ -111,23 +112,20 @@ function anadirListenersSubmenu () {
 function controladorMenuArchivo (evento) {
     let li = evento.target;
     switch (li.id) {
-        case "crear":
-            crear();
-            break;
-        case "abrir":
-            abrir();
-            break;
+        case "crear": crear(); break;
+        case "abrir": abrir(); break;
     }
 }
 
 function controladorMenuHtml (evento) {
     let li = evento.target;
     switch (li.id) {
-        case "crearHtml": console.log("html"); break;
-        case "abrirHtml": console.log("abrir html"); break;
+        case "anadirHtml": anadirHtml(); break;
+        case "abrirHtml": abrirHtml(); break;
     }
 }
 
+//funciones menu archivo
 async function crear () {
     //dibujar lienzo en el canvas
     let fondo = await Imagen2D.crearImagen2D();
@@ -136,4 +134,44 @@ async function crear () {
 
 function abrir () {
     console.log("abrir");
+}
+
+//funciones menu html
+function anadirHtml () {
+    let menu = document.createElement("div");
+    let ul = document.createElement("ul");
+    let li = document.createElement("li");
+    li.textContent = "Body";
+    li.id = "body";
+    li.addEventListener('click', () => {
+        crearBody();
+    });
+    ul.appendChild(li);
+    menu.appendChild(ul);
+    menu.style.display = "inline-block";
+    console.log("anadir html");
+}
+
+function abrirHtml () {
+    console.log("abrir html");
+}
+
+function anadirBoton (id, texto) {
+    let barraMenusUl = document.querySelector("div#barraMenus ul");
+    let boton = document.createElement("button");
+    boton.id = id;
+    boton.textContent = texto;
+    boton.style.backgroundColor = "#5a5a5a";
+    boton.addEventListener('mouseenter', () => {
+        boton.style.backgroundColor= "#929292";
+        boton.style.color = "white";
+    });
+    boton.addEventListener('mouseleave', () => {
+        boton.style.backgroundColor = "#5a5a5a";
+        boton.style.color = "black";
+    });
+    boton.addEventListener('click', () => {
+        console.log("click");
+    });
+    barraMenusUl.appendChild(boton);
 }

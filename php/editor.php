@@ -48,7 +48,7 @@
                         <li>
                             <button id="html">
                                 HTML
-                                <div id="menuHTML">
+                                <div id="menuHtml">
                                     <ul>
                                         <li id="anadirHtml">Añadir HTML</li>
                                         <li id="abrirHtml">Abrir HTML</li>
