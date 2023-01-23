@@ -1,11 +1,11 @@
 class Boton {
     //crea un boton y lo añade a la barra de menus
-    constructor (id, texto) {
+    constructor (id, texto, callback) {
         this.id = id;
         this.texto = texto;
         this.iniciarNodoButton();
         this.iniciarListenersEstilo();
-        this.iniciarListeners();
+        this.iniciarListeners(callback);
     }
     iniciarNodoButton () {
         this.nodoBoton = document.createElement("button");
@@ -25,9 +25,7 @@ class Boton {
         });
     }
 
-    iniciarListeners () {
-        this.nodoBoton.addEventListener('click', () => {
-            console.log("click");
-        });
+    iniciarListeners (callback) {
+        this.nodoBoton.addEventListener('click', callback);
     }
 }

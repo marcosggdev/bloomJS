@@ -58,10 +58,6 @@ div#barraMenus ul li img:hover{
     transform: scale(1.1,1.1);
 }
 
-div#barraMenus ul li {
-
-}
-
 div#barraMenus ul li button div {
     display: none;
     position: fixed;

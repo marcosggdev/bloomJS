@@ -7,15 +7,21 @@ var estiloBarraContexto = "";
 var estiloContenido = "";
 
 window.addEventListener('load', () => {
+    anadirBotonDesplegable("archivo2", "Archivo2", ["Crear nuevo", "Abrir"], [crear, abrir]);
     anadirListenersBotones();
     anadirListenerBarraMenus();
     anadirListenersIconos();
     guardarEstilos(); //seran modificados por codigo y interesa guardar los originales
     anadirListenersSubmenu();
     maximizarEditor();
-    anadirBoton("pruebaId", "botonNuevo");
-    anadirBotonDesplegable("id2", "nombre2", ["op1", "op2"]);
+    anadirBoton("pruebaId", "botonNuevo", hola);
+    anadirBotonDesplegable("id2", "nombre2", ["op1", "op2"], [hola, hola]);
+    anadirBotonIcono("../img/fondo.jpg", 25, 25, hola);
 });
+
+function hola () {
+    console.log("hola");
+}
 
 function anadirListenersBotones () {
     let botones = document.querySelectorAll("div#barraMenus ul li button");
@@ -126,14 +132,22 @@ function controladorMenuHtml (evento) {
     }
 }
 
-function anadirBoton (id, texto) {
+function anadirBoton (id, texto, callback) {
     let barraMenusUl = document.querySelector("div#barraMenus ul li");
-    let boton = new Boton("id", "nombre");
+    let boton = new Boton("id", "nombre", callback);
     barraMenusUl.appendChild(boton.nodoBoton);
 }
 
-function anadirBotonDesplegable (id, texto, opciones) {
+function anadirBotonDesplegable (id, texto, opciones, callbacks) {
+    let barraMenusUl = document.querySelector("div#barraMenus ul");
+    let li = document.createElement("li");
+    let botonDesplegable = new BotonDesplegable(id, texto, opciones, callbacks);
+    li.appendChild(botonDesplegable.nodoBoton);
+    barraMenusUl.appendChild(li);
+}
+
+function anadirBotonIcono (ruta, ancho, alto, callback) {
     let barraMenusUl = document.querySelector("div#barraMenus ul li");
-    let botonDesplegable = new BotonDesplegable(id, texto, opciones);
-    barraMenusUl.appendChild(botonDesplegable.nodoBoton);
+    let botonIcono = new BotonIcono(ruta, ancho, alto, callback);
+    barraMenusUl.appendChild(botonIcono.nodoImagen);
 }

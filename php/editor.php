@@ -17,6 +17,7 @@
         <script src="../js/iu/botonDesplegable.js"></script>
         <script src="../js/iu/barraMenu.js"></script>
         <script src="../js/editor/funciones.js"></script>
+        <script src="../js/iu/botonIcono.js"></script>
     </head>
     <body>
         <header>
