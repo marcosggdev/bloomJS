@@ -14,6 +14,7 @@ window.addEventListener('load', () => {
     anadirListenersSubmenu();
     maximizarEditor();
     anadirBoton("pruebaId", "botonNuevo");
+    anadirBotonDesplegable("id2", "nombre2", ["op1", "op2"]);
 });
 
 function anadirListenersBotones () {
@@ -125,53 +126,14 @@ function controladorMenuHtml (evento) {
     }
 }
 
-//funciones menu archivo
-async function crear () {
-    //dibujar lienzo en el canvas
-    let fondo = await Imagen2D.crearImagen2D();
-    graficos2D.insertarGrafico2D(fondo);
-}
-
-function abrir () {
-    console.log("abrir");
-}
-
-//funciones menu html
-function anadirHtml () {
-    let menu = document.createElement("div");
-    let ul = document.createElement("ul");
-    let li = document.createElement("li");
-    li.textContent = "Body";
-    li.id = "body";
-    li.addEventListener('click', () => {
-        crearBody();
-    });
-    ul.appendChild(li);
-    menu.appendChild(ul);
-    menu.style.display = "inline-block";
-    console.log("anadir html");
-}
-
-function abrirHtml () {
-    console.log("abrir html");
-}
-
 function anadirBoton (id, texto) {
-    let barraMenusUl = document.querySelector("div#barraMenus ul");
-    let boton = document.createElement("button");
-    boton.id = id;
-    boton.textContent = texto;
-    boton.style.backgroundColor = "#5a5a5a";
-    boton.addEventListener('mouseenter', () => {
-        boton.style.backgroundColor= "#929292";
-        boton.style.color = "white";
-    });
-    boton.addEventListener('mouseleave', () => {
-        boton.style.backgroundColor = "#5a5a5a";
-        boton.style.color = "black";
-    });
-    boton.addEventListener('click', () => {
-        console.log("click");
-    });
-    barraMenusUl.appendChild(boton);
+    let barraMenusUl = document.querySelector("div#barraMenus ul li");
+    let boton = new Boton("id", "nombre");
+    barraMenusUl.appendChild(boton.nodoBoton);
+}
+
+function anadirBotonDesplegable (id, texto, opciones) {
+    let barraMenusUl = document.querySelector("div#barraMenus ul li");
+    let botonDesplegable = new BotonDesplegable(id, texto, opciones);
+    barraMenusUl.appendChild(botonDesplegable.nodoBoton);
 }

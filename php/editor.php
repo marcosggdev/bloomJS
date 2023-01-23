@@ -10,10 +10,13 @@
         <script src="../js/utilidades.js"></script>
         <script src="../js/matematicas/matriz4x4.js"></script>
         <script src="../js/matematicas/vector4x1.js"></script>
-        <script src="../js/editor/barraMenu.js"></script>
         <script src="../js/render/imagen2D.js"></script>
         <script src="../js/render/glsl.js"></script>
         <script src="../js/main.js"></script>
+        <script src="../js/iu/boton.js"></script>
+        <script src="../js/iu/botonDesplegable.js"></script>
+        <script src="../js/iu/barraMenu.js"></script>
+        <script src="../js/editor/funciones.js"></script>
     </head>
     <body>
         <header>
