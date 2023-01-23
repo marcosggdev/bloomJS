@@ -18,14 +18,12 @@ window.addEventListener('load', () => {
 function anadirListenersBotones () {
     let botones = document.querySelectorAll("div#barraMenus ul li button");
     for (let i = 0; i < botones.length; i++) {
-        let menu = document.querySelector("div#barraMenus ul li button#" + botones[i].id + " ~ div");
+        let menu = document.querySelector("div#barraMenus ul li button#" + botones[i].id + " div");
         botones[i].addEventListener('click', () => {
             mostrarOcultarMenu(menu);
         });
         botones[i].addEventListener('blur', () => {
-            if (menu.style.display != "none") {
-                menu.style.display = "none";
-            }
+            menu.style.display = "none";
         });
     }
 }
@@ -95,31 +93,45 @@ function minimizarEditor () {
 }
 
 function anadirListenersSubmenu () {
-    //submenus
-    let submenus = document.querySelectorAll("div#barraMenus ul li div");
-    for (let i = 0; i < submenus.length; i++) {
+    //botones
+    let botones = document.querySelectorAll("div#barraMenus ul li button");
+    for (let i = 0; i < botones.length; i++) {
+        let submenu = document.querySelector("div#barraMenus ul li button#" + botones[i].id + " div");
         //cada submenu tiene varias opciones en forma de li
-        let opciones = submenus[i].querySelectorAll("ul li");
+        let opciones = submenu.querySelectorAll("ul li");
         for (let j = 0; j < opciones.length; j++) {
-            //para cada opcion del submenu
-            //pasamos id del submenu para ocultarlo facilmente tras hacer click
-            opciones[j].addEventListener('click', () => {
-                switch (opciones[j].id) {
-                    case "crear":
-                        crear();
-                        break;
-                    case "abrir":
-                        abrir();
-                        break;
-                }
-            });
+            switch (submenu.id) {
+                case "menuArchivo": opciones[j].addEventListener('click', controladorMenuArchivo); break;
+                case "menuHtml": opciones[j].addEventListener('click', controladorMenuHtml); break;
+            }
         }
     }
 }
 
-function crear () {
+function controladorMenuArchivo (evento) {
+    let li = evento.target;
+    switch (li.id) {
+        case "crear":
+            crear();
+            break;
+        case "abrir":
+            abrir();
+            break;
+    }
+}
+
+function controladorMenuHtml (evento) {
+    let li = evento.target;
+    switch (li.id) {
+        case "crearHtml": console.log("html"); break;
+        case "abrirHtml": console.log("abrir html"); break;
+    }
+}
+
+async function crear () {
     //dibujar lienzo en el canvas
-    console.log("crear");
+    let fondo = await Imagen2D.crearImagen2D();
+    graficos2D.insertarGrafico2D(fondo);
 }
 
 function abrir () {

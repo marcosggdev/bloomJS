@@ -58,14 +58,18 @@ div#barraMenus ul li img:hover{
     transform: scale(1.1,1.1);
 }
 
-div#menuArchivo {
+div#barraMenus ul li {
+
+}
+
+div#barraMenus ul li button div {
     display: none;
     position: fixed;
     z-index: 1;
     width: 20%;
 }
 
-div#menuArchivo ul li{
+div#barraMenus ul li button div ul li {
     display: block;
     text-decoration: none;
     color: black;
@@ -73,7 +77,7 @@ div#menuArchivo ul li{
     border: 1px solid black;
 }
 
-div#menuArchivo ul li:hover{
+div#barraMenus ul li button div ul li:hover {
     background-color: #929292;
     color: white;
 }
