@@ -1,7 +1,7 @@
 class Imagen2D {
 
-    constructor (posX = 0, posY = 0, posZ = 0, ancho = 500, alto = 500, anguloX = 0, anguloY = 0, anguloZ = 0, escalarX = 1, 
-        escalarY = 1, ruta = "../img/render/fondoAlfa.jpg") {
+    constructor (posX = 0, posY = 0, posZ = 0, ancho = 100, alto = 100, anguloX = 0, anguloY = 0, anguloZ = 0, 
+        escalarX = 1/canvas.clientWidth, escalarY = 1/canvas.clientHeight, ruta = "../img/render/fondoAlfa.jpg") {
             this.posX = posX;
             this.posY = posY;
             this.posZ = posZ;
@@ -53,9 +53,9 @@ class Imagen2D {
         //matriz Model
         this.matrizM = new Matriz4X4();
         this.matrizM.identidad();
-        /*this.matrizM.rotar(this.anguloX, this.anguloY, 0);
-        this.matrizM.escalar(this.factorX, this.factorY, 1);
-        this.matrizM.trasladar(this.posX, this.posY, this.posZ);*/
+        this.matrizM.rotar(this.anguloX, this.anguloY, 0);
+        this.matrizM.escalar(this.escalarX*this.ancho, this.escalarY*this.alto, 1);
+        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
         //shaders y programa
         this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -80,10 +80,12 @@ class Imagen2D {
     async cargarTextura () {
         var textura = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, textura);
-        //precargar en azul
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,255,255]));
+        //color plano
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([255,255,255,255]));
 
-        await this.cargarImagen(this.ruta)
+        if (this.ruta != "") {
+            //textura
+            await this.cargarImagen(this.ruta)
             .then(imagen => {
                 gl.bindTexture(gl.TEXTURE_2D, textura);
                 gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imagen);
@@ -94,6 +96,7 @@ class Imagen2D {
                 }
                 gl.generateMipmap(gl.TEXTURE_2D);
             });
+        }
 
         this.textura = textura; //guardamos el objeto textura en el objeto
         this.samplerLoc = gl.getUniformLocation(this.programa, "sampler");

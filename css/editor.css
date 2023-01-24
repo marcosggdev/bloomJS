@@ -38,9 +38,11 @@ div#barraMenus ul {
 }
 
 div#barraMenus ul li{
-    display: inline;
+    display: inline-block;
+    line-height: 100%;
     text-decoration: none;
     vertical-align: middle;
+    padding-right: 5px;
 }
 
 div#barraMenus ul li button {
@@ -123,10 +125,6 @@ div#menuLateral img{
 div#menuLateral img:hover {
     background-color: #303030;
     transform: scale(1.1,1.1);
-}
-
-div#canvas {
-    /*height: 800px;*/
 }
 
 div#canvas canvas {

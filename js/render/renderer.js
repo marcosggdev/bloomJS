@@ -14,6 +14,7 @@ class Renderer {
         gl.canvas.width = this.ancho;   //dimensionar canvas
         gl.canvas.height = this.alto;
 
+        //ancho y alto en pixeles del canvas
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
 
         gl.clearColor(0.0, 0.0, 0.0, 1.0);  //limpiar fondo a negro
@@ -25,7 +26,7 @@ class Renderer {
 
         //crear matriz perspectiva
         //this.aspecto = gl.canvas.width / gl.canvas.height;
-        this.matrizP = crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+        //this.matrizP = crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
 
         //matriz vista
         this.matrizV = new Matriz4X4();
@@ -66,9 +67,10 @@ class Renderer {
         gl.clearColor(0.0, 0.0, 0.0, 1.0);  //limpiar fondo
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        if (graficos2D.arrayGraficos2D.length > 0) {
-            for (let i = 0; i < graficos2D.arrayGraficos2D.length; i++) {
-                graficos2D.arrayGraficos2D[i].dibujar();
+        Editor.lienzo.imagen2D.dibujar();
+        if (Editor.elementos.length > 0) {
+            for (let i = 0; i < Editor.elementos.length; i++) {
+                Editor.elementos[i].imagen2D.dibujar();
             }
         }
     }

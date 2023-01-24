@@ -5,7 +5,7 @@ class Boton {
         this.texto = texto;
         this.iniciarNodoButton();
         this.iniciarListenersEstilo();
-        this.iniciarListeners(callback);
+        this.iniciarListenerBoton(callback);
     }
     iniciarNodoButton () {
         this.nodoBoton = document.createElement("button");
@@ -25,7 +25,7 @@ class Boton {
         });
     }
 
-    iniciarListeners (callback) {
+    iniciarListenerBoton (callback) {
         this.nodoBoton.addEventListener('click', callback);
     }
 }

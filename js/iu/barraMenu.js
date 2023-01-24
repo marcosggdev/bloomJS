@@ -7,8 +7,12 @@ var estiloBarraContexto = "";
 var estiloContenido = "";
 
 window.addEventListener('load', () => {
-    anadirBotonDesplegable("archivo2", "Archivo2", ["Crear nuevo", "Abrir"], [crear, abrir]);
-    anadirListenersBotones();
+    anadirBotonDesplegable("archivo", "Archivo", ["Crear nuevo", "Abrir", "Guardar"], [crear, abrir, guardar]);
+    anadirBotonDesplegable("html", "HTML", ["Añadir elemento", "Abrir HTML"], [anadirHtml, abrirHtml]);
+    anadirBotonIcono("../img/iconos/iconoMaximizar.png", 20, 20, maximizarEditor);
+    anadirBotonIcono("../img/iconos/iconoMinimizar.png", 20, 20, minimizarEditor);
+    maximizarEditor();
+    /*anadirListenersBotones();
     anadirListenerBarraMenus();
     anadirListenersIconos();
     guardarEstilos(); //seran modificados por codigo y interesa guardar los originales
@@ -16,7 +20,8 @@ window.addEventListener('load', () => {
     maximizarEditor();
     anadirBoton("pruebaId", "botonNuevo", hola);
     anadirBotonDesplegable("id2", "nombre2", ["op1", "op2"], [hola, hola]);
-    anadirBotonIcono("../img/fondo.jpg", 25, 25, hola);
+    anadirBotonDesplegable("archivo2", "Archivo2", ["Crear nuevo", "Abrir"], [crear, abrir]);
+    anadirBotonIcono("../img/fondo.jpg", 25, 25, hola);*/
 });
 
 function hola () {
@@ -147,7 +152,9 @@ function anadirBotonDesplegable (id, texto, opciones, callbacks) {
 }
 
 function anadirBotonIcono (ruta, ancho, alto, callback) {
-    let barraMenusUl = document.querySelector("div#barraMenus ul li");
+    let barraMenusUl = document.querySelector("div#barraMenus ul");
+    let li = document.createElement("li");
     let botonIcono = new BotonIcono(ruta, ancho, alto, callback);
-    barraMenusUl.appendChild(botonIcono.nodoImagen);
+    li.appendChild(botonIcono.nodoImagen);
+    barraMenusUl.appendChild(li);
 }

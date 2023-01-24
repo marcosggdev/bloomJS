@@ -18,6 +18,9 @@
         <script src="../js/iu/barraMenu.js"></script>
         <script src="../js/editor/funciones.js"></script>
         <script src="../js/iu/botonIcono.js"></script>
+        <script src="../js/editor/editor.js"></script>
+        <script src="../js/elementos/elemento.js"></script>
+        <script src="../js/elementos/body.js"></script>
     </head>
     <body>
         <header>
@@ -37,32 +40,7 @@
         <main>
             <div id="barraContexto">
                 <div id="barraMenus">
-                    <ul>
-                        <li>
-                            <button id="archivo">
-                                Archivo
-                                <div id="menuArchivo">
-                                    <ul>
-                                        <li id="crear">Crear nuevo</li>
-                                        <li id="abrir">Abrir</li>
-                                    </ul>
-                                </div>
-                            </button>
-                        </li>
-                        <li>
-                            <button id="html">
-                                HTML
-                                <div id="menuHtml">
-                                    <ul>
-                                        <li id="anadirHtml">Añadir HTML</li>
-                                        <li id="abrirHtml">Abrir HTML</li>
-                                    </ul>
-                                </div>
-                            </button>
-                        </li>
-                        <li><img id="maximizar" src="../img/iconos/iconoMaximizar.png" alt="Icono maximizar"></li>
-                        <li><img id="minimizar" src="../img/iconos/iconoMinimizar.png" alt="Icono minimizar"></li>
-                    </ul>
+                    <ul></ul>
                 </div>
                 <div id="barraIconos">
                     <img src="../img/iconos/desplegarMenu.png" alt="Icono menú desplegable">

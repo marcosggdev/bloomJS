@@ -1,8 +1,13 @@
 //funciones menu archivo
 async function crear () {
     //dibujar lienzo en el canvas
-    let fondo = await Imagen2D.crearImagen2D();
-    graficos2D.insertarGrafico2D(fondo);
+    if (Editor.lienzo == null) {
+        let lienzo = await Elemento.crearElemento("lienzo", canvas.clientWidth, canvas.clientHeight, 0, "../img/render/fondoAlfa.jpg");
+        Editor.setLienzo(lienzo);
+        renderer.dibujar();
+    } else {
+        alert("Lienzo ya existente");
+    }
 }
 
 function abrir () {
@@ -27,4 +32,8 @@ function anadirHtml () {
 
 function abrirHtml () {
     console.log("abrir html");
+}
+
+function guardar () {
+    console.log("guardar");
 }
