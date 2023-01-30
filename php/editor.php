@@ -21,6 +21,7 @@
         <script src="../js/editor/editor.js"></script>
         <script src="../js/elementos/elemento.js"></script>
         <script src="../js/elementos/body.js"></script>
+        <script src="../js/elementos/html.js"></script>
     </head>
     <body>
         <header>
@@ -41,6 +42,7 @@
             <div id="barraContexto">
                 <div id="barraMenus">
                     <ul></ul>
+                    <label id="nombreArchivo"></label>
                 </div>
                 <div id="barraIconos">
                     <img src="../img/iconos/desplegarMenu.png" alt="Icono menú desplegable">

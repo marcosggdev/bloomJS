@@ -79,6 +79,10 @@ div#barraMenus ul li button div ul li:hover {
     background-color: #929292;
     color: white;
 }
+div#barraMenus label#nombreArchivo {
+    display: inline;
+    color: white;
+}
 
 div#barraIconos {
     display: table;
@@ -125,6 +129,10 @@ div#menuLateral img{
 div#menuLateral img:hover {
     background-color: #303030;
     transform: scale(1.1,1.1);
+}
+
+div#contenido {
+    height: 1000px;
 }
 
 div#canvas canvas {

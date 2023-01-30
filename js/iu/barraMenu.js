@@ -1,28 +1,12 @@
-var maximizado = false;
+var maximizado = false; //variable estado
+
+//estilos estandar que seran modificados al maximizar
 var estiloHeader = "";
 var estiloNav = "";
 var estiloFooter = "";
 var estiloMain = "";
 var estiloBarraContexto = "";
 var estiloContenido = "";
-
-window.addEventListener('load', () => {
-    anadirBotonDesplegable("archivo", "Archivo", ["Crear nuevo", "Abrir", "Guardar"], [crear, abrir, guardar]);
-    anadirBotonDesplegable("html", "HTML", ["Añadir elemento", "Abrir HTML"], [anadirHtml, abrirHtml]);
-    anadirBotonIcono("../img/iconos/iconoMaximizar.png", 20, 20, maximizarEditor);
-    anadirBotonIcono("../img/iconos/iconoMinimizar.png", 20, 20, minimizarEditor);
-    maximizarEditor();
-    /*anadirListenersBotones();
-    anadirListenerBarraMenus();
-    anadirListenersIconos();
-    guardarEstilos(); //seran modificados por codigo y interesa guardar los originales
-    anadirListenersSubmenu();
-    maximizarEditor();
-    anadirBoton("pruebaId", "botonNuevo", hola);
-    anadirBotonDesplegable("id2", "nombre2", ["op1", "op2"], [hola, hola]);
-    anadirBotonDesplegable("archivo2", "Archivo2", ["Crear nuevo", "Abrir"], [crear, abrir]);
-    anadirBotonIcono("../img/fondo.jpg", 25, 25, hola);*/
-});
 
 function hola () {
     console.log("hola");
@@ -92,6 +76,8 @@ function maximizarEditor () {
 
     document.querySelector("div#barraContexto").style.height = "10vh";
     document.querySelector("div#contenido").style.height = "90vh";
+
+    maximizado = true;
 }
 
 function minimizarEditor () {
@@ -103,6 +89,8 @@ function minimizarEditor () {
 
     document.querySelector("div#barraContexto").style.height = estiloBarraContexto;
     document.querySelector("div#contenido").style.height = estiloContenido;
+
+    maximizado = false;
 }
 
 function anadirListenersSubmenu () {
