@@ -6,17 +6,26 @@
 body {
     width: 100%;
     height: 100%;
-    margin:0;
-    padding:0;
-    background: url("../img/fondo.jpg");
+    margin: 0;
+    padding: 0;
+    background: rgb(127 69 69) url(../img/fondo.jpg);
     background-attachment: fixed;
-    background-size:cover;
+    background-size: cover;
     z-index: -2;
+    background-blend-mode: luminosity;
+}
+
+div#cabecera {
+    background: linear-gradient(45deg, #000000, #ffffff80);
+    box-shadow: 3px 3px 5px black;
 }
 
 header {
     color: #1f091d;
     text-align: center;
+    animation-name: animHeader;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
 }
 
 header h1{
@@ -24,10 +33,11 @@ header h1{
     animation-duration: 6s;
     animation-name: animTitulo;
     animation-iteration-count: infinite;
+    color: white;
 }
 
 header h1::first-letter{
-    color: #4a1344;
+    color: #ff9df4;
     font-size: 1.2em;
 }
 
@@ -35,7 +45,7 @@ header h1, header h2 {
     font-family: "Monoton";
     font-size: 6em;
     font-style: italic;
-    font-weight: 500;
+    font-weight: 800;
 }
 
 header h2 {
@@ -48,18 +58,6 @@ header h2 {
     font-family: "Black Ops One";
 }
 
-header::before {
-    position: absolute;
-    content: " ";
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color: white;
-    opacity:0.5;
-    z-index:-1;
-}
-
 @keyframes animSubtitulo {
     from {
         color: pink;
@@ -70,24 +68,11 @@ header::before {
 }
 @keyframes animTitulo {
     from {
-        color: #1f091d;
+        color: white;
     }
     50% {
         color: pink;
     }
-}
-
-
-nav::before {
-    position: absolute;
-    content: " ";
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color: white;
-    opacity:0.5;
-    z-index:-1;
 }
 
 nav, header {
@@ -101,13 +86,15 @@ nav, header {
 nav {
     position: relative;
     text-align: center;
+    background: linear-gradient(to Right, #997070, #ffffff80);
 }
 nav ul{
-    position:relative;
+    display: flex;
     margin: 0;
     padding:0;
-    width:100%;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 4em;
 }
 nav ul li {
     margin: 0;
@@ -115,21 +102,28 @@ nav ul li {
     display: inline-block;
     text-align: center;
     box-sizing: border-box;
-    width: 15%;
+}
+nav ul li a.actual {
+    text-decoration: none;
+    padding: 1em;
+    background-color: rgb(74, 153, 73);
+    color: rgb(62, 62, 62);
+    box-shadow: 1px 1px 5px black;
+    text-align: center;
 }
 nav ul li a{
     display: inline-block;
     text-decoration: none;
     padding: 1em;
-    background-color: #191919;
+    background-color: rgb(121, 255, 119);
     width: 100%;
-    color: white;
-    border-radius: 25px;
-    border: 2px solid black;
+    color: black;
+    box-shadow: 2px 2px 5px black;
+    text-align: center;
 }
-nav ul li a:hover {
-    background-color: #262626;
-    animation-duration: 3s;
+nav ul li a:hover:not(a.actual) {
+    background-color: rgb(83, 255, 80);
+    animation-duration: 1s;
     animation-name: animBotonNav;
 }
 
@@ -142,50 +136,51 @@ nav ul li a:hover {
     }
 }
 
-
-main::before, footer::before{
-    position: absolute;
-    content: " ";
-    top:0;
-    left:0;
-    width: 100%;
-    height:100%;
-    background-color: white;
-    opacity:0.5;
-    z-index:-1;
-}
 main{
-    display: table;
-    position:relative;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1em;
     width: 100%;
+    gap: 200px;
+    box-sizing: border-box;
 }
 main h2 {
     margin-top: 0;
     font-family: "Oleo Script Swash Caps";
 }
 
-div#contenido section p{
+main section p{
     margin-bottom: 0;
-}
-footer::before {
-    content: " ";
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color: #212121;
-    opacity: 1;
-    z-index: -1;
 }
 footer {
-    position: relative;
-    float:left;
-    width: 100%;
-    display: block;
-    height: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
     color: white;
-    border-top: 2px solid grey;
+    border-top: 2px solid black;
+    background-color: #212121;
+    align-items: center;
+    position: relative;
 }
-footer p {
+footer div#infoFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(33, 33, 33);
+    padding: 5em;
+    padding-left: 10em;
+    padding-right: 10em;
+    box-shadow: 3px 3px 5px black;
+}
+footer div#infoFooter h2 {
+    margin: 0.5em;
+}
+footer div#infoFooter p {
     margin-bottom: 0;
+}
+footer small {
+    position: absolute;
+    bottom: 10px;
 }

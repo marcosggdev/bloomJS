@@ -1,66 +1,48 @@
-div#comentarios::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #212121;
-    opacity: 1;
-    z-index: -1;
-}
-div#comentarios {
-    color: white;
-    position: relative;
-    width: 20%;
-    display: table-cell;
-}
-
-div#contenido {
-    position: relative;
-    display: table-cell;
-}
-
-
-div#contenido section {
+main section {
     position: relative;
     padding: 2em;
+    box-shadow: 3px 3px 5px black;
+    background-blend-mode: color;
 }
-
-div#contenido section h2 {
-    font-size: 3em;
-    color: white;
-    font-weight: bold;
-}
-div#contenido section p {
+main section p {
     font-family: "DM Serif Text";
     font-size: 14pt;
     margin-bottom: 2em;
 }
 
-div#contenido section::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-    z-index: -1;
-    background-size:cover;
-    background-attachment: scroll;
-    background-image: linear-gradient(black, white,white,white,white, black);
+main section#bienvenida {
+    background: rgba(255,255,255,0.5) url("../img/prueba.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-div#contenido section#bienvenida::before{
-    background-image: url("../img/prueba.jpg");
+main section#funcionalidades {
+    background: rgba(255,255,255,0.5) url("../img/pluma.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-div#contenido section#funcionalidades::before{
-    background-image: linear-gradient(black, white,white,white,white, black), url("../img/pluma.jpg");
-    background-blend-mode: multiply;
+main section#empezar {
+    background: rgba(255,255,255,0.5) url("../img/videojuego.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-div#contenido section#empezar::before {
-    background-image: url("../img/videojuego.jpg");
+main section#empezar button#empezar {
+    border: none;
+    box-shadow: 3px 3px 5px black;
+    padding: 1em;
+    padding-left: 3em;
+    padding-right: 3em;
+    background-color: rgb(121, 255, 119);
+}
+section h2 {
+    font-size: 3em;
+    color: #480249;
+    font-weight: bold;
+}
+section h2 {
+    border-bottom: 1px solid rgba(0,0,0,.5);
+    border-width: 3px;
+}
+section p {
+    text-align: justify;
 }

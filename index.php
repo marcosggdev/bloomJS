@@ -7,33 +7,23 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
-        <header>
-            <h1>BloomJS</h1>
-            <h2>Para que puedas olvidarte del código y centrarte en tu diseño</h2>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Editor</a></li>
-                <li><a href="">Generador</a></li>
-                <li><a href="">Social</a></li>
-                <li><a href="">Guía de uso</a></li>
-                <li><a href="">Exportar</a></li>
-            </ul>
-        </nav>
-        <main>
-            <div id="comentarios">
-                <p>qweqeqweqe</p>
-                <p>qweqewqeqw</p>
+        <div id="cabecera">
+            <header>
+                <h1>BloomJS</h1>
+                <h2>Para que puedas olvidarte del código y centrarte en tu diseño</h2>
+            </header>
+            <nav>
                 <ul>
-                    <li>awqewqeqweqeqwe</li>
-                    <li>qweqeqeqweqweqweq</li>
-                    <li>qeqeqeqweqweqwqe</li>
+                    <li><a class="actual">Inicio</a></li>
+                    <li><a href="">Editor</a></li>
+                    <li><a href="">Generador</a></li>
+                    <li><a href="">Social</a></li>
+                    <li><a href="">Guía de uso</a></li>
+                    <li><a href="">Exportar</a></li>
                 </ul>
-                <p>qweqeqweqeqeqwewqe</p>
-                <p>qweqewqesaddsadas</p>
-            </div>
-            <div id="contenido">
+            </nav>
+        </div>
+        <main>
                 <section id="bienvenida">
                     <h2>¡Bienvenido a BloomJS!</h2>
                     <p>Bienvenido a BloomJS. Se trata de mi primera aplicación web de cara al público general. Si quieres saber más
@@ -77,13 +67,17 @@
                         si necesitas informar sobre un bug, atención de soporte o cualquier cosa no dudes en enviarnos un correo a
                         <email>Correo</email> ¡Bienvenido/a a BloomJS!
                     </p>
+                    <button id="empezar" onclick="window.location.assign('index.php')">Ir al Editor</button>
                 </section>
-            </div>
         </main>
         <footer>
-                Autor: <address>Marcos García García</address>
-                Correo: <mail>Correo@correo.com</mail>
-                <p>Copyright: Bloom&co&copy;</p>
+            <div id="infoFooter">
+                <h2>Autor: </h2>
+                <address>Marcos García García</address>
+                <h2>Correo: </h2>
+                <mail>Correo@correo.com</mail>
+            </div>
+            <small>Copyright: Bloom&co&copy;</small>
         </footer>
     </body>
 </html>
