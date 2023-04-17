@@ -4,17 +4,15 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 ?>
 
 
-<?=Vista::imprimirHead("Bloom - JS", ["css/general.css", "css/index.css"], [])?>
+<?=Vista::imprimirHead("Bloom - JS", [RAIZ . "css/general.css", RAIZ . "css/index.css"], [])?>
 
     <body>
 
         <div id="cabecera">
-            <header>
-                <h1>BloomJS</h1>
-                <h2>Para que puedas olvidarte del código y centrarte en tu diseño</h2>
-            </header>
 
-            <?=Vista::imprimirNav(Vista::$entradas, 0)?>
+        <?=Vista::imprimirHeader("BloomJS", "Para que puedas olvidarte del código y centrarte en tu diseño")?>
+
+        <?=Vista::imprimirNav(Vista::$entradas, 0)?>
 
         </div>
 

@@ -3,14 +3,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 class Vista {
 
     public static array $entradas = [
-        "Inicio" => "index.php",
-        "Editor" => "php/Editor.php",
-        "Generador" => "php/Generador.php",
-        "Social" => "php/GuiaUso.php",
-        "Exportar" => "php/Exportar.php"
+        "Inicio" => RAIZ . "index.php",
+        "Editor" => RAIZ . "php/Editor.php",
+        "Generador" => RAIZ . "php/Generador.php",
+        "Social" => RAIZ . "php/Social.php",
+        "Exportar" => RAIZ . "php/Exportar.php"
     ];
 
-    public static function imprimirHead ($titulo, $css, $js) {
+    public static function imprimirHeader ($titulo, $subtitulo) {
+?>
+        <header>
+            <h1><?=$titulo?></h1>
+            <h2><?=$subtitulo?></h2>
+        </header>
+<?php
+    }
+
+    public static function imprimirHead ($titulo, $css = [], $js = []) {
 ?>
         <!DOCTYPE html>
         <html lang="es">
@@ -29,7 +38,7 @@ class Vista {
         <?php
     }
 
-    public static function imprimirNav ($entradas, $indiceActual) {
+    public static function imprimirNav ($entradas, $indiceActual = 0) {
 ?>
         <nav>
             <ul>
