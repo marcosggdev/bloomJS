@@ -1,0 +1,46 @@
+div#cabecera {
+    box-shadow: none;
+}
+main {
+    padding: 0;
+}
+canvas {
+    width: 100%;
+    height: auto;
+}
+div#ventanaEdicion {
+    padding: 1em;
+}
+div#controlesVentana {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    background-color: #5a5a5a;
+    background: linear-gradient(to Right, black, #626262de);
+    padding: 5px;
+}
+div#iconos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+img.iconoDeshabilitado, img.iconoHabilitado {
+    width: 25px;
+    height: 25px;
+    box-shadow: 1px 1px 3px black;
+    padding: 5px;
+}
+img.iconoHabilitado {
+    background-color: white;
+    color: black;
+}
+img.iconoHabilitado:hover {
+    transform: scale(1.1);
+}
+img.iconoDeshabilitado {
+    background-color: rgb(184, 184, 184);
+    color: rgb(42, 42, 42);
+}

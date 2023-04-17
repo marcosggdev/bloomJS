@@ -5,7 +5,6 @@ main section {
     background-blend-mode: color;
 }
 main section p {
-    font-family: "DM Serif Text";
     font-size: 14pt;
     margin-bottom: 2em;
 }
@@ -25,14 +24,6 @@ main section#empezar {
     background: rgba(255,255,255,0.5) url("../img/videojuego.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-}
-main section#empezar button#empezar {
-    border: none;
-    box-shadow: 3px 3px 5px black;
-    padding: 1em;
-    padding-left: 3em;
-    padding-right: 3em;
-    background-color: rgb(121, 255, 119);
 }
 section h2 {
     font-size: 3em;

@@ -60,7 +60,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                         si necesitas informar sobre un bug, atención de soporte o cualquier cosa no dudes en enviarnos un correo a
                         <email>Correo</email> ¡Bienvenido/a a BloomJS!
                 </p>
-                <button id="empezar" onclick="window.location.assign('index.php')">Ir al Editor</button>
+                <button id="empezar" class="redireccion" onclick="window.location.assign('php/Editor.php')">Ir al Editor</button>
             </section>
         </main>
 

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 
 body {
     width: 100%;
@@ -184,3 +185,22 @@ footer small {
     position: absolute;
     bottom: 10px;
 }
+
+/*tipografia generica*/
+p {
+    font-family: "Roboto Condensed";
+} 
+
+/*interactivos*/
+button.redireccion {
+    border: none;
+    box-shadow: 3px 3px 5px black;
+    padding: 1em;
+    padding-left: 3em;
+    padding-right: 3em;
+    background-color: rgb(121, 255, 119);
+}
+button.redireccion:hover {
+    background-color: rgb(83, 255, 80);
+    transform: scale(1.1);
+} 
