@@ -1,8 +1,14 @@
+main {
+    padding: 0;
+}
 main section {
-    position: relative;
-    padding: 2em;
-    box-shadow: 3px 3px 5px black;
-    background-blend-mode: color;
+    background: rgba(255,255,255,0.5) url(../img/prueba.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 main section p {
     font-size: 14pt;
@@ -17,6 +23,21 @@ canvas {
     width: 100%;
     height: 100%;
 }
+div.contenedorImagen {
+    display: flex;
+}
+.contenedorImagen img {
+    width: 100%;
+}
+
+div.textoSecundario {
+    width: 30%;
+    padding: 3em;
+}
+div.textoSecundario h2 {
+    font-size: 23pt;
+    overflow:hidden;
+}
 
 main section#bienvenida {
     background: rgba(255,255,255,0.5) url("../img/prueba.jpg");
@@ -25,14 +46,37 @@ main section#bienvenida {
 }
 
 main section#funcionalidades {
-    background: rgba(255,255,255,0.5) url("../img/pluma.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    flex-direction: row;
 }
-main section#empezar {
-    background: rgba(255,255,255,0.5) url("../img/videojuego.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+section#funcionalidades .contenedorImagen {
+    position: relative;
+    float: left;
+}
+section#empezar {
+    gap: 3em;
+}
+section#empezar div.textoSecundario {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+div.enlaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    padding: 3em;
+}
+div.enlace {
+    padding: 2em;
+    box-shadow: 1px 1px 6px black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div.enlace h2 {
+    font-size: 18pt;
 }
 section h2 {
     font-size: 3em;

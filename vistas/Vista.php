@@ -58,6 +58,27 @@ class Vista {
 <?php
     }
 
+    public static function imprimirNavEstatico ($entradas, $indiceActual = 0) {
+        ?>
+                <nav id="estatico">
+                    <h2>BloomJS</h2>
+                    <ul>
+                        <?php
+                        $indice = 0;
+                        foreach ($entradas as $nombre => $ruta) {
+                            if ($indice != $indiceActual) {
+                                echo "<li><a href='".$ruta."'>".$nombre."</a></li>";
+                            } else {
+                                echo "<li><a class='actual'>".$nombre."</a></li>";
+                            }
+                            $indice++;
+                        }
+                        ?>
+                    </ul>
+                </nav>
+        <?php
+            }
+
     public static function imprimirFooter () {
 ?>
                 <footer>
