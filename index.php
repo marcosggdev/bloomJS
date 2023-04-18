@@ -40,19 +40,20 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         </div>
 
         <main>
-            <section id="animacion3D">
-                <canvas id="canvas" tabindex=0>
-                        Su navegador no es compatible con WebGL
-                </canvas>
-            </section>
             <section id="bienvenida">
-                <h2>¡Bienvenido a BloomJS!</h2>
-                <p>Bienvenido a BloomJS. Se trata de mi primera aplicación web de cara al público general. Si quieres saber más
-                    sobre mí puedes visitar el siguiente <a href="">enlace</a>, pero por ahora centrémonos en lo importante: ¿Qué
-                    es BloomJS?</p>
-                <p>BloomJS, consiste en una aplicación web que te ayudará con tus proyectos de desarrollo web, permitiéndote aprovechar
-                    librerías gráficas potentes orientadas a entorno web, como WebGL para la generación de gráficos bonitos que podrás incrustar
-                    en tu web, de forma gratuita.</p> 
+                <div class="contenedorImagen">
+                        <h1 class="titulo"></h1>
+                        <img src="/bloomJS/img/colorido.jpg" alt="Imagen de fondo">
+                </div>
+                <div class="textoSecundario">
+                        <h2>¡Bienvenido a BloomJS!</h2>
+                        <p>Bienvenido a BloomJS. Se trata de mi primera aplicación web de cara al público general. Si quieres saber más
+                        sobre mí puedes visitar el siguiente <a href="">enlace</a>, pero por ahora centrémonos en lo importante: ¿Qué
+                        es BloomJS?</p>
+                        <p>BloomJS, consiste en una aplicación web que te ayudará con tus proyectos de desarrollo web, permitiéndote aprovechar
+                        librerías gráficas potentes orientadas a entorno web, como WebGL para la generación de gráficos bonitos que podrás incrustar
+                        en tu web, de forma gratuita.</p> 
+                </div>
             </section>
             <section id="funcionalidades">
                 <h2>¿Para qué sirve BloomJS?</h2>
@@ -89,6 +90,11 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                         <email>Correo</email> ¡Bienvenido/a a BloomJS!
                 </p>
                 <button id="empezar" class="redireccion" onclick="window.location.assign('php/Editor.php')">Ir al Editor</button>
+            </section>
+            <section id="animacion3D">
+                <canvas id="canvas" tabindex=0>
+                        Su navegador no es compatible con WebGL
+                </canvas>
             </section>
         </main>
 

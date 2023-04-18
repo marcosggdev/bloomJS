@@ -9,6 +9,10 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background: url("/bloomJS/img/fondo.jpg");
+    background-position: 50%;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 div#cabecera {
