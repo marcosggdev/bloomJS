@@ -15,10 +15,10 @@ window.addEventListener('load', () => {
         return;
     }
 
-    renderer = new Renderer(0, 0, 20, 1920, 1080);
+    //carga valores por defecto del css de elementos que cambian para guardarlos ante alteraciones
+    Defecto.cargarValores();
+
+    //se encarga de dibujar en el canvas
+    Renderer.iniciar(0, 0, 20, 1920, 1080);
 
 });
-
-async function iniciarObjetos () {
-
-}

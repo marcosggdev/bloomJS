@@ -29,3 +29,19 @@ function toRadians (grados) {
     let resultado = Math.PI * grados / 180.0;
     return resultado;
 }
+
+//crea y devuelve la matriz de perspectiva
+function crearMatrizPerspectiva (fovy, aspecto, n, f) {
+    let q = 1.0 / Math.tan(toRadians(0.5 * fovy));
+    let A = q / aspecto;
+    let B = (n + f) / (n - f);
+    let C = (2.0 * n * f) / (n - f);
+    let datos = [
+        [A,0,0,0],
+        [0,q,0,0],
+        [0,0,B,C],
+        [0,0,-1.0,0]
+    ];
+    let matriz = new Matriz4X4(datos);
+    return matriz;
+}

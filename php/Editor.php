@@ -9,13 +9,14 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/editor.css"
     ], 
     [
+        RAIZ . "js/editor/Defecto.js",
         RAIZ . "js/editor/Main.js",
         RAIZ . "js/webgl/Utilidades.js",
         RAIZ . "js/webgl/matematicas/Matriz4x4.js",
         RAIZ . "js/editor/BotonIcono.js",
         RAIZ . "js/editor/FuncionesIconos.js",
         RAIZ . "js/editor/VentanaCanvas.js",
-        RAIZ . "js/editor/Renderer.js",
+        RAIZ . "js/webgl/Renderer.js",
     ]);
 ?>
 <div id="cabecera">

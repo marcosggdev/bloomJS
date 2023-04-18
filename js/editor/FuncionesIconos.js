@@ -1,21 +1,21 @@
 function minimizar (boton) {
     if (boton.estado) {
-        boton.nodo.className = "iconoDesha"
-        console.log("minimizar");
-        boton.nodo.className = "iconoDeshabilitado";
-        let botonMaximizar = Icono.buscarBotonPorId("maximizar");
-        botonMaximizar.nodo.className = "iconoHabilitado";
-        botonMaximizar.estado = true;
-        boton.estado = false;
+        boton.deshabilitar();
+        BotonIcono.buscarBotonPorId("maximizar").habilitar();
+        Defecto.aplicarEstilosPorDefecto();
     }
 }
 
 function maximizar (boton) {
     if (boton.estado) {
-        boton.nodo.className = "iconoDeshabilitado";
-        boton.estado = false;
-        document.getElementById("minimizar").className = "iconoHabilitado";
-        BotonIcono.buscarBotonPorId("minimizar").estado = true;
-        console.log("maximizar");
+        boton.deshabilitar();
+        BotonIcono.buscarBotonPorId("minimizar").habilitar();
+        document.querySelector("footer").style.display = "none";
+        document.querySelector("div#cabecera").style.display = "none";
+        document.querySelector("main").style.width = "100vw";
+        document.querySelector("main").style.height = "100vh";
+        document.querySelector("main").style.padding = "0";
+        document.querySelector("#ventanaEdicion").style.padding = "0";
+        document.querySelector("#ventanaEdicion").style.overflow = "hidden";
     }
 }

@@ -1,42 +1,67 @@
 class Renderer {
-    //pos camara, ancho alto del viewport, array de modelos3D a dibujar, codigoGLSL
-    constructor (camaraX, camaraY, camaraZ, ancho, alto, controles) {
-        this.camaraX = camaraX;
-        this.camaraY = camaraY;
-        this.camaraZ = camaraZ;
-        this.ancho = ancho;
-        this.alto = alto;
-        this.controles = controles;
-        this.iniciar();
-    }
 
-    iniciar () {
-        gl.canvas.width = this.ancho;   //dimensionar canvas
-        gl.canvas.height = this.alto;
+    static clearColorR = 0.289;
+    static clearColorG = 0.289;
+    static clearColorB = 0.289;
+    static clearColorA = 1.0;
+
+    static camaraX = 0;
+    static camaraY = 0;
+    static camaraZ = 0;
+    static ancho = 640;
+    static alto = 480;
+    static dibujables = [];
+
+    static iniciar (camaraX = 0, camaraY = 0, camaraZ = 0, ancho = 640, alto = 480) {
+
+        //si se pasan valores se toman. Sino se dejan por defecto
+        Renderer.camaraX = camaraX;
+        Renderer.camaraY = camaraY;
+        Renderer.camaraZ = camaraZ;
+        Renderer.ancho = ancho;
+        Renderer.alto = alto;
+
+        gl.canvas.width = Renderer.ancho;   //dimensionar canvas
+        gl.canvas.height = Renderer.alto;
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
 
-        gl.clearColor(0.5, 0.5, 0.5, 1.0);  //limpiar fondo a negro
-        gl.clear(gl.COLOR_BUFFER_BIT);
+        //limpiar fondo a negro
+        Renderer.limpiarFondo();
 
+        //habilita cull face, depth test y inversion eje y de texturas
+        Renderer.habilitarPropiedades();
+
+        //matrices vista y perspectiva
+        Renderer.iniciarMatrices();
+    }
+
+    static limpiarFondo () {
+        gl.clearColor(Renderer.clearColorR, Renderer.clearColorG, Renderer.clearColorB, Renderer.clearColorA);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    }
+
+    static habilitarPropiedades () {
         gl.enable(gl.CULL_FACE);    //cull face
         gl.enable(gl.DEPTH_TEST);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
-
-        //crear matriz perspectiva
-        this.aspecto = gl.canvas.width / gl.canvas.height;
-        this.matrizP = crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
-
-        //matriz vista
-        this.matrizV = new Matriz4X4();
-        this.matrizV.identidad();
-        //this.crearMatrizVista();
-        //this.matrizV.rotar(45, 0, 0);
-        this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
     }
 
-    crearMatrizVista () {
-        let d = new Vector4X1([-this.camaraX, -this.camaraY, -this.camaraZ, 1.0]);   //camara en pos camara, mirando al (0,0,0)
+    static iniciarMatrices () {
+        //crear matriz perspectiva
+        Renderer.aspecto = gl.canvas.width / gl.canvas.height;
+        Renderer.matrizP = Renderer.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+
+        //matriz vista
+        Renderer.matrizV = new Matriz4X4();
+        Renderer.matrizV.identidad();
+        //this.crearMatrizVista();
+        //this.matrizV.rotar(45, 0, 0);
+        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);
+    }
+
+    static crearMatrizVista () {
+        let d = new Vector4X1([-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ, 1.0]);   //camara en pos camara, mirando al (0,0,0)
         d.normalizar();
         let x2 = d.productoVectorial(new Vector4X1([0, 1, 0]));
         x2.normalizar();
@@ -49,47 +74,46 @@ class Renderer {
         this.matrizV.cambiarColumna(2, d.datos);
     }
 
-    ciclo () {
-        this.actualizar();
-        this.dibujar();
+    static ciclo () {
+        Renderer.actualizar();
+        Renderer.dibujar();
     }
 
-    actualizar () {
+    static actualizar () {
         //actualizar matrizV
-        this.matrizV = new Matriz4X4();
-        this.matrizV.identidad();
+        Renderer.matrizV = new Matriz4X4();
+        Renderer.matrizV.identidad();
         //this.matrizV.rotar(45, 0, 0);
-        this.matrizV.trasladar(-this.camaraX, -this.camaraY, -this.camaraZ);
+        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);
 
-        this.controles.actualizar();
+        //no hay controles en esta implementacion -- Renderer.controles.actualizar();
 
-        for (let i = 0; i < modelos3D.length; i++) {
-            modelos3D[i].actualizar();
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            Renderer.dibujables[i].actualizar();
         }
     }
 
-    dibujar () {
-        //gl.clearColor(0.0, 0.0, 0.0, 1.0);  //limpiar fondo
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        //dibujar modelos3D del array del constructor
-        for (let i = 0; i < modelos3D.length; i++) {
-            modelos3D[i].dibujar();
+    static dibujar () {
+        Renderer.limpiarFondo();
+
+        //dibujar objetos dibujables
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            Renderer.dibujables[i].dibujar();
         }
     }
-}
 
-//crea y devuelve la matriz de perspectiva
-function crearMatrizPerspectiva (fovy, aspecto, n, f) {
-    let q = 1.0 / Math.tan(toRadians(0.5 * fovy));
-    let A = q / aspecto;
-    let B = (n + f) / (n - f);
-    let C = (2.0 * n * f) / (n - f);
-    let datos = [
-        [A,0,0,0],
-        [0,q,0,0],
-        [0,0,B,C],
-        [0,0,-1.0,0]
-    ];
-    let matriz = new Matriz4X4(datos);
-    return matriz;
+    static anadirGraficoDibujable (grafico) {
+        this.dibujables.push(grafico);
+    }
+
+    static eliminarGraficoDibujable (id) {
+        for (let i = 0; i < this.dibujables.length; i++) {
+            if (this.dibujables[i].id == id) {
+                //elimina ese y solo ese grafico del array
+                this.dibujables[i].splice(i, 1);
+                return true;
+            }
+        }
+        return false;
+    }
 }

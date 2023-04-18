@@ -27,12 +27,14 @@ class BotonIcono {
         return null;
     }
 
-    setEstado (estado) {
-        if (estado) {
+    habilitar () {
+        this.nodo.className = "iconoHabilitado";
+        this.estado = true;
+    }
 
-        } else {
-            
-        }
+    deshabilitar () {
+        this.nodo.className = "iconoDeshabilitado";
+        this.estado = false;
     }
 
 }   
