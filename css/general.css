@@ -9,16 +9,18 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: rgb(127 69 69) url(../img/fondo.jpg);
+}
+
+div#cabecera {
+    /*background: rgb(0 0 0) url(../img/fondo.jpg);*/ 
+    background: rgb(0 0 0) url(../img/fondoHeader.png);
+    background-color: black;
     background-attachment: fixed;
     background-size: cover;
     z-index: -2;
     background-blend-mode: luminosity;
-}
-
-div#cabecera {
-    background: linear-gradient(45deg, #000000, #ffffff80);
-    box-shadow: 3px 3px 5px black;
+    /* box-shadow: 3px 3px 5px black; */
+    box-shadow: inset 2px 2px -21px #ff00ec;
 }
 
 header {
@@ -28,57 +30,65 @@ header {
     animation-duration: 7s;
     animation-iteration-count: infinite;
 }
-
-header h1{
-    margin: 0;
-    animation-duration: 6s;
-    animation-name: animTitulo;
+header h1:before {
+    position: absolute;
+    top: 26%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    transform: perspective(1em) rotateX(170deg);
+    z-index: -1;
+    filter: blur(49px);
+    background-blend-mode: darken;
+    animation-name: animH1Before;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
-    color: white;
+    animation-timing-function: steps(1, end);
+}
+header h1{
+    position: relative;
+    margin: 0;
+    color: #9e369e;
+    /* text-shadow: 0 0 0.4em #ffd3fc; */
+    width: fit-content;
+    z-index: 0;
+    text-shadow: 0 0 0.25em #ffd6fd;
+    animation-name: animTitulo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(1, end);
 }
 
 header h1::first-letter{
-    color: #ff9df4;
+    color: #daffde;
     font-size: 1.2em;
+    text-shadow: 0 0 0.2em #99ff8e;
 }
 
 header h1, header h2 {
     font-family: "Monoton";
-    font-size: 6em;
+    font-size: 8em;
     font-style: italic;
-    font-weight: 800;
+    font-weight: 600;
 }
 
 header h2 {
     margin-left: 8em;
     font-size: 1em;
     margin: 0;
-    animation-duration: 0.5s;
-    animation-name: animSubtitulo;
-    animation-iteration-count: infinite;
-    font-family: "Black Ops One";
-}
-
-@keyframes animSubtitulo {
-    from {
-        color: pink;
-    }
-    50% {
-        color: white;
-    }
-}
-@keyframes animTitulo {
-    from {
-        color: white;
-    }
-    50% {
-        color: pink;
-    }
+    /*font-family: "Black Ops One";*/ 
+    text-shadow: 0 0 0.5em #ff00ec;
+    z-index: 0;
+    color: white;
 }
 
 nav, header {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0px;
     padding: 0px;
     padding-top: 2em;
@@ -87,15 +97,17 @@ nav, header {
 nav {
     position: relative;
     text-align: center;
-    background: linear-gradient(to Right, #997070, #ffffff80);
+    /* background: linear-gradient(to Right, #35353500, #fe83ff69);*/ 
+    padding: 0;
 }
 nav ul{
     display: flex;
     margin: 0;
-    padding:0;
+    padding:1em;
     align-items: center;
     justify-content: center;
     gap: 4em;
+    box-sizing: border-box;
 }
 nav ul li {
     margin: 0;
@@ -104,7 +116,7 @@ nav ul li {
     text-align: center;
     box-sizing: border-box;
 }
-nav ul li a.actual {
+nav ul li.actual {
     text-decoration: none;
     padding: 1em;
     background-color: rgb(74, 153, 73);
@@ -112,29 +124,27 @@ nav ul li a.actual {
     box-shadow: 1px 1px 5px black;
     text-align: center;
 }
-nav ul li a{
+nav ul li {
     display: inline-block;
     text-decoration: none;
     padding: 1em;
-    background-color: rgb(121, 255, 119);
+    background-color: rgb(116, 0, 120);
     width: 100%;
-    color: black;
+    color: white;
     box-shadow: 2px 2px 5px black;
     text-align: center;
 }
-nav ul li a:hover:not(a.actual) {
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+nav ul li a:visited {
+    color: white;
+}
+nav ul li:hover:not(.actual) {
     background-color: rgb(83, 255, 80);
     animation-duration: 1s;
     animation-name: animBotonNav;
-}
-
-@keyframes animBotonNav {
-    from {
-        transform: scale(1,1);
-    }
-    100% {
-        transform: scale(1.2,1.2);
-    }
 }
 
 main{

@@ -1,0 +1,85 @@
+@keyframes animTitulo {
+    from {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    10% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    20% {
+
+    }
+    30% {
+
+    }
+    50% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    60% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    70% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    80% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    to {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+}
+
+@keyframes animH1Before {
+    from {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 61, 229);
+        background: linear-gradient(180deg, white, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    10% {
+        color: pink;
+        background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    20% {
+
+    }
+    30% {
+
+    }
+    50% {
+        color: pink;
+        background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    60% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 61, 229);
+        background: linear-gradient(180deg, white, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    70% {
+        color: pink;
+        background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    80% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 61, 229);
+        background: linear-gradient(180deg, white, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+    to {
+        color: pink;
+        background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    }
+}
+
+@keyframes animBotonNav {
+    from {
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(1.2,1.2);
+    }
+}

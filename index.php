@@ -7,7 +7,8 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 <?=Vista::imprimirHead("Bloom - JS", 
         [
                 RAIZ . "css/general.css", 
-                RAIZ . "css/index.css"
+                RAIZ . "css/index.css",
+                RAIZ . "css/animaciones.css"
         ], 
         [
                 RAIZ . "js/editor/Defecto.js",
