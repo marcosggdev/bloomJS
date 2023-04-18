@@ -303,6 +303,30 @@ var FRAGMENT_SHADER_JUGADOR_PHONG =
 "   gl_FragColor = vec4(color.xyz * textura.xyz, 1.0);\n" +
 "}\n";
 
+//------------------------------------------IMAGEN---------------------------------
+
+var VERTEX_SHADER_IMAGEN = 
+"uniform mat4 mv;\n" +
+"uniform mat4 m;\n" +
+"uniform mat4 p;\n" +
+"uniform sampler2D sampler;\n" +
+"attribute vec3 aPos;\n" +
+"attribute vec2 aTex;\n" +
+"varying vec2 vTex;\n" + 
+"void main(){\n" +
+"   gl_Position = p * mv * vec4(aPos, 1.0);\n" +
+"   vTex = aTex;\n" +
+"}\n";
+
+var FRAGMENT_SHADER_IMAGEN =
+"precision mediump float;\n" +
+"uniform sampler2D sampler;\n" +
+"varying vec2 vTex;\n" +
+"void main(){\n" +
+"   vec4 textura = texture2D(sampler, vTex);\n" + 
+"   gl_FragColor = vec4(textura.xyz, 1.0);\n" +
+"}\n";
+
 function crearShader (gl, tipo, codigoGLSL) {
     var shader = gl.createShader(tipo);
     gl.shaderSource(shader, codigoGLSL);

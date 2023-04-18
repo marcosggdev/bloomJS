@@ -50,7 +50,7 @@ class Renderer {
     static iniciarMatrices () {
         //crear matriz perspectiva
         Renderer.aspecto = gl.canvas.width / gl.canvas.height;
-        Renderer.matrizP = Renderer.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+        Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
 
         //matriz vista
         Renderer.matrizV = new Matriz4X4();
@@ -104,6 +104,7 @@ class Renderer {
 
     static anadirGraficoDibujable (grafico) {
         this.dibujables.push(grafico);
+        Renderer.dibujar();
     }
 
     static eliminarGraficoDibujable (id) {

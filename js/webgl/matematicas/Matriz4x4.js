@@ -147,8 +147,8 @@ class Matriz4X4 {
 
     rotarX (angulo) {
         //sentido antihorario para angulo > 0
-        let c = Math.cos(toRadians(angulo));    //coseno = c, seno = s
-        let s = Math.sin(toRadians(angulo));
+        let c = Math.cos(Utilidades.toRadians(angulo));    //coseno = c, seno = s
+        let s = Math.sin(Utilidades.toRadians(angulo));
         let datosRotacion = [
             [1,0,0,0],
             [0,c,-s,0],
@@ -161,8 +161,8 @@ class Matriz4X4 {
 
     rotarY (angulo) {
         //sentido antihorario para angulo > 0
-        let c = Math.cos(toRadians(angulo));    //coseno = c, seno = s
-        let s = Math.sin(toRadians(angulo));
+        let c = Math.cos(Utilidades.toRadians(angulo));    //coseno = c, seno = s
+        let s = Math.sin(Utilidades.toRadians(angulo));
         let datosRotacion = [
             [c,0,s,0],
             [0,1,0,0],
@@ -175,8 +175,8 @@ class Matriz4X4 {
 
     rotarZ (angulo) {
         //sentido antihorario para angulo > 0
-        let c = Math.cos(toRadians(angulo));    //coseno = c, seno = s
-        let s = Math.sin(toRadians(angulo));
+        let c = Math.cos(Utilidades.toRadians(angulo));    //coseno = c, seno = s
+        let s = Math.sin(Utilidades.toRadians(angulo));
         let datosRotacion = [
             [c,-s,0,0],
             [s,c,0,0],
