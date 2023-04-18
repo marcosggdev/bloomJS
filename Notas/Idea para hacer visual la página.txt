@@ -1,0 +1,4 @@
+Modelar cilindro con textura de carretera, colocarlo en la direccion x y rotarlo con respecto al eje x, generando la ilusión
+de una carretera que se mueve hacia el usuario.
+
+Ademas colocar movimiento automatico y manual a la rotacion y presentar textos en funcion de la rotacion con imagenes

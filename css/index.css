@@ -8,6 +8,15 @@ main section p {
     font-size: 14pt;
     margin-bottom: 2em;
 }
+section#animacion3D {
+    padding: 0;
+    display: flex;
+}
+canvas {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
 
 main section#bienvenida {
     background: rgba(255,255,255,0.5) url("../img/prueba.jpg");

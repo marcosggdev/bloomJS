@@ -4,7 +4,29 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 ?>
 
 
-<?=Vista::imprimirHead("Bloom - JS", [RAIZ . "css/general.css", RAIZ . "css/index.css"], [])?>
+<?=Vista::imprimirHead("Bloom - JS", 
+        [
+                RAIZ . "css/general.css", 
+                RAIZ . "css/index.css"
+        ], 
+        [
+                RAIZ . "js/editor/Defecto.js",
+                RAIZ . "js/webgl/GLSL.js",
+                RAIZ . "js/webgl/Color.js",
+                RAIZ . "js/webgl/Material.js",
+                RAIZ . "js/webgl/Dae.js",
+                RAIZ . "js/webgl/Modelo3D.js",
+                RAIZ . "js/webgl/Modelo2D.js",
+                RAIZ . "js/webgl/Lienzo.js",
+                RAIZ . "js/index/Main.js",
+                RAIZ . "js/webgl/Utilidades.js",
+                RAIZ . "js/webgl/matematicas/Matriz4x4.js",
+                RAIZ . "js/editor/BotonIcono.js",
+                RAIZ . "js/editor/FuncionesIconos.js",
+                RAIZ . "js/editor/VentanaCanvas.js",
+                RAIZ . "js/webgl/Renderer.js",
+        ]
+)?>
 
     <body>
 
@@ -17,6 +39,11 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         </div>
 
         <main>
+            <section id="animacion3D">
+                <canvas id="canvas" tabindex=0>
+                        Su navegador no es compatible con WebGL
+                </canvas>
+            </section>
             <section id="bienvenida">
                 <h2>¡Bienvenido a BloomJS!</h2>
                 <p>Bienvenido a BloomJS. Se trata de mi primera aplicación web de cara al público general. Si quieres saber más

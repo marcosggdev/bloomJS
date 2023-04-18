@@ -1,0 +1,12 @@
+# Blender 3.4.1 MTL File: 'jugador.blend'
+# www.blender.org
+
+newmtl mat_jugador
+Ns 211.103012
+Ka 0.520270 0.520270 0.520270
+Ks 0.527027 0.527027 0.527027
+Ke 0.000000 0.000000 0.000000
+Ni 0.000000
+d 1.000000
+illum 3
+map_Kd C:/texturaJugador.jpg

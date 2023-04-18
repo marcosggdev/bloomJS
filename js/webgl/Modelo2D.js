@@ -1,7 +1,7 @@
 class Modelo2D {
 
     constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
-         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = Color.BLANCO) {
+         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = null) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -83,8 +83,10 @@ class Modelo2D {
 
         var textura = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, textura);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([this.color.R, this.color.G, 
-            this.color.B, this.color.A]));
+        if (this.color != null) {
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([this.color.R, this.color.G, 
+                this.color.B, this.color.A]));
+        }
 
         //si se pasa una textura, se carga. En caso contrario se ignora la textura
         if (this.rutaTextura !== "") {
@@ -101,6 +103,7 @@ class Modelo2D {
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
                     gl.generateMipmap(gl.TEXTURE_2D);
                 }
+                
     
             });
         }

@@ -1,4 +1,5 @@
 class Modelo3D {
+    
     constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, rutaArchivoDae,
          VSHADER_SOURCE = VERTEX_SHADER_GOURAUD2, FSHADER_SOURCE = FRAGMENT_SHADER_GOURAUD2) {
         //constructor con parametros sincronos. Se llama desde generarModelo
@@ -16,17 +17,7 @@ class Modelo3D {
         this.texturizado = 0.0;
         this.VSHADER_SOURCE = VSHADER_SOURCE;
         this.FSHADER_SOURCE = FSHADER_SOURCE;
-    }
-
-    //permite generar modelos y esperar a que se ejecuten las funciones asincronas e iniciar(), para que asi el renderer
-    //llame a actualizar/dibujar despues de que todos los modelos estan cargados
-    static async generarModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, rutaArchivoDae,
-        VSHADER_SOURCE, FSHADER_SOURCE) {
-            //constructor asincrono estatico
-            let modelo = new Modelo3D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, rutaArchivoDae,
-                VSHADER_SOURCE, FSHADER_SOURCE);
-            await modelo.cargar();
-            return modelo;
+        this.cargar();
     }
 
     async cargar () {
@@ -39,7 +30,7 @@ class Modelo3D {
                 this.procesarDae(new DOMParser().parseFromString(texto, "application/xml"));
             });
 
-        const respuestaMaterial = await fetch("assets/modelos/dae/materiales/esfera.mtl")
+        const respuestaMaterial = await fetch("/bloomJS/assets/materiales/esfera.mtl")
             .then( response => {
                 return response.text();
             })
@@ -49,14 +40,12 @@ class Modelo3D {
 
         const cargados = await Promise.all([respuestaArchivoXML, respuestaMaterial])
             .then( response => {
-                this.posar();
                 this.iniciar();
             });
     }
 
     procesarDae (archivoXML) {
         this.archivoXML = archivoXML;
-        console.log(this.archivoXML);
             //vertices, normales y uv
             let datosProcesados = [[],[],[]];
             
@@ -167,7 +156,7 @@ class Modelo3D {
             let library_images = archivoXML.getElementsByTagName("library_images")[0];
             if (typeof library_images.getElementsByTagName("init_from")[0] !== "undefined") {
                 let nombreTextura = library_images.getElementsByTagName("init_from")[0].textContent;
-                this.rutaTextura = "assets/modelos/dae/texturas/" + nombreTextura;
+                this.rutaTextura = "/bloomJS/assets/texturas/" + nombreTextura;
                 this.texturizado = 1.0;
             }
 
@@ -256,21 +245,6 @@ class Modelo3D {
         }
     }
 
-    posar () {
-        //transforma los vertices para adaptarlos a los huesos utilizando el objeto skin y el objeto esqueleto
-        //multiplicamos vertices por matriz union forma: transforma el sist ref de la geometria al que usan los huesos 
-        this.reiniciarGeometria();
-        let transformaciones = this.skin.transformaciones;
-        for (let i = 0; i < transformaciones.length; i++) {
-            //tranformaciones = [[ts1,ts2,... vert 1], [ts1,ts2... vert 2...]...]
-            let transformacionesPorVertice = transformaciones[i];
-            //por lo que i es el vertice afectado por las transform, coord primer dato 3*i en array vertices
-            //la transformacion es lineal: (am1 + bm2 + ...) * v
-            this.transformarVertice(transformacionesPorVertice, i);
-        }
-        this.construirVertices();
-    }
-
     transformarVertices (transformacion) {
         //permite aplicar una matriz al array de vertices. Similar a GLSL
         for (let i = 0; i < this.geometria.length/3; i++) {
@@ -304,7 +278,7 @@ class Modelo3D {
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
         //matriz modeloVista
-        this.matrizMV = renderer.matrizV.multiplicar(this.matrizM);
+        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
 
         //shaders y programa
         this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -341,7 +315,7 @@ class Modelo3D {
             imagen.addEventListener('load', function () {
                 gl.bindTexture(gl.TEXTURE_2D, textura);
                 gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imagen);
-                if (dimensionesPotenciaDeDos(imagen)) {
+                if (Utilidades.dimensionesPotenciaDeDos(imagen)) {
                     gl.generateMipmap(gl.TEXTURE_2D);
                 } else {
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -360,9 +334,10 @@ class Modelo3D {
         this.mv = gl.getUniformLocation(this.programa, "mv");
         gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
         this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, renderer.matrizP.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
         this.m = gl.getUniformLocation(this.programa, "m");
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+
         //material
         this.texturizadoLoc = gl.getUniformLocation(this.programa, "texturizado");
         gl.uniform1f(this.texturizadoLoc, this.texturizado);
@@ -384,18 +359,13 @@ class Modelo3D {
         gl.uniform1f(this.niLoc, this.material.ni);
         this.dLoc = gl.getUniformLocation(this.programa, "d");
         gl.uniform1f(this.dLoc, this.material.d);
-        //otros uniform
-        if (typeof jugador !== "undefined") {
-            this.jPosLoc = gl.getUniformLocation(this.programa, "uJPos"); //uniform jugador posicion
-            gl.uniform3fv(this.jPosLoc, jugador.posicion);
-        } else {
-            this.jPosLoc = gl.getUniformLocation(this.programa, "uJPos"); //uniform jugador posicion
-            gl.uniform3fv(this.jPosLoc, [0,0,0]);
-        }
+
+
+        Renderer.anadirGraficoDibujable(this);
     }
 
     actualizar () {
-        //this.anguloX += 0.0001;
+        this.anguloX += 1;
         //this.anguloY += 1;
         //this.anguloZ += 0.0001;
     }
@@ -408,18 +378,10 @@ class Modelo3D {
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
-        this.matrizMV = renderer.matrizV.multiplicar(this.matrizM);
+        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
 
         gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
-
-        if (typeof jugador !== "undefined") {
-            this.jPosLoc = gl.getUniformLocation(this.programa, "uJPos"); //uniform jugador posicion
-            gl.uniform3fv(this.jPosLoc, jugador.posicion);
-        } else {
-            this.jPosLoc = gl.getUniformLocation(this.programa, "uJPos"); //uniform jugador posicion
-            gl.uniform3fv(this.jPosLoc, [0,0,0]);
-        }
 
         //atributos
         gl.enableVertexAttribArray(this.aPosLoc);
