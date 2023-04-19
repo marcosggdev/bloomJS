@@ -6,9 +6,11 @@ Vista::imprimirHead("Bloom - JS",
     [
         RAIZ . "css/general.css", 
         RAIZ . "css/index.css", 
-        RAIZ . "css/editor.css"
+        RAIZ . "css/editor.css",
+        RAIZ . "css/animaciones.css"
     ], 
     [
+        RAIZ . "js/general/NavDinamico.js",
         RAIZ . "js/editor/Defecto.js",
         RAIZ . "js/webgl/GLSL.js",
         RAIZ . "js/webgl/Color.js",
@@ -29,6 +31,7 @@ Vista::imprimirHead("Bloom - JS",
 <div id="cabecera">
     <?=Vista::imprimirHeader("Editor", "Aquí podrás editar el estilo de tus páginas de forma cómoda y rápida");?>
     <?=Vista::imprimirNav(Vista::$entradas, 1);?>
+    <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
 </div>
 <main>
 

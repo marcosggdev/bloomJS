@@ -19,9 +19,16 @@ div#lienzo {
     background-color: white;
     left: 0;
     transform: translateX(5%);
+    overflow-y: scroll;
 }
+
+div#lienzo .focus {
+    background-color: rgb(188, 188, 188);
+    box-shadow: 2px 1px 5px black;
+}
+
 div#menuHerramientas {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -34,6 +41,7 @@ div#menuHerramientas {
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     padding: 10px;
+    z-index: 1;
 }
 div.celda {
     width: 100%;
@@ -51,4 +59,7 @@ div.celda:hover {
 img.icono {
     width: 30px;
     height: 30px;
+}
+.contenedor {
+    z-index: 2;
 }

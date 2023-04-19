@@ -1,7 +1,6 @@
 window.addEventListener('load', () => {
-    cargarListeners();
+    Lienzo.iniciar();
+    document.querySelector("#frame").appendChild(Lienzo.nodo);
+    ControladorLienzo.iniciar();
+    ControladorHerramientas.iniciar();
 });
-
-function cargarListeners () {
-    let botones = document.querySelectorAll("div#menuHerramientas");
-}
