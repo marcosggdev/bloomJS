@@ -11,11 +11,13 @@ Vista::imprimirHead("Bloom - JS",
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",
+        RAIZ . "js/generador/Submenu.js",
+        RAIZ . "js/generador/Herramienta.js",
+        RAIZ . "js/generador/ControladorHerramientas.js",
+        RAIZ . "js/generador/MenuHerramientas.js",
+       
         RAIZ . "js/generador/Lienzo.js",
         RAIZ . "js/generador/Contenedor.js",
-        RAIZ . "js/generador/ControladorLienzo.js",
-        RAIZ . "js/generador/ControladorHerramientas.js",
-        RAIZ . "js/generador/FuncionesIconos.js",
         RAIZ . "js/generador/Main.js"
     ]);
 ?>
@@ -29,14 +31,18 @@ Vista::imprimirHead("Bloom - JS",
         <div id="vistaReducida">
 
         </div>
-        <div id="menuHerramientas">
+        <!--<div id="menuHerramientas">
                 <div class="celda">
-                    <img class="icono" src="/bloomJS/img/iconos/maximizar.png" alt="Icono maximizar">
+                    <img id="maximizar" class="icono" src="/bloomJS/img/iconos/maximizar.png" alt="Icono maximizar">
                 </div>
                 <div class="celda">
-                    <img class="icono" src="/bloomJS/img/iconos/anadir.png" alt="Icono añadir">
+                    <img id="desplegarSubmenuAnadir" class="icono" src="/bloomJS/img/iconos/anadir.png" alt="Icono añadir">
                 </div>
+                <ul id="submenuAnadir">
+                    <li id="anadirPlantilla">Plantilla</li>
+                </ul>
         </div>
+-->
     </div>
 </main>
 <?=Vista::imprimirFooter();?>

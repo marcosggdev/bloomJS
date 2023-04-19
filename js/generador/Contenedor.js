@@ -8,25 +8,19 @@ class Contenedor {
         let contenedor = document.createElement("div");
         contenedor.className = "contenedor";
         contenedor.innerHTML = html;
+        contenedor.draggable = true;
 
+        var self = this;
         //cuando se hace clik en el nodo, se maneja el click desde el objeto que lo contiene
-        contenedor.addEventListener('click', this.click);
-        contenedor.addEventListener('blur', this.blur);
-        contenedor.addEventListener('dblclick', this.dblclick);
+        contenedor.addEventListener('click', function () {
+            self.click(self);
+        });
+
         return contenedor;
     }
 
-    click (e) {
-        let nodo = e.target;
-        nodo.classList.add("focus");
-    }
-
-    blur (e) {
-        let nodo = e.target;
-    }
-
-    dblclick () {
-        console.log("dblclick");
+    click (contenedor) {
+        contenedor.nodo.classList.add("focus");
     }
 
 }

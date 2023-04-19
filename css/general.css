@@ -194,6 +194,22 @@ nav ul li a:hover:not(.actual) {
     text-shadow: 0 0 0.25em rgb(255, 52, 218);
     box-shadow: inset 0 0 0.75em rgb(255, 52, 218), 0 0 0.95em rgb(255, 52, 218);
 }
+nav#estatico {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    flex-direction: row;
+    /*background: linear-gradient(to Right, purple, rgba(0,0,0, 0.5));*/
+    background-color: white;
+    box-shadow: 2px 2px 5px black;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    width: 100%;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
 nav#estatico h2 {
     position: relative;
     margin: 0;
@@ -221,24 +237,9 @@ nav#estatico h2::first-letter {
     color: hsl(114, 100%, 71%);
     text-shadow: 0 0 10px rgb(209, 255, 202);
 }
-nav#estatico {
-    position: fixed;
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    /*background: linear-gradient(to Right, purple, rgba(0,0,0, 0.5));*/
-    background-color: white;
-    box-shadow: 2px 2px 5px black;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
-    width: 100%;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
 /*cuando el nav es visible */ 
 nav#estatico.activo {
+    display: flex;
     transition: top 1s;
     opacity: 1;
     left: 50%;
