@@ -15,6 +15,8 @@ body {
     background-position: 50%;
     background-attachment: fixed;
     background-size: cover;*/
+    scroll-behavior: smooth;
+    font-family: "Roboto Condensed";
 }
 
 div#cabecera {
@@ -160,7 +162,7 @@ nav ul li a {
     width: 100%;
     font-family: 'Oleo Script Swash Caps';
     text-decoration: none;
-    color: rgb(80, 0, 65);
+    color: rgb(151 0 123);
     text-shadow: 0 0 0.25em #680068;
     font-size: 21pt;
     height: 100%;
@@ -193,9 +195,31 @@ nav ul li a:hover:not(.actual) {
     box-shadow: inset 0 0 0.75em rgb(255, 52, 218), 0 0 0.95em rgb(255, 52, 218);
 }
 nav#estatico h2 {
+    position: relative;
     margin: 0;
-    color: black;
+    color: #ffbdff;
     font-family: "Monoton";
+    padding: 1em;
+    background-color: black;
+    border: 4px solid purple;
+    border-radius: 10px;
+    box-shadow: inset 0 0 40px purple, 0 0 25px purple;
+    text-shadow: 0 0 10px rgb(255, 191, 253);
+}
+nav#estatico h2::before {
+    position: absolute;
+    content: " ";
+    top: 58%;
+    left: 0;
+    width: 100%;
+    height: 24%;
+    background-color: #ff9dff;
+    transform: perspective(19px) rotateX(7deg);
+    filter: blur(20px);
+}
+nav#estatico h2::first-letter {
+    color: hsl(114, 100%, 71%);
+    text-shadow: 0 0 10px rgb(209, 255, 202);
 }
 nav#estatico {
     position: fixed;
@@ -210,6 +234,16 @@ nav#estatico {
     top: 0;
     width: 100%;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+/*cuando el nav es visible */ 
+nav#estatico.activo {
+    transition: top 1s;
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s;
 }
 nav#estatico ul li {
     margin: 0;
@@ -262,11 +296,120 @@ footer div#infoFooter h2 {
 footer div#infoFooter p {
     margin-bottom: 0;
 }
-footer small {
-    font-size: 14pt;
+footer div#principal {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    align-items: stretch;
+    justify-content: space-between;
+}
+footer div#principal > div {
+    flex-grow: 1;
+    padding: 1em;
+    box-sizing: border-box;
+}
+div#contactos {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 10px;
+}
+a.contacto {
+    display: flex;
+    align-items:center;
+    gap: 10px;
+    box-shadow: 0 2px 5px white;
+    padding: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.5s;
+}
+a.contacto img {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px;
+}
+a.contacto:hover {
+    background-color: rgb(57, 57, 57);
+    box-shadow: 0 0 40px pink;
+}
+div#interes {
+
+}
+
+div#interes ul li {
+
+}
+
+div#interes ul li a {
+    color: rgb(226, 226, 226);
+    text-decoration: underline;
+}
+
+div#logos {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+div.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px white;
+    width: 100%;
+}
+div.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    padding: 10px;
+}
+div#secundario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div#secundario h1 {
+    font-family: "Monoton";
+    position: relative;
+    margin: 0;
+    color: #9e369e;
+    /* text-shadow: 0 0 0.4em #ffd3fc; */
+    width: fit-content;
+    z-index: 0;
+    text-shadow: 0 0 0.25em #ffd6fd;
+}
+div#secundario h1::first-letter {
+    color: #daffde;
+    font-size: 1.2em;
+    text-shadow: 0 0 0.2em #99ff8e;
+}
+div#secundario h1::before {
     position: absolute;
-    bottom: 10px;
-    font-family: "Lobster";
+    top: 26%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    background: linear-gradient(180deg, #ffa7fc, #36003afc), linear-gradient(90deg, #0b5200, white);
+    transform: perspective(1em) rotateX(170deg);
+    z-index: -1;
+    filter: blur(51px);
+    background-blend-mode: darken;
+}
+div#secundario small {
+    font-family: 'Oleo Script Swash Caps';
+    font-size: 14pt;
+}
+div#secundario address {
+    font-family: serif;
+    font-size: 9pt;
 }
 
 /*tipografia generica*/

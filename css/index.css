@@ -2,7 +2,7 @@ main {
     padding: 0;
 }
 main section {
-    background: rgba(255,255,255,0.5) url(../img/prueba.jpg);
+    background: rgba(255,255,255,0.5);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -33,6 +33,15 @@ div.contenedorImagen {
 div.textoSecundario {
     width: 30%;
     padding: 3em;
+}
+div.textoSecundario ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14pt;
+}
+div.textoSecundario ul li {
+    text-align: justify;
 }
 div.textoSecundario h2 {
     font-size: 23pt;
@@ -69,6 +78,8 @@ div.enlaces {
 }
 div.enlace {
     padding: 2em;
+    padding-top: 6em;
+    padding-bottom: 6em;
     box-shadow: 1px 1px 6px black;
     border-radius: 10px;
     display: flex;
@@ -85,7 +96,7 @@ section h2 {
 }
 section h2 {
     border-bottom: 1px solid rgba(0,0,0,.5);
-    border-width: 3px;
+    border-width: 1px;
 }
 section p {
     text-align: justify;

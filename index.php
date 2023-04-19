@@ -11,6 +11,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 RAIZ . "css/animaciones.css"
         ], 
         [
+                RAIZ . "js/general/NavDinamico.js",
                 RAIZ . "js/editor/Defecto.js",
                 RAIZ . "js/webgl/GLSL.js",
                 RAIZ . "js/webgl/Color.js",
@@ -44,7 +45,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         <section id="bienvenida">
                 <div class="textoSecundario">
                         <h2>¡Bienvenido a BloomJS!</h2>
-                        <p>Bienvenido a BloomJS. Se trata de mi primera aplicación web de cara al público general</p>
+                        <p>Bienvenido a BloomJS. Se trata de mi proyecto para el CFGS Desarrollo de Aplicaciones Web</p>
                         <p>BloomJS te ayudará con tus proyectos de desarrollo web</p>
                 </div>
                 <div class="contenedorImagen">
@@ -57,13 +58,14 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 </div>
                 <div class="textoSecundario">
                         <h2>¿Para qué sirve BloomJS?</h2>
-                        <p>Entre las funcionalidades más guays de BloomJS están:
-                        </p>
-                        <p>Patrones con la forma que tú mismo/a elijas</p>
-                        <p>La generación de escenas en 3D para colocarlas en tu página</p>
-                        <p>Generación de animaciones píxel</p>
-                        <p>Compartir es vivir: comparte tus chulísimos gráficos generados bajo tus directrices</p>
-                        <p>Generación de gráficos por shader: ¡Tu navegador también utiliza la GPU, aprovéchalo!</p>
+                        <p>Entre las funcionalidades de BloomJS están: </p>
+                        <ul>
+                                <li>Generar patrones con la forma que tú mismo/a elijas</li>
+                                <li>La generación de escenas en 3D para colocarlas en tu página</li>
+                                <li>Generación de animaciones píxel</li>
+                                <li>Compartir es vivir: comparte tus chulísimos gráficos generados bajo tus directrices</li>
+                                <li>Generación de gráficos por shader: ¡Tu navegador también utiliza la GPU, aprovéchalo!</li>
+                        </ul>
                 </div>
             </section>
             <section id="empezar">
@@ -82,21 +84,18 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 </div>
                 <div class="enlaces">
                         <div class="enlace">
-                                <h2>Lorem ipsum dolor sit amet consectetur adipit minus</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, 
-                                        nihiuscipit minus</p>
+                                <h2>Prueba nuestro editor</h2>
+                                        <p>Te ayudará con el diseño de tu página</p>
                                 <a href="#">enlace</a>
                         </div>
                         <div class="enlace">
-                                <h2>Lorem ipsum dolor sit amet consectetur adipit minus</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, 
-                                        nihiuscipit minus</p>
+                                <h2>Genera tus propios assets</h2>
+                                        <p>Para que no tengas que preouparte por el copyright</p>
                                 <a href="#">enlace</a>
                         </div>
                         <div class="enlace">
-                                <h2>Lorem ipsum dolor sit amet consectetur adipit minus</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, 
-                                        nihiuscipit minus</p>
+                                <h2>¡Comparte tus creaciones!</h2>
+                                        <p>Descubre las creaciones de otros usuarios</p>
                                 <a href="#">enlace</a>
                         </div>
                 </div>

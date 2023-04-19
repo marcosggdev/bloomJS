@@ -82,13 +82,51 @@ class Vista {
     public static function imprimirFooter () {
 ?>
                 <footer>
-                    <div id="infoFooter">
-                        <h2>Autor: </h2>
-                        <address>Marcos García García</address>
-                        <h2>Correo: </h2>
-                        <mail>Correo@correo.com</mail>
+                    <div id="principal">
+                        <div id="contactos">
+                            <h1>Contacto</h1>
+                            <a href="" class="contacto">
+                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
+                                <small>Github</small>
+                            </a>
+                            <a href="" class="contacto">
+                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
+                                <small>Github</small>
+                            </a>
+                            <a href="" class="contacto">
+                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
+                                <small>Github</small>
+                            </a>
+                            <a href="" class="contacto">
+                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
+                                <small>Github</small>
+                            </a>
+                        </div>
+                        <div id="interes">
+                            <h1>Algunos enlaces de interés</h1>
+                            <ul>
+                                <li><a href="www.wikipedia.org">¿De dónde surgió la idea de BloomJS?</a></li>
+                                <li><a href="www.wikipedia.org">¿Se puede reutilizar el código fuente?</a></li>
+                                <li><a href="www.wikipedia.org">¿Cuándo sale la siguiente actualización?</a></li>
+                            </ul>
+                        </div>
+                        <div id="logos">
+                            <h1>Instituciones</h1>
+                            <div class="logo">
+                                <img src="/bloomJS/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
+                                <small>IES Bernaldo de Quirós</small>
+                            </div>
+                            <div class="logo">
+                                <img src="/bloomJS/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
+                                <small>IES Bernaldo de Quirós</small>
+                            </div>
+                        </div>
                     </div>
-                    <small>Copyright: Bloom&co&copy;</small>
+                    <div id="secundario">
+                        <h1>BloomJS</h1>
+                        <small>Marcos García García</small>
+                        <address>IES Bernaldo de Quirós, Mieres</address>
+                    </div>
                 </footer>
                 </body>
         </html>
