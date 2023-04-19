@@ -55,7 +55,22 @@ window.addEventListener('load', () => {
 function mostrarMensaje (indice) {
     let li = document.createElement("li");
     li.textContent = pasos[indice];
-    document.getElementById("listaPasos").appendChild(li);
+
+    switch (indice) {
+        case 0:
+            document.getElementById("listaPasos").appendChild(li);
+            break;
+        case 1:
+            document.getElementById("listaPasos").appendChild(li);
+            let div = document.createElement("div");
+            div.id = "formas";
+            let forma1 = document.createElement("img");
+            forma1.src = "/bloomJS/img/iconos/forma1.png";
+            forma1.alt = "Forma";
+            div.appendChild(forma1);
+            document.getElementById("listaPasos").appendChild(div);
+            break;
+    }
 }
 
 function moverBoton () {
