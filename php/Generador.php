@@ -28,21 +28,25 @@ Vista::imprimirHead("Bloom - JS",
 </div>
 <main>
     <div id="frame">
-        <div id="vistaReducida">
+        <div id="guia">
+            <h1>Guía de uso</h1>
+            <ul id="listaPasos">
+                <li>Haga click en cualquier punto del lienzo que desee utilizar como origen
+                    <button id="siguiente">Siguiente</button>
+                </li>
+            </ul>
+        </div>
+        <div id="lienzo">
 
         </div>
-        <!--<div id="menuHerramientas">
-                <div class="celda">
-                    <img id="maximizar" class="icono" src="/bloomJS/img/iconos/maximizar.png" alt="Icono maximizar">
-                </div>
-                <div class="celda">
-                    <img id="desplegarSubmenuAnadir" class="icono" src="/bloomJS/img/iconos/anadir.png" alt="Icono añadir">
-                </div>
-                <ul id="submenuAnadir">
-                    <li id="anadirPlantilla">Plantilla</li>
-                </ul>
-        </div>
--->
+    </div>
+    <div id="patrones">
+        <img class="flecha" src="/bloomJS/img/iconos/izquierda.png" alt="Izquierda">
+        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
+        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
+        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
+        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
+        <img class="flecha" src="/bloomJS/img/iconos/derecha.png" alt="Izquierda">
     </div>
 </main>
 <?=Vista::imprimirFooter();?>
