@@ -128,14 +128,18 @@ class Matriz4X4 {
     }
 
     trasladar (posX, posY, posZ) {
+
         let datosTraslacion = [
             [1,0,0,posX],
             [0,1,0,posY],
             [0,0,1,posZ],
             [0,0,0,1]
         ];
+
         let matrizTraslacion = new Matriz4X4(datosTraslacion);
+
         this.datos = matrizTraslacion.multiplicar(this).datos;
+
     }
 
     rotar (anguloX, anguloY, anguloZ) {
@@ -163,13 +167,16 @@ class Matriz4X4 {
         //sentido antihorario para angulo > 0
         let c = Math.cos(Utilidades.toRadians(angulo));    //coseno = c, seno = s
         let s = Math.sin(Utilidades.toRadians(angulo));
+
         let datosRotacion = [
             [c,0,s,0],
             [0,1,0,0],
             [-s,0,c,0],
             [0,0,0,1]
         ];
+
         let matrizRotacionY = new Matriz4X4(datosRotacion);
+
         this.datos = this.multiplicar(matrizRotacionY).datos;
     }
 

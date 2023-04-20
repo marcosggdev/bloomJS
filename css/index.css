@@ -48,12 +48,6 @@ div.textoSecundario h2 {
     overflow:hidden;
 }
 
-main section#bienvenida {
-    background: rgba(255,255,255,0.5) url("../img/prueba.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 main section#funcionalidades {
     flex-direction: row;
 }

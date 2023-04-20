@@ -277,9 +277,6 @@ class Modelo3D {
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
-        //matriz modeloVista
-        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
-
         //shaders y programa
         this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
         this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
@@ -331,12 +328,12 @@ class Modelo3D {
         }
 
         //uniforms matrices
-        this.mv = gl.getUniformLocation(this.programa, "mv");
-        gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
-        this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
         this.m = gl.getUniformLocation(this.programa, "m");
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+        this.v = gl.getUniformLocation(this.programa, "v");
+        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+        this.p = gl.getUniformLocation(this.programa, "p");
+        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
 
         //material
         this.texturizadoLoc = gl.getUniformLocation(this.programa, "texturizado");
@@ -365,22 +362,21 @@ class Modelo3D {
     }
 
     actualizar () {
-        this.anguloX += 1;
+        //this.anguloX += 1;
         //this.anguloY += 1;
         //this.anguloZ += 0.0001;
     }
 
     dibujar () {
         gl.useProgram(this.programa);
+
         //matriz del modelo
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
-        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
-
-        gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
 
         //atributos

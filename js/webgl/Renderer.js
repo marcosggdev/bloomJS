@@ -5,19 +5,14 @@ class Renderer {
     static clearColorB = 0.289;
     static clearColorA = 1.0;
 
-    static camaraX = 0;
-    static camaraY = 0;
-    static camaraZ = 0;
+    static camara = null;
     static ancho = 640;
     static alto = 480;
     static dibujables = [];
 
-    static iniciar (camaraX = 0, camaraY = 0, camaraZ = 0, ancho = 640, alto = 480) {
+    static iniciar (camara = null, ancho = 640, alto = 480) {
 
-        //si se pasan valores se toman. Sino se dejan por defecto
-        Renderer.camaraX = camaraX;
-        Renderer.camaraY = camaraY;
-        Renderer.camaraZ = camaraZ;
+        Renderer.camara = camara;
         Renderer.ancho = ancho;
         Renderer.alto = alto;
 
@@ -51,13 +46,14 @@ class Renderer {
         //crear matriz perspectiva
         Renderer.aspecto = gl.canvas.width / gl.canvas.height;
         Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
-
+        Renderer.matrizV = Renderer.camara.matrizV;
+/* 
         //matriz vista
         Renderer.matrizV = new Matriz4X4();
         Renderer.matrizV.identidad();
         //this.crearMatrizVista();
         //this.matrizV.rotar(45, 0, 0);
-        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);
+        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);*/ 
     }
 
     static crearMatrizVista () {
@@ -81,10 +77,12 @@ class Renderer {
 
     static actualizar () {
         //actualizar matrizV
-        Renderer.matrizV = new Matriz4X4();
+        Renderer.camara.actualizar();
+        Renderer.matrizV = Renderer.camara.matrizV;
+        /* Renderer.matrizV = new Matriz4X4();
         Renderer.matrizV.identidad();
         //this.matrizV.rotar(45, 0, 0);
-        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);
+        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);*/
 
         //no hay controles en esta implementacion -- Renderer.controles.actualizar();
 

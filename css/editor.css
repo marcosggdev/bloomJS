@@ -11,7 +11,7 @@ canvas {
 div#ventanaEdicion {
     padding: 1em;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     box-sizing: border-box;
 }
 div#controlesVentana {

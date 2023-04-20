@@ -11,22 +11,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 RAIZ . "css/animaciones.css"
         ], 
         [
-                RAIZ . "js/general/NavDinamico.js",
-                RAIZ . "js/editor/Defecto.js",
-                RAIZ . "js/webgl/GLSL.js",
-                RAIZ . "js/webgl/Color.js",
-                RAIZ . "js/webgl/Material.js",
-                RAIZ . "js/webgl/Dae.js",
-                RAIZ . "js/webgl/Modelo3D.js",
-                RAIZ . "js/webgl/Modelo2D.js",
-                RAIZ . "js/webgl/Lienzo.js",
-                RAIZ . "js/index/Main.js",
-                RAIZ . "js/webgl/Utilidades.js",
-                RAIZ . "js/webgl/matematicas/Matriz4x4.js",
-                RAIZ . "js/editor/BotonIcono.js",
-                RAIZ . "js/editor/FuncionesIconos.js",
-                RAIZ . "js/editor/VentanaCanvas.js",
-                RAIZ . "js/webgl/Renderer.js",
+                RAIZ . "js/general/NavDinamico.js"
         ]
 )?>
 
@@ -101,9 +86,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 </div>
             </section>
             <section id="animacion3D">
-                <canvas id="canvas" tabindex=0>
-                        Su navegador no es compatible con WebGL
-                </canvas>
+
             </section>
         </main>
 

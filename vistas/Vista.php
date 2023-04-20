@@ -105,7 +105,9 @@ class Vista {
                         <div id="interes">
                             <h1>Algunos enlaces de interés</h1>
                             <ul>
-                                <li><a href="www.wikipedia.org">¿De dónde surgió la idea de BloomJS?</a></li>
+                                <li><a href="https://asliceofrendering.com/scene%20helper/2020/01/05/InfiniteGrid/" target="_blank">
+                                    ¿Cómo se dibuja el grid infinito en WebGL?
+                                </a></li>
                                 <li><a href="www.wikipedia.org">¿Se puede reutilizar el código fuente?</a></li>
                                 <li><a href="www.wikipedia.org">¿Cuándo sale la siguiente actualización?</a></li>
                             </ul>
