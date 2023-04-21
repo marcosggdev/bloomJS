@@ -34,6 +34,14 @@ class Grid extends Modelo2D {
         this.p = gl.getUniformLocation(this.programa, "p");
         gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
 
+        //inversas
+        this.mInversa = gl.getUniformLocation(this.programa, "mInversa");
+        gl.uniformMatrix4fv(this.mInversa, false, Matriz4X4.obtenerInversa(this.matrizM).obtenerArrayPorColumnas());
+        this.vInversa = gl.getUniformLocation(this.programa, "vInversa");
+        gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(Renderer.camara.matrizV).obtenerArrayPorColumnas());
+        this.pInversa = gl.getUniformLocation(this.programa, "pInversa");
+        gl.uniformMatrix4fv(this.pInversa, false, Matriz4X4.obtenerInversa(Renderer.matrizP).obtenerArrayPorColumnas());
+
         Renderer.anadirGraficoDibujable(this);
     }
 
@@ -49,6 +57,8 @@ class Grid extends Modelo2D {
 
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.v, false, Renderer.matrizV.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.mInversa, false, Matriz4X4.obtenerInversa(this.matrizM).obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(Renderer.matrizV).obtenerArrayPorColumnas());
 
         //atributos
         gl.enableVertexAttribArray(this.aPosLoc);

@@ -250,4 +250,61 @@ class Matriz4X4 {
             return null;
         }
     }
+
+    static obtenerInversa (matriz) {
+        //A-1 = (1 / det(A)) * Adj(A)
+        let primerTermino = 1 / this.obtenerDeterminante(matriz);
+        let matrizAdjunta = this.obtenerMatrizAdjunta(matriz);
+        matrizAdjunta.multiplicarEscalar(primerTermino); //esta es la inversa
+        return matrizAdjunta;
+    }
+
+    static obtenerMatrizAdjunta(matriz) {
+        //matriz en la que cada elemento se ha sustituido por el determinante de su adjunto
+        let datos = [[],[],[], []];
+        for (let i = 0; i < matriz.datos.length; i++) {
+            for (let j = 0; j < matriz.datos[0].length; j++) {
+                let adjunto = this.obtenerAdjunto(matriz, i, j);
+                let signo = Math.pow(-1, i+j);
+                datos[j][i] = signo * Matriz3X3.obtenerDeterminante(adjunto);
+            }
+        }
+        let matrizAdjunta = new Matriz4X4(datos);
+        return matrizAdjunta;
+    }
+
+    static obtenerDeterminante (matriz) {
+
+        let determinante = 0;
+
+        for (let j = 0; j < matriz.datos.length; j++) {
+            let m1i = matriz.datos[0][j];
+            let adjunto = this.obtenerAdjunto(matriz, 0, j);
+            let termino = Math.pow(-1, 1 + (j+1)) * m1i * Matriz3X3.obtenerDeterminante(adjunto);
+            determinante += termino;
+        }
+
+        return determinante;
+    }
+
+    static obtenerAdjunto (matriz, evitarI, evitarJ) {
+
+        //matriz 3x3
+        let extraidos = [];
+
+        for (let i = 0; i < matriz.datos.length; i++) {
+            for (let j = 0; j < matriz.datos[0].length; j++) {
+                //recorrer matriz
+                if (i != evitarI && j != evitarJ) {
+                    let mij = matriz.datos[i][j];
+                    extraidos.push(mij);
+                }
+            }
+        }
+
+        //convertir array 1D en array 3x3
+        let adjunto = Matriz3X3.formatearArray(extraidos);
+        return adjunto;
+
+    }
 }

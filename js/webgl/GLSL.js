@@ -404,33 +404,46 @@ var FRAGMENT_SHADER_IMAGEN =
 
 //------------------------------------------GRID--------------------------------------ç
 var VERTEX_SHADER_GRID = 
+"precision mediump float;\n" +
 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
 "uniform mat4 p;\n" +
+"uniform mat4 mInversa;\n"+
+"uniform mat4 vInversa;\n"+
+"uniform mat4 pInversa;\n"+
 
 "attribute vec3 aPos;\n" +
-"varying vec3 nearPoint;\n" +
-"varying vec3 farPoint;\n" +
+"varying vec3 vPos;\n"+
 
 "void main() {\n" +
-"   vec4 unprojectedNear = m * vec4(aPos.xy, 0.0, 1.0);\n" +
-"   vec4 unprojectedFar = m * vec4(aPos.xy, 1.0, 1.0);\n" +
-"   nearPoint = unprojectedNear.xyz / unprojectedNear.w;\n"+
-"   farPoint = unprojectedFar.xyz / unprojectedFar.w;\n"+
 "   gl_Position = p * v * m * vec4(aPos, 1.0);\n"+
+"   vPos = aPos;\n"+
 "}\n";
 
 var FRAGMENT_SHADER_GRID = 
 "precision mediump float;\n" +
 
-"varying vec3 nearPoint;\n" +
-"varying vec3 farPoint;\n" +
+"uniform mat4 m;\n" +
+"uniform mat4 v;\n" +
+"uniform mat4 p;\n" +
+"uniform mat4 mInversa;\n"+
+"uniform mat4 vInversa;\n"+
+"uniform mat4 pInversa;\n"+
+
+"varying vec3 vPos;\n"+
 
 "void main() {\n" +
-"    float t = -nearPoint.y / (farPoint.y - nearPoint.y);\n" +
+"    vec4 fragmentViPiMi = pInversa * vInversa * mInversa * vec4(vPos, 1.0);\n" + 
 //"    vec3 fragPos3D = nearPoint + t * (farPoint - nearPoint);\n" +
-"    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0 * float(t > 0.0));\n" +
+/* 
+"    if (mod(fragmentViPiMi.x, 50.0) < 1.0 || mod(fragmentViPiMi.y, 50.0) < 1.0) {\n" +
+"        gl_FragColor = vec4(1.0, 0.0, 0.0, 0.5);\n"+
+"    }"+
+*/
+"    if (mod(fragmentViPiMi.x, 50.0) < 1.0 || mod(fragmentViPiMi.z, 50.0) < 1.0) {\n" +
+"        gl_FragColor = vec4(1.0, 0.0, 0.0, 0.5);\n"+
+"    }"+
 "}\n";
 
 /* 
