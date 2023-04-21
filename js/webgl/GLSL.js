@@ -444,9 +444,10 @@ var FRAGMENT_SHADER_GRID =
 "varying vec3 vPos;\n"+
 
 "void main() {\n" +
-"    vec4 unprojectedVector = vInversa * pInversa * vec4(vPos, 1.0);\n"+
-"    if ((gl_FragCoord.x > -1.0 && gl_FragCoord.x < 1.0) || (gl_FragCoord.z > -1.0 && gl_FragCoord.z < 1.0)) {" +
-"        gl_FragColor = vec4(1.0, 1.0, 1.0, 0.6);"+
+"    float t = -nearPoint.y / (farPoint.y - nearPoint.y);"+
+"    vec4 unprojectedVector =  m * vec4(vPos.xyz, 1.0);\n"+
+"    if (mod(unprojectedVector.x, 10.0) < 0.2 || mod(unprojectedVector.z, 10.0) < 0.2) {" +
+"        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);"+
 "   } else {"+
 "        gl_FragColor = vec4(0.3, 0.3, 0.3, 1.0);"+
 "   }"+
