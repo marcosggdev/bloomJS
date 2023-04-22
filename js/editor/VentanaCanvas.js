@@ -30,7 +30,10 @@ class VentanaCanvas {
         }
 
         let barraHerramientas = new BarraHerramientas([
-            new Boton("Boton1", "saludar"),
+            new Boton("Escena", "desplegar", [
+                ["Añadir Modelo3D"],
+                ["anadirModelo3D"]
+            ]),
             new Boton("Desplegable", "desplegar", [
                 ["boton1", "boton2"],
                 ["c1", "c2"]
@@ -41,11 +44,32 @@ class VentanaCanvas {
         canvas.tabindex = 0;
         canvas.id = "canvas";
 
+        this.iniciarControlesCanvas(canvas);
+
         controlesVentana.appendChild(iconos);
         ventanaEdicion.appendChild(controlesVentana);
         ventanaEdicion.appendChild(barraHerramientas.nodo);
         ventanaEdicion.appendChild(canvas);
 
         return ventanaEdicion;
+    }
+
+    iniciarControlesCanvas (canvas) {
+        var moviendoCamara = false;
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (moviendoCamara) {   
+                Renderer.camara.anguloY += e.movementX;
+                Renderer.camara.anguloXPropio += e.movementY;
+            }
+        });
+    
+        canvas.addEventListener('mousedown', (e) => {
+            moviendoCamara = true;
+        });
+    
+        canvas.addEventListener('mouseup', () => {
+            moviendoCamara = false;
+        });
     }
 }

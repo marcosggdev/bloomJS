@@ -14,7 +14,10 @@ class Submenu {
         for (let i = 0; i < nombres.length; i++) {
             let li = document.createElement("li");
             li.textContent = nombres[i];
-            li.addEventListener("click", this[acciones[i]]);
+            li.addEventListener("click", () => {
+                this[acciones[i]]();
+                this.ocultar();
+            });
             ul.appendChild(li);
         }
 
@@ -22,11 +25,21 @@ class Submenu {
     }
 
     desplegar () {
-
+        this.nodo.style.display = "flex";
     }
 
     ocultar () {
+        this.nodo.style.display = "none";
+    }
 
+    c1 () {
+        console.log("c1");
+    }
+    c2 () {
+        console.log("c2");
+    }
+    anadirModelo3D () {
+        console.log("añadir modelo 3D");
     }
 
 }

@@ -15,28 +15,11 @@ window.addEventListener('load', () => {
         return;
     }
 
-    var moviendoCamara = false;
-
-    canvas.addEventListener('mousemove', (e) => {
-        if (moviendoCamara) {   
-            Renderer.camara.anguloY += e.movementX;
-            Renderer.camara.anguloXPropio += e.movementY;
-        }
-    });
-
-    canvas.addEventListener('mousedown', (e) => {
-        moviendoCamara = true;
-    });
-
-    canvas.addEventListener('mouseup', () => {
-        moviendoCamara = false;
-    });
-
     //carga valores por defecto del css de elementos que cambian para guardarlos ante alteraciones
     Defecto.cargarValores();
 
     //camara que el renderer utiliza para dibujar
-    let arcballCamera = new ArcballCamera(0, 0, 0, 10, 70, 90);
+    let arcballCamera = new ArcballCamera(0, 0, 0, 10, 30, 30);
     //se encarga de dibujar en el canvas
     Renderer.iniciar(arcballCamera, 640, 480);
 

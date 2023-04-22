@@ -65,19 +65,36 @@ ul#listaBotones {
 div.boton {
     background-color: black;
     color: white;
+    padding: 1em;
+    width: 20%;
+    text-align: center;
 }
-div.boton p.contenedor {
-    position: relative;
+div.boton p {
+    margin: 0;
 }
 div.boton:hover {
     background-color: white;
     color: black;
 }
+p.contenedor {
+    position: relative;
+}
 ul.submenu {
+    display: none;
     position: absolute;
-    display: flex;
+    top: 100%;
     flex-direction: column;
     list-style: none;
     padding: 0;
     align-items: stretch;
+    width:100%;
+}
+ul.submenu li {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+ul.submenu li:hover {
+    background-color: white;
+    color: black;
 }

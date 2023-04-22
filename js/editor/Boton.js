@@ -17,11 +17,18 @@ class Boton {
         div.className = "boton";
         let p = document.createElement("p");
         p.textContent = nombre;
-        p.addEventListener("click", this[accion]);
             
         if (this.submenu != null) {
             p.appendChild(this.submenu.nodo);
             p.classList.add("contenedor");
+            div.addEventListener("mouseenter", () => {
+                this.desplegar();
+            });
+            div.addEventListener("mouseleave", () => {
+                this.ocultar();
+            });
+        } else {
+            p.addEventListener("click", this[accion]);
         }
 
         div.appendChild(p);
@@ -35,6 +42,11 @@ class Boton {
 
     ocultar () {
         this.submenu.ocultar();
+    }
+
+    //ACCIONES de boton
+    saludar () {
+        console.log("saludar");
     }
 
 }
