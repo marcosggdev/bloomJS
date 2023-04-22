@@ -47,3 +47,37 @@ img.iconoDeshabilitado {
     background-color: rgb(184, 184, 184);
     color: rgb(42, 42, 42);
 }
+div#barraHerramientas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+ul#listaBotones {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+div.boton {
+    background-color: black;
+    color: white;
+}
+div.boton p.contenedor {
+    position: relative;
+}
+div.boton:hover {
+    background-color: white;
+    color: black;
+}
+ul.submenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    align-items: stretch;
+}

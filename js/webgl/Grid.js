@@ -66,8 +66,15 @@ class Grid extends Modelo2D {
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
         gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
 
+        //deshabilitamos cull face para que se vea el plano por ambas caras
+        gl.disable(gl.CULL_FACE);
+
         //dibujado
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
+
+        //anulamos los cambios despues del dibujo para no afectar al resto
+        gl.cullFace(gl.BACK);
+        gl.depthFunc(gl.LESS);
     }
 
 }

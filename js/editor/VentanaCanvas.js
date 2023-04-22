@@ -29,12 +29,21 @@ class VentanaCanvas {
             iconos.appendChild(icono.nodo);
         }
 
+        let barraHerramientas = new BarraHerramientas([
+            new Boton("Boton1", "saludar"),
+            new Boton("Desplegable", "desplegar", [
+                ["boton1", "boton2"],
+                ["c1", "c2"]
+            ])
+        ]);
+
         let canvas = document.createElement("canvas");
         canvas.tabindex = 0;
         canvas.id = "canvas";
 
         controlesVentana.appendChild(iconos);
         ventanaEdicion.appendChild(controlesVentana);
+        ventanaEdicion.appendChild(barraHerramientas.nodo);
         ventanaEdicion.appendChild(canvas);
 
         return ventanaEdicion;
