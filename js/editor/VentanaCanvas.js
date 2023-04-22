@@ -55,6 +55,16 @@ class VentanaCanvas {
     }
 
     iniciarControlesCanvas (canvas) {
+        this.iniciarControlesCamara(canvas);
+    }
+
+    iniciarControlesCamara (canvas) {
+        this.controladorRotacionCamara(canvas);
+        this.controladorZoomCamara(canvas);
+        this.controladorSeleccionObjeto(canvas);
+    }
+
+    controladorRotacionCamara (canvas) {
         var moviendoCamara = false;
 
         canvas.addEventListener('mousemove', (e) => {
@@ -63,13 +73,42 @@ class VentanaCanvas {
                 Renderer.camara.anguloXPropio += e.movementY;
             }
         });
-    
-        canvas.addEventListener('mousedown', (e) => {
+
+        canvas.addEventListener('mousedown', () => {
             moviendoCamara = true;
         });
     
         canvas.addEventListener('mouseup', () => {
             moviendoCamara = false;
+        });
+    }
+
+    controladorZoomCamara (canvas) {
+        canvas.addEventListener("mousewheel", (e) => {
+            if (e.ctrlKey) {
+                //evitar hacer zoom en la pagina
+                e.preventDefault();
+                //zoom de la camara
+                if (e.deltaY < 0) {
+                    Renderer.camara.radio-=0.5;
+                    //zoom out de la camara
+                } else if (e.deltaY > 0) {
+                    Renderer.camara.radio+=0.5;
+                }
+            }
+        });
+    }
+
+    //comprobar posicion del click y buscar objeto que interseque
+    controladorSeleccionObjeto (canvas) {
+        canvas.addEventListener("click", (e) => {
+
+            //comprobamos los objetos de tipo Modelo3D que se estan dibujando
+            for (let i = 0; i < Renderer.dibujables.length; i++) {
+                if (Renderer.dibujables[i] instanceof Modelo3D) {
+                    
+                }
+            }
         });
     }
 }

@@ -39,7 +39,7 @@ class Submenu {
         console.log("c2");
     }
     anadirModelo3D () {
-        console.log("añadir modelo 3D");
+        let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
     }
 
 }
