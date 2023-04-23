@@ -19,6 +19,11 @@ class ArcballCamera {
         this.matrizV = this.crearMatrizVista();
     }
 
+    obtenerPosicionCamara () {
+        let vector = new Vector4X1([this.posXInicial, this.posYInicial, this.posZInicial, 1.0]);
+        return this.matrizV.multiplicarVector(vector);
+    }
+
     crearMatrizVista () {
         let matriz = new Matriz4X4();
         matriz.identidad();

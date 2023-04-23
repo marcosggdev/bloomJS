@@ -507,6 +507,26 @@ var FRAGMENT_SHADER_HITBOX =
 "   } else { discard;}"+
 "}";
 
+//------------------------------------------LINEA RECTA------------------------------------------------------------
+var VERTEX_SHADER_LINEA_RECTA = 
+"precision mediump float;"+
+
+"uniform mat4 v;"+
+"uniform mat4 p;"+
+
+"attribute vec3 aPos;"+
+
+"void main() {"+
+"   gl_Position = p * v * vec4(aPos, 1.0);"+
+"}";
+
+var FRAGMENT_SHADER_LINEA_RECTA =
+"precision mediump float;"+
+
+"void main () {"+
+"   gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);"+
+"}";
+
 /* 
 "precision mediump float;\n"+
 

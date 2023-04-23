@@ -103,6 +103,24 @@ class VentanaCanvas {
     controladorSeleccionObjeto (canvas) {
         canvas.addEventListener("click", (e) => {
 
+            //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
+            let xCanvas = canvas.getBoundingClientRect().left;
+            let yCanvas = canvas.getBoundingClientRect().top;
+            let anchoCanvas = canvas.getBoundingClientRect().width;
+            let altoCanvas = canvas.getBoundingClientRect().height;
+            let centroX = xCanvas + anchoCanvas / 2;
+            let centroY = yCanvas + altoCanvas / 2;
+
+            let coordXPixeles = e.clientX - centroX;
+            let coordYPixeles = - (e.clientY - centroY);
+
+            //convertir coordenadas del click a coords de opengl: minimo = -1, maximo = 1;
+            //ancho = 2, xPixeles = xGL => xGL = (xPixeles * 2) / ancho
+            let coordXGL = coordXPixeles * 2 / anchoCanvas;
+            let coordYGL = coordYPixeles * 2 / altoCanvas;
+
+            let puntosClick = new LineaRecta(coordXGL, coordYGL);
+
             //comprobamos los objetos de tipo Modelo3D que se estan dibujando
             for (let i = 0; i < Renderer.dibujables.length; i++) {
                 if (Renderer.dibujables[i] instanceof Modelo3D) {
