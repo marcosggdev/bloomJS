@@ -273,8 +273,8 @@ class Modelo3D {
         //matriz del modelo
         this.matrizM = new Matriz4X4();
         this.matrizM.identidad();
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
+        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
         //shaders y programa
@@ -357,8 +357,53 @@ class Modelo3D {
         this.dLoc = gl.getUniformLocation(this.programa, "d");
         gl.uniform1f(this.dLoc, this.material.d);
 
+        //crear HITBOX
+        let factoresHitbox = this.calcularFactoresHitbox(this.vertices);
+        this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
+            this.anguloX, this.anguloY, this.anguloZ, 
+            this.factorX, this.factorY, this.factorZ, factoresHitbox);
 
         Renderer.anadirGraficoDibujable(this);
+    }
+
+    calcularFactoresHitbox (vertices) {
+        //calcular escala de la hitbox para que contenga el modelo de forma minima y cubica
+        let xMinima = 1000;
+        let yMinima = 1000;
+        let zMinima = 1000;
+        let xMaxima = -1000;
+        let yMaxima = -1000;
+        let zMaxima = -1000;
+        
+        for (let i = 0; i < vertices.length / 3; i++) {
+            
+            //nota: convertir a number porque sino comparara strings con resultados extraños
+            let x = Number(vertices[3*i]);
+            let y = Number(vertices[3*i+1]);
+            let z = Number(vertices[3*i+2]);
+
+            if (x < xMinima) {
+                xMinima = x;
+            }
+            if (x > xMaxima) {
+                xMaxima = x;
+            }
+
+            if (y < yMinima) {
+                yMinima = y;
+            }
+            if (y > yMaxima) {
+                yMaxima = y;
+            }
+
+            if (z < zMinima) {
+                zMinima = z;
+            }
+            if (z > zMaxima) {
+                zMaxima = z;
+            }
+        }
+        return [xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima];
     }
 
     actualizar () {

@@ -468,6 +468,45 @@ var FRAGMENT_SHADER_GRID =
 "   }"+
 "}\n";
 
+//------------------------------------------HITBOX------------------------------------------------------------
+var VERTEX_SHADER_HITBOX = 
+"precision mediump float;"+
+
+"uniform mat4 m;"+
+"uniform mat4 v;"+
+"uniform mat4 p;"+
+
+"attribute vec3 aPos;"+
+"varying vec3 vPos;"+
+
+"void main() {"+
+"   gl_Position = p * v * m * vec4(aPos, 1.0);"+
+"   vPos = aPos;"+
+"}";
+
+var FRAGMENT_SHADER_HITBOX =
+"precision mediump float;"+
+
+"uniform mat4 m;"+
+"uniform float xMinima;"+
+"uniform float xMaxima;"+
+"uniform float yMinima;"+
+"uniform float yMaxima;"+
+"uniform float zMinima;"+
+"uniform float zMaxima;"+
+"uniform vec3 uColor;"+
+
+"varying vec3 vPos;"+
+
+"void main () {"+
+"   vec4 unprojected = m * vec4(vPos.xyz, 1.0);"+
+"   if ((unprojected.x > (xMaxima - 0.2) || unprojected.x < (xMinima + 0.2)) && (unprojected.z > (zMaxima - 0.2) || unprojected.z < (zMinima + 0.2))"+
+"       || (unprojected.x > (xMaxima - 0.2) || unprojected.x < (xMinima + 0.2)) && (unprojected.y > (yMaxima - 0.2) || unprojected.y < (yMinima + 0.2))"+
+"       || (unprojected.y > (yMaxima - 0.2) || unprojected.y < (yMinima + 0.2)) && (unprojected.z > (zMaxima - 0.2) || unprojected.z < (zMinima + 0.2))) {"+
+"       gl_FragColor = vec4(uColor.xyz, 1.0);"+
+"   } else { discard;}"+
+"}";
+
 /* 
 "precision mediump float;\n"+
 

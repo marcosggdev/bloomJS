@@ -10,8 +10,8 @@ class Grid extends Modelo2D {
         //matriz del modelo
         this.matrizM = new Matriz4X4();
         this.matrizM.identidad();
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
+        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
         //shaders y programa
@@ -73,8 +73,7 @@ class Grid extends Modelo2D {
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
 
         //anulamos los cambios despues del dibujo para no afectar al resto
-        gl.cullFace(gl.BACK);
-        gl.depthFunc(gl.LESS);
+        gl.enable(gl.CULL_FACE);
     }
 
 }

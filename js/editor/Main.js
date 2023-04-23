@@ -19,14 +19,15 @@ window.addEventListener('load', () => {
     Defecto.cargarValores();
 
     //camara que el renderer utiliza para dibujar
-    let arcballCamera = new ArcballCamera(0, 0, 0, 10, 30, 30);
+    let arcballCamera = new ArcballCamera(0, 0, 0, 10, -90, 30);
     //se encarga de dibujar en el canvas
     Renderer.iniciar(arcballCamera, 640, 480);
 
     //cuando se crea un modelo, despues de cargarse se añade al renderer, y al añadirse se dibuja
     //let blanco = new Modelo2D(0, 0, 0, 0, 0, 0, 1, 1, "/bloomJS/img/pluma.jpg", VERTEX_SHADER_IMAGEN, FRAGMENT_SHADER_IMAGEN);
     //let lienzo = new Lienzo();
-    /*let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");*/
+    let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+    //let hitbox = new Hitbox(barril);
     let grid = new Grid();
     let aps = 24;
     let spa = 1 / aps;
