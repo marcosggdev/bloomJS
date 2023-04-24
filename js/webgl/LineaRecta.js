@@ -6,41 +6,42 @@ class LineaRecta {
         this.VSHADER_SOURCE = VERTEX_SHADER_LINEA_RECTA;
         this.FSHADER_SOURCE = FRAGMENT_SHADER_LINEA_RECTA;
 
-        let posCamara = Renderer.camara.obtenerPosicionCamara();
-        posCamara.normalizar();
-
-        //en coords p v
-        let posPunto = new Vector4X1([this.coordXGL, this.coordYGL, 0.0, 1.0]);
-
         let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
         let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
 
-        //en coords world space
-        let posPuntoWorldSpace = vInversa.multiplicarVector(pInversa.multiplicarVector(posPunto));
+       /* let posCamara = Renderer.camara.obtenerPosicionCamara();
+        //posCamara = Vector4X1.sumarVectores(posCamara, new Vector4X1([1,0,0,0]));
+        let posRelativaPuntoVP = new Vector4X1([this.coordXGL, this.coordYGL, 0.0, 1.0]);
+        let posRelativaPuntoW = vInversa.multiplicarVector(pInversa.multiplicarVector(posRelativaPuntoVP));
+        let posPuntoW = Vector4X1.sumarVectores(posCamara, posRelativaPuntoVP);
 
-        this.crearVertices(posPuntoWorldSpace);
-        //malla de puntos que se utilizaran para comprobar colisiones
-        this.crearVerticesMalla(posPuntoWorldSpace);
+        let vectorDirectorW = Vector4X1.invertirVector(posCamara);
+        vectorDirectorW.normalizar();
+
+        let destino = Vector4X1.sumarVectores(posPuntoW, Vector4X1.multiplicarVectorPorEscalar(vectorDirectorW, 2000 * Renderer.camara.radio));
+*/
+        this.crearVertices(this.coordXGL, this.coordYGL, 0, Renderer.camara.matrizV);
         this.iniciar();
     }
 
-    crearVerticesMalla (posCamara) {
-        let verticesMalla = [];
-        let longitud = 2 * Renderer.camara.radio;
-        for (let i = 0; i < 100; i++) {
-            let vectorPuntoRecta = Vector4X1.multiplicarVectorPorEscalar(posCamara, i / 100 * longitud);
-            verticesMalla.push(vectorPuntoRecta.datos[0]);
-            verticesMalla.push(vectorPuntoRecta.datos[1]);
-            verticesMalla.push(vectorPuntoRecta.datos[2]);
-        }
-        this.verticesMalla = verticesMalla;
-    }
+    crearVertices (dx, dy, dz, matriz) {
+        
+        let v1 = new Vector4X1([0,0,-Renderer.camara.radio,1]);
+        let v2 = new Vector4X1([0,0,Renderer.camara.radio,1]);
 
-    crearVertices (posPunto) {
+        let traslacion = new Matriz4X4();
+        traslacion.identidad();
+        traslacion.trasladar(Renderer.camara.radio+dx,Renderer.camara.radio+dy,Renderer.camara.radio+dz);
+
+        let m = traslacion.multiplicar(matriz);
+
+        let v1Nuevo = m.multiplicarVector(v1);
+        let v2Nuevo = m.multiplicarVector(v2);
+
         //puntos: -punto y punto => pasa por el centro 0
         this.vertices = [  
-            -posPunto.datos[0], -posPunto.datos[1], -posPunto.datos[2],
-            posPunto.datos[0], posPunto.datos[1], posPunto.datos[2]
+            v1Nuevo.datos[0], v1Nuevo.datos[1], v1Nuevo.datos[2],
+            v2Nuevo.datos[0], v2Nuevo.datos[1], v2Nuevo.datos[2]
         ];
     }
 
@@ -83,7 +84,6 @@ class LineaRecta {
 
         gl.lineWidth(10.0);
         gl.drawArrays(gl.LINES, 0, this.vertices.length / 3);
-        console.log("dibujando linea");
     }
 
 }

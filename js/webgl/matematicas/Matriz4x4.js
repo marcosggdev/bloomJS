@@ -44,8 +44,9 @@ class Matriz4X4 {
             this.datos[2][0] * vector.datos[0] + this.datos[2][1] * vector.datos[1] + this.datos[2][2] * vector.datos[2] + this.datos[2][3] * vector.datos[3],
             this.datos[3][0] * vector.datos[0] + this.datos[3][1] * vector.datos[1] + this.datos[3][2] * vector.datos[2] + this.datos[3][3] * vector.datos[3]
         ];
-        var vector = new Vector4X1(datosResultado);
-        return vector;
+
+        let resultado = new Vector4X1(datosResultado);
+        return resultado;
     }
 
     multiplicarEscalar (a) {
@@ -306,5 +307,13 @@ class Matriz4X4 {
         let adjunto = Matriz3X3.formatearArray(extraidos);
         return adjunto;
 
+    }
+
+    static obtenerColumnaDeMatriz (matriz, indice) {
+        let datos = [];
+        for (let i = 0; i < 4; i++) {
+            datos.push(matriz.datos[i][indice]);
+        }
+        return new Vector4X1(datos);
     }
 }

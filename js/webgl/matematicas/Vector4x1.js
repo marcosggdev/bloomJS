@@ -46,6 +46,48 @@ class Vector4X1 {
         }
     }
 
+    sumarVector (vector) {
+        for (let i = 0; i < 3; i++) {
+            this.datos[i] += vector.datos[i];
+        }
+    }
+
+    restarVector (vector) {
+        for (let i = 0; i < 3; i++) {
+            this.datos[i] -= vector.datos[i];
+        }
+    }
+
+    invertir () {
+        for (let i = 0; i < 3; i++) {
+            this.datos[i] = -this.datos[i];
+        }
+    }
+
+    multiplicarEscalar (escalar) {
+        for (let i = 0; i < 3; i++) {
+            this.datos[i] *= escalar;
+        }
+    }
+
+    static sumarVectores (v1, v2) {
+        let datos = [];
+        for (let i = 0; i < 3; i++) {
+            datos[i] = v1.datos[i] + v2.datos[i];
+        }
+        datos[3] = 1;
+        return new Vector4X1(datos);
+    }
+
+    static restarVectores (v1, v2) {
+        let datos = [];
+        for (let i = 0; i < 3; i++) {
+            datos[i] = v1.datos[i] - v2.datos[i];
+        }
+        datos[3] = 1;
+        return new Vector4X1(datos);
+    }
+
     static multiplicarVectorPorEscalar (vector, escalar) {
         let datos = [];
         for (let i = 0; i < 3; i++) {
@@ -55,9 +97,24 @@ class Vector4X1 {
         return new Vector4X1(datos);
     }
 
-    sumarVector (vector) {
+    static normalizarVector (vector) {
+        let datos = [];
+        let x2 = vector.datos[0] * vector.datos[0];
+        let y2 = vector.datos[1] * vector.datos[1];
+        let z2 = vector.datos[2] * vector.datos[2];
+        let longitud = Math.sqrt(x2 + y2 + z2);
+
         for (let i = 0; i < 3; i++) {
-            this.datos[i] += vector.datos[i];
+            datos[i] /= vector.datos[i] / longitud;
         }
+    }
+
+    static invertirVector (vector) {
+        let datos = [];
+        for (let i = 0; i < 3; i++) {
+            datos[i] = -vector.datos[i];
+        }
+        datos[3] = 1;
+        return new Vector4X1(datos);
     }
 }

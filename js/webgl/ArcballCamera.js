@@ -20,8 +20,10 @@ class ArcballCamera {
     }
 
     obtenerPosicionCamara () {
+        this.matrizV = this.crearMatrizVista();
         let vector = new Vector4X1([this.posXInicial, this.posYInicial, this.posZInicial, 1.0]);
-        return this.matrizV.multiplicarVector(vector);
+        //al ser camara, modelo = inversa de vista)
+        return Matriz4X4.obtenerInversa(this.matrizV).multiplicarVector(vector);
     }
 
     crearMatrizVista () {
