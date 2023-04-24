@@ -110,6 +110,7 @@ class Vista {
                                 </a></li>
                                 <li><a href="www.wikipedia.org">¿Se puede reutilizar el código fuente?</a></li>
                                 <li><a href="www.wikipedia.org">¿Cuándo sale la siguiente actualización?</a></li>
+                                <li><a href="https://learnopengl.com/Getting-started/Coordinate-Systems">Matrices de Modelo, Vista y Perspectiva en OpenGL</a></li>
                             </ul>
                         </div>
                         <div id="logos">

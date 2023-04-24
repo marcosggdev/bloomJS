@@ -14,7 +14,7 @@ class ArcballCamera {
 
         this.posXInicial = 0;
         this.posYInicial = 0;
-        this.posZInicial = radio;
+        this.posZInicial = 0;
 
         this.matrizV = this.crearMatrizVista();
     }

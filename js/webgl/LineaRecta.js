@@ -6,9 +6,6 @@ class LineaRecta {
         this.VSHADER_SOURCE = VERTEX_SHADER_LINEA_RECTA;
         this.FSHADER_SOURCE = FRAGMENT_SHADER_LINEA_RECTA;
 
-        let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
-        let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
-
        /* let posCamara = Renderer.camara.obtenerPosicionCamara();
         //posCamara = Vector4X1.sumarVectores(posCamara, new Vector4X1([1,0,0,0]));
         let posRelativaPuntoVP = new Vector4X1([this.coordXGL, this.coordYGL, 0.0, 1.0]);
@@ -20,28 +17,45 @@ class LineaRecta {
 
         let destino = Vector4X1.sumarVectores(posPuntoW, Vector4X1.multiplicarVectorPorEscalar(vectorDirectorW, 2000 * Renderer.camara.radio));
 */
-        this.crearVertices(this.coordXGL, this.coordYGL, 0, Renderer.camara.matrizV);
+        this.crearVertices(this.coordXGL, this.coordYGL);
         this.iniciar();
     }
 
-    crearVertices (dx, dy, dz, matriz) {
-        
-        let v1 = new Vector4X1([0,0,-Renderer.camara.radio,1]);
-        let v2 = new Vector4X1([0,0,Renderer.camara.radio,1]);
+    crearVertices (coordXGL, coordYGL) {
+
+        //inversas de matrices
+        let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
+        let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
+
+        //camara
+        let v1 = Renderer.camara.obtenerPosicionCamara();
+        //origen
+        let v2 = Vector4X1.invertirVector(v1);
+
+        //recta k pasa por v1 y v2 pasa por el origen. Hay que hacerle una traslacion en funcion del click del raton
+        let vectorClickVP = new Vector4X1([coordXGL, coordYGL, 0.0, 1.0]);
+        //las coords de la camara estan sujetas a la traslacion y rotacion de la camara. Si invertimos esas coordenadas,
+        //obtendremos las coordenadas relativas al origen donde estaba la camara, en 0,0,0, pero entonces 1 de camara = 1 de world
+
+        //con camara en 0, coord camara 1 = coord world 1.
+        //con camara en d, coord camara 1 = ?
+        let factor = 1;
+
+        //enviar a origen y cancelar rotaciones => vector en coords world space
+        let vectorClick = vInversa.multiplicarVector(vectorClickVP);
 
         let traslacion = new Matriz4X4();
         traslacion.identidad();
-        traslacion.trasladar(Renderer.camara.radio+dx,Renderer.camara.radio+dy,Renderer.camara.radio+dz);
+        traslacion.trasladar(vectorClick.datos[0], vectorClick.datos[1], vectorClick.datos[2]);
 
-        let m = traslacion.multiplicar(matriz);
+        v1 = traslacion.multiplicarVector(v1);
+        v2 = traslacion.multiplicarVector(v2);
 
-        let v1Nuevo = m.multiplicarVector(v1);
-        let v2Nuevo = m.multiplicarVector(v2);
 
         //puntos: -punto y punto => pasa por el centro 0
         this.vertices = [  
-            v1Nuevo.datos[0], v1Nuevo.datos[1], v1Nuevo.datos[2],
-            v2Nuevo.datos[0], v2Nuevo.datos[1], v2Nuevo.datos[2]
+            v1.datos[0], v1.datos[1], v1.datos[2],
+            v2.datos[0], v2.datos[1], v2.datos[2]
         ];
     }
 
