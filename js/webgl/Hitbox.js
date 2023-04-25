@@ -18,7 +18,31 @@ class Hitbox {
         this.FSHADER_SOURCE = FRAGMENT_SHADER_HITBOX;
         this.crearVertices(factoresHitbox[0], factoresHitbox[1], factoresHitbox[2], 
             factoresHitbox[3], factoresHitbox[4], factoresHitbox[5]);
+        this.crearTriangulosInterseccion();
         this.iniciar();
+    }
+
+    crearTriangulosInterseccion () {
+
+        let triangulosInterseccion = [];
+
+        //malla de triangulos para tratar intersecciones. Usaremos los triangulos de la hitbox en lugar de los del modelo
+        for (let i = 0; i < this.vertices.length; i+=9) {
+
+            let v1 = new Vector4X1([this.vertices[i], this.vertices[i+1], this.vertices[i+2], 1.0]);
+            let v2 = new Vector4X1([this.vertices[i+3], this.vertices[i+4], this.vertices[i+5], 1.0]);
+            let v3 = new Vector4X1([this.vertices[i+6], this.vertices[i+7], this.vertices[i+8], 1.0]);
+
+            let triangulo = new Triangulo(v1, v2, v3);
+            triangulosInterseccion.push(triangulo);
+        }
+
+        this.triangulosInterseccion = triangulosInterseccion;
+    }
+
+    calcularCentro (xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima) {
+        this.centro = new Vector4X1([(xMaxima - xMinima)/2, (yMaxima - yMinima)/2, (zMaxima - zMinima)/2, 1.0]);
+        this.longitudInterseccion = Vector4X1.obtenerModulo(this.centro);
     }
 
     crearVertices (xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima) {
@@ -30,6 +54,8 @@ class Hitbox {
             (vertices[i+2] == 1) ? vertices[i+2] = zMaxima : vertices[i+2] = zMinima;
         }
         this.vertices = vertices;
+
+        this.calcularCentro(xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima);
 
     }
 
@@ -171,6 +197,19 @@ class Hitbox {
             gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
         }
 
+    }
+
+    static comprobarPuntoContenidoEnHitbox (punto, hitbox) {
+        if (
+            (punto.datos[0] > hitbox.factoresHitbox[0] && punto.datos[0]  < hitbox.factoresHitbox[1])
+            && (punto.datos[1] > hitbox.factoresHitbox[2] && punto.datos[1]  < hitbox.factoresHitbox[3])
+            && (punto.datos[2] > hitbox.factoresHitbox[4] && punto.datos[2]  < hitbox.factoresHitbox[5])
+            ) 
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

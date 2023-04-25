@@ -119,12 +119,16 @@ class VentanaCanvas {
             let coordXGL = coordXPixeles * 2 / anchoCanvas;
             let coordYGL = coordYPixeles * 2 / altoCanvas;
 
-            let puntosClick = new LineaRecta(coordXGL, coordYGL);
+            let rayoClick = new LineaRecta(coordXGL, coordYGL);
 
             //comprobamos los objetos de tipo Modelo3D que se estan dibujando
             for (let i = 0; i < Renderer.dibujables.length; i++) {
                 if (Renderer.dibujables[i] instanceof Modelo3D) {
-                    
+                    if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
+                        console.log("intersecan");
+                    } else {
+                        console.log("No intersecan");
+                    }
                 }
             }
         });

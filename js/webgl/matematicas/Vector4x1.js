@@ -117,4 +117,12 @@ class Vector4X1 {
         datos[3] = 1;
         return new Vector4X1(datos);
     }
+
+    static obtenerModulo (vector) {
+        let x2 = vector.datos[0] * vector.datos[0];
+        let y2 = vector.datos[1] * vector.datos[1];
+        let z2 = vector.datos[2] * vector.datos[2];
+        let longitud = Math.sqrt(x2 + y2 + z2);
+        return longitud;
+    }
 }

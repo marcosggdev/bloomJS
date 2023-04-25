@@ -6,17 +6,9 @@ class LineaRecta {
         this.VSHADER_SOURCE = VERTEX_SHADER_LINEA_RECTA;
         this.FSHADER_SOURCE = FRAGMENT_SHADER_LINEA_RECTA;
 
-       /* let posCamara = Renderer.camara.obtenerPosicionCamara();
-        //posCamara = Vector4X1.sumarVectores(posCamara, new Vector4X1([1,0,0,0]));
-        let posRelativaPuntoVP = new Vector4X1([this.coordXGL, this.coordYGL, 0.0, 1.0]);
-        let posRelativaPuntoW = vInversa.multiplicarVector(pInversa.multiplicarVector(posRelativaPuntoVP));
-        let posPuntoW = Vector4X1.sumarVectores(posCamara, posRelativaPuntoVP);
+        //precision en pasos al convertir la linea a puntos
+        this.precision = 100;
 
-        let vectorDirectorW = Vector4X1.invertirVector(posCamara);
-        vectorDirectorW.normalizar();
-
-        let destino = Vector4X1.sumarVectores(posPuntoW, Vector4X1.multiplicarVectorPorEscalar(vectorDirectorW, 2000 * Renderer.camara.radio));
-*/
         this.crearVertices(this.coordXGL, this.coordYGL);
         this.iniciar();
     }
@@ -55,6 +47,27 @@ class LineaRecta {
             v1.datos[0], v1.datos[1], v1.datos[2],
             v2.datos[0], v2.datos[1], v2.datos[2]
         ];
+
+        //aprovechamos para obtener malla de vertices
+        this.crearVerticesInterseccion(v1, v2);
+    }
+
+    crearVerticesInterseccion (v1, v2) {
+        let vectorDirector = Vector4X1.restarVectores(v2, v1);
+        vectorDirector.normalizar();
+        let origen = v1;
+
+        let verticesInterseccion = [];
+
+        let precision = this.precision;
+        for (let i = 0; i < precision; i++) {
+            let punto = Vector4X1.sumarVectores(origen, Vector4X1.multiplicarVectorPorEscalar(vectorDirector, i/precision * Renderer.camara.radio));
+            for (let j = 0; j < 3; j++) {
+                verticesInterseccion.push(punto.datos[j]);
+            }
+        }
+
+        this.verticesInterseccion = verticesInterseccion;
     }
 
     iniciar () {
@@ -96,6 +109,21 @@ class LineaRecta {
 
         gl.lineWidth(10.0);
         gl.drawArrays(gl.LINES, 0, this.vertices.length / 3);
+    }
+
+    static comprobarInterseccionLineaModelo (linea, modelo) {
+        return this.comprobarInterseccionLineaHitbox (linea, modelo.hitbox);
+    }
+
+    static comprobarInterseccionLineaHitbox (linea, hitbox) {
+        for (let i = 0; i < linea.verticesInterseccion.length / 3; i++) {
+            let puntoLinea = new Vector4X1([linea.verticesInterseccion[3*i], 
+                linea.verticesInterseccion[3*i+1], linea.verticesInterseccion[3*i+2], 1.0]);
+            if (Hitbox.comprobarPuntoContenidoEnHitbox(puntoLinea, hitbox)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
