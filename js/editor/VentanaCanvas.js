@@ -10,8 +10,6 @@ class VentanaCanvas {
     }
 
     crearNodo () {
-        let ventanaEdicion = document.createElement("div");
-        ventanaEdicion.id = "ventanaEdicion";
 
         let controlesVentana = document.createElement("div");
         controlesVentana.id = "controlesVentana";
@@ -48,18 +46,17 @@ class VentanaCanvas {
         canvas.tabindex = 0;
         canvas.id = "canvas";
 
-        lienzo.appendChild(canvas);
-
         this.menuSeleccion = new MenuSeleccion(lienzo);
 
         this.iniciarControlesCanvas(canvas);
 
         controlesVentana.appendChild(iconos);
-        ventanaEdicion.appendChild(controlesVentana);
-        ventanaEdicion.appendChild(barraHerramientas.nodo);
-        ventanaEdicion.appendChild(lienzo);
 
-        return ventanaEdicion;
+        lienzo.appendChild(controlesVentana);
+        lienzo.appendChild(barraHerramientas.nodo);
+        lienzo.appendChild(canvas);
+
+        return lienzo;
     }
 
     iniciarControlesCanvas (canvas) {

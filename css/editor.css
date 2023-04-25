@@ -10,7 +10,6 @@ canvas {
 }
 div#ventanaEdicion {
     padding: 1em;
-    width: 100%;
     box-sizing: border-box;
 }
 div#controlesVentana {
@@ -104,6 +103,7 @@ div#barraHerramientas {
 }
 div#lienzo {
     position: relative;
+    height: 100%;
 }
 div#menuSeleccion {
     position: absolute;

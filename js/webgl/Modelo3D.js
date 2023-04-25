@@ -407,7 +407,7 @@ class Modelo3D {
     }
 
     actualizar () {
-        //this.anguloX += 1;
+        this.anguloX += 1;
         //this.anguloY += 1;
         //this.anguloZ += 0.0001;
     }

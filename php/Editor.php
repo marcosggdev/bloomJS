@@ -10,7 +10,6 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/animaciones.css"
     ], 
     [
-        RAIZ . "js/general/NavDinamico.js",
         RAIZ . "js/editor/Defecto.js",
         RAIZ . "js/webgl/GLSL.js",
         RAIZ . "js/webgl/Color.js",
