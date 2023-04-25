@@ -98,3 +98,17 @@ ul.submenu li:hover {
     background-color: white;
     color: black;
 }
+div#barraHerramientas {
+    position: relative;
+    z-index: 1;
+}
+div#lienzo {
+    position: relative;
+}
+div#menuSeleccion {
+    position: absolute;
+    top: 0;
+    background-color: red;
+    right: 0;
+    opacity: 0;
+}

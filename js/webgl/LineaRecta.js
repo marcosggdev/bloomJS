@@ -97,18 +97,20 @@ class LineaRecta {
     }
 
     dibujar () {
-        gl.useProgram(this.programa);
+        if (Renderer.dibujarLineasSeleccion) {
+            gl.useProgram(this.programa);
 
-        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
-
-        //atributos
-        gl.enableVertexAttribArray(this.aPosLoc);
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
-        gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
-
-        gl.lineWidth(10.0);
-        gl.drawArrays(gl.LINES, 0, this.vertices.length / 3);
+            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+    
+            //atributos
+            gl.enableVertexAttribArray(this.aPosLoc);
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
+    
+            gl.lineWidth(10.0);
+            gl.drawArrays(gl.LINES, 0, this.vertices.length / 3);
+        }
     }
 
     static comprobarInterseccionLineaModelo (linea, modelo) {

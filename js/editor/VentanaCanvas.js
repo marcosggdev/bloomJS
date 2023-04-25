@@ -1,6 +1,7 @@
 class VentanaCanvas {
 
     static botones = [];
+    static menuSeleccion = null;
 
     constructor () {
         //botones de la ventana del canvas
@@ -40,37 +41,36 @@ class VentanaCanvas {
             ])
         ]);
 
+        let lienzo = document.createElement("div");
+        lienzo.id = "lienzo";
+
         let canvas = document.createElement("canvas");
         canvas.tabindex = 0;
         canvas.id = "canvas";
+
+        lienzo.appendChild(canvas);
+
+        this.menuSeleccion = new MenuSeleccion(lienzo);
 
         this.iniciarControlesCanvas(canvas);
 
         controlesVentana.appendChild(iconos);
         ventanaEdicion.appendChild(controlesVentana);
         ventanaEdicion.appendChild(barraHerramientas.nodo);
-        ventanaEdicion.appendChild(canvas);
+        ventanaEdicion.appendChild(lienzo);
 
         return ventanaEdicion;
     }
 
     iniciarControlesCanvas (canvas) {
-        this.iniciarControlesCamara(canvas);
-    }
-
-    iniciarControlesCamara (canvas) {
-        this.controladorRotacionCamara(canvas);
-        this.controladorZoomCamara(canvas);
-        this.controladorSeleccionObjeto(canvas);
-    }
-
-    controladorRotacionCamara (canvas) {
         var moviendoCamara = false;
+        var camaraMovida = false;
 
         canvas.addEventListener('mousemove', (e) => {
             if (moviendoCamara) {   
                 Renderer.camara.anguloY += e.movementX;
                 Renderer.camara.anguloXPropio += e.movementY;
+                camaraMovida = true;
             }
         });
 
@@ -78,12 +78,18 @@ class VentanaCanvas {
             moviendoCamara = true;
         });
     
-        canvas.addEventListener('mouseup', () => {
+        canvas.addEventListener('mouseup', (e) => {
             moviendoCamara = false;
-        });
-    }
+            
+            if (camaraMovida) {
+                console.log("fin rotacion");
+            } else {
+                this.controladorSeleccionObjeto(canvas, e);
+            }
 
-    controladorZoomCamara (canvas) {
+            camaraMovida = false;
+        });
+
         canvas.addEventListener("mousewheel", (e) => {
             if (e.ctrlKey) {
                 //evitar hacer zoom en la pagina
@@ -100,37 +106,35 @@ class VentanaCanvas {
     }
 
     //comprobar posicion del click y buscar objeto que interseque
-    controladorSeleccionObjeto (canvas) {
-        canvas.addEventListener("click", (e) => {
+    controladorSeleccionObjeto (canvas, e) {
+        //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
+        let xCanvas = canvas.getBoundingClientRect().left;
+        let yCanvas = canvas.getBoundingClientRect().top;
+        let anchoCanvas = canvas.getBoundingClientRect().width;
+        let altoCanvas = canvas.getBoundingClientRect().height;
+        let centroX = xCanvas + anchoCanvas / 2;
+        let centroY = yCanvas + altoCanvas / 2;
 
-            //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
-            let xCanvas = canvas.getBoundingClientRect().left;
-            let yCanvas = canvas.getBoundingClientRect().top;
-            let anchoCanvas = canvas.getBoundingClientRect().width;
-            let altoCanvas = canvas.getBoundingClientRect().height;
-            let centroX = xCanvas + anchoCanvas / 2;
-            let centroY = yCanvas + altoCanvas / 2;
+        let coordXPixeles = e.clientX - centroX;
+        let coordYPixeles = - (e.clientY - centroY);
 
-            let coordXPixeles = e.clientX - centroX;
-            let coordYPixeles = - (e.clientY - centroY);
+        //convertir coordenadas del click a coords de opengl: minimo = -1, maximo = 1;
+        //ancho = 2, xPixeles = xGL => xGL = (xPixeles * 2) / ancho
+        let coordXGL = coordXPixeles * 2 / anchoCanvas;
+        let coordYGL = coordYPixeles * 2 / altoCanvas;
 
-            //convertir coordenadas del click a coords de opengl: minimo = -1, maximo = 1;
-            //ancho = 2, xPixeles = xGL => xGL = (xPixeles * 2) / ancho
-            let coordXGL = coordXPixeles * 2 / anchoCanvas;
-            let coordYGL = coordYPixeles * 2 / altoCanvas;
+        let rayoClick = new LineaRecta(coordXGL, coordYGL);
 
-            let rayoClick = new LineaRecta(coordXGL, coordYGL);
-
-            //comprobamos los objetos de tipo Modelo3D que se estan dibujando
-            for (let i = 0; i < Renderer.dibujables.length; i++) {
-                if (Renderer.dibujables[i] instanceof Modelo3D) {
-                    if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
-                        console.log("intersecan");
-                    } else {
-                        console.log("No intersecan");
-                    }
+        //comprobamos los objetos de tipo Modelo3D que se estan dibujando
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            if (Renderer.dibujables[i] instanceof Modelo3D) {
+                if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
+                    this.menuSeleccion.mostrar();
+                } else {
+                    this.menuSeleccion.ocultar();
                 }
+                rayoClick = null;
             }
-        });
+        }
     }
 }
