@@ -129,7 +129,7 @@ class VentanaCanvas {
         for (let i = 0; i < Renderer.dibujables.length; i++) {
             if (Renderer.dibujables[i] instanceof Modelo3D) {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
-                    this.menuSeleccion.mostrar();
+                    this.menuSeleccion.mostrar(Renderer.dibujables[i]);
                 } else {
                     this.menuSeleccion.ocultar();
                 }
