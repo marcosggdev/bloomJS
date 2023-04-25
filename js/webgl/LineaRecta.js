@@ -27,30 +27,28 @@ class LineaRecta {
         let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
         let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
 
-        //camara
+        //linea recta que une camara con centro
         let v1 = Renderer.camara.obtenerPosicionCamara();
-        //origen
-        let v2 = Vector4X1.invertirVector(v1);
 
-        //recta k pasa por v1 y v2 pasa por el origen. Hay que hacerle una traslacion en funcion del click del raton
-        let vectorClickVP = new Vector4X1([coordXGL, coordYGL, 0.0, 1.0]);
-        //las coords de la camara estan sujetas a la traslacion y rotacion de la camara. Si invertimos esas coordenadas,
-        //obtendremos las coordenadas relativas al origen donde estaba la camara, en 0,0,0, pero entonces 1 de camara = 1 de world
+        //obtener vector director de la linea
+        let vectorClickV = new Vector4X1([coordXGL, coordYGL, -1.0, 1.0]);
+        let vectorClick = pInversa.multiplicarVector(vectorClickV);
+        vectorClick.datos[2] =-1.0;
+        vectorClick.datos[3] = 0.0;
+        vectorClick = vInversa.multiplicarVector(vectorClick);
+        vectorClick.normalizar();
 
-        //con camara en 0, coord camara 1 = coord world 1.
-        //con camara en d, coord camara 1 = ?
-        let factor = 1;
+        //obtenemos punto 2 usando el vector director y el punto 1
+        let longitud = 1000;
+        let v2 = Vector4X1.sumarVectores(v1, Vector4X1.multiplicarVectorPorEscalar(vectorClick, longitud));
 
-        //enviar a origen y cancelar rotaciones => vector en coords world space
-        let vectorClick = vInversa.multiplicarVector(vectorClickVP);
+        //en funcion del click del raton desplazaremos esta linea recta en el eje adecuado
+        let matriz = new Matriz4X4();
+        matriz.identidad();
+        matriz.trasladar(vectorClick.datos[0], vectorClick.datos[1], vectorClick.datos[2]);
 
-        let traslacion = new Matriz4X4();
-        traslacion.identidad();
-        traslacion.trasladar(vectorClick.datos[0], vectorClick.datos[1], vectorClick.datos[2]);
-
-        v1 = traslacion.multiplicarVector(v1);
-        v2 = traslacion.multiplicarVector(v2);
-
+        v1 = matriz.multiplicarVector(v1);
+        v2 = matriz.multiplicarVector(v2);
 
         //puntos: -punto y punto => pasa por el centro 0
         this.vertices = [  
