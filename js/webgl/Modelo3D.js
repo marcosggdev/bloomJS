@@ -407,7 +407,7 @@ class Modelo3D {
     }
 
     actualizar () {
-        this.anguloX += 1;
+        //this.anguloX += 1;
         //this.anguloY += 1;
         //this.anguloZ += 0.0001;
     }
@@ -442,5 +442,10 @@ class Modelo3D {
         }
 
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
+    }
+
+    mover (atributo, valor) {
+        this[atributo] = valor;
+        this.hitbox.actualizarPosicion(this.posX, this.posY, this.posZ);
     }
 }

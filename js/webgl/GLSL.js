@@ -499,7 +499,7 @@ var FRAGMENT_SHADER_HITBOX =
 "varying vec3 vPos;"+
 
 "void main () {"+
-"   vec4 unprojected = m * vec4(vPos.xyz, 1.0);"+
+"   vec4 unprojected = vec4(vPos.xyz, 1.0);"+
 "   if ((unprojected.x > (xMaxima - 0.2) || unprojected.x < (xMinima + 0.2)) && (unprojected.z > (zMaxima - 0.2) || unprojected.z < (zMinima + 0.2))"+
 "       || (unprojected.x > (xMaxima - 0.2) || unprojected.x < (xMinima + 0.2)) && (unprojected.y > (yMaxima - 0.2) || unprojected.y < (yMinima + 0.2))"+
 "       || (unprojected.y > (yMaxima - 0.2) || unprojected.y < (yMinima + 0.2)) && (unprojected.z > (zMaxima - 0.2) || unprojected.z < (zMinima + 0.2))) {"+

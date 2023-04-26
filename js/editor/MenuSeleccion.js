@@ -23,7 +23,7 @@ class MenuSeleccion {
 
         //titulo
         let h1 = document.createElement("h1");
-        h1.textContent = "Menú de selección"
+        h1.textContent = "Selección"
         estatico.appendChild(h1);
 
         let dinamico = document.createElement("div");
@@ -39,23 +39,26 @@ class MenuSeleccion {
         this.nodo.style.opacity = "1";
         this.modelo = modelo;
         this.actualizarDatos(modelo);
-    }
-
-    actualizarDatos (modelo) {
-        let dinamico = this.nodo.querySelector("#dinamico");
-        dinamico.innerHTML = "";
-        GUI.anadirNombreValor(dinamico, "Posición X", modelo.posX);
-        GUI.anadirNombreValor(dinamico, "Posición Y", modelo.posY);
-        GUI.anadirNombreValor(dinamico, "Posición Z", modelo.posZ);
-        
-        GUI.anadirNombreValor(dinamico, "Ángulo X", modelo.anguloX);
-        GUI.anadirNombreValor(dinamico, "Ángulo Y", modelo.anguloY);
-        GUI.anadirNombreValor(dinamico, "Ángulo Z", modelo.anguloZ);
+        this.nodo.style.pointerEvents = "all";
     }
 
     ocultar () {
         this.nodo.style.opacity = "0";
         this.modelo = null;
+        this.nodo.style.pointerEvents = "none";
+    }
+
+    actualizarDatos (modelo) {
+        let dinamico = this.nodo.querySelector("#dinamico");
+        dinamico.innerHTML = "";
+
+        GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], ["posX", "posY", "posZ"], "posicionesFila");
+        
+        GUI.anadirNombreValorEditable(dinamico, "Ángulo X", modelo.anguloX);
+        GUI.anadirNombreValorEditable(dinamico, "Ángulo Y", modelo.anguloY);
+        GUI.anadirNombreValorEditable(dinamico, "Ángulo Z", modelo.anguloZ);
+
+        
     }
 
 }

@@ -11,6 +11,15 @@ class VentanaCanvas {
 
     crearNodo () {
 
+        //contenedor general
+        let lienzo = document.createElement("div");
+        lienzo.id = "lienzo";
+
+        //contenedor de barras de opciones
+        let barraVentana = document.createElement("div");
+        barraVentana.id = "barraVentana";
+
+        //barra con controles para maximizar/minimizar
         let controlesVentana = document.createElement("div");
         controlesVentana.id = "controlesVentana";
 
@@ -27,7 +36,9 @@ class VentanaCanvas {
             let icono = VentanaCanvas.botones[i];
             iconos.appendChild(icono.nodo);
         }
+        controlesVentana.appendChild(iconos);
 
+        //barra de herramientas
         let barraHerramientas = new BarraHerramientas([
             new Boton("Escena", "desplegar", [
                 ["Añadir Modelo3D"],
@@ -39,22 +50,28 @@ class VentanaCanvas {
             ])
         ]);
 
-        let lienzo = document.createElement("div");
-        lienzo.id = "lienzo";
-
+        //canvas
         let canvas = document.createElement("canvas");
         canvas.tabindex = 0;
         canvas.id = "canvas";
-
-        this.menuSeleccion = new MenuSeleccion(lienzo);
-
         this.iniciarControlesCanvas(canvas);
 
-        controlesVentana.appendChild(iconos);
+        //menu de seleccion de objeto
+        this.menuSeleccion = new MenuSeleccion(lienzo);
 
-        lienzo.appendChild(controlesVentana);
-        lienzo.appendChild(barraHerramientas.nodo);
+        barraVentana.appendChild(controlesVentana);
+        barraVentana.appendChild(barraHerramientas.nodo);
+
+        let gui = document.createElement("div");
+        gui.id = "gui";
+        gui.appendChild(this.menuSeleccion.nodo);
+
+        lienzo.appendChild(gui);
+        
+        lienzo.appendChild(barraVentana);
         lienzo.appendChild(canvas);
+
+
 
         return lienzo;
     }

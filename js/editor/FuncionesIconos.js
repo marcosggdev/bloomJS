@@ -15,7 +15,7 @@ function maximizar (boton) {
         document.querySelector("main").style.width = "100vw";
         document.querySelector("main").style.height = "100vh";
         document.querySelector("main").style.padding = "0";
-        document.querySelector("#ventanaEdicion").style.padding = "0";
-        document.querySelector("#ventanaEdicion").style.overflow = "hidden";
+        document.querySelector("#lienzo").style.padding = "0";
+        document.querySelector("#lienzo").style.overflow = "hidden";
     }
 }

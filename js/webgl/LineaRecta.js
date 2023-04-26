@@ -71,25 +71,27 @@ class LineaRecta {
     }
 
     iniciar () {
-        //shaders y programa
-        this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
-        this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
-        this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
-        gl.useProgram(this.programa);    
+        if (Renderer.dibujarLineasSeleccion) {
+            //shaders y programa
+            this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
+            this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
+            this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
+            gl.useProgram(this.programa);    
 
-        //attribute aPos
-        this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
-        this.aPosBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            //attribute aPos
+            this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
+            this.aPosBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
 
-        //uniforms matrices
-        this.v = gl.getUniformLocation(this.programa, "v");
-        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
-        this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
+            //uniforms matrices
+            this.v = gl.getUniformLocation(this.programa, "v");
+            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+            this.p = gl.getUniformLocation(this.programa, "p");
+            gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
 
-        Renderer.anadirGraficoDibujable(this);
+            Renderer.anadirGraficoDibujable(this);
+        }
     }
 
     actualizar () {

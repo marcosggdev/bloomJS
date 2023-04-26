@@ -1,17 +1,17 @@
 class Renderer {
 
-    static clearColorR = 0;
-    static clearColorG = 0;
-    static clearColorB = 0;
-    static clearColorA = 0.0;
+    static clearColorR = 0.3;
+    static clearColorG = 0.3;
+    static clearColorB = 0.3;
+    static clearColorA = 1.0;
 
     static camara = null;
     static ancho = 640;
     static alto = 480;
     static dibujables = [];
 
-    static dibujarHitbox = true;
-    static dibujarLineasSeleccion = true;
+    static dibujarHitbox = false;
+    static dibujarLineasSeleccion = false;
 
     static iniciar (camara = null, ancho = 640, alto = 480) {
 
