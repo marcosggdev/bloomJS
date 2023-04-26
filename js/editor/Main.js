@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
     Defecto.cargarValores();
 
     //camara que el renderer utiliza para dibujar
-    let arcballCamera = new ArcballCamera(0, 0, 0, 10, -90, 30);
+    let arcballCamera = new ArcballCamera(0, 0, 0, 30, -90, 30);
     //se encarga de dibujar en el canvas
     Renderer.iniciar(arcballCamera, 640, 480);
 

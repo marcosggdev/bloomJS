@@ -138,6 +138,7 @@ div#gui {
     box-sizing: border-box;
 }
 div#menuSeleccion {
+    position: absolute;
     background-color: white;
     right: 0;
     opacity: 0;
@@ -148,6 +149,9 @@ div#menuSeleccion {
     padding: 1em;
     box-sizing: border-box;
     pointer-events: all;
+    width: 30%;
+    bottom: 0;
+    top: 13%;
 }
 div#gui div.posicionesColumna {
     display: flex;

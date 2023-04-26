@@ -51,18 +51,14 @@ class Hitbox {
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
     }
 
+    //actualiza los factores que se usan para comprobar la interseccion con lineas rectas en funcion de matrizM
     actualizarFactoresHitbox () {
-
         this.factoresHitboxActuales[0] = this.matrizM.multiplicarVector(new Vector4X1([this.factoresHitbox[0], 0, 0, 1])).datos[0];
         this.factoresHitboxActuales[1] = this.matrizM.multiplicarVector(new Vector4X1([this.factoresHitbox[1], 0, 0, 1])).datos[0];
         this.factoresHitboxActuales[2] = this.matrizM.multiplicarVector(new Vector4X1([0, this.factoresHitbox[2], 0, 1])).datos[1];
         this.factoresHitboxActuales[3] = this.matrizM.multiplicarVector(new Vector4X1([0, this.factoresHitbox[3], 0, 1])).datos[1];
         this.factoresHitboxActuales[4] = this.matrizM.multiplicarVector(new Vector4X1([0, 0, this.factoresHitbox[4], 1])).datos[2];
         this.factoresHitboxActuales[5] = this.matrizM.multiplicarVector(new Vector4X1([0, 0, this.factoresHitbox[5], 1])).datos[2];
-
-        console.log(this.factoresHitbox);
-        console.log(this.factoresHitboxActuales);
-
     }
 
     crearVertices (xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima) {
@@ -203,6 +199,13 @@ class Hitbox {
             gl.uniform3f(this.uColorLoc, Hitbox.color[0], Hitbox.color[1], Hitbox.color[2]);
 
             Renderer.anadirGraficoDibujable(this);
+        } else {
+            //la creamos almenos porque influye en la actualizacion de factoresHitboxActuales
+            this.matrizM = new Matriz4X4();
+            this.matrizM.identidad();
+            this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
+            this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
+            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
         }
     }
 
