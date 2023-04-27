@@ -323,22 +323,13 @@ class Matriz4X4 {
 
         rotacionWorld.rotarX(anguloX);
 
-        //ahora redefinir nuevo vectorY
-        let yActual = new Vector4X1([0,1,0,1]);
-        let yOriginal = Matriz4X4.obtenerInversa(rotacionWorld).multiplicarVector(yActual);
-        yOriginal.normalizar();
+        let ejeY = new Vector4X1([0,1,0,1]);
+        let rotY = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(ejeY, anguloY);
+        rotacionWorld = rotY.multiplicar(rotacionWorld);
 
-        //rotacion con respecto a eje yOriginal un angulo anguloY
-        let rotacionYW = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(yOriginal, anguloY);
-        rotacionWorld = rotacionYW.multiplicar(rotacionWorld);  //stack: Ryw*Rx
-
-        //rotacion con respecto a eje zOriginal un angulo anguloZ
-        let zActual = new Vector4X1([0,0,1,1]);
-        let zOriginal = Matriz4X4.obtenerInversa(rotacionWorld).multiplicarVector(zActual);
-        zOriginal.normalizar();
-
-        let rotacionZW = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(zOriginal, anguloZ);
-        rotacionWorld = rotacionZW.multiplicar(rotacionWorld);  //stack: Rzw*Ryw*Rx
+        let ejeZ = new Vector4X1([0,0,1,0]);
+        let rotZ = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(ejeZ, anguloZ);
+        rotacionWorld = rotZ.multiplicar(rotacionWorld);
 
         this.datos = rotacionWorld.multiplicar(this).datos;
     }

@@ -56,12 +56,13 @@ class Hitbox {
         //matriz del modelo
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
+        this.matrizM.rotarConRespectoAWorld(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
     }
 
     //actualiza los factores que se usan para comprobar la interseccion con lineas rectas en funcion de matrizM
     actualizarFactoresHitbox () {
+        this.actualizarMatrizModelo();
         this.factoresHitboxActuales[0] = this.matrizM.multiplicarVector(new Vector4X1([this.factoresHitbox[0], 0, 0, 1])).datos[0];
         this.factoresHitboxActuales[1] = this.matrizM.multiplicarVector(new Vector4X1([this.factoresHitbox[1], 0, 0, 1])).datos[0];
         this.factoresHitboxActuales[2] = this.matrizM.multiplicarVector(new Vector4X1([0, this.factoresHitbox[2], 0, 1])).datos[1];
@@ -156,10 +157,7 @@ class Hitbox {
         if (Renderer.dibujarHitbox) {
             //matriz del modelo
             this.matrizM = new Matriz4X4();
-            this.matrizM.identidad();
-            this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-            this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+            this.actualizarMatrizModelo();
 
             //shaders y programa
             this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -228,10 +226,7 @@ class Hitbox {
             gl.useProgram(this.programa);
 
             //matriz del modelo
-            this.matrizM.identidad();
-            this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-            this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+            this.actualizarMatrizModelo();
     
             gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
             gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());

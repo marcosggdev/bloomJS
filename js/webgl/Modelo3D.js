@@ -441,12 +441,7 @@ class Modelo3D {
     actualizarMatrizM () {
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-
-        let qx = new Quaternion(new Vector([1,0,0,1]), this.anguloX);
-        let qy = new Quaternion(new Vector([0,1,0,1]), this.anguloY);
-        let qz = new Quaternion(new Vector([0,0,1,1]), this.anguloZ);
-        
-        //this.matrizM.rotarConRespectoAWorld(this.anguloX, this.anguloY, this.anguloZ);
+        this.matrizM.rotarConRespectoAWorld(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
     }
 
