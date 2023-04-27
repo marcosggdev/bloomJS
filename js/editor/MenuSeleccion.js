@@ -53,10 +53,11 @@ class MenuSeleccion {
         dinamico.innerHTML = "";
 
         GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], ["posX", "posY", "posZ"], "posicionesFila");
-        
-        GUI.anadirNombreValorEditable(dinamico, "Ángulo X", modelo.anguloX);
+        GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["Ángulo X", "Ángulo Y", "Ángulo Z"], 
+        [modelo.anguloX, modelo.anguloY, modelo.anguloZ], ["anguloX", "anguloY", "anguloZ", "posicionesFila"])
+        /*GUI.anadirNombreValorEditable(dinamico, "Ángulo X", modelo.anguloX);
         GUI.anadirNombreValorEditable(dinamico, "Ángulo Y", modelo.anguloY);
-        GUI.anadirNombreValorEditable(dinamico, "Ángulo Z", modelo.anguloZ);
+        GUI.anadirNombreValorEditable(dinamico, "Ángulo Z", modelo.anguloZ);*/
 
         
     }

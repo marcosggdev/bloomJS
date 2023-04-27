@@ -444,8 +444,23 @@ class Modelo3D {
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
     }
 
+    actualizarMatrizM () {
+        this.matrizM.identidad();
+        this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
+        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
+        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+    }
+
     mover (atributo, valor) {
         this[atributo] = valor;
+        this.actualizarMatrizM();
         this.hitbox.actualizarPosicion(this.posX, this.posY, this.posZ);
+    }
+
+    //buscamos rotaciones con respecto a ejes x,y,z de world space, no de local space
+    rotar (atributo, valor) {
+        this[atributo] = valor;
+        this.actualizarMatrizM();
+        this.hitbox.actualizarRotacion(this.anguloX, this.anguloY, this.anguloZ);
     }
 }

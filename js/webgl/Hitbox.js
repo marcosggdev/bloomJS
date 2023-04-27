@@ -32,6 +32,15 @@ class Hitbox {
         }
     }
 
+    actualizarRotacion (anguloX, anguloY, anguloZ) {
+        this.anguloX = anguloX;
+        this.anguloY = anguloY;
+        this.anguloZ = anguloZ;
+
+        this.actualizarMatrizModelo();
+        this.actualizarFactoresHitbox();
+    }
+
     actualizarPosicion (posX, posY, posZ) {
         //reflejara los cambios en el shader
         this.posX = posX;

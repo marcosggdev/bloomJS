@@ -35,6 +35,10 @@ class GUI {
                 case "posY":
                 case "posZ":
                     modelo.mover(atributo, input.value); break;
+                case "anguloX":
+                case "anguloY":
+                case "anguloZ":
+                    modelo.rotar(atributo, input.value); break;
             }
         });
 
