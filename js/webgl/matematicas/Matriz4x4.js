@@ -316,4 +316,51 @@ class Matriz4X4 {
         }
         return new Vector4X1(datos);
     }
+
+    rotarConRespectoAWorld (anguloX, anguloY, anguloZ) {
+        let rotacionWorld = new Matriz4X4();
+        rotacionWorld.identidad();
+
+        rotacionWorld.rotarX(anguloX);
+
+        //ahora redefinir nuevo vectorY
+        let yActual = new Vector4X1([0,1,0,1]);
+        let yOriginal = Matriz4X4.obtenerInversa(rotacionWorld).multiplicarVector(yActual);
+        yOriginal.normalizar();
+
+        //rotacion con respecto a eje yOriginal un angulo anguloY
+        let rotacionYW = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(yOriginal, anguloY);
+        rotacionWorld = rotacionYW.multiplicar(rotacionWorld);  //stack: Ryw*Rx
+
+        //rotacion con respecto a eje zOriginal un angulo anguloZ
+        let zActual = new Vector4X1([0,0,1,1]);
+        let zOriginal = Matriz4X4.obtenerInversa(rotacionWorld).multiplicarVector(zActual);
+        zOriginal.normalizar();
+
+        let rotacionZW = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(zOriginal, anguloZ);
+        rotacionWorld = rotacionZW.multiplicar(rotacionWorld);  //stack: Rzw*Ryw*Rx
+
+        this.datos = rotacionWorld.multiplicar(this).datos;
+    }
+
+    //vector normalizado
+    static crearMatrizRotacionConRespectoAVectorUnitario (vector, angulo) {
+
+        let t = Utilidades.toRadians(angulo);
+        let ux = vector.datos[0];
+        let uy = vector.datos[1];
+        let uz = vector.datos[2];
+        let sin = Math.sin(t);
+        let cos = Math.cos(t);
+
+        //matriz de rotacion con respecto a eje arbitrario dado por vector director unitario
+        let matriz = new Matriz4X4([
+            [cos + ux*ux*(1 - cos), ux*uy*(1-cos)-uz*sin, ux*uz*(1-cos)+uy*sin, 0],
+            [uy*ux*(1-cos)+uz*sin, cos+uy*uy*(1-cos), uy*uz*(1-cos)-ux*sin, 0],
+            [uz*ux*(1-cos)-uy*sin, uz*uy*(1-cos)+ux*sin, cos+uz*uz*(1-cos), 0],
+            [0,0,0,1]
+        ]);
+
+        return matriz;
+    }
 }

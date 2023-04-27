@@ -272,10 +272,7 @@ class Modelo3D {
     iniciar () {
         //matriz del modelo
         this.matrizM = new Matriz4X4();
-        this.matrizM.identidad();
-        this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+        this.actualizarMatrizM();
 
         //shaders y programa
         this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -416,10 +413,7 @@ class Modelo3D {
         gl.useProgram(this.programa);
 
         //matriz del modelo
-        this.matrizM.identidad();
-        this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+        this.actualizarMatrizM();
 
         gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
@@ -447,7 +441,12 @@ class Modelo3D {
     actualizarMatrizM () {
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
+
+        let qx = new Quaternion(new Vector([1,0,0,1]), this.anguloX);
+        let qy = new Quaternion(new Vector([0,1,0,1]), this.anguloY);
+        let qz = new Quaternion(new Vector([0,0,1,1]), this.anguloZ);
+        
+        //this.matrizM.rotarConRespectoAWorld(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
     }
 
