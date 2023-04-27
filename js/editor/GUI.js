@@ -3,21 +3,69 @@ class GUI {
     static nodo = null;
     static menuSeleccion = null;
 
-    static iniciar () {
-        let nodo = document.createElement("div");
-    }
-
     static crearInterfaz (lienzo) {
         let gui = document.createElement("div");
         gui.id = "gui";
 
+        //contenedor de barras de opciones
+        let barraVentana = document.createElement("div");
+        barraVentana.id = "barraVentana";
+
+        //barra con controles para maximizar/minimizar
+        let controlesVentana = document.createElement("div");
+        controlesVentana.id = "controlesVentana";
+
+        let iconos = document.createElement("div");
+        iconos.id = "iconos";
+
+        let botonMinimizar = new BotonIcono("/bloomJS/img/iconos/minimizar.png", minimizar, false, "minimizar");
+        let botonMaximizar = new BotonIcono("/bloomJS/img/iconos/maximizar.png", maximizar, true, "maximizar");
+    
+        VentanaCanvas.botones.push(botonMinimizar);
+        VentanaCanvas.botones.push(botonMaximizar);
+
+        for (let i = 0; i < VentanaCanvas.botones.length; i++) {
+            let icono = VentanaCanvas.botones[i];
+            iconos.appendChild(icono.nodo);
+        }
+        controlesVentana.appendChild(iconos);
+
+        //barra de herramientas
+        let barraHerramientas = new BarraHerramientas([
+            new Boton("Escena", "desplegar", [
+                ["Añadir Modelo3D"],
+                ["anadirModelo3D"]
+            ]),
+            new Boton("Desplegable", "desplegar", [
+                ["boton1", "boton2"],
+                ["c1", "c2"]
+            ])
+        ]);
+
+        barraVentana.appendChild(controlesVentana);
+        barraVentana.appendChild(barraHerramientas.nodo);
+        gui.appendChild(controlesVentana);
+        gui.appendChild(barraHerramientas.nodo);
+
+        //contenedor de menus que esten sobre el canvas
+        let menuCanvas = document.createElement("div");
+
+        //menu global
+        let menuGlobal = document.createElement("div");
+        menuGlobal.id = "menuGlobal";
+        let tituloMenuGlobal = document.createElement("h1");
+        tituloMenuGlobal.textContent = "Menú global";
+        menuGlobal.appendChild(tituloMenuGlobal);
+        menuCanvas.appendChild(menuGlobal);
+
         //menu de seleccion de objeto
         this.menuSeleccion = new MenuSeleccion(lienzo);
+        menuCanvas.appendChild(this.menuSeleccion.nodo);
+        menuCanvas.id = "menuCanvas";
+        gui.appendChild(menuCanvas);
 
-        gui.appendChild(this.menuSeleccion.nodo);
-
+        //iniciar nodo y añadirlo al DOM
         this.nodo = gui;
-
         lienzo.appendChild(this.nodo);
     }
 

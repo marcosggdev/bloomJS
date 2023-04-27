@@ -15,53 +15,14 @@ class VentanaCanvas {
         let lienzo = document.createElement("div");
         lienzo.id = "lienzo";
 
-        //contenedor de barras de opciones
-        let barraVentana = document.createElement("div");
-        barraVentana.id = "barraVentana";
-
-        //barra con controles para maximizar/minimizar
-        let controlesVentana = document.createElement("div");
-        controlesVentana.id = "controlesVentana";
-
-        let iconos = document.createElement("div");
-        iconos.id = "iconos";
-
-        let botonMinimizar = new BotonIcono("/bloomJS/img/iconos/minimizar.png", minimizar, false, "minimizar");
-        let botonMaximizar = new BotonIcono("/bloomJS/img/iconos/maximizar.png", maximizar, true, "maximizar");
-    
-        VentanaCanvas.botones.push(botonMinimizar);
-        VentanaCanvas.botones.push(botonMaximizar);
-
-        for (let i = 0; i < VentanaCanvas.botones.length; i++) {
-            let icono = VentanaCanvas.botones[i];
-            iconos.appendChild(icono.nodo);
-        }
-        controlesVentana.appendChild(iconos);
-
-        //barra de herramientas
-        let barraHerramientas = new BarraHerramientas([
-            new Boton("Escena", "desplegar", [
-                ["Añadir Modelo3D"],
-                ["anadirModelo3D"]
-            ]),
-            new Boton("Desplegable", "desplegar", [
-                ["boton1", "boton2"],
-                ["c1", "c2"]
-            ])
-        ]);
-
         //canvas
         let canvas = document.createElement("canvas");
         canvas.tabindex = 0;
         canvas.id = "canvas";
         this.iniciarControlesCanvas(canvas);
 
-        barraVentana.appendChild(controlesVentana);
-        barraVentana.appendChild(barraHerramientas.nodo);
-
+        //DOM
         GUI.crearInterfaz(lienzo);
-        
-        lienzo.appendChild(barraVentana);
         lienzo.appendChild(canvas);
 
 
