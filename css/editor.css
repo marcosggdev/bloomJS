@@ -149,7 +149,7 @@ div#menuSeleccion {
     padding: 1em;
     box-sizing: border-box;
     pointer-events: all;
-    width: 30%;
+    width: 40%;
     bottom: 0;
     top: 13%;
 }
@@ -181,4 +181,10 @@ div.nombreValor input {
 }
 div.nombreValor p {
     margin: 0;
+}
+img.enlazar {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border-radius: 25px;
 }

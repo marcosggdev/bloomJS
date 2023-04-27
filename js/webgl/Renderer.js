@@ -10,7 +10,7 @@ class Renderer {
     static alto = 480;
     static dibujables = [];
 
-    static dibujarHitbox = true;
+    static dibujarHitbox = false;
     static dibujarLineasSeleccion = false;
 
     static iniciar (camara = null, ancho = 640, alto = 480) {

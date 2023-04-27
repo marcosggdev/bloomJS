@@ -56,17 +56,10 @@ class VentanaCanvas {
         canvas.id = "canvas";
         this.iniciarControlesCanvas(canvas);
 
-        //menu de seleccion de objeto
-        this.menuSeleccion = new MenuSeleccion(lienzo);
-
         barraVentana.appendChild(controlesVentana);
         barraVentana.appendChild(barraHerramientas.nodo);
 
-        let gui = document.createElement("div");
-        gui.id = "gui";
-        gui.appendChild(this.menuSeleccion.nodo);
-
-        lienzo.appendChild(gui);
+        GUI.crearInterfaz(lienzo);
         
         lienzo.appendChild(barraVentana);
         lienzo.appendChild(canvas);
@@ -143,9 +136,9 @@ class VentanaCanvas {
         for (let i = 0; i < Renderer.dibujables.length; i++) {
             if (Renderer.dibujables[i] instanceof Modelo3D) {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
-                    this.menuSeleccion.mostrar(Renderer.dibujables[i]);
+                    GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
                 } else {
-                    this.menuSeleccion.ocultar();
+                    GUI.menuSeleccion.ocultar();
                 }
                 rayoClick = null;
             }

@@ -457,4 +457,10 @@ class Modelo3D {
         this.actualizarMatrizM();
         this.hitbox.actualizarRotacion(this.anguloX, this.anguloY, this.anguloZ);
     }
+
+    escalar (atributo, valor) {
+        this[atributo] = valor;
+        this.actualizarMatrizM();
+        this.hitbox.actualizarEscala(this.factorX, this.factorY, this.factorZ);
+    }
 }

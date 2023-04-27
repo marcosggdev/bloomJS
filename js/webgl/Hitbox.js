@@ -52,6 +52,15 @@ class Hitbox {
         this.actualizarFactoresHitbox();
     }
 
+    actualizarEscala (factorX, factorY, factorZ) {
+        this.factorX = factorX;
+        this.factorY = factorY;
+        this.factorZ = factorZ;
+
+        this.actualizarMatrizModelo();
+        this.actualizarFactoresHitbox();
+    }
+
     actualizarMatrizModelo () {
         //matriz del modelo
         this.matrizM.identidad();
