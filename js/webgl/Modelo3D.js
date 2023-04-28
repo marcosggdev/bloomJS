@@ -463,6 +463,7 @@ class Modelo3D {
 
     escalar (atributo, valor) {
         this[atributo] = valor;
+        this[atributo+"Inicial"] = valor;
         this.actualizarMatrizM();
         this.hitbox.actualizarEscala(this.factorX, this.factorY, this.factorZ);
     }
