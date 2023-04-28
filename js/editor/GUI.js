@@ -64,12 +64,13 @@ class GUI {
         //menu ajustes de webgl
         let menuAjustesWebGL = document.createElement("div");
         menuAjustesWebGL.id = "menuAjustesWebGL";
-        GUI.crearBarraCierre(menuAjustesWebGL);
-        let tituloMenuAjustesWebGL = document.createElement("h1");
-        tituloMenuAjustesWebGL.textContent = "Menú Ajustes de WebGL";
-        menuAjustesWebGL.appendChild(tituloMenuAjustesWebGL);
-        GUI.agregarCampo(menuAjustesWebGL, "Renderer ancho");
-        GUI.agregarCampo(menuAjustesWebGL, "Renderer alto");
+        menuAjustesWebGL.className = "menuPopUp";
+        GUI.crearBarraCierre(menuAjustesWebGL, "Ajustes WebGL");
+
+        let campos = document.createElement("div");
+        campos.className = "grupoCampos";
+        GUI.agregarCampo(campos, "Renderer ancho");
+        GUI.agregarCampo(campos, "Renderer alto");
         let botonGuardar = document.createElement("button");
         botonGuardar.id = "guardarMenuAjustesWebGL";
         botonGuardar.textContent = "Guardar";
@@ -83,7 +84,8 @@ class GUI {
             //matriz de forma: [ [nombres] [valores] ]
             Renderer.aplicarConfiguracion(configuraciones);
         });
-        menuAjustesWebGL.appendChild(botonGuardar);
+        campos.appendChild(botonGuardar);
+        menuAjustesWebGL.appendChild(campos);
         principal.appendChild(menuAjustesWebGL);
 
         //menu de seleccion de objeto
@@ -101,12 +103,14 @@ class GUI {
         let div = document.createElement("div");
         div.className = "campo";
 
-        div.textContent = nombre;
+        let p = document.createElement("p");
+        p.textContent = nombre;
+        div.appendChild(p);
 
         let input = document.createElement("input");
         input.type = "number";
-
         div.appendChild(input);
+
         contenedor.appendChild(div);
     }
 
@@ -160,7 +164,9 @@ class GUI {
         let nodo = document.createElement("div");
         nodo.className = "nombreValor";
 
-        nodo.textContent = nombre;
+        let p = document.createElement("p");
+        p.textContent = nombre;
+        nodo.appendChild(p);
 
         let input = document.createElement("input");
         input.type = tipo;
@@ -216,9 +222,13 @@ class GUI {
         menu.style.pointerEvents = "all";
     }
 
-    static crearBarraCierre (contenedor) {
+    static crearBarraCierre (contenedor, titulo) {
         let nodo = document.createElement("div");
         nodo.className = "barraCierre";
+
+        let h2 = document.createElement("h2");
+        h2.textContent = titulo;
+        nodo.appendChild(h2);
 
         let img = document.createElement("img");
         img.className = "iconoCierre";
@@ -228,8 +238,8 @@ class GUI {
             contenedor.style.opacity = 0;
             contenedor.style.pointerEvents = "none";
         });
-
         nodo.appendChild(img);
+
         contenedor.appendChild(nodo);
     }
 

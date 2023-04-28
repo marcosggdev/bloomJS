@@ -156,6 +156,7 @@ nav ul li a::before {
     background-color: rgb(80, 0, 65);
     transform: perspective(107px) rotateX(76deg);
     filter: blur(23px);
+    pointer-events: none;
 }
 nav ul li a {
     padding: 0.5em;
@@ -403,6 +404,7 @@ div#secundario h1::before {
     z-index: -1;
     filter: blur(51px);
     background-blend-mode: darken;
+    pointer-events: none;
 }
 div#secundario small {
     font-family: 'Oleo Script Swash Caps';

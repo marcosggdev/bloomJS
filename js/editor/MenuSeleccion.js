@@ -11,25 +11,12 @@ class MenuSeleccion {
         //menu como tal
         let div = document.createElement("div");
         div.id = "menuSeleccion";
+        div.className = "menuSeleccion menuPopUp";
 
-        //menu permanente: barra de minimizar, etc... y titulo
-        let estatico = document.createElement("div");
-        estatico.id = "estatico";
-
-        //barra para cerrarlo si molesta
-        let barraVentana = document.createElement("div");
-        barraVentana.id = "menuSeleccionBarraVentana";
-        estatico.appendChild(barraVentana);
-
-        //titulo
-        let h1 = document.createElement("h1");
-        h1.textContent = "Selección"
-        estatico.appendChild(h1);
+        GUI.crearBarraCierre(div, "Selección");
 
         let dinamico = document.createElement("div");
         dinamico.id = "dinamico";
-
-        div.appendChild(estatico);
         div.appendChild(dinamico);
 
         this.nodo = div;
