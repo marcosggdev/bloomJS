@@ -92,6 +92,12 @@ class Hitbox {
         this.vertices = vertices;
         this.verticesInterseccion = vertices;
 
+        let ancho = Math.abs(xMaxima - xMinima);
+        let alto = Math.abs(yMaxima - yMinima);
+        let profundidad = Math.abs(zMaxima - zMinima);
+
+        this.longitud = Utilidades.obtenerMayor([ancho, alto, profundidad]);
+
     }
 
     crearVerticesInterseccion (xMinima, xMaxima, yMinima, yMaxima, zMinima, zMaxima) {
@@ -265,6 +271,16 @@ class Hitbox {
         } else {
             return false;
         }
+    }
+
+    static comprobarPuntoCercanoACentroDeHitbox (punto, hitbox) {
+        //true si el punto esta mas cerca al centro que la distancia del centro a la longitud mas larga del objeto
+        let vectorDistancia = Vector4X1.restarVectores(punto, new Vector4X1([hitbox.posX, hitbox.posY, hitbox.posZ, 1]));
+        let distancia = Vector4X1.obtenerModulo(vectorDistancia);
+        if (distancia < hitbox.centro) {
+            return true;
+        }
+        return false;
     }
 
 

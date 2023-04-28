@@ -116,7 +116,8 @@ class LineaRecta {
     }
 
     static comprobarInterseccionLineaModelo (linea, modelo) {
-        return this.comprobarInterseccionLineaHitbox (linea, modelo.hitbox);
+        //return this.comprobarInterseccionLineaHitbox (linea, modelo.hitbox);
+        return this.interseccionLineaHitboxPorCercaniaAlCentro(linea, modelo.hitbox);
     }
 
     static comprobarInterseccionLineaHitbox (linea, hitbox) {
@@ -124,6 +125,19 @@ class LineaRecta {
             let puntoLinea = new Vector4X1([linea.verticesInterseccion[3*i], 
                 linea.verticesInterseccion[3*i+1], linea.verticesInterseccion[3*i+2], 1.0]);
             if (Hitbox.comprobarPuntoContenidoEnHitbox(puntoLinea, hitbox)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static interseccionLineaHitboxPorCercaniaAlCentro (linea, hitbox) {
+        for (let i = 0; i < linea.verticesInterseccion.length / 3; i++) {
+            let punto = new Vector4X1([
+                linea.verticesInterseccion[3*i], linea.verticesInterseccion[3*i+1], linea.verticesInterseccion[3*i+2], 1]);
+            let vectorDistancia = Vector4X1.restarVectores(punto, new Vector4X1([hitbox.posX, hitbox.posY, hitbox.posZ, 1]));
+            let distancia = Vector4X1.obtenerModulo(vectorDistancia);
+            if (distancia < hitbox.longitud) {
                 return true;
             }
         }

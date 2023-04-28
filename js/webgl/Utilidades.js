@@ -50,4 +50,14 @@ class Utilidades {
         return matriz;
     }
 
+    static obtenerMayor (array) {
+        let mayor = -1000;
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] > mayor) {
+                mayor = array[i];
+            }
+        }
+        return mayor;
+    }
+
 }

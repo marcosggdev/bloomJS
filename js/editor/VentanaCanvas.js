@@ -105,9 +105,13 @@ class VentanaCanvas {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
                     GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
                     VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
+                    Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
                 } else {
                     GUI.menuSeleccion.ocultar();
                     VentanaCanvas.globalOcultarObjeto();
+                    Renderer.dibujables[i].funcionActualizar = null;
+                    Renderer.dibujables[i].contador = null;
+                    Renderer.dibujables[i].resetearFactores();
                 }
             }
         }
@@ -118,6 +122,7 @@ class VentanaCanvas {
         VentanaCanvas.globalOcultarObjeto();
         GUI.menuSeleccion.mostrar(objeto);
         objetoDibujable.style.backgroundColor = "#9e369e";
+        objeto.funcionActualizar = Modelo3D.funcionSeleccion;
     }
 
     //se utilizan para seleccionar desde el menu global por click, sin ray casting

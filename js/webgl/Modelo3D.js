@@ -12,6 +12,7 @@ class Modelo3D {
         this.factorX = factorX;
         this.factorY = factorY;
         this.factorZ = factorZ;
+
         this.rutaArchivoDae = rutaArchivoDae;
         this.rutaTextura = null;
         this.texturizado = 0.0;
@@ -404,9 +405,11 @@ class Modelo3D {
     }
 
     actualizar () {
-        //this.anguloX += 1;
-        //this.anguloY += 1;
-        //this.anguloZ += 0.0001;
+        if (this.funcionActualizar != null) {
+            this.funcionActualizar(this);
+        } else {
+            //actualizando sin funcion definida
+        }
     }
 
     dibujar () {
@@ -462,5 +465,55 @@ class Modelo3D {
         this[atributo] = valor;
         this.actualizarMatrizM();
         this.hitbox.actualizarEscala(this.factorX, this.factorY, this.factorZ);
+    }
+
+    static funcionSeleccion (modelo) {
+        if (modelo.contador == null) {
+            modelo.factorXInicial = modelo.factorX;
+            modelo.factorYInicial = modelo.factorY;
+            modelo.factorZInicial = modelo.factorZ;
+            modelo.contador = 0;
+        }
+        let factor = 1 + Math.cos(Utilidades.toRadians(modelo.contador)) / 24;
+        modelo.factorX = modelo.factorXInicial * factor;
+        modelo.factorY = modelo.factorYInicial * factor;
+        modelo.factorZ = modelo.factorZInicial * factor;
+        modelo.contador+=1;
+    };
+
+    static funcionRotarX (modelo) {
+        if (modelo.contador == null) {
+            modelo.contador = 0;
+        }
+        modelo.anguloX = modelo.contador;
+        modelo.contador++;
+    }
+
+    static funcionRotarY (modelo) {
+        if (modelo.contador == null) {
+            modelo.contador = 0;
+        }
+        modelo.anguloY = modelo.contador;
+        modelo.contador++;
+    }
+
+    static funcionRotarZ (modelo) {
+        if (modelo.contador == null) {
+            modelo.contador = 0;
+        }
+        modelo.anguloZ = modelo.contador;
+        modelo.contador++;
+    }
+
+    resetearFactores () {
+        if (this.factorXInicial != null) {
+            this.factorX = this.factorXInicial;
+        }
+        if (this.factorYInicial != null) {
+            this.factorY = this.factorYInicial;
+        }
+        if (this.factorZInicial != null) {
+            this.factorZ = this.factorZInicial;
+        }
     }
 }

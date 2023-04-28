@@ -177,7 +177,6 @@ class Matriz4X4 {
         ];
 
         let matrizRotacionY = new Matriz4X4(datosRotacion);
-
         this.datos = this.multiplicar(matrizRotacionY).datos;
     }
 
@@ -327,9 +326,8 @@ class Matriz4X4 {
         let rotY = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(ejeY, anguloY);
         rotacionWorld = rotY.multiplicar(rotacionWorld);
 
-        let ejeZActual = new Vector4X1([0,0,1,0]);
-        let ejeZAnterior = Matriz4X4.obtenerInversa(rotY).multiplicarVector(ejeZActual);
-        let rotZ = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(ejeZAnterior, anguloZ);
+        let ejeZ = new Vector4X1([0,0,1,1]);
+        let rotZ = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(ejeZ, anguloZ);
         rotacionWorld = rotZ.multiplicar(rotacionWorld);
 
         this.datos = rotacionWorld.multiplicar(this).datos;
