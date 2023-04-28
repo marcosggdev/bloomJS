@@ -2,6 +2,13 @@ class VentanaCanvas {
 
     static botones = [];
     static menuSeleccion = null;
+    static objetoSeleccionado = null;
+
+    static teclas = {
+        82: "r",
+        84: "t",
+        83: "s"
+    }
 
     constructor () {
         //botones de la ventana del canvas
@@ -77,6 +84,18 @@ class VentanaCanvas {
                 }
             }
         });
+
+        canvas.addEventListener("keydown", (e) => {
+            if (this.objetoSeleccionado != null) {
+                let tecla = this.teclas[e.keyCode];
+
+                switch (e.keyCode) {
+                    case "r": Modelo3D.rotarObjetoTecla(this.objetoSeleccionado); break;
+                    case "t": Modelo3D.trasladarObjetoTecla(this.objetoSeleccionado); break;
+                    case "s": Modelo3D.escalarObjetoTecla(this.objetoSeleccionado); break;
+                }
+            }
+        });
     }
 
     //comprobar posicion del click y buscar objeto que interseque
@@ -106,12 +125,14 @@ class VentanaCanvas {
                     GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
                     VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
                     Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
+                    VentanaCanvas.objetoSeleccionado = Renderer.dibujables[i];
                 } else {
                     GUI.menuSeleccion.ocultar();
                     VentanaCanvas.globalOcultarObjeto();
                     Renderer.dibujables[i].funcionActualizar = null;
                     Renderer.dibujables[i].contador = null;
                     Renderer.dibujables[i].resetearFactores();
+                    VentanaCanvas.objetoSeleccionado = null;
                 }
             }
         }

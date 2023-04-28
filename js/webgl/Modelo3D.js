@@ -516,4 +516,31 @@ class Modelo3D {
             this.factorZ = this.factorZInicial;
         }
     }
+
+    /**
+     * permite rotar el modelo despues de pulsar la tecla r con el teclado.
+     * Para ello calculamos un eje de rotacion perpendicular a un plano imaginario perpendicular a la camara y que contenga
+     * el centro del objeto
+     */
+    static rotarObjetoTecla (modelo) {
+        
+    }
+
+    /**
+     * Permite trasladar un objeto al pulsar la tecla t del teclado.
+     * Para ello, calculamos un plano imaginario perpendicular a la camara que contenga el centro del objeto y lo
+     * trasladamos por el plano
+     */
+    static trasladarObjetoTecla (modelo) {
+
+    }
+
+    /**
+     * Permite escalar un objeto al pulsar la tecla s del teclado
+     * Para ello, calculamos el factor de escala proporcional a la distancia en screen del raton al centro del objeto.
+     * Esta escala es la por defecto y escala xyz. 
+     */
+    static escalarObjetoTecla (modelo) {
+
+    }
 }
