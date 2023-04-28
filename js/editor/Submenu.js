@@ -25,11 +25,13 @@ class Submenu {
     }
 
     desplegar () {
-        this.nodo.style.display = "flex";
+        this.nodo.style.opacity = 1;
+        this.nodo.style.pointerEvents = "all";
     }
 
     ocultar () {
-        this.nodo.style.display = "none";
+        this.nodo.style.opacity = 0;
+        this.nodo.style.pointerEvents = "none";
     }
 
     c1 () {
@@ -40,6 +42,10 @@ class Submenu {
     }
     anadirModelo3D () {
         let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+    }
+
+    mostrarMenuAjustesWebGL () {
+        GUI.mostrarMenuAjustesWebGL();
     }
 
 }

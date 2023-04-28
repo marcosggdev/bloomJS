@@ -34,6 +34,31 @@ class Renderer {
         Renderer.iniciarMatrices();
     }
 
+    static aplicarConfiguracion (configuraciones) {
+        for (let i = 0; i < configuraciones[0].length; i++) {
+            switch (configuraciones[0][i]) {
+                case "Renderer ancho": this.cambiarAncho(configuraciones[1][i]); break;
+                case "Renderer alto": this.cambiarAlto(configuraciones[1][i]); break;
+            }
+        }
+    }
+
+    static cambiarAncho (ancho) {
+        Renderer.ancho = ancho;
+
+        gl.canvas.width = Renderer.ancho;
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
+    }
+
+    static cambiarAlto (alto) {
+        Renderer.alto = alto;
+
+        gl.canvas.height = Renderer.alto;
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
+    }
+
     static limpiarFondo () {
         gl.clearColor(Renderer.clearColorR, Renderer.clearColorG, Renderer.clearColorB, Renderer.clearColorA);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -50,13 +75,6 @@ class Renderer {
         Renderer.aspecto = gl.canvas.width / gl.canvas.height;
         Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
         Renderer.matrizV = Renderer.camara.matrizV;
-/* 
-        //matriz vista
-        Renderer.matrizV = new Matriz4X4();
-        Renderer.matrizV.identidad();
-        //this.crearMatrizVista();
-        //this.matrizV.rotar(45, 0, 0);
-        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);*/ 
     }
 
     static crearMatrizVista () {
@@ -82,12 +100,6 @@ class Renderer {
         //actualizar matrizV
         Renderer.camara.actualizar();
         Renderer.matrizV = Renderer.camara.matrizV;
-        /* Renderer.matrizV = new Matriz4X4();
-        Renderer.matrizV.identidad();
-        //this.matrizV.rotar(45, 0, 0);
-        Renderer.matrizV.trasladar(-Renderer.camaraX, -Renderer.camaraY, -Renderer.camaraZ);*/
-
-        //no hay controles en esta implementacion -- Renderer.controles.actualizar();
 
         for (let i = 0; i < Renderer.dibujables.length; i++) {
             Renderer.dibujables[i].actualizar();
@@ -117,5 +129,11 @@ class Renderer {
             }
         }
         return false;
+    }
+
+    static recalcularPerspectiva () {
+        this.aspecto = document.querySelector("canvas").width / document.querySelector("canvas").height;
+        Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+        console.log("recalc");
     }
 }

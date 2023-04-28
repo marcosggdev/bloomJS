@@ -39,13 +39,16 @@ class GUI {
             new Boton("Desplegable", "desplegar", [
                 ["boton1", "boton2"],
                 ["c1", "c2"]
+            ]),
+            new Boton("WebGL", "desplegar", [
+                ["Ajustes"],
+                ["mostrarMenuAjustesWebGL"]
             ])
         ]);
 
-        barraVentana.appendChild(controlesVentana);
         barraVentana.appendChild(barraHerramientas.nodo);
-        gui.appendChild(controlesVentana);
-        gui.appendChild(barraHerramientas.nodo);
+        barraVentana.appendChild(controlesVentana);
+        gui.appendChild(barraVentana);
 
         //contenedor de menus que esten sobre el canvas
         let menuCanvas = document.createElement("div");
@@ -58,6 +61,31 @@ class GUI {
         menuGlobal.appendChild(tituloMenuGlobal);
         menuCanvas.appendChild(menuGlobal);
 
+        //menu ajustes de webgl
+        let menuAjustesWebGL = document.createElement("div");
+        menuAjustesWebGL.id = "menuAjustesWebGL";
+        GUI.crearBarraCierre(menuAjustesWebGL);
+        let tituloMenuAjustesWebGL = document.createElement("h1");
+        tituloMenuAjustesWebGL.textContent = "Menú Ajustes de WebGL";
+        menuAjustesWebGL.appendChild(tituloMenuAjustesWebGL);
+        GUI.agregarCampo(menuAjustesWebGL, "Renderer ancho");
+        GUI.agregarCampo(menuAjustesWebGL, "Renderer alto");
+        let botonGuardar = document.createElement("button");
+        botonGuardar.id = "guardarMenuAjustesWebGL";
+        botonGuardar.textContent = "Guardar";
+        botonGuardar.addEventListener("click", () => {
+            let campos = menuAjustesWebGL.querySelectorAll(".campo");
+            let configuraciones = [[],[]];
+            for (let i = 0; i < campos.length; i++) {
+                configuraciones[0].push(campos[i].textContent);
+                configuraciones[1].push(campos[i].querySelector("input").value);
+            }
+            //matriz de forma: [ [nombres] [valores] ]
+            Renderer.aplicarConfiguracion(configuraciones);
+        });
+        menuAjustesWebGL.appendChild(botonGuardar);
+        menuGlobal.after(menuAjustesWebGL);
+
         //menu de seleccion de objeto
         this.menuSeleccion = new MenuSeleccion(lienzo);
         menuCanvas.appendChild(this.menuSeleccion.nodo);
@@ -67,6 +95,19 @@ class GUI {
         //iniciar nodo y añadirlo al DOM
         this.nodo = gui;
         lienzo.appendChild(this.nodo);
+    }
+
+    static agregarCampo (contenedor, nombre) {
+        let div = document.createElement("div");
+        div.className = "campo";
+
+        div.textContent = nombre;
+
+        let input = document.createElement("input");
+        input.type = "number";
+
+        div.appendChild(input);
+        contenedor.appendChild(div);
     }
 
     static anadirNombreValor (contenedor, nombre, valor) {
@@ -167,6 +208,29 @@ class GUI {
             input.value = valor;
             this.ejecutarFuncion(input, modelo);
         });
+    }
+
+    static mostrarMenuAjustesWebGL () {
+        let menu = document.getElementById("menuAjustesWebGL");
+        menu.style.opacity = 1;
+        menu.style.pointerEvents = "all";
+    }
+
+    static crearBarraCierre (contenedor) {
+        let nodo = document.createElement("div");
+        nodo.className = "barraCierre";
+
+        let img = document.createElement("img");
+        img.className = "iconoCierre";
+        img.src = "/bloomJS/img/iconos/cerrar.png";
+
+        img.addEventListener("click", () => {
+            contenedor.style.opacity = 0;
+            contenedor.style.pointerEvents = "none";
+        });
+
+        nodo.appendChild(img);
+        contenedor.appendChild(nodo);
     }
 
 }

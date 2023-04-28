@@ -3,6 +3,9 @@ function minimizar (boton) {
         boton.deshabilitar();
         BotonIcono.buscarBotonPorId("maximizar").habilitar();
         Defecto.aplicarEstilosPorDefecto();
+
+        //recalcular matrizP del Renderer con las nuevas dimensiones del canvas
+        Renderer.recalcularPerspectiva();
     }
 }
 
@@ -17,5 +20,8 @@ function maximizar (boton) {
         document.querySelector("main").style.padding = "0";
         document.querySelector("#lienzo").style.padding = "0";
         document.querySelector("#lienzo").style.overflow = "hidden";
+
+        //recalcular matrizP del Renderer con las nuevas dimensiones del canvas
+        Renderer.recalcularPerspectiva();
     }
 }

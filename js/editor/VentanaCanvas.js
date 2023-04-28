@@ -25,8 +25,6 @@ class VentanaCanvas {
         GUI.crearInterfaz(lienzo);
         lienzo.appendChild(canvas);
 
-
-
         return lienzo;
     }
 

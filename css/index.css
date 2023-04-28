@@ -18,11 +18,6 @@ section#animacion3D {
     padding: 0;
     display: flex;
 }
-canvas {
-    flex-grow: 1;
-    width: 100%;
-    height: 100%;
-}
 div.contenedorImagen {
     display: flex;
 }
