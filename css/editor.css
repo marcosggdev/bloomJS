@@ -249,6 +249,7 @@ div#menuGlobal {
     align-items: stretch;
     padding: 10px;
     box-sizing: border-box;
+    width: 300px;
 }
 div#menuGlobal:hover {
     height: 100%;
