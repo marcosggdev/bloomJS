@@ -15,6 +15,14 @@ class VentanaCanvas {
         let lienzo = document.createElement("div");
         lienzo.id = "lienzo";
 
+        let principal = document.createElement("div");
+        principal.id = "principal";
+        lienzo.appendChild(principal);
+
+        let secundario = document.createElement("div");
+        secundario.id = "secundario";
+        lienzo.appendChild(secundario);
+
         //canvas
         let canvas = document.createElement("canvas");
         canvas.tabindex = 0;
@@ -22,8 +30,8 @@ class VentanaCanvas {
         this.iniciarControlesCanvas(canvas);
 
         //DOM
-        GUI.crearInterfaz(lienzo);
-        lienzo.appendChild(canvas);
+        GUI.crearInterfaz(principal, secundario);
+        principal.appendChild(canvas);
 
         return lienzo;
     }

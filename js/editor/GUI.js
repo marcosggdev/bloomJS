@@ -3,7 +3,7 @@ class GUI {
     static nodo = null;
     static menuSeleccion = null;
 
-    static crearInterfaz (lienzo) {
+    static crearInterfaz (principal, secundario) {
         let gui = document.createElement("div");
         gui.id = "gui";
 
@@ -59,7 +59,7 @@ class GUI {
         let tituloMenuGlobal = document.createElement("h1");
         tituloMenuGlobal.textContent = "Menú global";
         menuGlobal.appendChild(tituloMenuGlobal);
-        menuCanvas.appendChild(menuGlobal);
+        secundario.appendChild(menuGlobal);
 
         //menu ajustes de webgl
         let menuAjustesWebGL = document.createElement("div");
@@ -84,17 +84,17 @@ class GUI {
             Renderer.aplicarConfiguracion(configuraciones);
         });
         menuAjustesWebGL.appendChild(botonGuardar);
-        menuGlobal.after(menuAjustesWebGL);
+        principal.appendChild(menuAjustesWebGL);
 
         //menu de seleccion de objeto
-        this.menuSeleccion = new MenuSeleccion(lienzo);
+        this.menuSeleccion = new MenuSeleccion(principal);
         menuCanvas.appendChild(this.menuSeleccion.nodo);
         menuCanvas.id = "menuCanvas";
         gui.appendChild(menuCanvas);
 
         //iniciar nodo y añadirlo al DOM
         this.nodo = gui;
-        lienzo.appendChild(this.nodo);
+        principal.appendChild(this.nodo);
     }
 
     static agregarCampo (contenedor, nombre) {
