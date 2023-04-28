@@ -104,11 +104,38 @@ class VentanaCanvas {
             if (Renderer.dibujables[i] instanceof Modelo3D) {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
                     GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
+                    VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
                 } else {
                     GUI.menuSeleccion.ocultar();
+                    VentanaCanvas.globalOcultarObjeto();
                 }
             }
         }
         rayoClick = null;
+    }
+
+    static seleccionarObjeto (objeto, objetoDibujable) {
+        VentanaCanvas.globalOcultarObjeto();
+        GUI.menuSeleccion.mostrar(objeto);
+        objetoDibujable.style.backgroundColor = "#9e369e";
+    }
+
+    //se utilizan para seleccionar desde el menu global por click, sin ray casting
+    static globalSeleccionarObjeto (objeto) {
+        VentanaCanvas.globalOcultarObjeto();
+        let objetosDibujables = document.querySelectorAll(".objetoDibujable");
+        Array.from(objetosDibujables).forEach((e) => {
+            if (e.objeto == objeto) {
+                e.style.backgroundColor = "#9e369e";
+            }
+        });
+    }
+
+    static globalOcultarObjeto () {
+        //desseleccionarlo del menu global
+        let objetosDibujables = document.querySelectorAll(".objetoDibujable");
+        Array.from(objetosDibujables).forEach((e) => {
+            e.style.backgroundColor = "#271427";
+        });
     }
 }

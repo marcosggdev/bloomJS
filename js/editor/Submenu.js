@@ -42,6 +42,7 @@ class Submenu {
     }
     anadirModelo3D () {
         let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+        GUI.actualizarMenuGlobal();
     }
 
     mostrarMenuAjustesWebGL () {

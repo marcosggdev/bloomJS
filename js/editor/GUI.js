@@ -54,12 +54,7 @@ class GUI {
         let menuCanvas = document.createElement("div");
 
         //menu global
-        let menuGlobal = document.createElement("div");
-        menuGlobal.id = "menuGlobal";
-        let tituloMenuGlobal = document.createElement("h1");
-        tituloMenuGlobal.textContent = "Menú global";
-        menuGlobal.appendChild(tituloMenuGlobal);
-        secundario.appendChild(menuGlobal);
+        GUI.crearMenuGlobal(secundario);
 
         //menu ajustes de webgl
         let menuAjustesWebGL = document.createElement("div");
@@ -99,6 +94,59 @@ class GUI {
         //iniciar nodo y añadirlo al DOM
         this.nodo = gui;
         principal.appendChild(this.nodo);
+    }
+
+    static crearMenuGlobal (contenedor) {
+        let menuGlobal = document.createElement("div");
+        menuGlobal.id = "menuGlobal";
+
+        let tituloMenuGlobal = document.createElement("h1");
+        tituloMenuGlobal.textContent = "Global";
+        menuGlobal.appendChild(tituloMenuGlobal);
+
+        let objetosDibujables = document.createElement("div");
+        objetosDibujables.id = "objetosDibujables";
+        objetosDibujables.className = "menuSubcontenedor";
+        menuGlobal.appendChild(objetosDibujables);
+
+        contenedor.appendChild(menuGlobal);
+    }
+
+    static actualizarMenuGlobal () {
+        let objetosDibujables = document.getElementById("objetosDibujables");
+        
+        //vaciar nodo
+        objetosDibujables.innerHTML = "";
+
+        //volver a cargarlo
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+
+            let tipo = document.createElement("p");
+            tipo.textContent = Renderer.dibujables[i].constructor.name;
+
+            let nombre = document.createElement("p");
+            nombre.textContent = "Ejemplo";
+
+            let objetoDibujable = document.createElement("div");
+            objetoDibujable.className = "objetoDibujable";
+
+            objetoDibujable.objeto = Renderer.dibujables[i];
+
+            if (Renderer.dibujables[i].constructor.name != "Grid") {
+                objetoDibujable.addEventListener("click", () => {
+                    VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i], objetoDibujable);
+                });
+            } else {
+                objetoDibujable.style.pointerEvents = "none";
+                objetoDibujable.style.backgroundColor = "#170817";
+                objetoDibujable.style.boxShadow = "inset 0 0 2px black";
+            }
+
+
+            objetoDibujable.appendChild(tipo);
+            objetoDibujable.appendChild(nombre);
+            objetosDibujables.appendChild(objetoDibujable);
+        }
     }
 
     static agregarCampo (contenedor, nombre) {

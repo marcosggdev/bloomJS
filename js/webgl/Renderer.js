@@ -13,7 +13,7 @@ class Renderer {
     static dibujarHitbox = false;
     static dibujarLineasSeleccion = false;
 
-    static iniciar (camara = null, ancho = 640, alto = 480) {
+    static iniciar (camara = null, ancho, alto) {
 
         Renderer.camara = camara;
         Renderer.ancho = ancho;
@@ -128,6 +128,7 @@ class Renderer {
     static anadirGraficoDibujable (grafico) {
         this.dibujables.push(grafico);
         Renderer.dibujar();
+        GUI.actualizarMenuGlobal();
     }
 
     static eliminarGraficoDibujable (id) {
