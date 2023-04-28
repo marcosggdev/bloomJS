@@ -284,6 +284,10 @@ div#menuSeleccion {
     flex-direction: column;
     align-items: stretch;
     overflow-y: hidden;
+    transition: top 1s;
+}
+div#menuSeleccion:hover {
+    top: 20%;
 }
 div.menuPopUp button {
     background-color: #ffff79;

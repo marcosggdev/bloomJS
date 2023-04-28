@@ -15,6 +15,9 @@ class MenuSeleccion {
 
         GUI.crearBarraCierre(div, "Selección");
 
+        /*//boton para arrastrar hacia arriba y hacer mas grande el menu
+        GUI.anadirBotonAltura(div, "/bloomJS/img/iconos/arriba.png");*/
+
         let dinamico = document.createElement("div");
         dinamico.id = "dinamico";
         div.appendChild(dinamico);

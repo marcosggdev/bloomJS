@@ -66,6 +66,7 @@ class GUI {
         menuAjustesWebGL.id = "menuAjustesWebGL";
         menuAjustesWebGL.className = "menuPopUp";
         GUI.crearBarraCierre(menuAjustesWebGL, "Ajustes WebGL");
+        Renderer.cargarConfiguracion(menuAjustesWebGL);
 
         let campos = document.createElement("div");
         campos.className = "grupoCampos";
@@ -83,6 +84,7 @@ class GUI {
             }
             //matriz de forma: [ [nombres] [valores] ]
             Renderer.aplicarConfiguracion(configuraciones);
+            GUI.ocultarMenuAjustesWebGL();
         });
         campos.appendChild(botonGuardar);
         menuAjustesWebGL.appendChild(campos);
@@ -220,6 +222,13 @@ class GUI {
         let menu = document.getElementById("menuAjustesWebGL");
         menu.style.opacity = 1;
         menu.style.pointerEvents = "all";
+        Renderer.cargarConfiguracion(menu);
+    }
+
+    static ocultarMenuAjustesWebGL () {
+        let menu = document.getElementById("menuAjustesWebGL");
+        menu.style.opacity = 0;
+        menu.style.pointerEvents = "none";
     }
 
     static crearBarraCierre (contenedor, titulo) {
@@ -230,6 +239,9 @@ class GUI {
         h2.textContent = titulo;
         nodo.appendChild(h2);
 
+        let iconos = document.createElement("div");
+        iconos.className = "grupoIconos";
+
         let img = document.createElement("img");
         img.className = "iconoCierre";
         img.src = "/bloomJS/img/iconos/cerrar.png";
@@ -238,9 +250,28 @@ class GUI {
             contenedor.style.opacity = 0;
             contenedor.style.pointerEvents = "none";
         });
-        nodo.appendChild(img);
-
+        iconos.appendChild(img);
+        nodo.appendChild(iconos);
         contenedor.appendChild(nodo);
     }
+
+    /*static anadirBotonAltura (contenedor, ruta) {
+        let img = document.createElement("img");
+        img.src = ruta;
+        img.addEventListener("click", () => {
+            console.log("drag");
+        });
+
+        //si el contenedor tiene barra cierre, lo añadimos como un icono mas
+        let barraCierre = contenedor.querySelector("div.barraCierre");
+        if (barraCierre != null) {
+            let iconos = barraCierre.querySelector(".grupoIconos");
+            img.className = "iconoCierre";
+            iconos.prepend(img);
+            console.log("tiene barra cierre");
+        } else {
+            console.log("no tiene");
+        }
+    }*/ 
 
 }

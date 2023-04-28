@@ -107,8 +107,8 @@ class VentanaCanvas {
                 } else {
                     GUI.menuSeleccion.ocultar();
                 }
-                rayoClick = null;
             }
         }
+        rayoClick = null;
     }
 }

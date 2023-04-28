@@ -43,6 +43,16 @@ class Renderer {
         }
     }
 
+    static cargarConfiguracion (menuAjustes) {
+        let campos = menuAjustes.querySelectorAll("div.campo");
+        for (let i = 0; i < campos.length; i++) {
+            switch (campos[i].querySelector("p").textContent) {
+                case "Renderer ancho": campos[i].querySelector("input").value = Renderer.ancho; break;
+                case "Renderer alto": campos[i].querySelector("input").value = Renderer.alto; break;
+            }
+        }
+    }
+
     static cambiarAncho (ancho) {
         Renderer.ancho = ancho;
 
