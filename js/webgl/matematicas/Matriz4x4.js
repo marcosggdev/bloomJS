@@ -353,4 +353,19 @@ class Matriz4X4 {
 
         return matriz;
     }
+
+    /**
+     * Dada una matriz de rotacion, devuelve el angulo de euler que se utilizo para obtenerla
+     */
+    static obtenerAngulosDeMatrizRotacion (matriz) {
+        let anguloX = Math.atan2(matriz.datos[2][1], matriz.datos[2][2]);
+        let anguloY = Math.atan2(-matriz.datos[2][0], Math.pow(matriz.datos[2][1]*matriz.datos[2][1] + matriz.datos[2][2]*matriz.datos[2][2], 0.5));
+        let anguloZ = Math.atan2(matriz.datos[1][0], matriz.datos[0][0]);
+        let angulos = {
+            "anguloX": Utilidades.toDegrees(anguloX),
+            "anguloY": Utilidades.toDegrees(anguloY),
+            "anguloZ": Utilidades.toDegrees(anguloZ)
+        }
+        return angulos;
+    }
 }

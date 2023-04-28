@@ -34,6 +34,11 @@ class Utilidades {
         return resultado;
     }
 
+    static toDegrees (radians) {
+        let resultado = 180 * radians / Math.PI;
+        return resultado;
+    }
+
     //crear una matriz de perspectiva
     static crearMatrizPerspectiva (fovy, aspecto, n, f) {
         let q = 1.0 / Math.tan(Utilidades.toRadians(0.5 * fovy));

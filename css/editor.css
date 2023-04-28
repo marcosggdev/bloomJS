@@ -170,6 +170,7 @@ div#barraHerramientas {
     background-color: #212121;
     pointer-events: all;
     flex-grow: 1;
+    height: 50px;
 }
 div#barraHerramientas div.boton {
     width: 20%;
@@ -281,6 +282,9 @@ div.objetoDibujable p {
 canvas {
     width: 100%;
     height: 100%;
+}
+canvas:focus {
+    outline: none;
 }
 div.menuPopUp, div[class~=menuPopUp] {
     position: absolute;

@@ -523,7 +523,35 @@ class Modelo3D {
      * el centro del objeto
      */
     static rotarObjetoTecla (modelo) {
+        //eje: vector director camara-objeto
+        let posCamara = Renderer.camara.obtenerPosicionCamara();
+        let posObjeto = modelo.matrizM.multiplicarVector(new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]));
+        let vectorDirector = Vector4X1.restarVectores(posObjeto, posCamara);
+        vectorDirector.normalizar();
+
+        //como influye el mouse en la rotacion: indicara el angulo de rotacion como si se tratase de la aguja de un reloj.
+        //calcularemos el angulo con trigonometria. obtenemos coords de forma estatica desde VentanaCanvas
+
+        //sabemos coords del mouse respecto al centro visible del canvas
+        let centroX = VentanaCanvas.mouseX;
+        let centroY = VentanaCanvas.mouseY;
+        let vectorCentro = new Vector4X1([centroX, centroY, 0, 1]);
+
+        //computar coord screen del centro del modelo
+        let coordScreen = Renderer.matrizP.multiplicarVector(Renderer.camara.matrizV.multiplicarVector(modelo.matrizM.multiplicarVector
+            (new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]))));
         
+        let coordsRespectoAObjeto = Vector4X1.restarVectores(vectorCentro, coordScreen);
+        let r = Math.pow(Math.pow(coordsRespectoAObjeto.datos[0], 2) + Math.pow(coordsRespectoAObjeto.datos[1], 2), 0.5);
+        let angulo = Math.asin(coordsRespectoAObjeto.datos[0] / r);
+
+        let rotacion = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(vectorDirector, angulo);
+        let angulos = Matriz4X4.obtenerAngulosDeMatrizRotacion(rotacion);
+        modelo.anguloX = angulos["anguloX"];
+        modelo.anguloY = angulos["anguloY"];
+        modelo.anguloZ = angulos["anguloZ"];
+
+        //por ultimo aplicar nuevos angulos al modelo. Descomponer el angulo que hemos obtenido a los 3 ejes
     }
 
     /**
