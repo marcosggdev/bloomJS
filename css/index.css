@@ -14,6 +14,12 @@ main section p {
     font-size: 14pt;
     margin-bottom: 2em;
 }
+main section:nth-child(2n+1) {
+    background-color: white;
+}
+main section:nth-child(2n) {
+    background-color: rgb(221, 221, 221);
+}
 section#animacion3D {
     padding: 0;
     display: flex;
@@ -26,7 +32,7 @@ div.contenedorImagen {
 }
 
 div.textoSecundario {
-    width: 30%;
+    width: 20%;
     padding: 3em;
 }
 div.textoSecundario ul {
@@ -42,6 +48,9 @@ div.textoSecundario h2 {
     font-size: 23pt;
     overflow:hidden;
 }
+main section#bienvenida .contenedorImagen img {
+    width: 100vw;
+}
 
 main section#funcionalidades {
     flex-direction: row;
@@ -50,6 +59,10 @@ section#funcionalidades .contenedorImagen {
     position: relative;
     float: left;
 }
+section#funcionalidades .contenedorImagen img {
+    width: auto;
+    height: 80vh;
+}
 section#empezar {
     gap: 3em;
 }
@@ -57,6 +70,39 @@ section#empezar div.textoSecundario {
     display:flex;
     flex-direction:column;
     align-items: center;
+}
+section#empezar .contenedorImagen {
+    width: 100vw;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+section#empezar .contenedorImagen::before {
+    position: absolute;
+    top:0;
+    left:0;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    
+    background: url(/bloomJS/img/videojuego.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-position: 10%;
+
+    animation-name: moverImagen;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}
+@keyframes moverImagen {
+    from {
+        background-size: 100%;
+    }
+    50% {
+        background-size: 110%;
+    }
 }
 div.enlaces {
     display: grid;

@@ -31,7 +31,9 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 <div class="textoSecundario">
                         <h2>¡Bienvenido a BloomJS!</h2>
                         <p>Bienvenido a BloomJS. Se trata de mi proyecto para el CFGS Desarrollo de Aplicaciones Web</p>
-                        <p>BloomJS te ayudará con tus proyectos de desarrollo web</p>
+                        <p>BloomJS te ayudará a darle un toque 3D a tus proyectos de Desarrollo Web, permitiéndote insertar
+                           en tu página modelos 3D animados y otros efectos, gracias a WebGL
+                        </p>
                 </div>
                 <div class="contenedorImagen">
                         <img src="/bloomJS/img/colorido.jpg" alt="Imagen de fondo">
@@ -65,7 +67,6 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                         <button id="empezar" class="redireccion" onclick="window.location.assign('php/Editor.php')">Ir al Editor</button>
                 </div>
                 <div class="contenedorImagen">
-                        <img src="/bloomJS/img/videojuego.jpg" alt="Videojuego">
                 </div>
                 <div class="enlaces">
                         <div class="enlace">
@@ -84,9 +85,6 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                                 <a href="#">enlace</a>
                         </div>
                 </div>
-            </section>
-            <section id="animacion3D">
-
             </section>
         </main>
 
