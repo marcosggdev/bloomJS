@@ -35,7 +35,7 @@ class Utilidades {
     }
 
     static toDegrees (radians) {
-        let resultado = 180 * radians / Math.PI;
+        let resultado = 180.0 * radians / Math.PI;
         return resultado;
     }
 

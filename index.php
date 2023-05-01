@@ -72,17 +72,17 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                         <div class="enlace">
                                 <h2>Prueba nuestro editor</h2>
                                         <p>Te ayudará con el diseño de tu página</p>
-                                <a href="#">enlace</a>
+                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                         <div class="enlace">
                                 <h2>Genera tus propios assets</h2>
                                         <p>Para que no tengas que preouparte por el copyright</p>
-                                <a href="#">enlace</a>
+                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                         <div class="enlace">
                                 <h2>¡Comparte tus creaciones!</h2>
                                         <p>Descubre las creaciones de otros usuarios</p>
-                                <a href="#">enlace</a>
+                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                 </div>
             </section>

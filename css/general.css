@@ -211,6 +211,7 @@ nav#estatico {
     opacity: 0;
     transition: opacity 0.5s;
     background: rgb(0 0 0) url(../img/fondoHeader.png);
+    pointer-events: none;
 }
 nav#estatico h2 {
     position: relative;
@@ -247,6 +248,7 @@ nav#estatico.activo {
     padding: 1em;
     box-sizing: border-box;
     background-blend-mode: luminosity;
+    pointer-events: all;
 }
 nav#estatico ul {
     gap: 10px;
@@ -280,7 +282,6 @@ footer {
     flex-direction: column;
     padding: 2em;
     color: white;
-    border-top: 2px solid black;
     background-color: #212121;
     align-items: center;
     position: relative;

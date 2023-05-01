@@ -26,6 +26,7 @@ class Vista {
             <head>
                 <meta charset="UTF-8">
                 <title><?=$titulo?></title>
+                <link rel="icon" href="/bloomJS/img/favicon/logo.ico" type="image/x-icon">
                 <?php
                 foreach ($css as $link) {
                     echo "<link rel='stylesheet' href='". $link ."'>";

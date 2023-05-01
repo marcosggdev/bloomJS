@@ -67,8 +67,8 @@ class VentanaCanvas {
             VentanaCanvas.mouseX = e.clientX - canvas.getBoundingClientRect().left - centroCanvasX;
             VentanaCanvas.mouseY = -(e.clientY - canvas.getBoundingClientRect().top - centroCanvasY); //barraHeeramientas mide 50px de alto
 
-            if (this.rotando) {
-                Modelo3D.rotarObjetoTecla(this.objetoSeleccionado);
+            if (VentanaCanvas.rotando) {
+                Modelo3D.rotarObjetoTecla(VentanaCanvas.objetoSeleccionado);
             }
         });
 
@@ -85,19 +85,18 @@ class VentanaCanvas {
             } else {
                 if (VentanaCanvas.objetoSeleccionado != null) {
                     //comprobar aplicacion de rst por teclado y aplicar.Despues no controladorSeleccion porque usamos el click para "guardar"
-                    //no queremos seleccionar otra cosa sin querer
+                    //no queremos deseleccionar otra cosa sin querer
                     if (VentanaCanvas.rotando || VentanaCanvas.trasladando || VentanaCanvas.escalando) {
-                        console.log("guardar cambios");
                         VentanaCanvas.rotando = false;
                         VentanaCanvas.trasladando = false;
                         VentanaCanvas.escalando = false;
-                        VentanaCanvas.objetoSeleccionado = null;
                     } else {
-                        console.log("no cambios porque no se entro en modo edicion");
+                        //otro click implica controlador seleccion
+                        VentanaCanvas.controladorSeleccionObjeto(canvas, e);
                     }
-                    console.log("guardar");
                 } else {
-                    this.controladorSeleccionObjeto(canvas, e);
+                    //sin ningun objeto seleccionado, controlador seleccion
+                    VentanaCanvas.controladorSeleccionObjeto(canvas, e);
                 }
             }
 
@@ -120,13 +119,12 @@ class VentanaCanvas {
 
         canvas.addEventListener("keydown", (e) => {
 
-            if (this.objetoSeleccionado != null) {
+            if (VentanaCanvas.objetoSeleccionado != null) {
                 let tecla = VentanaCanvas.teclas[e.keyCode];
-                console.log(tecla);
                 switch (tecla) {
-                    case "r": this.rotando = true; Modelo3D.rotarObjetoTecla(this.objetoSeleccionado); break;
-                    case "t": this.trasladando = true; Modelo3D.trasladarObjetoTecla(this.objetoSeleccionado); break;
-                    case "s": this.escalando = true; Modelo3D.escalarObjetoTecla(this.objetoSeleccionado); break;
+                    case "r": VentanaCanvas.rotando = true; break;
+                    case "t": VentanaCanvas.trasladando = true; break;
+                    case "s": VentanaCanvas.escalando = true; break;
                 }
             }
 
@@ -134,7 +132,7 @@ class VentanaCanvas {
     }
 
     //comprobar posicion del click y buscar objeto que interseque
-    controladorSeleccionObjeto (canvas, e) {
+    static controladorSeleccionObjeto (canvas, e) {
         //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
         let xCanvas = canvas.getBoundingClientRect().left;
         let yCanvas = canvas.getBoundingClientRect().top;
@@ -160,14 +158,14 @@ class VentanaCanvas {
                     GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
                     VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
                     Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
-                    this.objetoSeleccionado = Renderer.dibujables[i];
+                    VentanaCanvas.objetoSeleccionado = Renderer.dibujables[i];
                 } else {
                     GUI.menuSeleccion.ocultar();
                     VentanaCanvas.globalOcultarObjeto();
                     Renderer.dibujables[i].funcionActualizar = null;
                     Renderer.dibujables[i].contador = null;
                     Renderer.dibujables[i].resetearFactores();
-                    this.objetoSeleccionado = null;
+                    VentanaCanvas.objetoSeleccionado = null;
                 }
             }
         }

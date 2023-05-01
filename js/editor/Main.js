@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
     //camara que el renderer utiliza para dibujar
     let arcballCamera = new ArcballCamera(0, 0, 0, 30, -90, 30);
     //se encarga de dibujar en el canvas
-    Renderer.iniciar(arcballCamera, 1024, 768);
+    Renderer.iniciar(arcballCamera, 640, 480);
 
     //el menu global se actualiza cada vez que se añade o borra un grafico dibujable
 
@@ -29,6 +29,9 @@ window.addEventListener('load', () => {
     //let blanco = new Modelo2D(0, 0, 0, 0, 0, 0, 1, 1, "/bloomJS/img/pluma.jpg", VERTEX_SHADER_IMAGEN, FRAGMENT_SHADER_IMAGEN);
     //let lienzo = new Lienzo();
     let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+
+    let botonMaximizar = document.getElementById("maximizar");
+    maximizar(botonMaximizar);
 
     //let hitbox = new Hitbox(barril);
     let grid = new Grid();

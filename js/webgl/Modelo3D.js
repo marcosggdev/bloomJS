@@ -526,8 +526,8 @@ class Modelo3D {
     static rotarObjetoTecla (modelo) {
         //eje: vector director camara-objeto
         let posCamara = Renderer.camara.obtenerPosicionCamara();
-        let posObjeto = modelo.matrizM.multiplicarVector(new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]));
-        let vectorDirector = Vector4X1.restarVectores(posObjeto, posCamara);
+        let posObjeto = new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]);
+        let vectorDirector = Vector4X1.restarVectores(posCamara, posObjeto);
         vectorDirector.normalizar();
 
         //como influye el mouse en la rotacion: indicara el angulo de rotacion como si se tratase de la aguja de un reloj.
@@ -543,16 +543,15 @@ class Modelo3D {
             (new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]))));
         
         let coordsRespectoAObjeto = Vector4X1.restarVectores(vectorCentro, coordScreen);
-        let r = Math.pow(Math.pow(coordsRespectoAObjeto.datos[0], 2) + Math.pow(coordsRespectoAObjeto.datos[1], 2), 0.5);
-        let angulo = Math.asin(coordsRespectoAObjeto.datos[0] / r);
+        let angulo = Math.atan2(coordsRespectoAObjeto.datos[1], coordsRespectoAObjeto.datos[0]);
+        angulo = Utilidades.toDegrees(angulo);
 
+       //por ultimo Descomponer el angulo que hemos obtenido a los 3 ejes para pasarlo a modelo.factorXYZ
         let rotacion = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(vectorDirector, angulo);
         let angulos = Matriz4X4.obtenerAngulosDeMatrizRotacion(rotacion);
         modelo.anguloX = angulos["anguloX"];
         modelo.anguloY = angulos["anguloY"];
         modelo.anguloZ = angulos["anguloZ"];
-
-        //por ultimo aplicar nuevos angulos al modelo. Descomponer el angulo que hemos obtenido a los 3 ejes
     }
 
     /**
