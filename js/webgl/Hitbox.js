@@ -231,7 +231,7 @@ class Hitbox {
         }
     }
 
-    actualizar () {
+    actualizar (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ) {
 
     }
 

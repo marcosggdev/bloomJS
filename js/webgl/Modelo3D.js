@@ -551,6 +551,7 @@ class Modelo3D {
         modelo.anguloX = angulos["anguloX"];
         modelo.anguloY = angulos["anguloY"];
         modelo.anguloZ = angulos["anguloZ"];
+        modelo.hitbox.actualizarRotacion(modelo.anguloX, modelo.anguloY, modelo.anguloZ);
     }
 
     /**
@@ -570,7 +571,7 @@ class Modelo3D {
         let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
         let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
 
-        let coordScreenModelo = new Vector4X1([centroXGL, centroYGL, -1.0, 1]);
+        let coordScreenModelo = new Vector4X1([centroXGL, centroYGL, 0.0, 1]);
         coordScreenModelo = pInversa.multiplicarVector(coordScreenModelo);
         coordScreenModelo.datos[2] = -1.0;
         coordScreenModelo.datos[3] = 0.0;
@@ -587,6 +588,7 @@ class Modelo3D {
         modelo.posX = coordModelo.datos[0];
         modelo.posY = coordModelo.datos[1];
         modelo.posZ = coordModelo.datos[2];
+        modelo.hitbox.actualizarPosicion(modelo.posX, modelo.posY, modelo.posZ);
     }
 
     /**
@@ -595,31 +597,41 @@ class Modelo3D {
      * Esta escala es la por defecto y escala xyz. 
      */
     static escalarObjetoTecla (modelo) {
-        //guardamos las coords screen del instante inicial en el que se pulso la tecla de escala
-        //asi sabemos la direccion de crecimiento / decrecimiento. Si el punto esta a más distancia que ese, aumenta de escala
-        //en caso contrario, decrece.
+        //distancia en screen space entre raton y modelo => factor exponencial para escalar.
 
-        let posInicial = new Vector4X1([VentanaCanvas.mouseXTecla, VentanaCanvas.mouseYTecla, 0, 1]);
-        let posModelo = new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]);
+        //pos el raton cuando se pulso la tecla t (referencia porque en ese punto, tamaño = tamaño inicial)
+        let posInicial = new Vector4X1([VentanaCanvas.mouseXTecla *2 / Renderer.ancho, VentanaCanvas.mouseYTecla * 2 / Renderer.alto, -1, 1]);
+        //pos modelo en screenSpace
+        let posModelo = Renderer.matrizP.multiplicarVector(Renderer.camara.matrizV.multiplicarVector(modelo.matrizM.multiplicarVector
+            (new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]))));
+        //distancia inicial
         let distanciaInicial = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posInicial, posModelo));
 
-        let posActual = new Vector4X1([VentanaCanvas.mouseX, VentanaCanvas.mouseY, 0, 1]);
+
+        //pos actual del mouse
+        let posActual = new Vector4X1([VentanaCanvas.mouseX*2 / Renderer.ancho, VentanaCanvas.mouseY* 2 / Renderer.alto, -1, 1]);
+        //distancia screen mouse - screen modelo
         let distanciaActual = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posActual, posModelo));
 
         // > 0 si actual > inicial; < 0 si actua < inicial. => mayor si mas lejos del modelo con respecto a inicial
         let deltaDistancia = distanciaActual - distanciaInicial;
-
+        
         //en delta = 0, escala no modificada. Despues aumenta/decrece exponencialmente
-        modelo.factorX = Modelo3D.escala(VentanaCanvas.factorXInicial, deltaDistancia);
-        modelo.factorY = Modelo3D.escala(VentanaCanvas.factorYInicial, deltaDistancia);
-        modelo.factorZ = Modelo3D.escala(VentanaCanvas.factorZInicial, deltaDistancia);
+        modelo.factorX = Modelo3D.escala(VentanaCanvas.factorXInicial, deltaDistancia, distanciaInicial);
+        modelo.factorY = Modelo3D.escala(VentanaCanvas.factorYInicial, deltaDistancia, distanciaInicial);
+        modelo.factorZ = Modelo3D.escala(VentanaCanvas.factorZInicial, deltaDistancia, distanciaInicial);
+        modelo.hitbox.actualizarEscala(modelo.factorX, modelo.factorY, modelo.factorZ, distanciaInicial);
+
+        console.log(deltaDistancia);
 
         //reset de contador para que se tome nuevos factores como punto de partida en animacion de seleccion
         modelo.contador = null;
+
     }
 
-    static escala (escalaInicial, deltaDistancia) {
-        let resultado = escalaInicial * Math.exp(deltaDistancia / 200);
+    static escala (escalaInicial, distanciaActual, distanciaInicial) {
+        //escalado exponencial. Velocidad proporcional a la distanciaInicial
+        let resultado = escalaInicial * Math.exp(1500 * distanciaActual / distanciaInicial);
         return resultado;
     }
 }
