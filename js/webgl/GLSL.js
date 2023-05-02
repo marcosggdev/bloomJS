@@ -1,71 +1,23 @@
-//Este archivo tiene los diferentes shaders que se van a usar
-/* 
-//GOURAUD SHADING
-var VERTEX_SHADER_GOURAUD2= 
-"uniform mat4 mv;\n" +
+var VERTEX_SHADER_SIMPLE_COLOR = 
 "uniform mat4 m;\n" +
+"uniform mat4 v;\n" +
 "uniform mat4 p;\n" +
-"uniform vec3 uJPos;\n" +
-"uniform sampler2D sampler;\n" +
-"uniform float texturizado;\n" + 
-"uniform float ns;\n" +
-"uniform vec3 ka;\n" +
-"uniform vec3 kd;\n" +
-"uniform vec3 ks;\n" +
-"uniform vec3 ke;\n" +
-"uniform float ni;\n" +
-"uniform float d;\n" +
+
 "attribute vec3 aPos;\n" +
-"attribute vec2 aTex;\n" +
-"attribute vec3 aNorm;\n" +
-"varying vec3 vNorm;\n" +
-"varying vec2 vTex;\n" +
-"varying vec3 iAmbiente;\n" +
-"varying vec3 iDifusion;\n" +
-"varying vec3 iEspecular;\n" +
-"varying vec3 vColor;\n" +
-"varying vec3 l;\n" +
+
 "void main(){\n" +
-"   vec3 lightColor = vec3(3.0,3.0,3.0);\n" +
-"   vNorm = normalize((m * vec4(aNorm, 1.0)).xyz);\n" +
-"   vec3 luzPos = vec3(-10.0, 0.0, 0.0);\n" +
-"   iAmbiente = lightColor * ka;\n" +
-"   l = normalize(luzPos - (aPos - uJPos));\n" +
-"   float cosDifusion = max(dot(vNorm, l), 0.0);\n" +
-"   iDifusion = lightColor * (cosDifusion * kd);\n" +
-"   vec3 r = normalize(reflect(-l, vNorm));\n" +
-"   vec3 camaraPos = vec3(0.0, 0.0, 10.0);\n" +
-"   vec3 v = normalize(-camaraPos);\n" +
-"   iEspecular = lightColor * (max(0.0, pow(dot(r,v), 3.0)) * ks);\n" +
-"   gl_Position = p * mv * vec4(aPos - uJPos, 1.0);\n" +
-"   vNorm = aNorm;\n" +
-"   if (texturizado == 1.0) vTex = aTex;\n" +
-"   vColor = iAmbiente + iDifusion + iEspecular;\n" +
+"   gl_Position = p * v * m * vec4(aPos, 1.0);\n" +
 "}\n";
 
-var FRAGMENT_SHADER_GOURAUD2 =
-"precision highp float;\n" +
-"varying vec3 vColor;\n" +
-"varying vec2 vTex;\n" +
-"uniform sampler2D sampler;\n" +
-"uniform float texturizado;\n" + 
-"uniform float ns;\n" +
-"uniform vec3 ka;\n" +
-"uniform vec3 kd;\n" +
-"uniform vec3 ks;\n" +
-"uniform vec3 ke;\n" +
-"uniform float ni;\n" +
-"uniform float d;\n" +
+var FRAGMENT_SHADER_SIMPLE_COLOR =
+"precision mediump float;\n" +
+
+"uniform vec4 uColor;"+ 
+
 "void main(){\n" +
-"   if (texturizado == 1.0) {\n" +
-"       vec4 textura = texture2D(sampler, vTex);\n" +
-"       gl_FragColor = vec4(vColor * textura.xyz, d*1.0);\n" +
-"   } else {\n" + 
-"       gl_FragColor = vec4(vColor, d*1.0);\n" +
-"   }" + 
-"}\n";*/ 
-//Este archivo tiene los diferentes shaders que se van a usar
-//GOURAUD SHADING
+"       gl_FragColor = uColor;\n" +
+"}\n";
+
 var VERTEX_SHADER_GOURAUD2= 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +

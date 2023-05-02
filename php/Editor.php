@@ -39,6 +39,7 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/editor/VentanaCanvas.js",
         RAIZ . "js/webgl/Renderer.js",
         RAIZ . "js/webgl/Modelo3D.js",
+        RAIZ . "js/webgl/PuntoLuz.js",
         RAIZ . "js/webgl/Hitbox.js"
     ]);
 ?>

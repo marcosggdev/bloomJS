@@ -22,7 +22,6 @@ class Modelo3D {
     }
 
     async cargar () {
-        let p = [];
         const respuestaArchivoXML = await fetch(this.rutaArchivoDae)
             .then( response => {
                 return response.text();

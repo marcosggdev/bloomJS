@@ -28,7 +28,8 @@ window.addEventListener('load', () => {
     //cuando se crea un modelo, despues de cargarse se añade al renderer, y al añadirse se dibuja
     //let blanco = new Modelo2D(0, 0, 0, 0, 0, 0, 1, 1, "/bloomJS/img/pluma.jpg", VERTEX_SHADER_IMAGEN, FRAGMENT_SHADER_IMAGEN);
     //let lienzo = new Lienzo();
-    let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+    //let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+    let luz = new PuntoLuz(0, 0, 0);
 
     let botonMaximizar = document.getElementById("maximizar");
     maximizar(botonMaximizar);
