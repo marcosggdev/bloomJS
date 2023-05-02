@@ -128,7 +128,15 @@ class VentanaCanvas {
                 switch (tecla) {
                     case "r": VentanaCanvas.rotando = true; break;
                     case "t": VentanaCanvas.trasladando = true; break;
-                    case "s": VentanaCanvas.escalando = true; break;
+                    case "s": 
+                        VentanaCanvas.escalando = true; 
+                        //coords en el momento de pulsar la tecla; util para escala
+                        VentanaCanvas.mouseXTecla = VentanaCanvas.mouseX; 
+                        VentanaCanvas.mouseYTecla = VentanaCanvas.mouseY;
+                        VentanaCanvas.factorXInicial = VentanaCanvas.objetoSeleccionado.factorX;
+                        VentanaCanvas.factorYInicial = VentanaCanvas.objetoSeleccionado.factorY;
+                        VentanaCanvas.factorZInicial = VentanaCanvas.objetoSeleccionado.factorZ;
+                        break;
                 }
             }
 

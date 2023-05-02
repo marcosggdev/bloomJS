@@ -596,6 +596,31 @@ class Modelo3D {
      * Esta escala es la por defecto y escala xyz. 
      */
     static escalarObjetoTecla (modelo) {
+        //guardamos las coords screen del instante inicial en el que se pulso la tecla de escala
+        //asi sabemos la direccion de crecimiento / decrecimiento. Si el punto esta a más distancia que ese, aumenta de escala
+        //en caso contrario, decrece.
 
+        let posInicial = new Vector4X1([VentanaCanvas.mouseXTecla, VentanaCanvas.mouseYTecla, 0, 1]);
+        let posModelo = new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]);
+        let distanciaInicial = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posInicial, posModelo));
+
+        let posActual = new Vector4X1([VentanaCanvas.mouseX, VentanaCanvas.mouseY, 0, 1]);
+        let distanciaActual = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posActual, posModelo));
+
+        // > 0 si actual > inicial; < 0 si actua < inicial. => mayor si mas lejos del modelo con respecto a inicial
+        let deltaDistancia = distanciaActual - distanciaInicial;
+
+        //en delta = 0, escala no modificada. Despues aumenta/decrece exponencialmente
+        modelo.factorX = Modelo3D.escala(VentanaCanvas.factorXInicial, deltaDistancia);
+        modelo.factorY = Modelo3D.escala(VentanaCanvas.factorYInicial, deltaDistancia);
+        modelo.factorZ = Modelo3D.escala(VentanaCanvas.factorZInicial, deltaDistancia);
+
+        //reset de contador para que se tome nuevos factores como punto de partida en animacion de seleccion
+        modelo.contador = null;
+    }
+
+    static escala (escalaInicial, deltaDistancia) {
+        let resultado = escalaInicial * Math.exp(deltaDistancia / 200);
+        return resultado;
     }
 }
