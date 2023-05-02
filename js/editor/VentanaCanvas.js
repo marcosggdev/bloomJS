@@ -69,6 +69,10 @@ class VentanaCanvas {
 
             if (VentanaCanvas.rotando) {
                 Modelo3D.rotarObjetoTecla(VentanaCanvas.objetoSeleccionado);
+            } else if (VentanaCanvas.trasladando) {
+                Modelo3D.trasladarObjetoTecla(VentanaCanvas.objetoSeleccionado);
+            } else if (VentanaCanvas.escalando) {
+                Modelo3D.escalarObjetoTecla(VentanaCanvas.objetoSeleccionado);
             }
         });
 

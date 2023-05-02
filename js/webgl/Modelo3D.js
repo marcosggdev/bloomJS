@@ -560,7 +560,34 @@ class Modelo3D {
      * trasladamos por el plano
      */
     static trasladarObjetoTecla (modelo) {
+        //obtenemos las coords del raton en coordenadas de screen
+        //sabemos coords del mouse respecto al centro visible del canvas
+        let centroX = VentanaCanvas.mouseX;
+        let centroY = VentanaCanvas.mouseY;
 
+        let centroXGL = 2 * centroX / Renderer.ancho;
+        let centroYGL = 2 * centroY / Renderer.alto;
+
+        let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
+        let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
+
+        let coordScreenModelo = new Vector4X1([centroXGL, centroYGL, -1.0, 1]);
+        coordScreenModelo = pInversa.multiplicarVector(coordScreenModelo);
+        coordScreenModelo.datos[2] = -1.0;
+        coordScreenModelo.datos[3] = 0.0;
+        coordScreenModelo = vInversa.multiplicarVector(coordScreenModelo);
+        coordScreenModelo.normalizar();
+
+        let posCamara = Renderer.camara.obtenerPosicionCamara();
+        let posModelo = new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]);
+        let distancia = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posCamara, posModelo));
+
+        let coordModelo = Vector4X1.sumarVectores(posCamara, Vector4X1.multiplicarVectorPorEscalar(coordScreenModelo, distancia));
+
+       // let coordsModelo = vInversa.multiplicarVector(pInversa.multiplicarVector(coordScreenModelo));
+        modelo.posX = coordModelo.datos[0];
+        modelo.posY = coordModelo.datos[1];
+        modelo.posZ = coordModelo.datos[2];
     }
 
     /**
