@@ -43,8 +43,21 @@ class Submenu {
 
     //permite añadir un modelo 3D a la escena. Para ello se sube al servidor el archivo dae y la textura
     anadirModelo3D () {
-        let modal = document.getElementById("subirModelo");
-        modal.showModal();
+        let dialog = document.createElement("dialog");
+        dialog.id = "subirModelo";
+
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dialog.innerHTML += this.responseText;
+                let lienzo = document.getElementById("lienzo");
+                lienzo.appendChild(dialog);
+                ControlesSubirModelo.crearControles(dialog);
+                dialog.showModal();
+            }
+        };
+        req.open("GET", "/bloomJS/vistas/editor/subirModelo.php");
+        req.send();
 
         /*let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
         GUI.actualizarMenuGlobal();*/

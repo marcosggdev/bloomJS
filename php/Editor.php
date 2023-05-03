@@ -53,29 +53,4 @@ Vista::imprimirHead("Bloom - JS",
 <main>
 
 </main>
-<!--dialog subir modelo-->
-<dialog id="subirModelo">
-    <div id="encabezado">
-        <div id="barraVentana">
-            <img id="cerrarSubirModelo" src="/bloomJS/img/iconos/cerrar.png" alt="">
-        </div>
-        <h1>Subir Modelo3D</h1>
-        <p>Para dibujar tu modelo en la escena, la aplicación necesita que subas al servidor tu modelo en formato .dae y la imagen con la 
-                textura</p>
-    </div>
-    <div id="contenido">
-        <p>Es por ello que te pedimos que rellenes este formulario con tus archivos</p>
-        <form action="procesarModelo.php" method="POST">
-            <div class="campo">
-                <label for="modeloDae">Modelo3D en formato .dae:</label>
-                <input type="file" name="modeloDae">
-            </div>
-            <div class="campo">
-                <label for="textura">Imagen con la textura del Modelo3D</label>
-                <input type="file" name="textura">
-            </div>
-            <input type="button" value="Subir">
-        </form>
-    </div>
-</dialog>
 <?=Vista::imprimirFooter();?>
