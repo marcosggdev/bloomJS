@@ -76,35 +76,43 @@ class VentanaCanvas {
             }
         });
 
-        canvas.addEventListener('mousedown', () => {
-            moviendoCamara = true;
+        canvas.addEventListener('mousedown', (e) => {
+            if (e.button == 2) {
+                moviendoCamara = true;
+            }
         });
     
         canvas.addEventListener('mouseup', (e) => {
-            moviendoCamara = false;
-            
-            if (camaraMovida) {
-                //se ejecuta despues de levantar el click tras una rotacion no nula de la camara
 
-            } else {
-                if (VentanaCanvas.objetoSeleccionado != null) {
-                    //comprobar aplicacion de rst por teclado y aplicar.Despues no controladorSeleccion porque usamos el click para "guardar"
-                    //no queremos deseleccionar otra cosa sin querer
-                    if (VentanaCanvas.rotando || VentanaCanvas.trasladando || VentanaCanvas.escalando) {
-                        VentanaCanvas.rotando = false;
-                        VentanaCanvas.trasladando = false;
-                        VentanaCanvas.escalando = false;
+            if (e.button == 2) {
+                moviendoCamara = false;
+            } else if (e.button == 0) {
+                console.log("click izq");
+                if (!camaraMovida) {
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        //comprobar aplicacion de rst por teclado y aplicar.Despues no controladorSeleccion porque usamos el click para "guardar"
+                        //no queremos deseleccionar otra cosa sin querer
+                        if (VentanaCanvas.rotando || VentanaCanvas.trasladando || VentanaCanvas.escalando) {
+                            VentanaCanvas.rotando = false;
+                            VentanaCanvas.trasladando = false;
+                            VentanaCanvas.escalando = false;
+                            GUI.menuSeleccion.actualizarDatos(VentanaCanvas.objetoSeleccionado);
+                        } else {
+                            //otro click implica controlador seleccion
+                            VentanaCanvas.controladorSeleccionObjeto(canvas, e);
+                        }
                     } else {
-                        //otro click implica controlador seleccion
+                        //sin ningun objeto seleccionado, controlador seleccion
                         VentanaCanvas.controladorSeleccionObjeto(canvas, e);
                     }
-                } else {
-                    //sin ningun objeto seleccionado, controlador seleccion
-                    VentanaCanvas.controladorSeleccionObjeto(canvas, e);
                 }
+                camaraMovida = false;
             }
+        });
 
-            camaraMovida = false;
+        canvas.addEventListener("contextmenu", (e) => {
+            //evitamos el popup del menu de canvas para poder usar el click derecho
+            e.preventDefault();
         });
 
         canvas.addEventListener("mousewheel", (e) => {
@@ -124,23 +132,46 @@ class VentanaCanvas {
         canvas.addEventListener("keydown", (e) => {
 
             if (VentanaCanvas.objetoSeleccionado != null) {
+
                 let tecla = VentanaCanvas.teclas[e.keyCode];
-                switch (tecla) {
-                    case "r": VentanaCanvas.rotando = true; break;
-                    case "t": VentanaCanvas.trasladando = true; break;
-                    case "s": 
-                        VentanaCanvas.escalando = true; 
-                        //coords en el momento de pulsar la tecla; util para escala
-                        VentanaCanvas.mouseXTecla = VentanaCanvas.mouseX; 
-                        VentanaCanvas.mouseYTecla = VentanaCanvas.mouseY;
-                        VentanaCanvas.factorXInicial = VentanaCanvas.objetoSeleccionado.factorX;
-                        VentanaCanvas.factorYInicial = VentanaCanvas.objetoSeleccionado.factorY;
-                        VentanaCanvas.factorZInicial = VentanaCanvas.objetoSeleccionado.factorZ;
-                        break;
+
+                //MODELOS RST
+                if (VentanaCanvas.objetoSeleccionado.constructor.name == "Modelo3D") {
+                    switch (tecla) {
+                        case "r": VentanaCanvas.estadoRotar(); break;
+                        case "t": VentanaCanvas.estadoTrasladar(); break;
+                        case "s": 
+                            VentanaCanvas.estadoEscalar();
+                            break;
+                    }
+                //PUNTOS DE LUZ T
+                } else if (VentanaCanvas.objetoSeleccionado.constructor.name == "PuntoLuz") {
+                    switch (tecla) {
+                        case "t": VentanaCanvas.estadoTrasladar(); break;
+                    } 
                 }
+
             }
 
         });
+    }
+
+    static estadoRotar () {
+        VentanaCanvas.rotando = true;
+    }
+
+    static estadoTrasladar () {
+        VentanaCanvas.trasladando = true;
+    }
+
+    static estadoEscalar () {
+        VentanaCanvas.escalando = true; 
+        //coords en el momento de pulsar la tecla; util para escala
+        VentanaCanvas.mouseXTecla = VentanaCanvas.mouseX; 
+        VentanaCanvas.mouseYTecla = VentanaCanvas.mouseY;
+        VentanaCanvas.factorXInicial = VentanaCanvas.objetoSeleccionado.factorX;
+        VentanaCanvas.factorYInicial = VentanaCanvas.objetoSeleccionado.factorY;
+        VentanaCanvas.factorZInicial = VentanaCanvas.objetoSeleccionado.factorZ;
     }
 
     //comprobar posicion del click y buscar objeto que interseque

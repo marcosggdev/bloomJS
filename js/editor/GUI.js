@@ -36,11 +36,11 @@ class GUI {
                 ["Añadir Modelo3D"],
                 ["anadirModelo3D"]
             ]),
-            new Boton("Desplegable", "desplegar", [
+            /* new Boton("Desplegable", "desplegar", [
                 ["boton1", "boton2"],
                 ["c1", "c2"]
-            ]),
-            new Boton("WebGL", "desplegar", [
+            ]),*/ 
+            new Boton("Editor", "desplegar", [
                 ["Ajustes"],
                 ["mostrarMenuAjustesWebGL"]
             ])
@@ -60,7 +60,7 @@ class GUI {
         let menuAjustesWebGL = document.createElement("div");
         menuAjustesWebGL.id = "menuAjustesWebGL";
         menuAjustesWebGL.className = "menuPopUp";
-        GUI.crearBarraCierre(menuAjustesWebGL, "Ajustes WebGL");
+        GUI.crearBarraCierre(menuAjustesWebGL, "Ajustes Editor");
         Renderer.cargarConfiguracion(menuAjustesWebGL);
 
         let campos = document.createElement("div");
