@@ -1,0 +1,25 @@
+#subirModelo {
+    width: 50%;
+}
+#subirModelo #barraVentana {
+    justify-content: flex-end;
+}
+#subirModelo img {
+    width: 25px;
+    height: 25px;
+}
+#subirModelo img:hover {
+    transform: scale(1.1);
+}
+#subirModelo form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background-color: rgb(255, 255, 170);
+    padding: 1em;
+}
+#subirModelo form .campo {
+    display: flex;
+    justify-content: space-between;
+}

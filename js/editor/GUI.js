@@ -41,8 +41,8 @@ class GUI {
                 ["c1", "c2"]
             ]),*/ 
             new Boton("Editor", "desplegar", [
-                ["Ajustes"],
-                ["mostrarMenuAjustesWebGL"]
+                ["Ajustes", "Controles"],
+                ["mostrarMenuAjustesEditor", "mostrarMenuControles"]
             ])
         ]);
 
@@ -56,22 +56,28 @@ class GUI {
         //menu global
         GUI.crearMenuGlobal(secundario);
 
-        //menu ajustes de webgl
-        let menuAjustesWebGL = document.createElement("div");
-        menuAjustesWebGL.id = "menuAjustesWebGL";
-        menuAjustesWebGL.className = "menuPopUp";
-        GUI.crearBarraCierre(menuAjustesWebGL, "Ajustes Editor");
-        Renderer.cargarConfiguracion(menuAjustesWebGL);
+        //menu ajustes del editor
+        let menuAjustesEditor = document.createElement("div");
+        menuAjustesEditor.id = "menuAjustesEditor";
+        menuAjustesEditor.className = "menuPopUp";
+        GUI.crearBarraCierre(menuAjustesEditor, "Ajustes Editor");
+        Renderer.cargarConfiguracion(menuAjustesEditor);
+
+        //menu controles del editor
+        let menuControlesEditor = document.createElement("div");
+        menuControlesEditor.id = "menuControlesEditor";
+        menuControlesEditor.className = "menuPopUp";
+        GUI.crearBarraCierre(menuControlesEditor, "Controles Editor");
 
         let campos = document.createElement("div");
         campos.className = "grupoCampos";
         GUI.agregarCampo(campos, "Renderer ancho");
         GUI.agregarCampo(campos, "Renderer alto");
         let botonGuardar = document.createElement("button");
-        botonGuardar.id = "guardarMenuAjustesWebGL";
+        botonGuardar.id = "guardarMenuAjustesEditor";
         botonGuardar.textContent = "Guardar";
         botonGuardar.addEventListener("click", () => {
-            let campos = menuAjustesWebGL.querySelectorAll(".campo");
+            let campos = menuAjustesEditor.querySelectorAll(".campo");
             let configuraciones = [[],[]];
             for (let i = 0; i < campos.length; i++) {
                 configuraciones[0].push(campos[i].textContent);
@@ -79,11 +85,12 @@ class GUI {
             }
             //matriz de forma: [ [nombres] [valores] ]
             Renderer.aplicarConfiguracion(configuraciones);
-            GUI.ocultarMenuAjustesWebGL();
+            GUI.ocultarMenuAjustesEditor();
         });
         campos.appendChild(botonGuardar);
-        menuAjustesWebGL.appendChild(campos);
-        principal.appendChild(menuAjustesWebGL);
+        menuAjustesEditor.appendChild(campos);
+        principal.appendChild(menuAjustesEditor);
+        principal.appendChild(menuControlesEditor);
 
         //menu de seleccion de objeto
         this.menuSeleccion = new MenuSeleccion(principal);
@@ -159,6 +166,23 @@ class GUI {
 
         let input = document.createElement("input");
         input.type = "number";
+        div.appendChild(input);
+
+        contenedor.appendChild(div);
+    }
+
+    static agregarCampoNoEditable (contenedor, nombre, valor) {
+        let div = document.createElement("div");
+        div.className = "campo";
+
+        let p = document.createElement("p");
+        p.textContent = nombre;
+        div.appendChild(p);
+
+        let input = document.createElement("input");
+        input.type = "text";
+        input.value = valor;
+        input.disabled = true;
         div.appendChild(input);
 
         contenedor.appendChild(div);
@@ -266,15 +290,8 @@ class GUI {
         });
     }
 
-    static mostrarMenuAjustesWebGL () {
-        let menu = document.getElementById("menuAjustesWebGL");
-        menu.style.opacity = 1;
-        menu.style.pointerEvents = "all";
-        Renderer.cargarConfiguracion(menu);
-    }
-
-    static ocultarMenuAjustesWebGL () {
-        let menu = document.getElementById("menuAjustesWebGL");
+    static ocultarMenuAjustesEditor () {
+        let menu = document.getElementById("menuAjustesEditor");
         menu.style.opacity = 0;
         menu.style.pointerEvents = "none";
     }

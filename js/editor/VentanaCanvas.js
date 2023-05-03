@@ -215,14 +215,17 @@ class VentanaCanvas {
         rayoClick = null;
     }
 
+    //seleccion del modelo desde menu global
     static seleccionarObjeto (objeto, objetoDibujable) {
         VentanaCanvas.globalOcultarObjeto();
         GUI.menuSeleccion.mostrar(objeto);
         objetoDibujable.style.backgroundColor = "#9e369e";
         objeto.funcionActualizar = Modelo3D.funcionSeleccion;
+        VentanaCanvas.objetoSeleccionado = objeto;
+        canvas.focus(); //sino el listener de teclas no funciona hasta adquirir foco
     }
 
-    //se utilizan para seleccionar desde el menu global por click, sin ray casting
+    //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global
     static globalSeleccionarObjeto (objeto) {
         VentanaCanvas.globalOcultarObjeto();
         let objetosDibujables = document.querySelectorAll(".objetoDibujable");
@@ -233,11 +236,13 @@ class VentanaCanvas {
         });
     }
 
+    //gestiona la deseleccion de un objeto en el menu global
     static globalOcultarObjeto () {
         //desseleccionarlo del menu global
         let objetosDibujables = document.querySelectorAll(".objetoDibujable");
         Array.from(objetosDibujables).forEach((e) => {
             e.style.backgroundColor = "#271427";
         });
+        VentanaCanvas.objetoSeleccionado = null;
     }
 }

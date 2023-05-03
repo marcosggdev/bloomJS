@@ -13,6 +13,34 @@ class Renderer {
     static dibujarHitbox = true;
     static dibujarLineasSeleccion = false;
 
+    static controlesNombres = [
+        "Rotar cámara",
+        "Zoom in",
+        "Zoom out",
+        "Seleccionar/Deseleccionar"
+    ];
+
+    static controlesAcciones = [
+        "Click derecho",
+        "Ctrl +  scroll arriba",
+        "Ctrl + scroll abajo",
+        "Click izquierdo"
+    ];
+
+    static cargarControles (menu) {
+        let hijos = menu.querySelectorAll("#menuControlesEditor > :not(.barraCierre)");
+        for (let i = 0; i < hijos.length; i++) {
+            hijos[i].parentNode.removeChild(hijos[i]);
+        }
+
+        let contenido = document.createElement("div");
+        contenido.id = "menuControlesContenido";
+        for (let i = 0; i < Renderer.controlesNombres.length; i++) {
+            GUI.agregarCampoNoEditable(contenido, Renderer.controlesNombres[i], Renderer.controlesAcciones[i]);
+        }
+        menu.appendChild(contenido);
+    }
+
     static iniciar (camara = null, ancho, alto) {
 
         Renderer.camara = camara;

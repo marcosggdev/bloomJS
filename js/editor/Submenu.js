@@ -40,13 +40,28 @@ class Submenu {
     c2 () {
         console.log("c2");
     }
+
+    //permite añadir un modelo 3D a la escena. Para ello se sube al servidor el archivo dae y la textura
     anadirModelo3D () {
-        let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
-        GUI.actualizarMenuGlobal();
+        let modal = document.getElementById("subirModelo");
+        modal.showModal();
+
+        /*let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
+        GUI.actualizarMenuGlobal();*/
     }
 
-    mostrarMenuAjustesWebGL () {
-        GUI.mostrarMenuAjustesWebGL();
+    mostrarMenuAjustesEditor () {
+        let menu = document.getElementById("menuAjustesEditor");
+        menu.style.opacity = 1;
+        menu.style.pointerEvents = "all";
+        Renderer.cargarConfiguracion(menu);
+    }
+
+    mostrarMenuControles () {
+        let menu = document.getElementById("menuControlesEditor");
+        menu.style.opacity = 1;
+        menu.style.pointerEvents = "all";
+        Renderer.cargarControles(menu);
     }
 
 }

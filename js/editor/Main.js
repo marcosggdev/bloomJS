@@ -23,6 +23,8 @@ window.addEventListener('load', () => {
     //se encarga de dibujar en el canvas
     Renderer.iniciar(arcballCamera, 640, 480);
 
+    ControlesSubirModelo.crearControles();
+
     //el menu global se actualiza cada vez que se añade o borra un grafico dibujable
 
     //cuando se crea un modelo, despues de cargarse se añade al renderer, y al añadirse se dibuja
