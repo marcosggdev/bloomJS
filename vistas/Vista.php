@@ -6,8 +6,7 @@ class Vista {
         "Inicio" => RAIZ . "index.php",
         "Editor" => RAIZ . "php/Editor.php",
         "Generador" => RAIZ . "php/Generador.php",
-        "Social" => RAIZ . "php/Social.php",
-        "Exportar" => RAIZ . "php/Exportar.php"
+        "Blog" => RAIZ . "php/Blog.php"
     ];
 
     public static function imprimirHeader ($titulo, $subtitulo) {
@@ -137,6 +136,17 @@ class Vista {
                 </body>
         </html>
 <?php
+    }
+
+    public static function imprimirEntradas ($directorio) {
+        $rutas = scandir($directorio);
+        foreach ($rutas as $ruta) {
+            self::imprimirEntrada($ruta);
+        }
+    }
+
+    public static function imprimirEntrada ($ruta) {
+        readfile($ruta);
     }
 
 }
