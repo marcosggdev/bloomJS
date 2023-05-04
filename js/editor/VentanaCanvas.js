@@ -112,7 +112,7 @@ class VentanaCanvas {
 
         canvas.addEventListener("contextmenu", (e) => {
             //evitamos el popup del menu de canvas para poder usar el click derecho
-            e.preventDefault();
+            //e.preventDefault();
         });
 
         canvas.addEventListener("mousewheel", (e) => {

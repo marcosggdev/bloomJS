@@ -46,7 +46,7 @@ Vista::imprimirHead("Bloom - JS",
     ]);
 ?>
 <div id="cabecera">
-    <?=Vista::imprimirHeader("Editor", "Aquí podrás editar el estilo de tus páginas de forma cómoda y rápida");?>
+    <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
     <?=Vista::imprimirNav(Vista::$entradas, 1);?>
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
 </div>

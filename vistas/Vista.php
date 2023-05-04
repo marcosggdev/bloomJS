@@ -6,8 +6,7 @@ class Vista {
         "Inicio" => RAIZ . "index.php",
         "Editor" => RAIZ . "php/Editor.php",
         "Generador" => RAIZ . "php/Generador.php",
-        "Social" => RAIZ . "php/Social.php",
-        "Exportar" => RAIZ . "php/Exportar.php"
+        "Blog" => RAIZ . "php/Blog.php"
     ];
 
     public static function imprimirHeader ($titulo, $subtitulo) {

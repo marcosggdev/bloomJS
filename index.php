@@ -19,7 +19,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 
         <div id="cabecera">
 
-        <?=Vista::imprimirHeader("BloomJS", "Para que puedas olvidarte del código y centrarte en tu diseño")?>
+        <?=Vista::imprimirHeader("BloomJS", "Utiliza gráficos avanzados en tu página")?>
 
         <?=Vista::imprimirNav(Vista::$entradas, 0)?>
         <?=Vista::imprimirNavEstatico(Vista::$entradas, 0)?>
