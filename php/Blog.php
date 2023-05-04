@@ -15,6 +15,7 @@ Vista::imprimirHead("Bloom - JS",
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",
+        RAIZ . "js/blog/AsideDinamico.js"
     ]);
 ?>
 <div id="cabecera">
@@ -23,6 +24,30 @@ Vista::imprimirHead("Bloom - JS",
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 3)?>
 </div>
 <main>
-    <?=VistaBlog::imprimirContenido()?>
+<?php
+    if (isset($_GET["entrada"])) {
+        $archivos = scandir(RAIZ_WEB . "blog");
+        for ($i = 0; $i < count($archivos); $i++) {
+            if ($archivos[$i] == "." || $archivos[$i] == "..") {
+                unset($archivos[$i]);
+            }
+        }
+        $archivos = array_values($archivos);
+        $archivo = null;
+        for ($i = 0; $i < count($archivos); $i++) {
+            if ($archivos[$i] == $_GET["entrada"]) {
+                $archivo = $archivos[$i];
+            }
+        }
+        if ($archivo != null) {
+            VistaBlog::imprimirEntrada(RAIZ_WEB . "blog/" . $archivo);
+            VistaBlog::imprimirAside();
+        } else {
+            echo "Ha ocurrido un error. La entrada no se ha encontrado";
+        }
+    } else {
+        VistaBlog::imprimirContenido();
+    }
+?>
 </main>
 <?=Vista::imprimirFooter();?>
