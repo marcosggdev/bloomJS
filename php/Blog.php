@@ -1,13 +1,17 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 
 Vista::imprimirHead("Bloom - JS", 
     [
-        RAIZ . "css/general.css", 
-        RAIZ . "css/index.css", 
-        RAIZ . "css/Generador.css",
-        RAIZ . "css/animaciones.css"
+        RAIZ . "css/general.css",
+        RAIZ . "css/animaciones.css",
+        RAIZ . "css/blog.css"
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",
@@ -19,6 +23,6 @@ Vista::imprimirHead("Bloom - JS",
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 3)?>
 </div>
 <main>
-    <?=Vista::imprimirEntradas("/bloomJS/blog")?>
+    <?=VistaBlog::imprimirContenido()?>
 </main>
 <?=Vista::imprimirFooter();?>

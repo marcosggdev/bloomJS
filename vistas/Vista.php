@@ -138,15 +138,4 @@ class Vista {
 <?php
     }
 
-    public static function imprimirEntradas ($directorio) {
-        $rutas = scandir($directorio);
-        foreach ($rutas as $ruta) {
-            self::imprimirEntrada($ruta);
-        }
-    }
-
-    public static function imprimirEntrada ($ruta) {
-        readfile($ruta);
-    }
-
 }
