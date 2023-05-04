@@ -25,11 +25,12 @@ div#cabecera {
     background-color: black;
     background-attachment: fixed;
     background-size: cover;
-    z-index: -2;
     background-blend-mode: luminosity;
     /* box-shadow: 3px 3px 5px black; */
     box-shadow: inset 2px 2px -21px #ff00ec;
     height: 90vh;
+    z-index: 1;
+    position: relative;
 }
 
 header {

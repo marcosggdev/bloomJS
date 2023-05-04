@@ -16,16 +16,6 @@ div#entradas {
     padding: 1em;
 }
 aside#secundario {
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    box-sizing: border-box;
-    width: 30%;
-    text-align: justify;
-    height: fit-content;
-}
-aside#secundario.fijo {
     position: fixed;
     padding: 1em;
     display: flex;
@@ -38,6 +28,16 @@ aside#secundario.fijo {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
+    z-index: 0;
+}
+main > div.entrada {
+    text-align: justify;
+    width: 70%;
+    padding: 1em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 div.entrada {
     text-align: justify;
@@ -47,6 +47,10 @@ div.entrada img {
     max-height: 80vh;
     margin-top: 1em;
     margin-bottom:1em;
+}
+img.ilustracionMatematica {
+    width: fit-content;
+    height: fit-content;
 }
 div.entrada img.lateral {
     width: 40%;
