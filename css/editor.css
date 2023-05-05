@@ -111,7 +111,6 @@ div.nombreValor {
     align-items: center;
 }
 div.nombreValor input {
-    width: 30%;
     text-align: center;
 }
 div.nombreValor p {
@@ -287,7 +286,7 @@ div.menuPopUp, div[class~=menuPopUp] {
     background-color: grey;
     justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s;
@@ -296,6 +295,14 @@ div.menuPopUp, div[class~=menuPopUp] {
     overflow-y: scroll;
     top: 10%;
     color: white;
+    width: 40%;
+}
+div.menuPopUp.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+div.menuPopUp div.nombreValor p {
+    position: relative;
 }
 div#menuSeleccion {
     position: absolute;

@@ -63,18 +63,61 @@ class Submenu {
         GUI.actualizarMenuGlobal();*/
     }
 
-    mostrarMenuAjustesEditor () {
-        let menu = document.getElementById("menuAjustesEditor");
-        menu.style.opacity = 1;
-        menu.style.pointerEvents = "all";
-        Renderer.cargarConfiguracion(menu);
+    crearMenuModelos () {
+        let antiguoMenu = document.getElementById("menuModelos");
+        if (antiguoMenu == null) {
+            let menu = document.createElement("div");
+            menu.id = "menuModelos";
+            menu.className = "menuPopUp visible";
+            GUI.crearBarraCierre(menu, "Modelos predeterminados");
+            document.getElementById("gui").appendChild(menu);
+        } else {
+            antiguoMenu.classList.add("visible");
+        }
     }
 
-    mostrarMenuControles () {
-        let menu = document.getElementById("menuControlesEditor");
-        menu.style.opacity = 1;
-        menu.style.pointerEvents = "all";
-        Renderer.cargarControles(menu);
+    crearMenuAjustesEditor () {
+        let antiguoMenu = document.getElementById("menuModelos");
+        if (antiguoMenu == null) {
+            let menu = document.createElement("div");
+            menu.id = "menuAjustesEditor";
+            menu.className = "menuPopUp visible";
+            GUI.crearBarraCierre(menu, "Ajustes Editor");
+            
+            for (let i = 0; i < Renderer.nombresPropiedades.length; i++) {
+                GUI.anadirNombreValorEditable(menu, Renderer.nombresPropiedades[i], Renderer.valoresPropiedades[i]);
+            }
+            let guardar = document.createElement("button");
+            guardar.className = "botonGuardar";
+            guardar.textContent = "Guardar";
+            guardar.addEventListener("click", () => {
+                let nombres = menu.querySelectorAll("div.nombreValor p");
+                let inputs = menu.querySelectorAll("div.nombreValor input");
+                Renderer.actualizarAjustes(nombres, inputs);
+                menu.parentNode.removeChild(menu);
+            });
+            menu.appendChild(guardar);
+            document.getElementById("gui").appendChild(menu);
+        } else {
+            antiguoMenu.classList.add("visible");
+        }
+    }
+
+    crearMenuControles () {
+        let antiguoMenu = document.getElementById("menuControles");
+        if (antiguoMenu == null) {
+            let menu = document.createElement("div");
+            menu.id = "menuControles";
+            menu.className = "menuPopUp visible";
+            GUI.crearBarraCierre(menu, "Controles");
+            
+            for (let i = 0; i < Renderer.controlesNombres.length; i++) {
+                GUI.anadirNombreValor(menu, Renderer.controlesNombres[i], Renderer.controlesAcciones[i]);
+            }
+            document.getElementById("gui").appendChild(menu);
+        } else {
+            antiguoMenu.classList.add("visible");
+        }
     }
 
 }

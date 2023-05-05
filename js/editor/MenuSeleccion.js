@@ -42,13 +42,13 @@ class MenuSeleccion {
         let dinamico = this.nodo.querySelector("#dinamico");
         dinamico.innerHTML = "";
 
-        GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], 
+        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], 
         ["posX", "posY", "posZ"], "posicionesFila", "number", 1, false);
 
-        GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["Ángulo X", "Ángulo Y", "Ángulo Z"], 
+        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["Ángulo X", "Ángulo Y", "Ángulo Z"], 
         [modelo.anguloX, modelo.anguloY, modelo.anguloZ], ["anguloX", "anguloY", "anguloZ"], "posicionesFila", "number", 10, false);
 
-        GUI.anadirLineaNombresValoresEditables(dinamico, modelo, ["Factor X", "Factor Y", "Factor Z"], 
+        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["Factor X", "Factor Y", "Factor Z"], 
         [modelo.factorX, modelo.factorY, modelo.factorZ], ["factorX", "factorY", "factorZ"], "posicionesFila", "number", 0.5, true);
 
         

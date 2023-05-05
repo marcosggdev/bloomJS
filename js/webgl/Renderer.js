@@ -1,9 +1,6 @@
 class Renderer {
 
-    static clearColorR = 0.3;
-    static clearColorG = 0.3;
-    static clearColorB = 0.3;
-    static clearColorA = 1.0;
+    static fondo = new Color(0.3, 0.3, 0.3, 1.0);
 
     static camara = null;
     static ancho = 640;
@@ -17,7 +14,7 @@ class Renderer {
         "Rotar cámara",
         "Zoom in",
         "Zoom out",
-        "Seleccionar/Deseleccionar"
+        "Seleccionar"
     ];
 
     static controlesAcciones = [
@@ -26,6 +23,92 @@ class Renderer {
         "Ctrl + scroll abajo",
         "Click izquierdo"
     ];
+
+    static nombresPropiedades = [
+        "Fondo",
+        "Resolución_x",
+        "Resolución_y",
+        "Dibujar Hitbox",
+        "Dibujar rayos"
+    ];
+
+    static valoresPropiedades = [
+        Renderer.fondo.toString(),
+        Renderer.ancho,
+        Renderer.alto,
+        (Renderer.dibujarHitbox == true) ? "true": "false",
+        (Renderer.dibujarLineasSeleccion == true) ? "true": "false" 
+    ];
+
+    static asignacionCallbacks = {
+        "Fondo": "cambiarFondo",
+        "Resolución_x": "cambiarAncho",
+        "Resolución_y": "cambiarAlto",
+        "Dibujar Hitbox": "cambiarDibujarHitbox",
+        "Dibujar rayos": "cambiarDibujarLineasSeleccion"
+    };
+
+    //se llama al editar algun input del menu de ajustes y hacer click en guardar
+    static actualizarAjustes (nombres, inputs) {
+        //nombres array parrafos, inputs array inputs
+        for (let i = 0; i < nombres.length; i++) {
+            //es el nombre que se muestra de la propiedad, no el identificador. Para obtenerlo usamos el array definido asignacionAjustes
+            let nombreAjuste = nombres[i].textContent;
+            let valor = inputs[i].value;
+            Renderer[Renderer.asignacionCallbacks[nombreAjuste]](valor);
+        }
+        Renderer.actualizarValoresPropiedades();
+    }
+
+    static cambiarFondo (colorString) {
+        //tenemos que parsear el color
+        let colores = Color.parsearString(colorString);
+        let color = new Color(colores[0], colores[1], colores[2], colores[3]);
+        Renderer.fondo = color; 
+    }
+
+    static cambiarAncho (ancho) {
+        Renderer.ancho = ancho;
+        gl.canvas.width = Renderer.ancho;
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
+    }
+
+    static cambiarAlto (alto) {
+        Renderer.alto = alto;
+        gl.canvas.height = Renderer.alto;
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
+    }
+
+    static cambiarDibujarHitbox (boolString) {
+        if (boolString == "true") {
+            Renderer.dibujarHitbox = true;
+        } else if (boolString == "false") {
+            Renderer.dibujarHitbox = false;
+        } else {    
+            Renderer.dibujarHitbox = false;
+        }
+    }
+
+    static cambiarDibujarLineasSeleccion (boolString) {
+        if (boolString == "true") {
+            Renderer.dibujarLineasSeleccion = true;
+        } else if (boolString == "false") {
+            Renderer.dibujarLineasSeleccion = false;
+        } else {    
+            Renderer.dibujarLineasSeleccion = false;
+        }
+    }
+
+    //se llama cuando se cambian para k al abrir el menu de nuevo aparezcan los nuevos valores
+    static actualizarValoresPropiedades () {
+        Renderer.valoresPropiedades = [
+            this.fondo.toString(),
+            this.ancho,
+            this.alto,
+            (this.dibujarHitbox == true) ? "true": "false",
+            (this.dibujarLineasSeleccion == true) ? "true": "false" 
+        ];
+    }
 
     static cargarControles (menu) {
         let hijos = menu.querySelectorAll("#menuControlesEditor > :not(.barraCierre)");
@@ -71,7 +154,7 @@ class Renderer {
         }
     }
 
-    static cargarConfiguracion (menuAjustes) {
+    static cargarPropiedades (menuAjustes) {
         let campos = menuAjustes.querySelectorAll("div.campo");
         for (let i = 0; i < campos.length; i++) {
             switch (campos[i].querySelector("p").textContent) {
@@ -81,24 +164,8 @@ class Renderer {
         }
     }
 
-    static cambiarAncho (ancho) {
-        Renderer.ancho = ancho;
-
-        gl.canvas.width = Renderer.ancho;
-
-        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
-    }
-
-    static cambiarAlto (alto) {
-        Renderer.alto = alto;
-
-        gl.canvas.height = Renderer.alto;
-
-        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
-    }
-
     static limpiarFondo () {
-        gl.clearColor(Renderer.clearColorR, Renderer.clearColorG, Renderer.clearColorB, Renderer.clearColorA);
+        gl.clearColor(Renderer.fondo.R, Renderer.fondo.G, Renderer.fondo.B, Renderer.fondo.A);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
 

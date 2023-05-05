@@ -33,16 +33,12 @@ class GUI {
         //barra de herramientas
         let barraHerramientas = new BarraHerramientas([
             new Boton("Escena", "desplegar", [
-                ["Añadir Modelo3D"],
-                ["anadirModelo3D"]
+                ["Añadir Modelo3D", "Modelos"],
+                ["anadirModelo3D", "crearMenuModelos"]
             ]),
-            /* new Boton("Desplegable", "desplegar", [
-                ["boton1", "boton2"],
-                ["c1", "c2"]
-            ]),*/ 
             new Boton("Editor", "desplegar", [
                 ["Ajustes", "Controles"],
-                ["mostrarMenuAjustesEditor", "mostrarMenuControles"]
+                ["crearMenuAjustesEditor", "crearMenuControles"]
             ])
         ]);
 
@@ -55,42 +51,6 @@ class GUI {
 
         //menu global
         GUI.crearMenuGlobal(secundario);
-
-        //menu ajustes del editor
-        let menuAjustesEditor = document.createElement("div");
-        menuAjustesEditor.id = "menuAjustesEditor";
-        menuAjustesEditor.className = "menuPopUp";
-        GUI.crearBarraCierre(menuAjustesEditor, "Ajustes Editor");
-        Renderer.cargarConfiguracion(menuAjustesEditor);
-
-        //menu controles del editor
-        let menuControlesEditor = document.createElement("div");
-        menuControlesEditor.id = "menuControlesEditor";
-        menuControlesEditor.className = "menuPopUp";
-        GUI.crearBarraCierre(menuControlesEditor, "Controles Editor");
-
-        let campos = document.createElement("div");
-        campos.className = "grupoCampos";
-        GUI.agregarCampo(campos, "Renderer ancho");
-        GUI.agregarCampo(campos, "Renderer alto");
-        let botonGuardar = document.createElement("button");
-        botonGuardar.id = "guardarMenuAjustesEditor";
-        botonGuardar.textContent = "Guardar";
-        botonGuardar.addEventListener("click", () => {
-            let campos = menuAjustesEditor.querySelectorAll(".campo");
-            let configuraciones = [[],[]];
-            for (let i = 0; i < campos.length; i++) {
-                configuraciones[0].push(campos[i].textContent);
-                configuraciones[1].push(campos[i].querySelector("input").value);
-            }
-            //matriz de forma: [ [nombres] [valores] ]
-            Renderer.aplicarConfiguracion(configuraciones);
-            GUI.ocultarMenuAjustesEditor();
-        });
-        campos.appendChild(botonGuardar);
-        menuAjustesEditor.appendChild(campos);
-        principal.appendChild(menuAjustesEditor);
-        principal.appendChild(menuControlesEditor);
 
         //menu de seleccion de objeto
         this.menuSeleccion = new MenuSeleccion(principal);
@@ -188,6 +148,7 @@ class GUI {
         contenedor.appendChild(div);
     }
 
+    //par nombre - valor donde el valor no es editable
     static anadirNombreValor (contenedor, nombre, valor) {
         let nodo = document.createElement("div");
         nodo.className = "nombreValor";
@@ -207,6 +168,25 @@ class GUI {
         contenedor.appendChild(nodo);
     }
 
+    //par nombre valor donde el valor es editable
+    static anadirNombreValorEditable (contenedor, nombre, valor) {
+        let nodo = document.createElement("div");
+        nodo.className = "nombreValor";
+
+        let p = document.createElement("p");
+        p.textContent = nombre;
+
+        nodo.appendChild(p);
+
+        let input = document.createElement("input");
+        input.type = "text";
+        input.value = valor;
+
+        nodo.appendChild(input);
+
+        contenedor.appendChild(nodo);
+    }
+
     static anadirLineaNombresValores (contenedor, nombres, valores, clase) {
         let nodo = document.createElement("div");
         nodo.className = clase;
@@ -218,12 +198,12 @@ class GUI {
         contenedor.appendChild(nodo);
     }
 
-    static anadirLineaNombresValoresEditables (contenedor, modelo, nombres, valores, atributos, clase, tipo = "number", step, botonEnlazar) {
+    static anadirLineaNombresValoresEditablesModelo (contenedor, modelo, nombres, valores, atributos, clase, tipo = "number", step, botonEnlazar) {
         let nodo = document.createElement("div");
         nodo.className = clase;
 
         for (let i = 0; i < nombres.length; i++) {
-            GUI.anadirNombreValorEditable(nodo, modelo, nombres[i], valores[i], atributos[i], tipo, step);
+            GUI.anadirNombreValorEditableModelo(nodo, modelo, nombres[i], valores[i], atributos[i], tipo, step);
         }
 
         if (botonEnlazar) {
@@ -234,7 +214,7 @@ class GUI {
         contenedor.appendChild(nodo);
     }
 
-    static anadirNombreValorEditable (contenedor, modelo, nombre, valor, atributo, tipo = "number", step) {
+    static anadirNombreValorEditableModelo (contenedor, modelo, nombre, valor, atributo, tipo = "number", step) {
         let nodo = document.createElement("div");
         nodo.className = "nombreValor";
 
@@ -312,31 +292,11 @@ class GUI {
         img.src = "/bloomJS/img/iconos/cerrar.png";
 
         img.addEventListener("click", () => {
-            contenedor.style.opacity = 0;
-            contenedor.style.pointerEvents = "none";
+            contenedor.parentNode.removeChild(contenedor);
         });
         iconos.appendChild(img);
         nodo.appendChild(iconos);
         contenedor.appendChild(nodo);
     }
-
-    /*static anadirBotonAltura (contenedor, ruta) {
-        let img = document.createElement("img");
-        img.src = ruta;
-        img.addEventListener("click", () => {
-            console.log("drag");
-        });
-
-        //si el contenedor tiene barra cierre, lo añadimos como un icono mas
-        let barraCierre = contenedor.querySelector("div.barraCierre");
-        if (barraCierre != null) {
-            let iconos = barraCierre.querySelector(".grupoIconos");
-            img.className = "iconoCierre";
-            iconos.prepend(img);
-            console.log("tiene barra cierre");
-        } else {
-            console.log("no tiene");
-        }
-    }*/ 
 
 }
