@@ -13,7 +13,8 @@ class MenuSeleccion {
         div.id = "menuSeleccion";
         div.className = "menuSeleccion menuPopUp";
 
-        GUI.crearBarraCierre(div, "Selección");
+        //barra de cierre k no borra el nodo sino solo lo oculta
+        GUI.crearBarraCierreOcultar(div, "Selección");
 
         /*//boton para arrastrar hacia arriba y hacer mas grande el menu
         GUI.anadirBotonAltura(div, "/bloomJS/img/iconos/arriba.png");*/
@@ -42,14 +43,14 @@ class MenuSeleccion {
         let dinamico = this.nodo.querySelector("#dinamico");
         dinamico.innerHTML = "";
 
-        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], 
-        ["posX", "posY", "posZ"], "posicionesFila", "number", 1, false);
+        GUI.anadirGrupoNombresValoresEditablesModelo(dinamico, modelo, ["x", "y", "z"], [modelo.posX, modelo.posY, modelo.posZ], 
+        ["posX", "posY", "posZ"], "posicionesColumna", "number", 1, false);
 
-        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["Ángulo X", "Ángulo Y", "Ángulo Z"], 
-        [modelo.anguloX, modelo.anguloY, modelo.anguloZ], ["anguloX", "anguloY", "anguloZ"], "posicionesFila", "number", 10, false);
+        GUI.anadirGrupoNombresValoresEditablesModelo(dinamico, modelo, ["Ángulo X", "Ángulo Y", "Ángulo Z"], 
+        [modelo.anguloX, modelo.anguloY, modelo.anguloZ], ["anguloX", "anguloY", "anguloZ"], "posicionesColumna", "number", 10, false);
 
-        GUI.anadirLineaNombresValoresEditablesModelo(dinamico, modelo, ["Factor X", "Factor Y", "Factor Z"], 
-        [modelo.factorX, modelo.factorY, modelo.factorZ], ["factorX", "factorY", "factorZ"], "posicionesFila", "number", 0.5, true);
+        GUI.anadirGrupoNombresValoresEditablesModelo(dinamico, modelo, ["Factor X", "Factor Y", "Factor Z"], 
+        [modelo.factorX, modelo.factorY, modelo.factorZ], ["factorX", "factorY", "factorZ"], "posicionesColumna", "number", 0.5, true);
 
         
     }

@@ -27,4 +27,39 @@ class ModeloModelos {
         }
     }
 
+    public static function getModelosPorTipoYNumero ($tipo, $numero) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            if ($numero == 0) {
+                $sql = "SELECT * FROM modelos WHERE tipo=:tipo";
+                $preparada = $pdo->prepare($sql);
+                $preparada->execute([":tipo" => $tipo]);
+            } else if ($numero > 0) {
+                $sql = "SELECT * FROM modelos WHERE tipo=:tipo LIMIT :numero";
+                $preparada = $pdo->prepare($sql);
+                $preparada->execute([":tipo" => $tipo, ":numero" => $numero]);
+            }
+            $registros = [];
+            if ($preparada->rowCount() > 0) {
+                while ($registro = $preparada->fetch()) {
+                    $array = [
+                        'id' => $registro['id'], 
+                        'nombre' => $registro['nombre'], 
+                        'descripcion' => $registro['descripcion'], 
+                        'rutaModelo' => $registro['rutaModelo'],
+                        'rutaTextura' => $registro['rutaTextura'],
+                        'previsualizacion' => $registro['previsualizacion'],
+                        'tipo' => $registro['tipo'],
+                        'id_autor' => $registro['id_autor']
+                    ];
+                    $registros[] = $array;
+                }
+            }
+            return $registros;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

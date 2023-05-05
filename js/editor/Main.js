@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
     //let blanco = new Modelo2D(0, 0, 0, 0, 0, 0, 1, 1, "/bloomJS/img/pluma.jpg", VERTEX_SHADER_IMAGEN, FRAGMENT_SHADER_IMAGEN);
     //let lienzo = new Lienzo();
     //let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
-    let luz = new PuntoLuz(0, 0, 0);
+    //let luz = new PuntoLuz(0, 0, 0);
 
     let botonMaximizar = document.getElementById("maximizar");
     maximizar(botonMaximizar);

@@ -88,6 +88,8 @@ class BaseDatos {
                     "descripcion VARCHAR(100) NOT NULL,".
                     "rutaModelo VARCHAR(100) NOT NULL,". 
                     "rutaTextura VARCHAR(100) NOT NULL,". 
+                    "previsualizacion varchar(100) DEFAULT 'recursos/previsualizacion/defecto.png'," . 
+                    "tipo VARCHAR(20) NOT NULL," .
                     "id_autor INT NOT NULL);",
 
                 "CREATE TABLE IF NOT EXISTS usuarios (".
@@ -103,8 +105,12 @@ class BaseDatos {
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave) VALUES (" . 
                 "'usuario@usuario.es', 'Usuario', 'usuario');",
 
-                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, id_autor) VALUES (".
-                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', '1');",
+                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, tipo, id_autor) VALUES (".
+                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'defecto', '1');",
+                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, tipo, id_autor) VALUES (".
+                "'Barril2', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'defecto', '1');",
+                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
+                "'Barril3', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'recursos/previsualizacion/barril.png', 'defecto', '1');",
             ];
             for ($i = 0; $i < count($consultas); $i++) {
                 $con->query($consultas[$i]);

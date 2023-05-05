@@ -63,6 +63,10 @@ class Submenu {
         GUI.actualizarMenuGlobal();*/
     }
 
+    /**
+     * Muestra un menú con un conjunto de modelos prehechos (guardados permanentemente en el servidor) que el usuario puede seleccionar
+     * e importar a la escena en el 0, 0, 0 con un click, con valores estandar de atributos
+    */
     crearMenuModelos () {
         let antiguoMenu = document.getElementById("menuModelos");
         if (antiguoMenu == null) {
@@ -70,6 +74,7 @@ class Submenu {
             menu.id = "menuModelos";
             menu.className = "menuPopUp visible";
             GUI.crearBarraCierre(menu, "Modelos predeterminados");
+            GUI.generarMalla(menu, "/bloomJS/vistas/editor/modelo.php", "defecto", "0", null, 3);
             document.getElementById("gui").appendChild(menu);
         } else {
             antiguoMenu.classList.add("visible");

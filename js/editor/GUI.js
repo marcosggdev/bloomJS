@@ -198,18 +198,29 @@ class GUI {
         contenedor.appendChild(nodo);
     }
 
-    static anadirLineaNombresValoresEditablesModelo (contenedor, modelo, nombres, valores, atributos, clase, tipo = "number", step, botonEnlazar) {
+    static anadirGrupoNombresValoresEditablesModelo (contenedor, modelo, nombres, valores, atributos, clase, tipo = "number", step, botonEnlazar) {
         let nodo = document.createElement("div");
-        nodo.className = clase;
-
-        for (let i = 0; i < nombres.length; i++) {
-            GUI.anadirNombreValorEditableModelo(nodo, modelo, nombres[i], valores[i], atributos[i], tipo, step);
+        if (!botonEnlazar) {
+            nodo.className = clase;
+        } else {
+            nodo.className = clase + "ConIconos";
         }
+
+        let nombresValores = document.createElement("div");
+        nombresValores.className = "contenedorNombresValores";
+        for (let i = 0; i < nombres.length; i++) {
+            GUI.anadirNombreValorEditableModelo(nombresValores, modelo, nombres[i], valores[i], atributos[i], tipo, step);
+        }
+        nodo.appendChild(nombresValores);
+
+        let iconos = document.createElement("div");
+        iconos.className = "iconos";
 
         if (botonEnlazar) {
-            let boton = new BotonBooleano("activar", "desactivar", true, nodo.querySelectorAll("div.nombreValor"));
-            nodo.appendChild(boton.nodo);
+            let boton = new BotonBooleano("activar", "desactivar", true, nombresValores.querySelectorAll("div.nombreValor"));
+            iconos.appendChild(boton.nodo);
         }
+        nodo.appendChild(iconos);
 
         contenedor.appendChild(nodo);
     }
@@ -232,7 +243,8 @@ class GUI {
         }
         
         input.addEventListener("change", () => {
-            let controlador = contenedor.querySelector("img.enlazar");
+            let controlador = contenedor.parentNode.querySelector("div.iconos img.enlazar");
+            console.dir(controlador);
             if (controlador != null && controlador.classList.contains("activo")) {
                 //copia valores y se encarga de ejecutar las funciones tambien
                 this.copiarValorAAdyacentes(contenedor, input.value, modelo);
@@ -263,7 +275,7 @@ class GUI {
     }
 
     static copiarValorAAdyacentes (contenedor, valor, modelo) {
-        let hijos = contenedor.querySelectorAll("div.nombreValor input");
+        let hijos = contenedor.querySelectorAll("div.contenedorNombresValores div.nombreValor input");
         Array.from(hijos).forEach((input) => {
             input.value = valor;
             this.ejecutarFuncion(input, modelo);
@@ -276,6 +288,7 @@ class GUI {
         menu.style.pointerEvents = "none";
     }
 
+    //borra el nodo
     static crearBarraCierre (contenedor, titulo) {
         let nodo = document.createElement("div");
         nodo.className = "barraCierre";
@@ -297,6 +310,74 @@ class GUI {
         iconos.appendChild(img);
         nodo.appendChild(iconos);
         contenedor.appendChild(nodo);
+    }
+
+    //oculta el nodo
+    static crearBarraCierreOcultar (contenedor, titulo) {
+        let nodo = document.createElement("div");
+        nodo.className = "barraCierre";
+
+        let h2 = document.createElement("h2");
+        h2.textContent = titulo;
+        nodo.appendChild(h2);
+
+        let iconos = document.createElement("div");
+        iconos.className = "grupoIconos";
+
+        let img = document.createElement("img");
+        img.className = "iconoCierre";
+        img.src = "/bloomJS/img/iconos/cerrar.png";
+
+        img.addEventListener("click", () => {
+            contenedor.style.opacity = "0";
+            contenedor.style.pointerEvents = "none";
+        });
+        iconos.appendChild(img);
+        nodo.appendChild(iconos);
+        contenedor.appendChild(nodo);
+    }
+
+    /**
+     * Carga una plantilla generada por php. la ruta indica el archivo php que procesa la peticion, el tipo indica que tipo de 
+     * modelo obtener de la base de datos y el numero indica cuantos
+     * resultados obtenemos.
+     */
+    static obtenerPlantilla (ruta, tipo, numero) {
+        return new Promise(resolve => {
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    resolve(this.responseText);
+                }
+            };
+            let formData = new FormData();
+            formData.append("tipo", tipo);
+            formData.append("numero", numero);
+            req.open("POST", ruta);
+            req.send(formData);
+        });
+    }
+
+    static generarMalla (contenedor, ruta, tipo, numero, filas, columnas) {
+        let nodo = document.createElement("div");
+        nodo.className = "modelos";
+        let plantilla = GUI.obtenerPlantilla(ruta, tipo, numero);
+        plantilla
+        .then(
+            function (html) {
+                nodo.innerHTML += html;
+                nodo.style.display = "grid";
+
+                if (filas != null) {
+                    nodo.style.gridTemplateRows = "repeat(" + filas + ", 1fr)";
+                }
+                if (columnas != null) {
+                    nodo.style.gridTemplateColumns = "repeat(" + columnas + ", 1fr)";
+                }
+
+                contenedor.appendChild(nodo);
+            }
+        );
     }
 
 }
