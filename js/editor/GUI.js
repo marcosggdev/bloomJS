@@ -359,23 +359,39 @@ class GUI {
     }
 
     static generarMalla (contenedor, ruta, tipo, numero, filas, columnas) {
-        let nodo = document.createElement("div");
-        nodo.className = "modelos";
+
+        let malla = document.createElement("div");
+        malla.className = "malla";
+
         let plantilla = GUI.obtenerPlantilla(ruta, tipo, numero);
         plantilla
         .then(
             function (html) {
-                nodo.innerHTML += html;
-                nodo.style.display = "grid";
+
+                //1 contenedor y 1 script
+                let contenido = document.createElement("div");
+                contenido.innerHTML += html;
+
+                let plantillas = contenido.querySelectorAll(".plantilla");
+                let scriptPlantilla = contenido.querySelector("script");
+                let script = document.createElement("script");
+                script.textContent = scriptPlantilla.textContent;
+
+                for (let i = 0; i < plantillas.length; i++) {
+                    malla.appendChild(plantillas[i]);
+                }
+                malla.appendChild(script);
+
+                malla.style.display = "grid";
 
                 if (filas != null) {
-                    nodo.style.gridTemplateRows = "repeat(" + filas + ", 1fr)";
+                    malla.style.gridTemplateRows = "repeat(" + filas + ", 1fr)";
                 }
                 if (columnas != null) {
-                    nodo.style.gridTemplateColumns = "repeat(" + columnas + ", 1fr)";
+                    malla.style.gridTemplateColumns = "repeat(" + columnas + ", 1fr)";
                 }
 
-                contenedor.appendChild(nodo);
+                contenedor.appendChild(malla);
             }
         );
     }

@@ -139,10 +139,10 @@ img.enlazar {
     pointer-events: all;
 }
 
-div.modelos {
+div.malla {
     width: 100%;
 }
-div.modelo {
+div.plantilla {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,15 +150,15 @@ div.modelo {
     box-sizing: border-box;
     transition: transform 0.5s;
 }
-div.modelo:hover {
+div.plantilla:hover {
     background-color: purple;
     box-shadow: inset 0 0 50px pink;
     transform: scale(1.1);
 }
-div.modelo img {
+div.plantilla img {
     width: 100%;
 }
-div.modelo p, div.modelo h4 {
+div.plantilla p, div.plantilla h4 {
     margin: 0;
 }
 
