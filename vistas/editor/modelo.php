@@ -28,7 +28,7 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
 <?php $i = 0; ?>
         for (let i = 0; i < divs.length; i++) {
             divs[i].addEventListener("click", () => {
-                let modelo = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/<?=$modelosRegistros[$i]["rutaModelo"]?>");
+                let modelo = new Modelo3D(0,0,0,0,0,0,1,1,1, "T", "/bloomJS/<?=$modelosRegistros[$i]["rutaModelo"]?>", new Color(0.5,0.5,0.5,1.0), "/bloomJS/<?=$modelosRegistros[$i]["rutaTextura"]?>", "/bloomsJS/assets/materiales/esfera.mtl");
             });
             <?php $i++; ?>
         }

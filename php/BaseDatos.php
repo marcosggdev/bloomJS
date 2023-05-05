@@ -103,14 +103,10 @@ class BaseDatos {
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave) VALUES (" . 
-                "'usuario@usuario.es', 'Usuario', 'usuario');",
+                "'admin@admin.es', 'admin', 'admin');",
 
-                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, tipo, id_autor) VALUES (".
-                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'defecto', '1');",
-                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, tipo, id_autor) VALUES (".
-                "'Barril2', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'defecto', '1');",
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
-                "'Barril3', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'recursos/previsualizacion/barril.png', 'defecto', '1');",
+                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'recursos/previsualizacion/barril.png', 'defecto', '1');"
             ];
             for ($i = 0; $i < count($consultas); $i++) {
                 $con->query($consultas[$i]);

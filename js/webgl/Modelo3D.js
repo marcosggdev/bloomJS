@@ -1,7 +1,20 @@
 class Modelo3D {
+
+    static modos = {
+        "C": "cargarModoC",
+        "T": "cargarModoT",
+        "TM": "cargarModoTM",
+        "TMI": "cargarModoTMI"
+    };
+
+    static formasDibujo = {
+        "C": "dibujarC",
+        "T": "dibujarT",
+        "TM": "dibujarTM",
+        "TMI": "dibujarTMI"
+    }
     
-    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, rutaArchivoDae,
-         VSHADER_SOURCE = VERTEX_SHADER_GOURAUD2, FSHADER_SOURCE = FRAGMENT_SHADER_GOURAUD2) {
+    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -13,15 +26,235 @@ class Modelo3D {
         this.factorY = factorY;
         this.factorZ = factorZ;
 
+        this.modo = modo;
         this.rutaArchivoDae = rutaArchivoDae;
-        this.rutaTextura = null;
-        this.texturizado = 0.0;
-        this.VSHADER_SOURCE = VSHADER_SOURCE;
-        this.FSHADER_SOURCE = FSHADER_SOURCE;
-        this.cargar();
+        this.color = color;
+        this.rutaTextura = rutaTextura;
+        this.rutaMaterial = rutaMaterial;
+
+        //carga de forma distinta en funcion del modo de shader
+        this.cargar(modo);
     }
 
-    async cargar () {
+    cargar (modo) {
+        //shaders
+        this[Modelo3D.modos[modo]]();
+    }
+
+    dibujar () {
+        this[Modelo3D.formasDibujo[this.modo]]();
+    }   
+
+    dibujarC () {
+        gl.useProgram(this.programa);
+
+        //matriz del modelo
+        this.actualizarMatrizM();
+
+        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+
+        //atributos
+        gl.enableVertexAttribArray(this.aPosLoc);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+        gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
+
+        gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
+    }
+
+    dibujarT () {
+        gl.useProgram(this.programa);
+
+        //matriz del modelo
+        this.actualizarMatrizM();
+
+        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+
+        //atributos
+        gl.enableVertexAttribArray(this.aPosLoc);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+        gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
+
+        gl.enableVertexAttribArray(this.aTexLoc);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
+        gl.vertexAttribPointer(this.aTexLoc, 2, gl.FLOAT, false, 0, 0);
+        gl.bindTexture(gl.TEXTURE_2D, this.textura);    //para que cada objeto se dibuje con su textura
+
+        gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
+    }
+
+    /* 
+    * Solo necesitamos cargar aPos y uColor
+    */
+    cargarModoC () {
+        let promesa = new Promise(resolve => {
+            let self = this;
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    self.procesarDae(new DOMParser().parseFromString(this.responseText, "application/xml"));
+    
+                    self.VSHADER_SOURCE = VERTEX_SHADER_COLOR;
+                    self.FSHADER_SOURCE = FRAGMENT_SHADER_COLOR;
+                    //shaders y programa
+                    self.VSHADER = crearShader(gl, gl.VERTEX_SHADER, self.VSHADER_SOURCE);
+                    self.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, self.FSHADER_SOURCE);
+                    self.programa = crearPrograma(gl, self.VSHADER, self.FSHADER);
+                    gl.useProgram(self.programa);
+        
+                    //attribute aPos
+                    self.aPosLoc = gl.getAttribLocation(self.programa, "aPos");
+                    self.aPosBuffer = gl.createBuffer();
+                    gl.bindBuffer(gl.ARRAY_BUFFER, self.aPosBuffer);
+                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(self.vertices), gl.STATIC_DRAW);
+        
+                    //uniform uColor
+                    self.uColorLoc = gl.getUniformLocation(self.programa, "uColor");
+                    gl.uniform4f(self.uColorLoc, self.color.R, self.color.G, self.color.B, self.color.A);
+
+                    resolve();
+                }
+            };
+            req.open("GET", self.rutaArchivoDae);
+            req.send();
+        });
+
+        promesa
+        .then(
+            () => {
+                //matrices
+                this.matrizM = new Matriz4X4();
+                this.actualizarMatrizM();
+                //uniforms matrices
+                this.m = gl.getUniformLocation(this.programa, "m");
+                gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+                this.v = gl.getUniformLocation(this.programa, "v");
+                gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+                this.p = gl.getUniformLocation(this.programa, "p");
+                gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
+
+                //crear HITBOX
+                let factoresHitbox = this.calcularFactoresHitbox(this.vertices);
+                this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
+                    this.anguloX, this.anguloY, this.anguloZ, 
+                    this.factorX, this.factorY, this.factorZ, factoresHitbox);
+
+                Renderer.anadirGraficoDibujable(this);
+            }
+        );
+
+    }
+
+    cargarModoT () {
+
+        let self = this;
+
+        const promesaDae = new Promise(resolve => {
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    resolve(this.responseText);
+                }
+            };
+            req.open("GET", self.rutaArchivoDae);
+            req.send();
+        });
+
+        const promesaTextura = new Promise(resolve => {
+            var imagen = new Image();
+            imagen.crossOrigin = "anonymous";
+            imagen.src = self.rutaTextura;
+            imagen.addEventListener('load', function () {
+                resolve(imagen);
+            });
+        });
+
+        let promesa = Promise.all([promesaDae, promesaTextura]);
+        promesa
+        .then(
+            (values) => {
+                this.procesarDae(new DOMParser().parseFromString(values[0], "application/xml"));
+
+                //matriz del modelo
+                this.matrizM = new Matriz4X4();
+                this.actualizarMatrizM();
+
+                this.VSHADER_SOURCE = VERTEX_SHADER_T;
+                this.FSHADER_SOURCE = FRAGMENT_SHADER_T;
+                //shaders y programa
+                this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
+                this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
+                this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
+                gl.useProgram(this.programa);
+
+                //attribute aPos
+                this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
+                this.aPosBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+
+                //textura
+                this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
+                this.aTexBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.texCoords), gl.STATIC_DRAW);
+
+                var textura = gl.createTexture();
+                gl.bindTexture(gl.TEXTURE_2D, textura);
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+                var imagen = values[1];
+                imagen.crossOrigin = "anonymous";
+                imagen.src = this.rutaTextura;
+
+                imagen.addEventListener('load', function () {
+                    gl.bindTexture(gl.TEXTURE_2D, textura);
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imagen);
+                    if (Utilidades.dimensionesPotenciaDeDos(imagen)) {
+                        gl.generateMipmap(gl.TEXTURE_2D);
+                    } else {
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                    }
+                    gl.generateMipmap(gl.TEXTURE_2D);
+                });
+
+                this.textura = textura; //guardamos el objeto textura en el objeto
+                this.samplerLoc = gl.getUniformLocation(this.programa, "sampler");
+                gl.uniform1i(this.samplerLoc, 0);
+
+                //uniforms matrices
+                this.m = gl.getUniformLocation(this.programa, "m");
+                gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+                this.v = gl.getUniformLocation(this.programa, "v");
+                gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+                this.p = gl.getUniformLocation(this.programa, "p");
+                gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
+
+                //crear HITBOX
+                let factoresHitbox = this.calcularFactoresHitbox(this.vertices);
+                this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
+                    this.anguloX, this.anguloY, this.anguloZ,
+                    this.factorX, this.factorY, this.factorZ, factoresHitbox);
+
+                Renderer.anadirGraficoDibujable(this);
+            }
+        );
+    }
+
+    cargarModoTM () {
+
+    }
+
+    cargarModoTMI () {
+
+    }
+
+    /*async cargar () {
+        //obligatorio
         const respuestaArchivoXML = await fetch(this.rutaArchivoDae)
             .then( response => {
                 return response.text();
@@ -30,19 +263,32 @@ class Modelo3D {
                 this.procesarDae(new DOMParser().parseFromString(texto, "application/xml"));
             });
 
-        const respuestaMaterial = await fetch("/bloomJS/assets/materiales/esfera.mtl")
+        //cargar archivo del material
+        if (this.rutaMaterial != null) {
+            const respuestaMaterial = await fetch(this.rutaMaterial)
             .then( response => {
                 return response.text();
             })
             .then( texto => {
                 this.material = new Material(texto);
             });
+        }
 
-        const cargados = await Promise.all([respuestaArchivoXML, respuestaMaterial])
+        //cargar imagen de la textura
+        if (this.rutaTextura != null) {
+            var imagen = new Image();
+            imagen.crossOrigin = "anonymous";
+            imagen.src = this.rutaTextura;
+            imagen.addEventListener('load', () => {
+                this.imagen = imagen;
+            });
+        }
+
+        const cargados = await Promise.all([respuestaArchivoXML])
             .then( response => {
                 this.iniciar();
             });
-    }
+    }*/ 
 
     procesarDae (archivoXML) {
         this.archivoXML = archivoXML;
@@ -153,12 +399,12 @@ class Modelo3D {
             }
 
             //------------------------TEXTURA------------------------------------
-            let library_images = archivoXML.getElementsByTagName("library_images")[0];
+            /* let library_images = archivoXML.getElementsByTagName("library_images")[0];
             if (typeof library_images.getElementsByTagName("init_from")[0] !== "undefined") {
                 let nombreTextura = library_images.getElementsByTagName("init_from")[0].textContent;
                 this.rutaTextura = "/bloomJS/assets/texturas/" + nombreTextura;
                 this.texturizado = 1.0;
-            }
+            }*/
 
             //-------------------------nodos------------------------------
             let library_visual_scenes = archivoXML.getElementsByTagName("library_visual_scenes")[0];
@@ -293,6 +539,7 @@ class Modelo3D {
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.coordsNormales), gl.STATIC_DRAW);
 
         if (this.rutaTextura != null) {
+            this.texturizado = 1.0;
             //textura
             this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
             this.aTexBuffer = gl.createBuffer();
@@ -332,27 +579,30 @@ class Modelo3D {
         this.p = gl.getUniformLocation(this.programa, "p");
         gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
 
-        //material
         this.texturizadoLoc = gl.getUniformLocation(this.programa, "texturizado");
         gl.uniform1f(this.texturizadoLoc, this.texturizado);
-        this.nsLoc = gl.getUniformLocation(this.programa, "ns");
-        gl.uniform1f(this.nsLoc, this.material.ns);
-        this.kaLoc = gl.getUniformLocation(this.programa, "ka");
-        gl.uniform3fv(this.kaLoc, [0.2,0.2,0.2]);
-        this.kdLoc = gl.getUniformLocation(this.programa, "kd");
-        if (this.kd != null) {
-            gl.uniform3fv(this.kdLoc, this.material.kd);
-        } else {
-            gl.uniform3fv(this.kdLoc, [0.2,0.2,0.2]);
+
+        //material
+        if (this.material != null) {
+            this.nsLoc = gl.getUniformLocation(this.programa, "ns");
+            gl.uniform1f(this.nsLoc, this.material.ns);
+            this.kaLoc = gl.getUniformLocation(this.programa, "ka");
+            gl.uniform3fv(this.kaLoc, [0.2,0.2,0.2]);
+            this.kdLoc = gl.getUniformLocation(this.programa, "kd");
+            if (this.kd != null) {
+                gl.uniform3fv(this.kdLoc, this.material.kd);
+            } else {
+                gl.uniform3fv(this.kdLoc, [0.2,0.2,0.2]);
+            }
+            this.ksLoc = gl.getUniformLocation(this.programa, "ks");
+            gl.uniform3fv(this.ksLoc, this.material.ks);
+            this.keLoc = gl.getUniformLocation(this.programa, "ke");
+            gl.uniform3fv(this.keLoc, this.material.ke);
+            this.niLoc = gl.getUniformLocation(this.programa, "ni");
+            gl.uniform1f(this.niLoc, this.material.ni);
+            this.dLoc = gl.getUniformLocation(this.programa, "d");
+            gl.uniform1f(this.dLoc, this.material.d);
         }
-        this.ksLoc = gl.getUniformLocation(this.programa, "ks");
-        gl.uniform3fv(this.ksLoc, this.material.ks);
-        this.keLoc = gl.getUniformLocation(this.programa, "ke");
-        gl.uniform3fv(this.keLoc, this.material.ke);
-        this.niLoc = gl.getUniformLocation(this.programa, "ni");
-        gl.uniform1f(this.niLoc, this.material.ni);
-        this.dLoc = gl.getUniformLocation(this.programa, "d");
-        gl.uniform1f(this.dLoc, this.material.d);
 
         //crear HITBOX
         let factoresHitbox = this.calcularFactoresHitbox(this.vertices);
@@ -410,7 +660,7 @@ class Modelo3D {
             //actualizando sin funcion definida
         }
     }
-
+/*
     dibujar () {
         gl.useProgram(this.programa);
 
@@ -438,7 +688,7 @@ class Modelo3D {
         }
 
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
-    }
+    }*/ 
 
     actualizarMatrizM () {
         this.matrizM.identidad();

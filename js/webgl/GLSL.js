@@ -1,4 +1,5 @@
-var VERTEX_SHADER_SIMPLE_COLOR = 
+//-------------------------------------------C: COLOR------------------------------------------------------------//
+var VERTEX_SHADER_COLOR = 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
 "uniform mat4 p;\n" +
@@ -9,15 +10,47 @@ var VERTEX_SHADER_SIMPLE_COLOR =
 "   gl_Position = p * v * m * vec4(aPos, 1.0);\n" +
 "}\n";
 
-var FRAGMENT_SHADER_SIMPLE_COLOR =
+var FRAGMENT_SHADER_COLOR =
 "precision mediump float;\n" +
 
 "uniform vec4 uColor;"+ 
 
 "void main(){\n" +
-"       gl_FragColor = uColor;\n" +
+"   gl_FragColor = uColor;\n" +
 "}\n";
 
+//-----------------------------------------T: TEX---------------------------------------------//
+var VERTEX_SHADER_T= 
+"uniform mat4 m;\n" +
+"uniform mat4 v;\n" +
+"uniform mat4 p;\n" +
+
+"uniform sampler2D sampler;\n" +
+
+"attribute vec3 aPos;\n" +
+"attribute vec2 aTex;\n" +
+
+"varying vec2 vTex;\n" +
+
+"void main(){\n" +
+"   gl_Position = p * v * m * vec4(aPos, 1.0);" +
+"   vTex = aTex;\n" +
+"}\n";
+
+var FRAGMENT_SHADER_T =
+"precision highp float;\n" +
+
+"varying vec2 vTex;\n" +
+
+"uniform sampler2D sampler;\n" +
+
+"void main(){\n" +
+"    vec4 textura = texture2D(sampler, vTex);\n" +
+"    gl_FragColor = vec4(textura.xyz, 1.0);\n" +
+"}\n";
+
+
+//-----------------------------------------GOURAUD_TM: TEX + MATERIAL---------------------------------------------//
 var VERTEX_SHADER_GOURAUD2= 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
@@ -89,6 +122,66 @@ var FRAGMENT_SHADER_GOURAUD2 =
 "   } else {\n" + 
 "       gl_FragColor = vec4(vColor, d*1.0);\n" +
 "   }" + 
+"}\n";
+
+//-----------------------------------------GOURAUD_T: TEX---------------------------------------------//
+var VERTEX_SHADER_GOURAUD_T= 
+"uniform mat4 m;\n" +
+"uniform mat4 v;\n" +
+"uniform mat4 p;\n" +
+
+"uniform sampler2D sampler;\n" +
+
+"attribute vec3 aPos;\n" +
+"attribute vec2 aTex;\n" +
+"attribute vec3 aNorm;\n" +
+
+"varying vec3 vNorm;\n" +
+"varying vec2 vTex;\n" +
+"varying vec3 iAmbiente;\n" +
+"varying vec3 iDifusion;\n" +
+"varying vec3 iEspecular;\n" +
+"varying vec3 vColor;\n" +
+"varying vec3 l;\n" +
+
+"void main(){\n" +
+
+"   float ns = 1.0;\n" +
+"   vec3 ka = vec3(0.5, 0.5, 0.5);\n" +
+"   vec3 kd = vec3(0.5, 0.5, 0.5);\n" +
+"   vec3 ks = vec3(0.5, 0.5, 0.5);\n" +
+"   vec3 ke = vec3(0.5, 0.5, 0.5);\n" +
+"   float ni = 0.5;\n" +
+"   float d = 0.05;\n" +
+
+"   vec3 lightColor = vec3(3.0,3.0,3.0);\n" +
+"   vNorm = normalize((m * vec4(aNorm, 1.0)).xyz);\n" +
+"   vec3 luzPos = vec3(-10.0, 0.0, 0.0);\n" +
+"   iAmbiente = lightColor * ka;\n" +
+"   l = normalize(luzPos - (aPos));\n" +
+"   float cosDifusion = max(dot(vNorm, l), 0.0);\n" +
+"   iDifusion = lightColor * (cosDifusion * kd);\n" +
+"   vec3 r = normalize(reflect(-l, vNorm));\n" +
+"   vec3 camaraPos = vec3(0.0, 0.0, 10.0);\n" +
+"   vec3 vectorCamara = normalize(-camaraPos);\n" +
+"   iEspecular = lightColor * (max(0.0, pow(dot(r,vectorCamara), 3.0)) * ks);\n" +
+"   gl_Position = p * v * m * vec4(aPos, 1.0);\n" +
+"   vNorm = aNorm;\n" +
+"   vTex = aTex;\n" +
+"   vColor = iAmbiente + iDifusion + iEspecular;\n" +
+"}\n";
+
+var FRAGMENT_SHADER_GOURAUD_T =
+"precision highp float;\n" +
+
+"varying vec3 vColor;\n" +
+"varying vec2 vTex;\n" +
+
+"uniform sampler2D sampler;\n" +
+
+"void main(){\n" +
+"    vec4 textura = texture2D(sampler, vTex);\n" +
+"    gl_FragColor = vec4(vColor * textura.xyz, 1.0);\n" +
 "}\n";
 
 //PHONG 2 (materiales)
