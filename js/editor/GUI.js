@@ -103,7 +103,8 @@ class GUI {
     
                 if (Renderer.dibujables[i].constructor.name != "Grid") {
                     objetoDibujable.addEventListener("click", () => {
-                        VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i], objetoDibujable);
+                        VentanaCanvas.deseleccionarObjeto();
+                        VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i]);
                     });
                 } else {
                     objetoDibujable.style.pointerEvents = "none";

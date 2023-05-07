@@ -201,16 +201,10 @@ class VentanaCanvas {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
                     //si hubiese uno seleccionado ya
                     if (VentanaCanvas.objetoSeleccionado != null) {
-                        VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
-                        VentanaCanvas.objetoSeleccionado.contador = null;
-                        VentanaCanvas.objetoSeleccionado.resetearFactores();
-                        GUI.menuSeleccion.ocultar();
-                        VentanaCanvas.objetoSeleccionado = null;
+                        VentanaCanvas.deseleccionarObjeto();
+                        VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i]);
                     } else {
-                        GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
-                        VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
-                        Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
-                        VentanaCanvas.objetoSeleccionado = Renderer.dibujables[i];
+                        VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i]);
                     }
                     click = true;
                 }
@@ -219,25 +213,44 @@ class VentanaCanvas {
 
         if (!click) {
             if (VentanaCanvas.objetoSeleccionado != null) {
-                VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
-                VentanaCanvas.objetoSeleccionado.contador = null;
-                VentanaCanvas.objetoSeleccionado.resetearFactores();
-                GUI.menuSeleccion.ocultar();
-                VentanaCanvas.objetoSeleccionado = null;
+                VentanaCanvas.deseleccionarObjeto();
             }
         }
         rayoClick = null;
     }
 
+    //se ha seleccionado un objeto
+    static seleccionarObjeto (objeto) {
+        //canvas: mostrar menu, funcionactualizar, seleccionar y llamar a la funcion de global
+        GUI.menuSeleccion.mostrar(objeto);
+        objeto.funcionActualizar = Modelo3D.funcionSeleccion;
+        VentanaCanvas.objetoSeleccionado = objeto;
+        VentanaCanvas.globalSeleccionarObjeto(objeto);
+        canvas.focus();
+    }
+
+    //se deselecciona un objeto
+    static deseleccionarObjeto () {
+        if (VentanaCanvas.objetoSeleccionado != null) {
+            //reset + deseleccion en menu global
+            VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
+            VentanaCanvas.objetoSeleccionado.contador = null;
+            VentanaCanvas.objetoSeleccionado.resetearFactores();
+            GUI.menuSeleccion.ocultar();
+            VentanaCanvas.objetoSeleccionado = null;
+            VentanaCanvas.globalOcultarObjeto();
+        }
+    }
+    /*
     //seleccion del modelo desde menu global
     static seleccionarObjeto (objeto, objetoDibujable) {
-        VentanaCanvas.globalOcultarObjeto();
+        VentanaCanvas.deseleccionar();
         GUI.menuSeleccion.mostrar(objeto);
         objetoDibujable.style.backgroundColor = "#9e369e";
         objeto.funcionActualizar = Modelo3D.funcionSeleccion;
         VentanaCanvas.objetoSeleccionado = objeto;
         canvas.focus(); //sino el listener de teclas no funciona hasta adquirir foco
-    }
+    }*/
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global
     static globalSeleccionarObjeto (objeto) {
@@ -257,14 +270,14 @@ class VentanaCanvas {
         Array.from(objetosDibujables).forEach((e) => {
             e.style.backgroundColor = "#271427";
         });
-        VentanaCanvas.objetoSeleccionado = null;
     }
 
     static eliminarSeleccionado () {
         VentanaCanvas.objetoSeleccionado.eliminar();
         VentanaCanvas.deseleccionar();
+        GUI.actualizarMenuGlobal();
     }
-
+/*
     static deseleccionar () {
         if (VentanaCanvas.objetoSeleccionado != null) {
             VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
@@ -272,8 +285,7 @@ class VentanaCanvas {
             VentanaCanvas.objetoSeleccionado.resetearFactores();
             GUI.menuSeleccion.ocultar();
             VentanaCanvas.objetoSeleccionado = null;
-            //VentanaCanvas.globalOcultarObjeto();
-            GUI.actualizarMenuGlobal();
+            VentanaCanvas.globalOcultarObjeto();
         }
-    }
+    }*/
 }
