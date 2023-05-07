@@ -305,6 +305,8 @@ class GUI {
         img.src = "/bloomJS/img/iconos/cerrar.png";
 
         img.addEventListener("click", () => {
+            //si el contenedor tenia algun elemento con event listeners, debemos paralos tambien, porque sino 
+            //el garbage collector no podra eliminarlos por si mismo de la memoria, aunque se borren del DOM
             contenedor.parentNode.removeChild(contenedor);
         });
         iconos.appendChild(img);
