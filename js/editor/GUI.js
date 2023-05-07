@@ -88,31 +88,35 @@ class GUI {
         //volver a cargarlo
         for (let i = 0; i < Renderer.dibujables.length; i++) {
 
-            let tipo = document.createElement("p");
-            tipo.textContent = Renderer.dibujables[i].constructor.name;
+            if (Renderer.dibujables[i] instanceof Modelo3D || Renderer.dibujables[i].constructor.name == "Grid") {
 
-            let nombre = document.createElement("p");
-            nombre.textContent = "Ejemplo";
-
-            let objetoDibujable = document.createElement("div");
-            objetoDibujable.className = "objetoDibujable";
-
-            objetoDibujable.objeto = Renderer.dibujables[i];
-
-            if (Renderer.dibujables[i].constructor.name != "Grid") {
-                objetoDibujable.addEventListener("click", () => {
-                    VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i], objetoDibujable);
-                });
-            } else {
-                objetoDibujable.style.pointerEvents = "none";
-                objetoDibujable.style.backgroundColor = "#170817";
-                objetoDibujable.style.boxShadow = "inset 0 0 2px black";
+                let tipo = document.createElement("p");
+                tipo.textContent = Renderer.dibujables[i].constructor.name;
+    
+                let nombre = document.createElement("p");
+                nombre.textContent = "Ejemplo";
+    
+                let objetoDibujable = document.createElement("div");
+                objetoDibujable.className = "objetoDibujable";
+    
+                objetoDibujable.objeto = Renderer.dibujables[i];
+    
+                if (Renderer.dibujables[i].constructor.name != "Grid") {
+                    objetoDibujable.addEventListener("click", () => {
+                        VentanaCanvas.seleccionarObjeto(Renderer.dibujables[i], objetoDibujable);
+                    });
+                } else {
+                    objetoDibujable.style.pointerEvents = "none";
+                    objetoDibujable.style.backgroundColor = "#170817";
+                    objetoDibujable.style.boxShadow = "inset 0 0 2px black";
+                }
+    
+    
+                objetoDibujable.appendChild(tipo);
+                objetoDibujable.appendChild(nombre);
+                objetosDibujables.appendChild(objetoDibujable);
+                
             }
-
-
-            objetoDibujable.appendChild(tipo);
-            objetoDibujable.appendChild(nombre);
-            objetosDibujables.appendChild(objetoDibujable);
         }
     }
 

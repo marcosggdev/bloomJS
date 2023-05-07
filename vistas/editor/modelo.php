@@ -28,6 +28,9 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
         Array.from(document.querySelectorAll(".plantilla")).forEach((div) => {
             div.addEventListener("click", () => {
                 let modelo = new Modelo3D(0,0,0,0,0,0,1,1,1, "T", "/bloomJS/<?=$modelosRegistros[$i]["rutaModelo"]?>", new Color(0.5,0.5,0.5,1.0), "/bloomJS/<?=$modelosRegistros[$i]["rutaTextura"]?>", "/bloomsJS/assets/materiales/esfera.mtl");
+                //elimina el menu asociado a la plantilla. Para que funcione bien, debemos tener un menu de la forma: menu -> malla -> plantilla
+                //hijos director en ese orden. En caso contrario se eliminara el nodo equivocado
+                div.parentNode.parentNode.parentNode.removeChild(div.parentNode.parentNode);
             });
             <?php $i++; ?>
         });

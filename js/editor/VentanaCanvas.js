@@ -87,7 +87,6 @@ class VentanaCanvas {
             if (e.button == 2) {
                 moviendoCamara = false;
             } else if (e.button == 0) {
-                console.log("click izq");
                 if (!camaraMovida) {
                     if (VentanaCanvas.objetoSeleccionado != null) {
                         //comprobar aplicacion de rst por teclado y aplicar.Despues no controladorSeleccion porque usamos el click para "guardar"
@@ -194,22 +193,37 @@ class VentanaCanvas {
 
         let rayoClick = new LineaRecta(coordXGL, coordYGL);
 
+        let click = false;
         //comprobamos los objetos de tipo Modelo3D que se estan dibujando
         for (let i = 0; i < Renderer.dibujables.length; i++) {
+            //si se ha hecho click en algun modelo
             if (Renderer.dibujables[i] instanceof Modelo3D) {
                 if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, Renderer.dibujables[i])) {
-                    GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
-                    VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
-                    Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
-                    VentanaCanvas.objetoSeleccionado = Renderer.dibujables[i];
-                } else {
-                    GUI.menuSeleccion.ocultar();
-                    VentanaCanvas.globalOcultarObjeto();
-                    Renderer.dibujables[i].funcionActualizar = null;
-                    Renderer.dibujables[i].contador = null;
-                    Renderer.dibujables[i].resetearFactores();
-                    VentanaCanvas.objetoSeleccionado = null;
+                    //si hubiese uno seleccionado ya
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
+                        VentanaCanvas.objetoSeleccionado.contador = null;
+                        VentanaCanvas.objetoSeleccionado.resetearFactores();
+                        GUI.menuSeleccion.ocultar();
+                        VentanaCanvas.objetoSeleccionado = null;
+                    } else {
+                        GUI.menuSeleccion.mostrar(Renderer.dibujables[i]);
+                        VentanaCanvas.globalSeleccionarObjeto(Renderer.dibujables[i]);
+                        Renderer.dibujables[i].funcionActualizar = Modelo3D.funcionSeleccion;
+                        VentanaCanvas.objetoSeleccionado = Renderer.dibujables[i];
+                    }
+                    click = true;
                 }
+            }
+        }
+
+        if (!click) {
+            if (VentanaCanvas.objetoSeleccionado != null) {
+                VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
+                VentanaCanvas.objetoSeleccionado.contador = null;
+                VentanaCanvas.objetoSeleccionado.resetearFactores();
+                GUI.menuSeleccion.ocultar();
+                VentanaCanvas.objetoSeleccionado = null;
             }
         }
         rayoClick = null;

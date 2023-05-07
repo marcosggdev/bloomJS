@@ -240,6 +240,5 @@ class Renderer {
     static recalcularPerspectiva () {
         this.aspecto = document.querySelector("canvas").width / document.querySelector("canvas").height;
         Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
-        console.log("recalc");
     }
 }

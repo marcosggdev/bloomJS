@@ -872,8 +872,6 @@ class Modelo3D {
         modelo.factorZ = Modelo3D.escala(VentanaCanvas.factorZInicial, deltaDistancia, distanciaInicial);
         modelo.hitbox.actualizarEscala(modelo.factorX, modelo.factorY, modelo.factorZ, distanciaInicial);
 
-        console.log(deltaDistancia);
-
         //reset de contador para que se tome nuevos factores como punto de partida en animacion de seleccion
         modelo.contador = null;
 
