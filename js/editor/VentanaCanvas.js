@@ -274,7 +274,7 @@ class VentanaCanvas {
 
     static eliminarSeleccionado () {
         VentanaCanvas.objetoSeleccionado.eliminar();
-        VentanaCanvas.deseleccionar();
+        VentanaCanvas.deseleccionarObjeto();
         GUI.actualizarMenuGlobal();
     }
 /*
