@@ -259,4 +259,21 @@ class VentanaCanvas {
         });
         VentanaCanvas.objetoSeleccionado = null;
     }
+
+    static eliminarSeleccionado () {
+        VentanaCanvas.objetoSeleccionado.eliminar();
+        VentanaCanvas.deseleccionar();
+    }
+
+    static deseleccionar () {
+        if (VentanaCanvas.objetoSeleccionado != null) {
+            VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
+            VentanaCanvas.objetoSeleccionado.contador = null;
+            VentanaCanvas.objetoSeleccionado.resetearFactores();
+            GUI.menuSeleccion.ocultar();
+            VentanaCanvas.objetoSeleccionado = null;
+            //VentanaCanvas.globalOcultarObjeto();
+            GUI.actualizarMenuGlobal();
+        }
+    }
 }

@@ -432,3 +432,11 @@ div#menuCanvas {
     /* box-sizing: border-box; */
     align-items: flex-start;
 }
+img.iconoFuncional {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.5s;
+}
+img.iconoFuncional:hover {
+    transform: scale(1.2);
+}

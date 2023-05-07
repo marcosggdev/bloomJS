@@ -882,4 +882,15 @@ class Modelo3D {
         let resultado = escalaInicial * Math.exp(1500 * distanciaActual / distanciaInicial);
         return resultado;
     }
+
+    eliminar () {
+        //borrar de renderer dibujables, igualar a null y hacer lo mismo con su hitbox
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            if (Renderer.dibujables[i] == this) {
+                Renderer.dibujables.splice(i, 1);
+            }
+        }
+        this.hitbox.eliminar();
+        this.hitbox = null;
+    }
 }

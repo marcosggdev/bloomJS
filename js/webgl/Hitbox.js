@@ -283,5 +283,13 @@ class Hitbox {
         return false;
     }
 
+    eliminar () {
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            if (Renderer.dibujables[i] == this) {
+                Renderer.dibujables.splice(i, 1);
+            }
+        }
+    }
+
 
 }

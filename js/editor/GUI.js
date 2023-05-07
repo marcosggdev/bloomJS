@@ -402,4 +402,12 @@ class GUI {
         );
     }
 
+    static anadirIconoFuncional (contenedor, rutaImg, funcion) {
+        let img = document.createElement("img");
+        img.className = "iconoFuncional";
+        img.addEventListener("click", funcion);
+        img.src = rutaImg;
+        contenedor.appendChild(img);
+    }
+
 }

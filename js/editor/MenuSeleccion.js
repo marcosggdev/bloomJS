@@ -23,6 +23,13 @@ class MenuSeleccion {
         dinamico.id = "dinamico";
         div.appendChild(dinamico);
 
+        let funcionalidades = document.createElement("div");
+        funcionalidades.id = "funcionalidades";
+        GUI.anadirIconoFuncional(funcionalidades, "/bloomJS/img/iconos/cerrar.png", function () {
+            VentanaCanvas.eliminarSeleccionado();
+        });
+        div.appendChild(funcionalidades);
+
         this.nodo = div;
     }
 
@@ -40,6 +47,7 @@ class MenuSeleccion {
     }
 
     actualizarDatos (modelo) {
+
         let dinamico = this.nodo.querySelector("#dinamico");
         dinamico.innerHTML = "";
 
@@ -51,8 +59,6 @@ class MenuSeleccion {
 
         GUI.anadirGrupoNombresValoresEditablesModelo(dinamico, modelo, ["Factor X", "Factor Y", "Factor Z"], 
         [modelo.factorX, modelo.factorY, modelo.factorZ], ["factorX", "factorY", "factorZ"], "posicionesColumna", "number", 0.5, true);
-
-        
     }
 
 }
