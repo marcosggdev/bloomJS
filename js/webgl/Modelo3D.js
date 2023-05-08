@@ -292,6 +292,7 @@ class Modelo3D {
 
     procesarDae (archivoXML) {
         this.archivoXML = archivoXML;
+        console.log(archivoXML);
             //vertices, normales y uv
             let datosProcesados = [[],[],[]];
             
@@ -421,7 +422,7 @@ class Modelo3D {
                 }
             }
 
-            //---------------------------escala------------------------------------------------------------------------------
+            //---------------------------Transformacion inicial------------------------------------------------------------------------------
             let visual_scene = library_visual_scenes.getElementsByTagName("visual_scene")[0];
             let arrayMatriz = visual_scene.getElementsByTagName("node")[0].getElementsByTagName("matrix")[0].textContent.split(" ");
             let m = new Matriz4X4();
@@ -467,20 +468,27 @@ class Modelo3D {
             }
 
             //informacion que iniciaremos de forma secuencial en el constructor con await y otra func auxiliar
-            this.construirVertices();
+            this.construirVertices(m);
             //this.vertices = datosProcesados[0];
             this.coordsNormales = datosProcesados[1];
             this.texCoords = datosProcesados[2];                                        
             //this.transformarVertices(m);
     }
 
-    construirVertices () {
+    construirVertices (transformacionInicial) {
         //construye vertices en base a los vertices de geometria y los indices geometria
         let vertices = [];
         for (let i = 0; i < this.indicesGeometria.length; i++) {
             for (let j = 0; j < 3; j++) {
                 vertices.push(this.geometria[3 * this.indicesGeometria[i] + j]);
             }
+        }
+        for (let i = 0; i < vertices.length / 3; i++) {
+            let vector = new Vector4X1([vertices[3*i], vertices[3*i+1], vertices[3*i+2], 1]);
+            let nuevoVector = transformacionInicial.multiplicarVector(vector);
+            vertices[3*i] = nuevoVector.datos[0];
+            vertices[3*i+1] = nuevoVector.datos[1];
+            vertices[3*i+2] = nuevoVector.datos[2];
         }
         this.vertices = vertices;
     }
@@ -515,7 +523,7 @@ class Modelo3D {
         }
     }
 
-    iniciar () {
+    iniciar () {0
         //matriz del modelo
         this.matrizM = new Matriz4X4();
         this.actualizarMatrizM();
