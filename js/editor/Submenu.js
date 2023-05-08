@@ -125,4 +125,25 @@ class Submenu {
         }
     }
 
+    exportarImagen () {
+        Renderer.maximizarAjustesParaExportacion();
+        //esperamos 2s a que se apliquen los cambios
+        setTimeout(function () {
+            let enlaceAuxiliar = document.createElement('a');
+            enlaceAuxiliar.download = 'BloomJS.png';
+            enlaceAuxiliar.href = canvas.toDataURL();
+            enlaceAuxiliar.click();
+            enlaceAuxiliar = null;
+            Renderer.resetearAjustes();
+        }, 2000);
+    }
+
+    exportarEscena () {
+        console.log("exportar escena");
+    }
+
+    exportarCanvas () {
+        console.log("exportar canvas");
+    }
+
 }

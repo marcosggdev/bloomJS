@@ -39,7 +39,11 @@ class GUI {
             new Boton("Editor", "desplegar", [
                 ["Ajustes", "Controles"],
                 ["crearMenuAjustesEditor", "crearMenuControles"]
-            ])
+            ]),
+            new Boton("Exportar", "desplegar", [
+                ["Imagen", "Escena", "Canvas"],
+                ["exportarImagen", "exportarEscena", "exportarCanvas"]
+            ]),
         ]);
 
         barraVentana.appendChild(barraHerramientas.nodo);

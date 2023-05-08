@@ -256,4 +256,31 @@ class Renderer {
         this.aspecto = document.querySelector("canvas").width / document.querySelector("canvas").height;
         Renderer.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
     }
+
+    static guardarConfiguracion () {
+        Renderer.dibujarGridPrevio = Renderer.dibujarGrid;
+        Renderer.dibujarHitboxPrevio = Renderer.dibujarHitbox;
+        Renderer.dibujarLineasSeleccionPrevio = Renderer.dibujarLineasSeleccion;
+        Renderer.anchoPrevio = Renderer.ancho;
+        Renderer.altoPrevio = Renderer.alto;
+    }
+
+    //configurar render para obtener imagen con calidad buena
+    static maximizarAjustesParaExportacion () {
+        Renderer.guardarConfiguracion();
+        Renderer.dibujarGrid = false;
+        Renderer.dibujarHitbox = false;
+        Renderer.dibujarLineasSeleccion = false;
+        Renderer.cambiarAncho(1920);
+        Renderer.cambiarAlto(1080);
+    }
+
+    //revertir cambios para obtener de nuevo las configuraciones que se tenian en el editor
+    static resetearAjustes () {
+        Renderer.dibujarGrid = Renderer.dibujarGridPrevio;
+        Renderer.dibujarHitbox = Renderer.dibujarHitboxPrevio;
+        Renderer.dibujarLineasSeleccion = Renderer.dibujarLineasSeleccionPrevio;
+        Renderer.cambiarAncho(Renderer.anchoPrevio);
+        Renderer.cambiarAlto(Renderer.altoPrevio);
+    }
 }
