@@ -18,6 +18,8 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
                 <h4><?=$modelosRegistros[$i]["nombre"]?></h4>
                 <img src="/bloomJS/<?=$modelosRegistros[$i]["previsualizacion"]?>" alt="">
                 <p>Autor: <?=$nombreAutor?></p>
+                <input type="hidden" id="rutaModelo" value="<?=$modelosRegistros[$i]["rutaModelo"]?>">
+                <input type="hidden" id="rutaTextura" value="<?=$modelosRegistros[$i]["rutaTextura"]?>">
             </div>
     <?php
     }
@@ -27,12 +29,12 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
         <?php $i = 0; ?>
         Array.from(document.querySelectorAll(".plantilla")).forEach((div) => {
             div.addEventListener("click", () => {
-                let modelo = new Modelo3D(0,0,0,0,0,0,1,1,1, "T", "/bloomJS/<?=$modelosRegistros[$i]["rutaModelo"]?>", new Color(0.5,0.5,0.5,1.0), "/bloomJS/<?=$modelosRegistros[$i]["rutaTextura"]?>", "/bloomsJS/assets/materiales/esfera.mtl");
+                let modelo = new Modelo3D(0,0,0,0,0,0,1,1,1, "T", "/bloomJS/" + div.querySelector("#rutaModelo").value, new Color(0.5,0.5,0.5,1.0), "/bloomJS/" + div.querySelector("#rutaTextura").value, "/bloomsJS/assets/materiales/esfera.mtl");
                 //elimina el menu asociado a la plantilla. Para que funcione bien, debemos tener un menu de la forma: menu -> malla -> plantilla
                 //hijos director en ese orden. En caso contrario se eliminara el nodo equivocado
                 div.parentNode.parentNode.parentNode.removeChild(div.parentNode.parentNode);
+                <?php $i++; ?>
             });
-            <?php $i++; ?>
         });
     </script>
 <?php

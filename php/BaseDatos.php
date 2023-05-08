@@ -88,7 +88,7 @@ class BaseDatos {
                     "descripcion VARCHAR(100) NOT NULL,".
                     "rutaModelo VARCHAR(100) NOT NULL,". 
                     "rutaTextura VARCHAR(100) NOT NULL,". 
-                    "previsualizacion varchar(100) DEFAULT 'recursos/previsualizacion/defecto.png'," . 
+                    "previsualizacion varchar(100) DEFAULT 'assets/defecto/previsualizacion/defecto.png'," . 
                     "tipo VARCHAR(20) NOT NULL," .
                     "id_autor INT NOT NULL);",
 
@@ -106,7 +106,9 @@ class BaseDatos {
                 "'admin@admin.es', 'admin', 'admin');",
 
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
-                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'recursos/previsualizacion/barril.png', 'defecto', '1');"
+                "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'assets/defecto/previsualizacion/barril.png', 'defecto', '1');",
+                "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
+                "'Veleta', 'Modelo por defecto', 'assets/defecto/modelos/veleta.dae', 'assets/defecto/texturas/veleta.png', 'assets/defecto/previsualizacion/veleta.jpg', 'defecto', '1');"
             ];
             for ($i = 0; $i < count($consultas); $i++) {
                 $con->query($consultas[$i]);

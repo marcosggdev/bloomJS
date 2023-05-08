@@ -241,16 +241,6 @@ class VentanaCanvas {
             VentanaCanvas.globalOcultarObjeto();
         }
     }
-    /*
-    //seleccion del modelo desde menu global
-    static seleccionarObjeto (objeto, objetoDibujable) {
-        VentanaCanvas.deseleccionar();
-        GUI.menuSeleccion.mostrar(objeto);
-        objetoDibujable.style.backgroundColor = "#9e369e";
-        objeto.funcionActualizar = Modelo3D.funcionSeleccion;
-        VentanaCanvas.objetoSeleccionado = objeto;
-        canvas.focus(); //sino el listener de teclas no funciona hasta adquirir foco
-    }*/
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global
     static globalSeleccionarObjeto (objeto) {
@@ -277,15 +267,5 @@ class VentanaCanvas {
         VentanaCanvas.deseleccionarObjeto();
         GUI.actualizarMenuGlobal();
     }
-/*
-    static deseleccionar () {
-        if (VentanaCanvas.objetoSeleccionado != null) {
-            VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
-            VentanaCanvas.objetoSeleccionado.contador = null;
-            VentanaCanvas.objetoSeleccionado.resetearFactores();
-            GUI.menuSeleccion.ocultar();
-            VentanaCanvas.objetoSeleccionado = null;
-            VentanaCanvas.globalOcultarObjeto();
-        }
-    }*/
+
 }
