@@ -905,4 +905,10 @@ class Modelo3D {
     setFuncionActualizar (callback) {
         this.funcionActualizar = this[callback];
     }
+
+    serializar () {
+        //nos interesa guardar: pos, angulo, factor
+        return "posX:"+this.posX+";posY:"+this.posY+";posZ:"+this.posZ+";anguloX:"+this.anguloX+";anguloY:"
+        +this.anguloY+";anguloZ:"+this.anguloZ+";factorX:"+this.factorX+";factorY:"+this.factorY+";factorZ:"+this.factorZ;
+    }
 }   

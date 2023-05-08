@@ -25,15 +25,6 @@ window.addEventListener('load', () => {
 
     //el menu global se actualiza cada vez que se añade o borra un grafico dibujable
 
-    //cuando se crea un modelo, despues de cargarse se añade al renderer, y al añadirse se dibuja
-    //let blanco = new Modelo2D(0, 0, 0, 0, 0, 0, 1, 1, "/bloomJS/img/pluma.jpg", VERTEX_SHADER_IMAGEN, FRAGMENT_SHADER_IMAGEN);
-    //let lienzo = new Lienzo();
-    //let barril = new Modelo3D(0,0,0,0,0,0,1,1,1,"/bloomJS/assets/barril.dae");
-    //let luz = new PuntoLuz(0, 0, 0);
-
-    let botonMaximizar = document.getElementById("maximizar");
-    maximizar(botonMaximizar);
-
     //let hitbox = new Hitbox(barril);
     let grid = new Grid();
     let aps = 24;

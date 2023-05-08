@@ -47,4 +47,9 @@ class ArcballCamera {
         this.matrizV = this.crearMatrizVista();
     }
 
+    serializar () {
+        return "posXCentro:"+this.posXCentro+";posYCentro:"+this.posYCentro+";posZCentro:"+this.posZCentro+";radio:"+this.radio+";anguloY:"+
+        this.anguloY+";anguloXPropio:"+this.anguloXPropio;
+    }
+
 }

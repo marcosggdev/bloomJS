@@ -139,11 +139,33 @@ class Submenu {
     }
 
     exportarEscena () {
-        console.log("exportar escena");
+
+        
     }
 
     exportarCanvas () {
-        console.log("exportar canvas");
+        //necesitamos la informacion de los modelos, la camara y el renderer.
+        let objetos = [];
+        for (let i = 0; i < Renderer.dibujables.length; i++) {
+            objetos.push(Renderer.dibujables[i].serializar());
+        }
+
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let a = document.createElement("a");
+                let archivo = new Blob([this.responseText], {type: 'text/plain'});
+                a.href = URL.createObjectURL(archivo);
+                a.download = "bloomjs_main.js";
+                a.click();
+                URL.revokeObjectURL(a.href);
+            }
+        };
+        let formData = new FormData();
+        formData.append("objetos", objetos);
+        formData.append("camara", Renderer.camara.serializar());
+        req.open("POST", "/bloomJS/php/generarExportacionCanvas.php");
+        req.send(formData);
     }
 
 }
