@@ -411,4 +411,35 @@ class GUI {
         contenedor.appendChild(img);
     }
 
+    static anadirNombreSelect (contenedor, texto, nombres, acciones) {
+        let p = document.createElement("p");
+        p.textContent = texto;
+        let select = document.createElement("select");
+        let defecto = document.createElement("option");
+        defecto.selected = true;
+        defecto.textContent = "---";
+        defecto.value = -1;
+        select.appendChild(defecto);
+        for (let i = 0; i < nombres.length; i++) {
+            let op = document.createElement("option");
+            op.textContent = nombres[i];
+            op.value = i;
+            select.appendChild(op);
+        }
+        select.addEventListener("change", () => {
+            let seleccionado = select[select.selectedIndex];
+            let indice = seleccionado.value;
+            if (indice == -1) {
+                if (VentanaCanvas.objetoSeleccionado != null) {
+                    VentanaCanvas.objetoSeleccionado.funcionActualizar = function () {};
+                }
+            } else if (indice >= 0) {
+                acciones[indice]();
+            }
+        });
+
+        contenedor.appendChild(p);
+        contenedor.appendChild(select);
+    }
+
 }

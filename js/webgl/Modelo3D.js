@@ -725,42 +725,42 @@ class Modelo3D {
         this.hitbox.actualizarEscala(this.factorX, this.factorY, this.factorZ);
     }
 
-    static funcionSeleccion (modelo) {
-        if (modelo.contador == null) {
-            modelo.factorXInicial = modelo.factorX;
-            modelo.factorYInicial = modelo.factorY;
-            modelo.factorZInicial = modelo.factorZ;
-            modelo.contador = 0;
+    funcionSeleccion () {
+        if (this.contador == null) {
+            this.factorXInicial = this.factorX;
+            this.factorYInicial = this.factorY;
+            this.factorZInicial = this.factorZ;
+            this.contador = 0;
         }
-        let factor = 1 + Math.cos(Utilidades.toRadians(modelo.contador)) / 24;
-        modelo.factorX = modelo.factorXInicial * factor;
-        modelo.factorY = modelo.factorYInicial * factor;
-        modelo.factorZ = modelo.factorZInicial * factor;
-        modelo.contador+=1;
+        let factor = 1 + Math.cos(Utilidades.toRadians(this.contador)) / 24;
+        this.factorX = this.factorXInicial * factor;
+        this.factorY = this.factorYInicial * factor;
+        this.factorZ = this.factorZInicial * factor;
+        this.contador+=1;
     };
 
-    static funcionRotarX (modelo) {
-        if (modelo.contador == null) {
-            modelo.contador = 0;
+    funcionRotarX () {
+        if (this.contador == null) {
+            this.contador = 0;
         }
-        modelo.anguloX = modelo.contador;
-        modelo.contador++;
+        this.anguloX = this.contador;
+        this.contador++;
     }
 
-    static funcionRotarY (modelo) {
-        if (modelo.contador == null) {
-            modelo.contador = 0;
+    funcionRotarY () {
+        if (this.contador == null) {
+            this.contador = 0;
         }
-        modelo.anguloY = modelo.contador;
-        modelo.contador++;
+        this.anguloY = this.contador;
+        this.contador++;
     }
 
-    static funcionRotarZ (modelo) {
-        if (modelo.contador == null) {
-            modelo.contador = 0;
+    funcionRotarZ () {
+        if (this.contador == null) {
+            this.contador = 0;
         }
-        modelo.anguloZ = modelo.contador;
-        modelo.contador++;
+        this.anguloZ = this.contador;
+        this.contador++;
     }
 
     resetearFactores () {
@@ -901,4 +901,8 @@ class Modelo3D {
         this.hitbox.eliminar();
         this.hitbox = null;
     }
-}
+
+    setFuncionActualizar (callback) {
+        this.funcionActualizar = this[callback];
+    }
+}   

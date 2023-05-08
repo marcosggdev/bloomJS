@@ -30,6 +30,33 @@ class MenuSeleccion {
         });
         div.appendChild(funcionalidades);
 
+        let divActualizar = document.createElement("div");
+        GUI.anadirNombreSelect(divActualizar, "Función actualizar",
+            ["RotarX", "RotarY", "RotarZ", "Seleccion"], 
+            [
+                function () {
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        VentanaCanvas.objetoSeleccionado.setFuncionActualizar("funcionRotarX");
+                    }
+                }, 
+                function () {
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        VentanaCanvas.objetoSeleccionado.setFuncionActualizar("funcionRotarY");
+                    }
+                }, 
+                function () {
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        VentanaCanvas.objetoSeleccionado.setFuncionActualizar("funcionRotarZ");
+                    }
+                }, 
+                function () {
+                    if (VentanaCanvas.objetoSeleccionado != null) {
+                        VentanaCanvas.objetoSeleccionado.setFuncionActualizar("funcionSeleccion");
+                    }
+                }
+            ]);
+        div.appendChild(divActualizar);
+
         this.nodo = div;
     }
 

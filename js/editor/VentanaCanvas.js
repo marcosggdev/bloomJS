@@ -223,7 +223,7 @@ class VentanaCanvas {
     static seleccionarObjeto (objeto) {
         //canvas: mostrar menu, funcionactualizar, seleccionar y llamar a la funcion de global
         GUI.menuSeleccion.mostrar(objeto);
-        objeto.funcionActualizar = Modelo3D.funcionSeleccion;
+        objeto.funcionActualizar = objeto.funcionSeleccion;
         VentanaCanvas.objetoSeleccionado = objeto;
         VentanaCanvas.globalSeleccionarObjeto(objeto);
         canvas.focus();

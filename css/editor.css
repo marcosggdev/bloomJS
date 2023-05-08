@@ -351,17 +351,17 @@ div#menuSeleccion {
     pointer-events: none;
     width: 40%;
     bottom: 0;
-    top: 70%;
+    /*top: 70%;*/
     flex-grow: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     overflow-y: hidden;
     transition: top 1s, opacity 0.5s;
-}
+}/*
 div#menuSeleccion:hover {
     top: 20%;
-}
+}*/
 div.menuPopUp button {
     background-color: #ffff79;
     color: black;

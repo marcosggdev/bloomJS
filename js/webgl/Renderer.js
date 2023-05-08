@@ -7,8 +7,9 @@ class Renderer {
     static alto = 480;
     static dibujables = [];
 
-    static dibujarHitbox = true;
+    static dibujarHitbox = false;
     static dibujarLineasSeleccion = false;
+    static dibujarGrid = true;
 
     static controlesNombres = [
         "Rotar cámara",
@@ -29,7 +30,8 @@ class Renderer {
         "Resolución_x",
         "Resolución_y",
         "Dibujar Hitbox",
-        "Dibujar rayos"
+        "Dibujar rayos",
+        "Dibujar Grid"
     ];
 
     static valoresPropiedades = [
@@ -37,7 +39,8 @@ class Renderer {
         Renderer.ancho,
         Renderer.alto,
         (Renderer.dibujarHitbox == true) ? "true": "false",
-        (Renderer.dibujarLineasSeleccion == true) ? "true": "false" 
+        (Renderer.dibujarLineasSeleccion == true) ? "true": "false",
+        (Renderer.dibujarGrid == true) ? "true": "false"
     ];
 
     static asignacionCallbacks = {
@@ -45,7 +48,8 @@ class Renderer {
         "Resolución_x": "cambiarAncho",
         "Resolución_y": "cambiarAlto",
         "Dibujar Hitbox": "cambiarDibujarHitbox",
-        "Dibujar rayos": "cambiarDibujarLineasSeleccion"
+        "Dibujar rayos": "cambiarDibujarLineasSeleccion",
+        "Dibujar Grid": "cambiarDibujarGrid"
     };
 
     //se llama al editar algun input del menu de ajustes y hacer click en guardar
@@ -99,6 +103,16 @@ class Renderer {
         }
     }
 
+    static cambiarDibujarGrid (boolString) {
+        if (boolString == "true") {
+            Renderer.dibujarGrid = true;
+        } else if (boolString == "false") {
+            Renderer.dibujarGrid = false;
+        } else {    
+            Renderer.dibujarGrid = false;
+        }
+    }
+
     //se llama cuando se cambian para k al abrir el menu de nuevo aparezcan los nuevos valores
     static actualizarValoresPropiedades () {
         Renderer.valoresPropiedades = [
@@ -106,7 +120,8 @@ class Renderer {
             this.ancho,
             this.alto,
             (this.dibujarHitbox == true) ? "true": "false",
-            (this.dibujarLineasSeleccion == true) ? "true": "false" 
+            (this.dibujarLineasSeleccion == true) ? "true": "false",
+            (this.dibujarGrid == true) ? "true": "false"
         ];
     }
 
