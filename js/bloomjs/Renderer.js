@@ -32,6 +32,15 @@ class Renderer {
         Renderer.iniciarMatrices();
     }
 
+    static configurarParametros (json) {
+        //ancho, alto, dibujargrid, fondo
+        Renderer.ancho = json.ancho;
+        Renderer.alto = json.alto;
+        Renderer.dibujarGrid = json.dibujarGrid;
+        Renderer.fondo = Color.parsearJSON(json.fondo);
+        console.dir(Renderer);
+    }
+
     static limpiarFondo () {
         gl.clearColor(Renderer.fondo.R, Renderer.fondo.G, Renderer.fondo.B, Renderer.fondo.A);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

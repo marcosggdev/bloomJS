@@ -29,6 +29,12 @@ class Color {
         return null;
     }
 
+    static parsearJSON (json) {
+        //{A:0.3, B:...}
+        let color = new Color(json.R, json.G, json.B, json.A);
+        return color;
+    }
+
     serializar () {
         return "color:rgba("+this.R+"-"+this.G+"-"+this.B+"-"+this.A+")";    
     }

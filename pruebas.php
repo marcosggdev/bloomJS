@@ -23,7 +23,7 @@ $imports =     [
     RAIZ . "js/bloomjs/Color.js",
     RAIZ . "js/bloomjs/Grid.js",
     RAIZ . "js/bloomjs/Renderer.js",
-    RAIZ . "js/bloomjs/Main.js",
+    RAIZ . "js/bloomjs/bloomjs_main.js",
 ];
 for ($i = 0; $i < count($imports); $i++) {
     echo "<script src='".$imports[$i]."'></script>";

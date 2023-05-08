@@ -17,19 +17,22 @@ if (isset($_POST["objetos"]) && isset($_POST["camara"])) {
     //camara DTO
     $camara = new Camara($_POST["camara"]);
 
+    //parametros como: color del fondo, dibujar grid, ancho y alto, etc.
+    $rendererParametros = $_POST["rendererParametros"];
+
     //generacion del script
-    $txt = generarMain($modelos, $camara);
+    $txt = generarMain($modelos, $camara, $rendererParametros);
     echo $txt;
 }
 
-function generarMain($modelos, $camara) {
+function generarMain($modelos, $camara, $rendererParametros) {
 
     $resultado = " 
     window.addEventListener('load', () => {
         
         //crear canvas y contexto webgl
         canvas = document.createElement('canvas');
-
+        document.body.appendChild(canvas);
         if (!canvas) {
             console.log('Error al obtener el canvas');
             return;
@@ -40,8 +43,6 @@ function generarMain($modelos, $camara) {
             return;
         }
         
-        document.body.appendChild(canvas);
-        
         //camara que el renderer utiliza para dibujar
         let arcballCamera = new ArcballCamera(".$camara->posXCentro.",".$camara->posYCentro.",".$camara->posZCentro.",".$camara->radio.",".
         $camara->anguloY.",".$camara->anguloXPropio.");
@@ -51,8 +52,11 @@ function generarMain($modelos, $camara) {
         for ($i = 0; $i < count($modelos); $i++) {
             $resultado .= "let modelo$i = new Modelo3D(".$modelos[$i]->posX.", ".$modelos[$i]->posY.", ".$modelos[$i]->posZ.", ".$modelos[$i]->anguloX.",".
             $modelos[$i]->anguloY.",".$modelos[$i]->anguloZ.", ".$modelos[$i]->factorX.", ".$modelos[$i]->factorY.", ".$modelos[$i]->factorZ.",'".
-            $modelos[$i]->modo."','".$modelos[$i]->rutaArchivoDae."','".$modelos[$i]->rutaTextura."','".$modelos[$i]->rutaMaterial."');";
+            $modelos[$i]->modo."','".$modelos[$i]->rutaArchivoDae."', new Color(".$modelos[$i]->color[0].", ".$modelos[$i]->color[1].", ".$modelos[$i]->color[2].", ".
+            $modelos[$i]->color[3]."), '".$modelos[$i]->rutaTextura."','".$modelos[$i]->rutaMaterial."');";
         }
+
+        $resultado .= "Renderer.configurarParametros($rendererParametros);";
         
         $resultado .= "". 
         "//el menu global se actualiza cada vez que se añade o borra un grafico dibujable

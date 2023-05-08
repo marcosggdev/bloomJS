@@ -147,7 +147,9 @@ class Submenu {
         //necesitamos la informacion de los modelos, la camara y el renderer.
         let objetos = [];
         for (let i = 0; i < Renderer.dibujables.length; i++) {
-            objetos.push(Renderer.dibujables[i].serializar());
+            if (Renderer.dibujables[i] instanceof Modelo3D) {
+                objetos.push(Renderer.dibujables[i].serializar());
+            }
         }
 
         let req = new XMLHttpRequest();
@@ -165,6 +167,13 @@ class Submenu {
         let formData = new FormData();
         formData.append("objetos", objetos);
         formData.append("camara", Renderer.camara.serializar());
+        let rendererParametros = {
+            "ancho": Renderer.ancho,
+            "alto": Renderer.alto,
+            "fondo": Renderer.fondo,
+            "dibujarGrid": Renderer.dibujarGrid
+        };
+        formData.append("rendererParametros", JSON.stringify(rendererParametros));
         req.open("POST", "/bloomJS/php/generarExportacionCanvas.php");
         req.send(formData);
     }
