@@ -26,12 +26,10 @@ function generarMain($modelos, $camara) {
 
     $resultado = " 
     window.addEventListener('load', () => {
-    
-        let ventanaCanvas = new VentanaCanvas();
-        document.querySelector('main').appendChild(ventanaCanvas.nodo);
         
         //crear canvas y contexto webgl
-        canvas = document.querySelector('canvas');
+        canvas = document.createElement('canvas');
+
         if (!canvas) {
             console.log('Error al obtener el canvas');
             return;
@@ -42,17 +40,18 @@ function generarMain($modelos, $camara) {
             return;
         }
         
-        //carga valores por defecto del css de elementos que cambian para guardarlos ante alteraciones
-        Defecto.cargarValores();
+        document.body.appendChild(canvas);
         
         //camara que el renderer utiliza para dibujar
         let arcballCamera = new ArcballCamera(".$camara->posXCentro.",".$camara->posYCentro.",".$camara->posZCentro.",".$camara->radio.",".
         $camara->anguloY.",".$camara->anguloXPropio.");
+
         //se encarga de dibujar en el canvas
         Renderer.iniciar(arcballCamera, 640, 480);";
         for ($i = 0; $i < count($modelos); $i++) {
             $resultado .= "let modelo$i = new Modelo3D(".$modelos[$i]->posX.", ".$modelos[$i]->posY.", ".$modelos[$i]->posZ.", ".$modelos[$i]->anguloX.",".
-            $modelos[$i]->anguloY.",".$modelos[$i]->anguloZ.", ".$modelos[$i]->factorX.", ".$modelos[$i]->factorY.", ".$modelos[$i]->factorZ.");";
+            $modelos[$i]->anguloY.",".$modelos[$i]->anguloZ.", ".$modelos[$i]->factorX.", ".$modelos[$i]->factorY.", ".$modelos[$i]->factorZ.",'".
+            $modelos[$i]->modo."','".$modelos[$i]->rutaArchivoDae."','".$modelos[$i]->rutaTextura."','".$modelos[$i]->rutaMaterial."');";
         }
         
         $resultado .= "". 
@@ -62,7 +61,7 @@ function generarMain($modelos, $camara) {
         let aps = 24;
         let spa = 1 / aps;
         setInterval(Renderer.ciclo, spa);
-        });";
+    });";
 
         return $resultado;
 

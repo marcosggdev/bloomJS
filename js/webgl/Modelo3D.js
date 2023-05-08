@@ -907,8 +907,9 @@ class Modelo3D {
     }
 
     serializar () {
-        //nos interesa guardar: pos, angulo, factor
+        //posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial
         return "posX:"+this.posX+";posY:"+this.posY+";posZ:"+this.posZ+";anguloX:"+this.anguloX+";anguloY:"
-        +this.anguloY+";anguloZ:"+this.anguloZ+";factorX:"+this.factorX+";factorY:"+this.factorY+";factorZ:"+this.factorZ;
+        +this.anguloY+";anguloZ:"+this.anguloZ+";factorX:"+this.factorX+";factorY:"+this.factorY+";factorZ:"+this.factorZ+";modo:"+this.modo+
+        ";rutaArchivoDae:"+this.rutaArchivoDae+";"+this.color.serializar()+";rutaTextura:"+this.rutaTextura+";rutaMaterial:"+this.rutaMaterial;
     }
 }   

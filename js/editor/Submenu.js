@@ -153,6 +153,7 @@ class Submenu {
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
                 let a = document.createElement("a");
                 let archivo = new Blob([this.responseText], {type: 'text/plain'});
                 a.href = URL.createObjectURL(archivo);

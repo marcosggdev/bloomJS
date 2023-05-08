@@ -29,4 +29,8 @@ class Color {
         return null;
     }
 
+    serializar () {
+        return "color:rgba("+this.R+"-"+this.G+"-"+this.B+"-"+this.A+")";    
+    }
+
 }
