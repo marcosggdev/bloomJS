@@ -15,10 +15,10 @@
         }
         
         //camara que el renderer utiliza para dibujar
-        let arcballCamera = new ArcballCamera(0,0,0,30,-16,28);
+        let arcballCamera = new ArcballCamera(0,0,0,4.5,-23,23);
 
         //se encarga de dibujar en el canvas
-        Renderer.iniciar(arcballCamera, 640, 480);let modelo0 = new Modelo3D(0, 0, 0, 0,0,0, 1, 1, 1,'T','/bloomJS/assets/defecto/modelos/veleta.dae', new Color(0.5, 0.5, 0.5, 1), '/bloomJS/assets/defecto/texturas/veleta.png','/bloomsJS/assets/materiales/esfera.mtl');Renderer.configurarParametros({"ancho":"800","alto":"480","fondo":{"R":"0.3","G":"0.8","B":"0.3","A":"0.2"},"dibujarGrid":false});//el menu global se actualiza cada vez que se añade o borra un grafico dibujable
+        Renderer.iniciar(arcballCamera, 640, 480);let modelo0 = new Modelo3D(0, -3, 0, 0,0,0, 1, 1, 1,'T','/bloomJS/assets/defecto/modelos/veleta.dae', new Color(0.5, 0.5, 0.5, 1), '/bloomJS/assets/defecto/texturas/veleta.png','/bloomsJS/assets/materiales/esfera.mtl');Renderer.configurarParametros({"ancho":"1920","alto":"1080","fondo":{"R":"0.3","G":"0.3","B":"0.3","A":"0"},"dibujarGrid":false});//el menu global se actualiza cada vez que se añade o borra un grafico dibujable
         
         let grid = new Grid();
         let aps = 24;

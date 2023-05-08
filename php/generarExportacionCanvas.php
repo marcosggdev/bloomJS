@@ -53,7 +53,7 @@ function generarMain($modelos, $camara, $rendererParametros) {
             $resultado .= "let modelo$i = new Modelo3D(".$modelos[$i]->posX.", ".$modelos[$i]->posY.", ".$modelos[$i]->posZ.", ".$modelos[$i]->anguloX.",".
             $modelos[$i]->anguloY.",".$modelos[$i]->anguloZ.", ".$modelos[$i]->factorX.", ".$modelos[$i]->factorY.", ".$modelos[$i]->factorZ.",'".
             $modelos[$i]->modo."','".$modelos[$i]->rutaArchivoDae."', new Color(".$modelos[$i]->color[0].", ".$modelos[$i]->color[1].", ".$modelos[$i]->color[2].", ".
-            $modelos[$i]->color[3]."), '".$modelos[$i]->rutaTextura."','".$modelos[$i]->rutaMaterial."');";
+            $modelos[$i]->color[3]."), '".$modelos[$i]->rutaTextura."','".$modelos[$i]->rutaMaterial."'); modelo$i.funcionActualizar = ".$modelos[$i]->funcionActualizar;
         }
 
         $resultado .= "Renderer.configurarParametros($rendererParametros);";

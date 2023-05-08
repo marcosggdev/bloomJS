@@ -16,6 +16,7 @@ class Modelo3D {
     public $color = [];
     public $rutaTextura;
     public $rutaMaterial;
+    public $funcionActualizar;
 
     //se crea a partir del objeto de js serializado recibido, que es un string
     public function __construct ($cadena) { 
