@@ -98,8 +98,18 @@ class BaseDatos {
                     "nombre VARCHAR(40) UNIQUE NOT NULL,".
                     "clave VARCHAR(15) NOT NULL,".
                     "imagenPerfil VARCHAR(60) DEFAULT 'recursos/imagenesPerfil/defecto.png');",
+
+                "CREATE TABLE IF NOT EXISTS entradas (". 
+                    "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 
+                    "ruta VARCHAR(100) UNIQUE NOT NULL);",
+
+                "CREATE TABLE IF NOT EXISTS comentariosAnonimos (" . 
+                    "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 
+                    "texto VARCHAR(200) NOT NULL," . 
+                    "id_target INT NOT NULL);",
                 
                 "ALTER TABLE modelos ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
+                "ALTER TABLE comentariosAnonimos ADD FOREIGN KEY(id_target) REFERENCES entradas(id);",
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave) VALUES (" . 
@@ -108,7 +118,18 @@ class BaseDatos {
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
                 "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'assets/defecto/previsualizacion/barril.png', 'defecto', '1');",
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
-                "'Veleta', 'Modelo por defecto', 'assets/defecto/modelos/veleta.dae', 'assets/defecto/texturas/veleta.png', 'assets/defecto/previsualizacion/veleta.jpg', 'defecto', '1');"
+                "'Veleta', 'Modelo por defecto', 'assets/defecto/modelos/veleta.dae', 'assets/defecto/texturas/veleta.png', 'assets/defecto/previsualizacion/veleta.jpg', 'defecto', '1');",
+
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/1_Introduccion.php')",
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/2_Graficos3D.php')",
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/3_Matrices.php')",
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/4_MatrizMVP.php')",
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/5_WebGL.php')",
+                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo1', '1');",
+                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo2', '2');",
+                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo3', '3');",
+                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo4', '4');",
+                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo5', '5');"
             ];
             for ($i = 0; $i < count($consultas); $i++) {
                 $con->query($consultas[$i]);

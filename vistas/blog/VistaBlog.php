@@ -1,6 +1,8 @@
 <?php
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once RAIZ_WEB . "modelos/ModeloEntradas.php";
+require_once RAIZ_WEB . "modelos/ModeloComentariosAnonimos.php";
 
 class VistaBlog {
 
@@ -48,21 +50,62 @@ class VistaBlog {
     }
 
     public static function imprimirEntradas ($directorio) {
-        $rutas = scandir($directorio);
 
-        foreach ($rutas as $ruta) {
-            self::imprimirEntrada($directorio . "/" . $ruta);
+        //consultar a la BD
+        $datosEntradas = ModeloEntradas::getEntradas();
+
+        foreach ($datosEntradas as $datosEntrada) {
+            self::imprimirEntrada($datosEntrada["id"], RAIZ_WEB . $datosEntrada["ruta"]);
         }
     }
 
     //la plantilla de entradas tiene div abierto por si se desea introducir algo por codigo desde aqui, por eso las funciones de imprimir entrada
     //imprimiran un cierre de </div>
-    public static function imprimirEntrada ($ruta) {
-        if (is_file($ruta)) {
-            include $ruta;
-            include RAIZ_WEB . "vistas/blog/MenuComentar.php";
-            ?></div><?php
+
+    //id entrada, ruta absoluta de entrada (no la de la BD que es relativa a la raiz)
+    public static function imprimirEntrada ($id, $ruta) {
+        //contenido
+        include $ruta;
+        //menu comentarios
+        self::imprimirMenuComentar($id);
+        //comentarios. id de la entrada es el parametro de la funcion
+        $datosComentarios = ModeloComentariosAnonimos::getComentariosAnonimosPorIdEntrada($id);
+        self::imprimirComentarios($datosComentarios);
+        ?></div><?php
+    }
+
+    public static function imprimirMenuComentar ($id_entrada) {
+?>
+        <div class="menuComentar">
+            <h2>Publicar un comentario anónimo</h2>
+            <textarea name="" id="" cols="30" rows="10">
+
+            </textarea>
+            <input type="hidden" id="id_entrada" value="<?=$id_entrada?>">
+            <button class="botonComentarEntrada">Comentar</button>
+        </div>
+<?php
+    }
+
+    public static function imprimirComentarios ($datosComentarios) {
+?>
+        <div class="comentarios">
+<?php
+        foreach ($datosComentarios as $datosComentario) {
+            self::imprimirComentario($datosComentario);
         }
+?>
+        </div>
+<?php
+    }
+
+    //en el futuro paginar resultados
+    public static function imprimirComentario ($datosComentario) {
+?>
+        <div id="<?=$datosComentario["id"]?>" class="comentario">
+            <p><?=$datosComentario["texto"]?></p>
+        </div>
+<?php
     }
 
 }

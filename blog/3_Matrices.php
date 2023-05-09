@@ -51,4 +51,3 @@
         esta:
     </p>
     <img src="/bloomJS/img/blog/3_matrices/escala.png" alt="">
-</div>

@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
+require_once RAIZ_WEB . "modelos/ModeloEntradas.php";
 
 Vista::imprimirHead("Bloom - JS", 
     [
@@ -15,7 +16,8 @@ Vista::imprimirHead("Bloom - JS",
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",
-        RAIZ . "js/blog/AsideDinamico.js"
+        RAIZ . "js/blog/AsideDinamico.js",
+        RAIZ . "js/blog/ControladorComentar.js"
     ]);
 ?>
 <div id="cabecera">
@@ -25,27 +27,13 @@ Vista::imprimirHead("Bloom - JS",
 </div>
 <main>
 <?php
+    //solo imprimir 1
     if (isset($_GET["entrada"])) {
-        $archivos = scandir(RAIZ_WEB . "blog");
-        for ($i = 0; $i < count($archivos); $i++) {
-            if ($archivos[$i] == "." || $archivos[$i] == "..") {
-                unset($archivos[$i]);
-            }
-        }
-        $archivos = array_values($archivos);
-        $archivo = null;
-        for ($i = 0; $i < count($archivos); $i++) {
-            if ($archivos[$i] == $_GET["entrada"]) {
-                $archivo = $archivos[$i];
-            }
-        }
-        if ($archivo != null) {
-            VistaBlog::imprimirEntrada(RAIZ_WEB . "blog/" . $archivo);
-            VistaBlog::imprimirAside();
-        } else {
-            echo "Ha ocurrido un error. La entrada no se ha encontrado";
-        }
+        $datosEntrada = ModeloEntradas::getEntradaPorRuta("/bloomJS/blog/" . $_GET["entrada"]);
+        VistaBlog::imprimirEntrada($datosEntrada["id"], $datosEntrada["ruta"]);
+        VistaBlog::imprimirAside();
     } else {
+        //imprimir todas
         VistaBlog::imprimirContenido();
     }
 ?>

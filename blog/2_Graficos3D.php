@@ -92,4 +92,3 @@
     <p>En próximas entradas, hablaremos de cómo funciona OpenGL y cómo utiliza estos datos para llegar al resultado 3D final y hablaremos
          también de shaders (programas que se ejecutan en la GPU por cada vértice y por cada píxel de la pantalla) y GLSL (el lenguaje
          utilizado para crear los programas de sombreado (shaders))</p>
-</div>
