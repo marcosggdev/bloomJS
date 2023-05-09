@@ -16,7 +16,7 @@ class VistaBlog {
 <?php
     }
 
-    public static function imprimirAside () {
+    public static function imprimirAside ($nombreEntrada = null) {
 ?>
         <aside id="secundario">
             <h2>Entradas</h2>
@@ -28,7 +28,15 @@ class VistaBlog {
                         $nombreArchivo = explode("blog/", $rutaBD)[1];
                         $nombre = explode("_", $nombreArchivo)[1];
                         $nombre = explode(".php", $nombre)[0];
-                        echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                        if ($nombreEntrada != null) {
+                            if ("blog/" . $nombreEntrada == $datosEntrada["ruta"]) {
+                                echo "<a id='actual'>$nombre</a>";
+                            } else {
+                                echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                            }
+                        } else {
+                            echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                        }
                     }
                 ?>
             </div>

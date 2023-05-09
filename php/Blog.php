@@ -31,7 +31,8 @@ Vista::imprimirHead("Bloom - JS",
     if (isset($_GET["entrada"])) {
         $datosEntrada = ModeloEntradas::getEntradaPorRuta("blog/" . $_GET["entrada"]);
         VistaBlog::imprimirEntrada($datosEntrada["id"], "/bloomJS/".$datosEntrada["ruta"]);
-        VistaBlog::imprimirAside();
+        //se le resta 1 porque el id autoincremento de BD empieza en 1
+        VistaBlog::imprimirAside($_GET["entrada"]);
     } else {
         //imprimir todas
         VistaBlog::imprimirContenido();
