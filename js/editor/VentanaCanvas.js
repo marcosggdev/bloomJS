@@ -223,7 +223,6 @@ class VentanaCanvas {
     static seleccionarObjeto (objeto) {
         //canvas: mostrar menu, funcionactualizar, seleccionar y llamar a la funcion de global
         GUI.menuSeleccion.mostrar(objeto);
-        objeto.funcionActualizar = objeto.funcionSeleccion;
         VentanaCanvas.objetoSeleccionado = objeto;
         VentanaCanvas.globalSeleccionarObjeto(objeto);
         canvas.focus();
@@ -233,9 +232,6 @@ class VentanaCanvas {
     static deseleccionarObjeto () {
         if (VentanaCanvas.objetoSeleccionado != null) {
             //reset + deseleccion en menu global
-            VentanaCanvas.objetoSeleccionado.funcionActualizar = null;
-            VentanaCanvas.objetoSeleccionado.contador = null;
-            VentanaCanvas.objetoSeleccionado.resetearFactores();
             GUI.menuSeleccion.ocultar();
             VentanaCanvas.objetoSeleccionado = null;
             VentanaCanvas.globalOcultarObjeto();

@@ -10,6 +10,10 @@
         <p>Es por ello que te pedimos que rellenes este formulario con tus archivos</p>
         <form action="procesarModelo.php" method="POST">
             <div class="campo">
+                <label for="nombre">Nombre del modelo:</label>
+                <input name="nombre" type="text" placeholder="Nombre del modelo">
+            </div>
+            <div class="campo">
                 <label for="modeloDae">Modelo3D en formato .dae:</label>
                 <input id="dae" type="file" name="modeloDae" accept=".dae">
             </div>
