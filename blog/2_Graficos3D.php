@@ -1,5 +1,4 @@
-<div class="entrada">
-    <img src="/bloomJS/img/barril_blender.jpg" alt="">
+<img src="/bloomJS/img/barril_blender.jpg" alt="">
     <h1>Gráficos en 3D</h1>
     <p>Aquí podrás aprender sobre desarrollo de gráficos en 3D con OpenGL en general, puesto que las implementaciones con WebGL (web), 
         OpenGL ES (moviles) o OpenGL (escritorio) siguen conceptos similares.

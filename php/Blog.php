@@ -29,8 +29,8 @@ Vista::imprimirHead("Bloom - JS",
 <?php
     //solo imprimir 1
     if (isset($_GET["entrada"])) {
-        $datosEntrada = ModeloEntradas::getEntradaPorRuta("/bloomJS/blog/" . $_GET["entrada"]);
-        VistaBlog::imprimirEntrada($datosEntrada["id"], $datosEntrada["ruta"]);
+        $datosEntrada = ModeloEntradas::getEntradaPorRuta("blog/" . $_GET["entrada"]);
+        VistaBlog::imprimirEntrada($datosEntrada["id"], "/bloomJS/".$datosEntrada["ruta"]);
         VistaBlog::imprimirAside();
     } else {
         //imprimir todas

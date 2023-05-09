@@ -1,9 +1,15 @@
-<?php
-
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
-require_once RAIZ_WEB . "modelos/ModeloEntradas.php";
-require_once RAIZ_WEB . "modelos/ModeloComentariosAnonimos.php";
-
-echo "<pre>";
-print_r (ModeloComentariosAnonimos::getComentarioAnonimoPorIdEntrada(2));
-echo "</pre>";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="prueba.css">
+</head>
+<body>
+    <div class="gif_completado">
+        V
+    </div>
+</body>
+</html>

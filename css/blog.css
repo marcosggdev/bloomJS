@@ -101,8 +101,20 @@ div.menuComentar button {
     box-shadow: 2px 2px 5px #593b57;
     transition: transform 0.3s;
 }
-div.menuComentar button:hover {
+div.cajaControles {
+    display: flex;
+    gap: 1em;
+    align-items: stretch;
+}
+div.menuComentar .cajaControles button:hover {
     box-shadow: 0 0 2px #271427;
     background-color: #593b57;
     transform: scale(1.05);
+}
+div.menuComentar .cajaControles img {
+    width: 50px;
+    margin: 0;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
 }

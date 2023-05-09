@@ -1,5 +1,4 @@
-<div class="entrada">
-    <img src="/bloomJS/img/blog/3_matrices/matrices.png" alt="">
+<img src="/bloomJS/img/blog/3_matrices/matrices.png" alt="">
     <h1>Matrices 4x4</h1>
     <hr>
     <p>Bueno, si has llegado hasta aquí ya sabrás que tenemos los datos sobre los vértices del cubo, sus coordenadas UV y los vectores 

@@ -10,9 +10,9 @@ class VistaBlog {
         //esto ira en el main de la pagina
 ?>
         <div id="entradas">
-            <?=VistaBlog::imprimirEntradas(RAIZ_WEB . "blog")?>
+            <?=VistaBlog::imprimirEntradas()?>
         </div>
-        <?=VistaBlog::imprimirAside();?>
+        <?=VistaBlog::imprimirAside()?>
 <?php
     }
 
@@ -22,17 +22,13 @@ class VistaBlog {
             <h2>Entradas</h2>
             <div class="contenidoAside">   
                 <?php
-                    $entradas = scandir(RAIZ_WEB . "blog");
-                    for ($i = 0; $i < count($entradas); $i++) {
-                        if ($entradas[$i] == "." || $entradas[$i] == "..") {
-                            unset($entradas[$i]);
-                        }
-                    }
-                    $entradas = array_values($entradas);
-                    foreach ($entradas as $entrada) {
-                        $nombre = explode("_", $entrada)[1];
+                    $datosEntradas = ModeloEntradas::getEntradas();
+                    foreach ($datosEntradas as $datosEntrada) {
+                        $rutaBD = $datosEntrada["ruta"];
+                        $nombreArchivo = explode("blog/", $rutaBD)[1];
+                        $nombre = explode("_", $nombreArchivo)[1];
                         $nombre = explode(".php", $nombre)[0];
-                        echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$entrada."'>$nombre</a>";
+                        echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
                     }
                 ?>
             </div>
@@ -49,13 +45,13 @@ class VistaBlog {
 <?php
     }
 
-    public static function imprimirEntradas ($directorio) {
+    public static function imprimirEntradas () {
 
         //consultar a la BD
         $datosEntradas = ModeloEntradas::getEntradas();
 
         foreach ($datosEntradas as $datosEntrada) {
-            self::imprimirEntrada($datosEntrada["id"], RAIZ_WEB . $datosEntrada["ruta"]);
+            self::imprimirEntrada($datosEntrada["id"], "/bloomJS/".$datosEntrada["ruta"]);
         }
     }
 
@@ -64,8 +60,9 @@ class VistaBlog {
 
     //id entrada, ruta absoluta de entrada (no la de la BD que es relativa a la raiz)
     public static function imprimirEntrada ($id, $ruta) {
+        ?><div id="<?="entrada_".$id?>" class="entrada"><?php
         //contenido
-        include $ruta;
+        include $_SERVER["DOCUMENT_ROOT"] . $ruta;
         //menu comentarios
         self::imprimirMenuComentar($id);
         //comentarios. id de la entrada es el parametro de la funcion
@@ -82,7 +79,10 @@ class VistaBlog {
 
             </textarea>
             <input type="hidden" id="id_entrada" value="<?=$id_entrada?>">
-            <button class="botonComentarEntrada">Comentar</button>
+            <div class="cajaControles">
+                <button class="botonComentarEntrada">Comentar</button>
+                <img src="/bloomJS/img/gif/completado.gif" alt="">
+            </div>
         </div>
 <?php
     }

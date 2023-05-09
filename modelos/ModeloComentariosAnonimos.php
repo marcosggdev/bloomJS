@@ -51,7 +51,7 @@ class ModeloComentariosAnonimos {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
             $sql = "INSERT INTO comentariosAnonimos(texto, id_target) VALUES (:texto, :id_target)";
             $preparada = $pdo->prepare($sql);
-            $preparada->execute([":texto" => $texto, ":id_target" => $id_target]);
+            $preparada->execute([":texto" => $texto, ":id_target" => $id_entrada]);
             return $pdo->lastInsertId();
         } catch (PDOException $e) {
             print_r($e->getMessage());
