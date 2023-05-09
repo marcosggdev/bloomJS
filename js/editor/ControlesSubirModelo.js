@@ -121,4 +121,22 @@ class ControlesSubirModelo {
 
     }
 
+    static cargarModelosDefecto (contenedor) {
+        let malla = contenedor.querySelector("div.malla");
+        contenedor.removeChild(malla);
+        GUI.generarMalla(contenedor, "/bloomJS/vistas/editor/modelo.php", "defecto", "0", null, 3);
+    }
+
+    static cargarModelosUsuario (contenedor) {
+        let malla = contenedor.querySelector("div.malla");
+        contenedor.removeChild(malla);
+        GUI.generarMalla(contenedor, "/bloomJS/vistas/editor/modelo.php", "usuario", "0", null, 3);
+    }
+
+    static cargarModelosComunidad (contenedor) {
+        let malla = contenedor.querySelector("div.malla");
+        contenedor.removeChild(malla);
+        GUI.generarMalla(contenedor, "/bloomJS/vistas/editor/modelo.php", "comunidad", "0", null, 3);
+    }
+
 }

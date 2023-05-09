@@ -440,3 +440,38 @@ img.iconoFuncional {
 img.iconoFuncional:hover {
     transform: scale(1.2);
 }
+.barraPestanas {
+    display: flex;
+    align-items: stretch;
+}
+.barraPestanas ul {
+    display: flex;
+    flex-grow: 1;
+    /* align-items: stretch; */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 11pt;
+    background-color: #736074;
+}
+.barraPestanas ul li {
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 53px #573a3f;
+    user-select: none;
+}
+.barraPestanas ul li:not(:last-of-type) {
+    border-right: 1px solid #212121;
+}
+.barraPestanas ul li:hover {
+    background-color: #271427;
+}
+/*
+GUI:
+Primario: #271427;
+Secundario: #593b57;
+fondo: #212121;
+*/
+.barraPestanas ul li#actual {
+    background-color: #271427;
+}

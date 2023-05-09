@@ -77,4 +77,87 @@ class ModeloModelos {
         }
     }
 
+    public static function getModelosPorDefecto () {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "SELECT * FROM modelos WHERE tipo=:tipo";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":tipo" => "defecto"]);
+            $registros = [];
+            while ($registro = $preparada->fetch()) {
+                $array = [
+                    'id' => $registro['id'], 
+                    'nombre' => $registro['nombre'], 
+                    'descripcion' => $registro['descripcion'], 
+                    'rutaModelo' => $registro['rutaModelo'],
+                    'rutaTextura' => $registro['rutaTextura'],
+                    'previsualizacion' => $registro['previsualizacion'],
+                    'tipo' => $registro['tipo'],
+                    'id_autor' => $registro['id_autor']
+                ];
+                $registros[] = $array;
+            }
+            return $registros;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
+    //id_autor = 1 => autor = admin
+    public static function getModelosPorIdAutor ($id_autor) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id_autor" => $id_autor]);
+            $registros = [];
+            while ($registro = $preparada->fetch()) {
+                $array = [
+                    'id' => $registro['id'], 
+                    'nombre' => $registro['nombre'], 
+                    'descripcion' => $registro['descripcion'], 
+                    'rutaModelo' => $registro['rutaModelo'],
+                    'rutaTextura' => $registro['rutaTextura'],
+                    'previsualizacion' => $registro['previsualizacion'],
+                    'tipo' => $registro['tipo'],
+                    'id_autor' => $registro['id_autor']
+                ];
+                $registros[] = $array;
+            }
+            return $registros;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
+    //id_autor = 2 =_ autor = comunidad
+    public static function getModelosComunidad () {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id_autor" => 2]);
+            $registros = [];
+            while ($registro = $preparada->fetch()) {
+                $array = [
+                    'id' => $registro['id'], 
+                    'nombre' => $registro['nombre'], 
+                    'descripcion' => $registro['descripcion'], 
+                    'rutaModelo' => $registro['rutaModelo'],
+                    'rutaTextura' => $registro['rutaTextura'],
+                    'previsualizacion' => $registro['previsualizacion'],
+                    'tipo' => $registro['tipo'],
+                    'id_autor' => $registro['id_autor']
+                ];
+                $registros[] = $array;
+            }
+            return $registros;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

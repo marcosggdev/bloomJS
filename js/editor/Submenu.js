@@ -74,6 +74,7 @@ class Submenu {
             menu.id = "menuModelos";
             menu.className = "menuPopUp visible";
             GUI.crearBarraCierre(menu, "Modelos predeterminados");
+            GUI.crearBarraPestanas(menu, 0, ["P. Defecto", "Usuario", "Comunidad"], ["cargarModelosDefecto", "cargarModelosUsuario", "cargarModelosComunidad"]);
             GUI.generarMalla(menu, "/bloomJS/vistas/editor/modelo.php", "defecto", "0", null, 3);
             document.getElementById("gui").appendChild(menu);
         } else {

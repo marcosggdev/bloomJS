@@ -446,4 +446,30 @@ class GUI {
         contenedor.appendChild(select);
     }
 
+    static crearBarraPestanas (contenedor, indiceActual, nombres, callbacks) {
+        let div = document.createElement("div");
+        div.className = "barraPestanas";
+
+        let ul = document.createElement("ul");
+        for (let i = 0; i < nombres.length; i++) {
+            let li = document.createElement("li");
+            if (i == indiceActual) {
+                li.id = "actual";
+            }
+            li.textContent = nombres[i];
+            ul.appendChild(li);
+            li.addEventListener("click", () => {
+                if (li.id != "actual") {
+                    ControlesSubirModelo[callbacks[i]](contenedor, li);
+                    let actualPrevio = contenedor.querySelector("li#actual");
+                    actualPrevio.id = "";
+                    li.id = "actual";
+                }
+            });
+        }
+
+        div.appendChild(ul);
+        contenedor.appendChild(div);
+    }
+
 }

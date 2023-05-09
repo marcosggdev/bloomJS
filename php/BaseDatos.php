@@ -120,6 +120,7 @@ class BaseDatos {
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
                 "'Veleta', 'Modelo por defecto', 'assets/defecto/modelos/veleta.dae', 'assets/defecto/texturas/veleta.png', 'assets/defecto/previsualizacion/veleta.jpg', 'defecto', '1');",
 
+                "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/0_Notas de desarrollo.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/1_Introduccion.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/2_Graficos3D.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/3_Matrices.php')",

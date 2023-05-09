@@ -5,7 +5,12 @@ require_once RAIZ_WEB . "modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "modelos/ModeloUsuarios.php";
 
 if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
-    $modelosRegistros = ModeloModelos::getModelosPorTipoYNumero($_POST["tipo"], (int)$_POST["numero"]);
+    //tipo de la forma: defecto, usuario o comunidad. No tiene que ver con la BD
+    switch ($_POST["tipo"]) {
+        case "defecto": $modelosRegistros = ModeloModelos::getModelosPorDefecto(); break;
+        case "usuario": $modelosRegistros = ModeloModelos::getModelosPorIdAutor(1); break;
+        case "comunidad": $modelosRegistros = ModeloModelos::getModelosComunidad(); break;
+    }
 ?>
     <div class="contenedor">
 <?php
