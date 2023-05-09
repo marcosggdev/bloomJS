@@ -10,72 +10,39 @@ class VistaBlog {
         <div id="entradas">
             <?=VistaBlog::imprimirEntradas(RAIZ_WEB . "blog")?>
         </div>
-        <aside id="secundario">
-            <h2>Buscador</h2>
-            <p>Utiliza el buscador para moverte más rápido por el Blog</p>
-            <hr>
-            <h2>Entradas</h2>
-            <hr>
-            <?php
-                $entradas = scandir(RAIZ_WEB . "blog");
-                for ($i = 0; $i < count($entradas); $i++) {
-                    if ($entradas[$i] == "." || $entradas[$i] == "..") {
-                        unset($entradas[$i]);
-                    }
-                }
-                $entradas = array_values($entradas);
-                foreach ($entradas as $entrada) {
-                    $nombre = explode("_", $entrada)[1];
-                    $nombre = explode(".php", $nombre)[0];
-                    echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$entrada."'>$nombre</a>";
-                }
-            ?>
-            <hr>
-            <h2>Sobre mí</h2>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <h2>Instituciones</h2>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <hr>
-        </aside>
+        <?=VistaBlog::imprimirAside();?>
 <?php
     }
 
     public static function imprimirAside () {
 ?>
         <aside id="secundario">
-            <h2>Buscador</h2>
-            <p>Utiliza el buscador para moverte más rápido por el Blog</p>
-            <hr>
             <h2>Entradas</h2>
-            <hr>
-            <?php
-                $entradas = scandir(RAIZ_WEB . "blog");
-                for ($i = 0; $i < count($entradas); $i++) {
-                    if ($entradas[$i] == "." || $entradas[$i] == "..") {
-                        unset($entradas[$i]);
+            <div class="contenidoAside">   
+                <?php
+                    $entradas = scandir(RAIZ_WEB . "blog");
+                    for ($i = 0; $i < count($entradas); $i++) {
+                        if ($entradas[$i] == "." || $entradas[$i] == "..") {
+                            unset($entradas[$i]);
+                        }
                     }
-                }
-                $entradas = array_values($entradas);
-                foreach ($entradas as $entrada) {
-                    $nombre = explode("_", $entrada)[1];
-                    $nombre = explode(".php", $nombre)[0];
-                    echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$entrada."'>$nombre</a>";
-                }
-            ?>
-            <hr>
+                    $entradas = array_values($entradas);
+                    foreach ($entradas as $entrada) {
+                        $nombre = explode("_", $entrada)[1];
+                        $nombre = explode(".php", $nombre)[0];
+                        echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$entrada."'>$nombre</a>";
+                    }
+                ?>
+            </div>
             <h2>Sobre mí</h2>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
+            <div class="contenidoAside">
+                <a href="https://github.com/marcosggdev">Github</a>
+                <a href="http://localhost:30080/bloomJS/php/Blog.php?entrada=1_Introduccion.php">BloomJS</a>
+            </div>
             <h2>Instituciones</h2>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <a href="">Enlace</a>
-            <hr>
+            <div class="contenidoAside">
+                <a href="https://ibq.es/">IES Bernaldo de Quirós</a>
+            </div>
         </aside>
 <?php
     }
@@ -88,9 +55,13 @@ class VistaBlog {
         }
     }
 
+    //la plantilla de entradas tiene div abierto por si se desea introducir algo por codigo desde aqui, por eso las funciones de imprimir entrada
+    //imprimiran un cierre de </div>
     public static function imprimirEntrada ($ruta) {
         if (is_file($ruta)) {
             include $ruta;
+            include RAIZ_WEB . "vistas/blog/MenuComentar.php";
+            ?></div><?php
         }
     }
 

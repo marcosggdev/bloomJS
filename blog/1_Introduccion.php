@@ -40,4 +40,3 @@
     <p>Y así hemos llegado a esta página: mi proyecto para fin de ciclo del CFGS DAW, impartido en el <a href="https://ibq.es/" target="_blank">IES Bernaldo 
         de Quirós
     </a></p>
-</div>

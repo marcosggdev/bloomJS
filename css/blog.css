@@ -16,7 +16,6 @@ div#entradas {
     padding: 1em;
 }
 aside#secundario {
-    position: fixed;
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -25,10 +24,15 @@ aside#secundario {
     width: 30%;
     text-align: justify;
     height: fit-content;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
     z-index: 0;
+    gap: 1em;
+}
+aside h2, aside p {
+    margin: 0;
+}
+aside .contenidoAside {
+    display: flex;
+    flex-direction: column;
 }
 main > div.entrada {
     text-align: justify;
@@ -78,4 +82,27 @@ em::after {
     content: "/>";
     font-size: 1.2rem;
     color: #a131a1;
+}
+div.menuComentar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+div.menuComentar textarea {
+    resize: none;
+}
+div.menuComentar button {
+    width: 20%;
+    padding: 1em;
+    background-color: #271427;
+    color: white;
+    border: none;
+    box-shadow: 2px 2px 5px #593b57;
+    transition: transform 0.3s;
+}
+div.menuComentar button:hover {
+    box-shadow: 0 0 2px #271427;
+    background-color: #593b57;
+    transform: scale(1.05);
 }

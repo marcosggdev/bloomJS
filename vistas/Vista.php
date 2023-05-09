@@ -85,19 +85,7 @@ class Vista {
                     <div id="principal">
                         <div id="contactos">
                             <h1>Contacto</h1>
-                            <a href="" class="contacto">
-                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
-                                <small>Github</small>
-                            </a>
-                            <a href="" class="contacto">
-                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
-                                <small>Github</small>
-                            </a>
-                            <a href="" class="contacto">
-                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
-                                <small>Github</small>
-                            </a>
-                            <a href="" class="contacto">
+                            <a href="https://github.com/marcosggdev" class="contacto">
                                 <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
                                 <small>Github</small>
                             </a>
@@ -117,10 +105,6 @@ class Vista {
                         </div>
                         <div id="logos">
                             <h1>Instituciones</h1>
-                            <div class="logo">
-                                <img src="/bloomJS/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
-                                <small>IES Bernaldo de Quirós</small>
-                            </div>
                             <div class="logo">
                                 <img src="/bloomJS/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
                                 <small>IES Bernaldo de Quirós</small>
