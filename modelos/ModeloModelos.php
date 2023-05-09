@@ -62,4 +62,19 @@ class ModeloModelos {
         }
     }
 
+    public static function insertarModelo ($nombre, $descripcion, $rutaModelo, $rutaTextura) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "INSERT INTO modelos(nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
+            ":nombre, :descripcion, :rutaModelo, :rutaTextura, :previsualizacion, :tipo, :id_autor)";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":nombre" => $nombre, ":descripcion" => $descripcion, ":rutaModelo" => $rutaModelo, ":rutaTextura" => $rutaTextura,
+                    ":previsualizacion" => "assets/defecto/previsualizacion/defecto.png", ":tipo" => "Subido", ":id_autor" => 1]);
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

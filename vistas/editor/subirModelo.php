@@ -8,10 +8,14 @@
 </div>
 <div id="contenido">
         <p>Es por ello que te pedimos que rellenes este formulario con tus archivos</p>
-        <form action="procesarModelo.php" method="POST">
+        <form action="ProcesarArchivoSubido.php" method="POST">
             <div class="campo">
                 <label for="nombre">Nombre del modelo:</label>
-                <input name="nombre" type="text" placeholder="Nombre del modelo">
+                <input id="nombre" name="nombre" type="text" placeholder="Nombre del modelo">
+            </div>
+            <div class="campo">
+                <label for="descripcion">Descripción breve:</label>
+                <input id="descripcion" name="descripcion" type="text" placeholder="Descripción">
             </div>
             <div class="campo">
                 <label for="modeloDae">Modelo3D en formato .dae:</label>

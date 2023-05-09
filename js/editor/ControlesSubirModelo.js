@@ -9,8 +9,11 @@ class ControlesSubirModelo {
         });
 
         //input de archivos
+        let inputNombre = dialog.querySelector("#nombre");
+        let inputDescripcion = dialog.querySelector("#descripcion");
         let inputDae = dialog.querySelector("#dae");
         let inputTextura = dialog.querySelector("#textura");
+
         let archivoDae = null;
         let textura = null;
 
@@ -26,9 +29,14 @@ class ControlesSubirModelo {
         let boton = dialog.querySelector("input[type=button]");
         boton.addEventListener("click", () => {
 
+            let nombre = inputNombre.value;
+            let descripcion = inputDescripcion.value;
+
             //si se han añanido ambos
             if (archivoDae != null && textura != null) {
                 let formData = new FormData();
+                formData.append("nombre", nombre);
+                formData.append("descripcion", descripcion);
                 formData.append("archivoDae", archivoDae);
                 formData.append("textura", textura);
     
@@ -41,6 +49,8 @@ class ControlesSubirModelo {
                 }
                 req.open("POST", "/bloomJS/php/ProcesarArchivoSubido.php");
                 req.send(formData);
+            } else {
+                alert("No puede dejar el archivo .dae o la textura sin incluir, vuelva a intentarlo");
             }
         });
 
