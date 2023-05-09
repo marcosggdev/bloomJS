@@ -97,7 +97,7 @@ class BaseDatos {
                     "correo VARCHAR(100) NOT NULL,".
                     "nombre VARCHAR(40) UNIQUE NOT NULL,".
                     "clave VARCHAR(15) NOT NULL,".
-                    "imagenPerfil VARCHAR(60) DEFAULT 'recursos/imagenesPerfil/defecto.png');",
+                    "imagenPerfil VARCHAR(60) DEFAULT 'assets/defecto/imagenesPerfil/defecto.png');",
 
                 "CREATE TABLE IF NOT EXISTS entradas (". 
                     "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 

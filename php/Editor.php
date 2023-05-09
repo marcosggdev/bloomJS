@@ -43,7 +43,8 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Renderer.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js"
+        RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "js/general/ControladorUsuarioGrande.js"
     ]);
 ?>
 <div id="cabecera">

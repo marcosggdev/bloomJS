@@ -11,7 +11,8 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                 RAIZ . "css/animaciones.css"
         ], 
         [
-                RAIZ . "js/general/NavDinamico.js"
+                RAIZ . "js/general/NavDinamico.js",
+                RAIZ . "js/general/ControladorUsuarioGrande.js"
         ]
 )?>
 
@@ -20,8 +21,8 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         <div id="cabecera">
 
         <?=Vista::imprimirHeader("BloomJS", "Utiliza gráficos avanzados en tu página")?>
-
         <?=Vista::imprimirNav(Vista::$entradas, 0)?>
+        <?=Vista::imprimirUsuario()?>
         <?=Vista::imprimirNavEstatico(Vista::$entradas, 0)?>
 
         </div>

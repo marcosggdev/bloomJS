@@ -122,4 +122,30 @@ class Vista {
 <?php
     }
 
+    public static function imprimirUsuario () {
+        if (isset($_SESSION["usuario"])) {
+            $usuario = $_SESSION["usuario"];
+?>
+            <div class="usuarioGrande">
+                <img src="<?=$usuario->imagenPerfil?>" alt="Imagen de perfil">
+                <div class="contenido">
+                    <p><?=$usuario->nombre?></p>
+                    <p><?=$usuario->correo?></p>
+                </div>
+            </div>
+<?php
+        } else {
+?>
+            <div class="usuarioGrande">
+                <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
+                <div class="contenido">
+                    <button id="iniciarSesion">Iniciar sesión</button>
+                </div>
+            </div> 
+<?php
+        }
+?>
+<?php
+    }
+
 }

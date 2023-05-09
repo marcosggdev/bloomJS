@@ -18,7 +18,8 @@ Vista::imprimirHead("Bloom - JS",
        
         RAIZ . "js/generador/Lienzo.js",
         RAIZ . "js/generador/Contenedor.js",
-        RAIZ . "js/generador/Main.js"
+        RAIZ . "js/generador/Main.js",
+        RAIZ . "js/general/ControladorUsuarioGrande.js"
     ]);
 ?>
 <div id="cabecera">

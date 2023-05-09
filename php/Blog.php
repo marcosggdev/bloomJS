@@ -17,7 +17,8 @@ Vista::imprimirHead("Bloom - JS",
     [
         RAIZ . "js/general/NavDinamico.js",
         RAIZ . "js/blog/AsideDinamico.js",
-        RAIZ . "js/blog/ControladorComentar.js"
+        RAIZ . "js/blog/ControladorComentar.js",
+        RAIZ . "js/general/ControladorUsuarioGrande.js"
     ]);
 ?>
 <div id="cabecera">
