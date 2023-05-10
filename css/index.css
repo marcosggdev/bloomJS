@@ -1,4 +1,12 @@
 main {
+    display: flex;
+    position: relative;
+    padding: 4em;
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     padding: 0;
 }
 main section {
@@ -9,6 +17,20 @@ main section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+main p.breve {
+    width: 15%;
+    text-align: justify;
+    padding: 4em;
+}
+section#blog {
+    width: 100%;
+    background-color: #212121;
+}
+section#blog > h1 {
+    color: white;
+    font-family: fantasy;
+    font-size: 24pt;
 }
 main section p {
     font-size: 14pt;

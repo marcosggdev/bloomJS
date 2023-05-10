@@ -12,7 +12,9 @@ Vista::imprimirHead("Bloom - JS",
     [
         RAIZ . "css/general.css",
         RAIZ . "css/animaciones.css",
-        RAIZ . "css/blog.css"
+        RAIZ . "css/blog.css",
+        RAIZ . "css/entrada.css",
+        RAIZ . "css/comentarios.css"
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",

@@ -116,4 +116,35 @@ class VistaBlog {
 <?php
     }
 
+    //carrusel horizontal donde se van presentando previews de las entradas
+    public static function imprimirCarruselEntradas () {
+        $datosEntradas = ModeloEntradas::getEntradas();
+?>
+        <div class="carruselHorizontal">
+<?php
+            foreach ($datosEntradas as $datosEntrada) {
+                $nombreEntrada = explode("blog/", $datosEntrada["ruta"])[1];
+                echo "<div class='previewEntrada'>";
+                echo "<div class='contenido'>";
+                self::imprimirPreviewEntrada($datosEntrada["ruta"]);
+                echo "</div><div class='control'>";
+                ?>
+                <button class="neon" onclick="window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=<?=$nombreEntrada?>')">Leer más</button>
+                <?php
+                echo "</div></div>";
+            }
+?>
+        </div>
+<?
+    }
+
+    //lee una entrada y genera algo para resumirla. En este caso podria ser la imagen del inicio, el titulo y un numero
+    //de caracteres del contenido
+    public static function imprimirPreviewEntrada ($ruta) {
+        $archivo = fopen(RAIZ_WEB . $ruta, "r");
+        $contenido = fread($archivo, 200 * 4);
+        $contenido .= "...";
+        echo $contenido;
+    }
+
 }

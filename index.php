@@ -1,93 +1,72 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 session_start();
 ?>
 
 
 <?=Vista::imprimirHead("Bloom - JS", 
-        [
-                RAIZ . "css/general.css", 
-                RAIZ . "css/index.css",
-                RAIZ . "css/animaciones.css"
-        ], 
-        [
-                RAIZ . "js/general/NavDinamico.js",
-                RAIZ . "js/general/AnimacionMostrarIzquierda.js"
-        ]
+	[
+		RAIZ . "css/general.css", 
+		RAIZ . "css/index.css",
+		RAIZ . "css/animaciones.css",
+        RAIZ . "css/entrada.css",
+        RAIZ . "css/comentarios.css",
+        RAIZ . "css/carruselHorizontal.css",
+        RAIZ . "css/neon.css"
+	], 
+	[
+		RAIZ . "js/general/NavDinamico.js",
+		RAIZ . "js/general/AnimacionMostrarIzquierda.js"
+	]
 )?>
 
     <body>
 
-        <div id="cabecera">
+	<div id="cabecera">
 
-        <?=Vista::imprimirHeader("BloomJS", "Utiliza gráficos avanzados en tu página")?>
-        <?=Vista::imprimirNav(Vista::$entradas, 0)?>
-        <?=Vista::imprimirUsuario()?>
-        <?=Vista::imprimirNavEstatico(Vista::$entradas, 0)?>
+	<?=Vista::imprimirHeader("BloomJS", "Utiliza gráficos avanzados en tu página")?>
+	<?=Vista::imprimirNav(Vista::$entradas, 0)?>
+	<?=Vista::imprimirUsuario()?>
+	<?=Vista::imprimirNavEstatico(Vista::$entradas, 0)?>
 
-        </div>
+	</div>
 
-        <main>
-        <section id="bienvenida">
-                <div class="textoSecundario">
-                        <h2>¡Bienvenido a BloomJS!</h2>
-                        <p>Bienvenido a BloomJS. Se trata de mi proyecto para el CFGS Desarrollo de Aplicaciones Web</p>
-                        <p>BloomJS te ayudará a darle un toque 3D a tus proyectos de Desarrollo Web, permitiéndote insertar
-                           en tu página modelos 3D animados y otros efectos, gracias a WebGL
-                        </p>
-                </div>
-                <div class="contenedorImagen">
-                        <img src="/bloomJS/img/colorido.jpg" alt="Imagen de fondo">
-                </div>
-            </section>
-            <section id="funcionalidades">
-                <div class="contenedorImagen">
-                        <img src="/bloomJS/img/pluma.jpg" alt="Fondo">
-                </div>
-                <div class="textoSecundario">
-                        <h2>¿Para qué sirve BloomJS?</h2>
-                        <p>Entre las funcionalidades de BloomJS están: </p>
-                        <ul>
-                                <li>Generar patrones con la forma que tú mismo/a elijas</li>
-                                <li>La generación de escenas en 3D para colocarlas en tu página</li>
-                                <li>Generación de animaciones píxel</li>
-                                <li>Compartir es vivir: comparte tus chulísimos gráficos generados bajo tus directrices</li>
-                                <li>Generación de gráficos por shader: ¡Tu navegador también utiliza la GPU, aprovéchalo!</li>
-                        </ul>
-                </div>
-            </section>
-            <section id="empezar">
-                <div class="textoSecundario">
-                        <h2>¡Empecemos!</h2>
-                        <p>Utilizar BloomJS no es tan difícil como parece. Si te gusta ir a tu bola siéntete libre de explorar el resto
-                                del sitio libremente. Sin embargo, si te gustaría tener una experiencia más ordenada, te recomendamos que leas
-                                los artículos en la sección <a href="">Guías</a>. Espero que la aplicación te sea de utilidad. Por supuesto,
-                                si necesitas informar sobre un bug, atención de soporte o cualquier cosa no dudes en enviarnos un correo a
-                                <email>Correo</email> ¡Bienvenido/a a BloomJS!
-                        </p>
-                        <button id="empezar" class="redireccion" onclick="window.location.assign('php/Editor.php')">Ir al Editor</button>
-                </div>
-                <div class="contenedorImagen">
-                </div>
-                <div class="enlaces">
-                        <div class="enlace">
-                                <h2>Prueba nuestro editor</h2>
-                                        <p>Te ayudará con el diseño de tu página</p>
-                                <a href="/bloomJS/php/paginas/Editor.php">Editor <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
-                        </div>
-                        <div class="enlace">
-                                <h2>Genera tus propios assets</h2>
-                                        <p>Para que no tengas que preouparte por el copyright</p>
-                                <a href="/bloomJS/php/paginas/Generador.php">Generador <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
-                        </div>
-                        <div class="enlace">
-                                <h2>¡Comparte tus creaciones!</h2>
-                                        <p>Descubre las creaciones de otros usuarios</p>
-                                <a href="/bloomJS/php/paginas/Comunidad.php">Comunidad <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
-                        </div>
-                </div>
-            </section>
-        </main>
+	<main>
+        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+        <h1>¡Bienvenido/a a BloomJS!</h1>
+        <p>BloomJS es una aplicación web resultado del proyecto de fin de ciclo formativo de Desarrollo de Aplicaciones Web. Permitirá
+            a los desarrolladores web disponer de una herramienta más para añadir gráficos 3D a sus páginas de forma sencilla, 
+            generar plantillas y patrones de imágenes por algoritmos y compartir assets gratuitos (sin licencia) con la comunidad.
+        </p>
+        <p>Para lograr esto, la página se ha desarrollado con las tecnologías fundamentales del entorno web, como lo son HTML, CSS, 
+            JavaScript y PHP. Además, para lograr la generación de gráficos avanzados con la aplicación, se ha utilizado WebGL como 
+            API de gráficos en entorno web.
+        </p>
+        <img src="/bloomJS/img/tecnologias_web.png" alt="">
+        <p>Te invitamos a pasarte por la zona del editor o por el blog, donde podrás aprender sobre la programación de gráficos en 
+            JavaScript</p>
+        <q>Esta es mi página para el proyecto de CFGS Desarrollo de Aplicaciones Web, espero que te sea útil y que aprendas sobre 
+            la programación de gráficos con JavaScript. Att: Marcos García García</q>
+        <p class="breve">¡Tenemos un editor muy chulo!</p>
+        <section>
+            <h1>Editor</h1>
+            <!--insertar aqui modelo 3d cuando funcione la exportacion-->
+        </section>
+        <p class="breve">¡Y también podrás generar imágenes!</p>
+        <section>
+            <h1>Generador</h1>
+            <!--insertar aqui imagenes generadas en el generador-->
+            <?=VistaBlog::imprimirEntrada("2", "/bloomJS/blog/1_Introduccion.php")?>
+        </section>
+        <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre cómo fue el desarrollo del proyecto, o conceptos básicos
+            sobre WebGL. También tenemos una cronología del desarrollo del proyecto.
+        </p>
+        <section id="blog">
+            <h1>Blog</h1>
+            <?=VistaBlog::imprimirCarruselEntradas();?>
+        </section>
+	</main>
 
-        <?=Vista::imprimirFooter()?>
+	<?=Vista::imprimirFooter()?>

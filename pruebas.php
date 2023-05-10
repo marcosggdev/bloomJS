@@ -1,3 +1,7 @@
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +12,6 @@
     <link rel="stylesheet" href="prueba.css">
 </head>
 <body>
-    <div class="gif_completado">
-        V
-    </div>
+    <?=VistaBlog::generarPreviewEntrada("blog/1_Introduccion.php")?>
 </body>
 </html>

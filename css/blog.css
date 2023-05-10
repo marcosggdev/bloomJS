@@ -83,30 +83,9 @@ aside .contenidoAside {
     display: flex;
     flex-direction: column;
 }
-main > div.entrada {
-    text-align: justify;
-    width: 70%;
-    padding: 1em;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-div.entrada {
-    text-align: justify;
-}
-div.entrada img {
-    max-width: 100%;
-    max-height: 80vh;
-    margin-top: 1em;
-    margin-bottom:1em;
-}
 img.ilustracionMatematica {
     width: fit-content;
     height: fit-content;
-}
-div.entrada img.lateral {
-    width: 40%;
 }
 /*imagen a izquierda y caja a la derecha*/
 div.imgIzquierda {
@@ -132,40 +111,11 @@ em::after {
     font-size: 1.2rem;
     color: #a131a1;
 }
-div.menuComentar {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-}
-div.menuComentar textarea {
-    resize: none;
-}
-div.menuComentar button {
-    width: 20%;
-    padding: 1em;
-    background-color: #271427;
-    color: white;
-    border: none;
-    box-shadow: 2px 2px 5px #593b57;
-    transition: transform 0.3s;
-}
+
 div.cajaControles {
     display: flex;
     gap: 1em;
     align-items: stretch;
-}
-div.menuComentar .cajaControles button:hover {
-    box-shadow: 0 0 2px #271427;
-    background-color: #593b57;
-    transform: scale(1.05);
-}
-div.menuComentar .cajaControles img {
-    width: 50px;
-    margin: 0;
-    border-radius: 6px;
-    opacity: 0;
-    transition: opacity 0.2s;
 }
 div.contenido p {
     margin-top: 1em;
@@ -239,17 +189,4 @@ ul.cronologia li:nth-child(2n+1)::before {
 }
 ul.cronologia li:nth-child(2n+1) {
     left: 203px;
-}
-div.entrada h1 {
-    color: #ffffff;
-    font-family: fantasy;
-    font-size: 26pt;
-    border-bottom: 4px solid #650066;
-    background: repeating-linear-gradient(45deg, #81009c, #b000ff 150px);
-    margin: 0;
-    padding: 0.5em;
-    box-shadow: 2px 2px 5px black;
-}
-div.entrada h1::first-letter {
-    color: #95ff95;
 }
