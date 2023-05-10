@@ -129,7 +129,7 @@ class VistaBlog {
                 self::imprimirPreviewEntrada($datosEntrada["ruta"]);
                 echo "</div><div class='control'>";
                 ?>
-                <button class="neon" onclick="window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=<?=$nombreEntrada?>')">Leer más</button>
+                <button class="caja-neon" onclick="window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=<?=$nombreEntrada?>')">Leer más</button>
                 <?php
                 echo "</div></div>";
             }

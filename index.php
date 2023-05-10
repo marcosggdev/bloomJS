@@ -14,7 +14,8 @@ session_start();
         RAIZ . "css/entrada.css",
         RAIZ . "css/comentarios.css",
         RAIZ . "css/carruselHorizontal.css",
-        RAIZ . "css/neon.css"
+        RAIZ . "css/neon.css",
+        RAIZ . "css/cronologia.css"
 	], 
 	[
 		RAIZ . "js/general/NavDinamico.js",
@@ -34,8 +35,10 @@ session_start();
 	</div>
 
 	<main>
-        <img src="/bloomJS/img/barril_blender.jpg" alt="">
-        <h1>¡Bienvenido/a a BloomJS!</h1>
+        <div class="titulo">
+        <h1 class="texto-neon">¡Bienvenido/a a BloomJS!</h1>
+        </div>
+        
         <p>BloomJS es una aplicación web resultado del proyecto de fin de ciclo formativo de Desarrollo de Aplicaciones Web. Permitirá
             a los desarrolladores web disponer de una herramienta más para añadir gráficos 3D a sus páginas de forma sencilla, 
             generar plantillas y patrones de imágenes por algoritmos y compartir assets gratuitos (sin licencia) con la comunidad.
@@ -58,11 +61,12 @@ session_start();
         <section>
             <h1>Generador</h1>
             <!--insertar aqui imagenes generadas en el generador-->
-            <?=VistaBlog::imprimirEntrada("2", "/bloomJS/blog/1_Introduccion.php")?>
         </section>
+        <?=VistaBlog::imprimirEntrada("1", "/bloomJS/blog/0_Notas de desarrollo.php")?>
         <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre cómo fue el desarrollo del proyecto, o conceptos básicos
             sobre WebGL. También tenemos una cronología del desarrollo del proyecto.
         </p>
+        <?=VistaBlog::imprimirEntrada("2", "/bloomJS/blog/1_Introduccion.php")?>
         <section id="blog">
             <h1>Blog</h1>
             <?=VistaBlog::imprimirCarruselEntradas();?>

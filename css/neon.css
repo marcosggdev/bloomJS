@@ -1,4 +1,4 @@
-.neon {
+.caja-neon {
     background-color: #47003d;
     color: #730069;
     border: none;
@@ -10,9 +10,66 @@
     border: 4px solid #690050;
     font-size: 16pt;
 }
-.neon:hover {
+.caja-neon:hover {
     background-color: #47003d;
     box-shadow: 0px 0px 25px #ffbdf7, inset 0 0 15px #ffbdf7;
     border: 4px solid #ffafec;
     color: #ffbdf7;
+}
+.texto-neon {
+    background-color: #47003d;
+    color: #730069;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #47003d, inset 0 0 7px #47003d;
+    font-family: 'Oleo Script Swash Caps';
+    border: 4px solid #690050;
+    font-size: 16pt;
+    animation-name: animTextoNeon;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+.texto-neon:hover {
+    background-color: #47003d;
+    box-shadow: 0px 0px 25px #ffbdf7, inset 0 0 15px #ffbdf7;
+    border: 4px solid #ffafec;
+    color: #ffbdf7;
+}
+@keyframes animTextoNeon {
+    from {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    10% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    20% {
+
+    }
+    30% {
+
+    }
+    50% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    60% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    70% {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
+    80% {
+        color: white;
+        text-shadow: 0 0 0.25em rgb(255, 52, 218);
+    }
+    to {
+        color: rgb(80, 0, 65);
+        text-shadow: 0 0 0.1em rgb(50, 0, 41);
+    }
 }

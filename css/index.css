@@ -9,6 +9,42 @@ main {
     gap: 0;
     padding: 0;
 }
+div.titulo::before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    z-index: -1;
+    background: url(/bloomJS/img/barril_blender.jpg);
+    background-size: 150%;
+    background-repeat: no-repeat;
+    animation-name: animFondo;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+}
+@keyframes animFondo {
+    from {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+}
+div.titulo {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.titulo h1 {
+    font-size: 70pt;
+    font-family: 'Monoton';
+}
 main section {
     background: rgba(255,255,255,0.5);
     background-repeat: no-repeat;
