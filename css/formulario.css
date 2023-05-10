@@ -12,9 +12,9 @@ form h1 {
     background-color: #a5ffa5;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    font-family: 'Monoton';
-    color: #ffd5ff;
-    text-shadow: 0 0 10px #3f0056;
+    font-family: fantasy;
+    color: white;
+    text-shadow: 2px 2px 4px black;
 }
 div.banda {
     position: absolute;
@@ -62,6 +62,12 @@ form .contenido {
 }
 .campo input {
     text-align: center;
+    padding: 1em;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+}
+.campo input::placeholder {
+    color: rgb(194, 194, 194);
 }
 .botonera {
     display: flex;
