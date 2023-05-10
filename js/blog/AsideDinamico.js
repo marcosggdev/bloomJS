@@ -7,7 +7,6 @@ window.addEventListener("load", () => {
     window.addEventListener("scroll", () => {
         let direccion = window.scrollY - scrollTopPrevio; //> 0 => abajo, < 0 => arriba
         scrollTopPrevio = window.scrollY;
-        console.log(direccion);
 
         let aside = document.querySelector("aside");
 

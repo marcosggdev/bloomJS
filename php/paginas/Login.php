@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
-require_once RAIZ_WEB . "servicios/ServicioUsuarios.php";
+require_once RAIZ_WEB . "php/backend/servicios/ServicioUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
 session_start();
 

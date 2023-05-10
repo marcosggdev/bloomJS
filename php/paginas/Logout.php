@@ -20,13 +20,13 @@ Vista::imprimirHead("Bloom - JS",
 ?>
 
 <div id="cabecera">
-    <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
+    <?=Vista::imprimirHeader("Logout", "");?>
 </div>
 <main>
     <div class="contenido">
         <p>Has cerrado la sesión con éxito</p>
         <a href="/bloomJS/index.php">Volver a Inicio</a>
-        <a href="/bloomJS/php/Blog.php">Blog sobre el desarrollo del proyecto</a>
+        <a href="/bloomJS/php/paginas/Blog.php">Blog sobre el desarrollo del proyecto</a>
     </div>
     <hr>
     <img src="/bloomJS/img/fondoLogout.png" alt="">
