@@ -1,6 +1,6 @@
 <?php
 function generarNombreArchivoUnico ($extension, $directorio) {
-    $ficheros = scandir("/var/www/html/bloomJS/" . $directorio);
+    $ficheros = scandir($directorio);
 
     $caracteres = "abcdefghijklmnopqrstuvwxyz0123456789";
 

@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 
 Vista::imprimirHead("Bloom - JS", 
     [
@@ -43,16 +44,16 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Renderer.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js",
-        RAIZ . "js/general/ControladorUsuarioGrande.js"
+        RAIZ . "js/webgl/Hitbox.js"
     ]);
 ?>
 <div id="cabecera">
     <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
     <?=Vista::imprimirNav(Vista::$entradas, 1);?>
+    <?=Vista::imprimirUsuario()?>
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
 </div>
 <main>
-
+ 
 </main>
 <?=Vista::imprimirFooter();?>

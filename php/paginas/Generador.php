@@ -18,13 +18,13 @@ Vista::imprimirHead("Bloom - JS",
        
         RAIZ . "js/generador/Lienzo.js",
         RAIZ . "js/generador/Contenedor.js",
-        RAIZ . "js/generador/Main.js",
-        RAIZ . "js/general/ControladorUsuarioGrande.js"
+        RAIZ . "js/generador/Main.js"
     ]);
 ?>
 <div id="cabecera">
     <?=Vista::imprimirHeader("Generador", "Aquí podrás generar imágenes con patrones para tus páginas");?>
     <?=Vista::imprimirNav(Vista::$entradas, 2);?>
+    <?=Vista::imprimirUsuario()?>
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 2)?>
 </div>
 <main>

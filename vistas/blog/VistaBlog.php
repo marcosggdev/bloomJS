@@ -1,8 +1,8 @@
 <?php
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
-require_once RAIZ_WEB . "modelos/ModeloEntradas.php";
-require_once RAIZ_WEB . "modelos/ModeloComentariosAnonimos.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloComentariosAnonimos.php";
 
 class VistaBlog {
 
@@ -32,10 +32,10 @@ class VistaBlog {
                             if ("blog/" . $nombreEntrada == $datosEntrada["ruta"]) {
                                 echo "<a id='actual'>$nombre</a>";
                             } else {
-                                echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                                echo "<a href='"."/bloomJS/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
                             }
                         } else {
-                            echo "<a href='"."/bloomJS/php/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                            echo "<a href='"."/bloomJS/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
                         }
                     }
                 ?>

@@ -1,12 +1,14 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once RAIZ_WEB . "php/DTO/Usuario.php";
+
 class Vista {
 
     public static array $entradas = [
         "Inicio" => RAIZ . "index.php",
-        "Editor" => RAIZ . "php/Editor.php",
-        "Generador" => RAIZ . "php/Generador.php",
-        "Blog" => RAIZ . "php/Blog.php"
+        "Editor" => RAIZ . "php/paginas/Editor.php",
+        "Generador" => RAIZ . "php/paginas/Generador.php",
+        "Blog" => RAIZ . "php/paginas/Blog.php"
     ];
 
     public static function imprimirHeader ($titulo, $subtitulo) {
@@ -61,7 +63,7 @@ class Vista {
     public static function imprimirNavEstatico ($entradas, $indiceActual = 0) {
         ?>
                 <nav id="estatico">
-                    <h2>BloomJS</h2>
+                    <!--<h2>BloomJS</h2>-->
                     <ul>
                         <?php
                         $indice = 0;
@@ -127,19 +129,24 @@ class Vista {
             $usuario = $_SESSION["usuario"];
 ?>
             <div class="usuarioGrande">
-                <img src="<?=$usuario->imagenPerfil?>" alt="Imagen de perfil">
-                <div class="contenido">
-                    <p><?=$usuario->nombre?></p>
-                    <p><?=$usuario->correo?></p>
+                <div class="usuarioImgCaja ocultoDerecha">
+                    <img src="<?=$usuario->imagenPerfil?>" alt="Imagen de perfil">
+                    <div class="contenido">
+                        <p><?=$usuario->nombre?></p>
+                        <p><?=$usuario->correo?></p>
+                    </div>
+                    <button onclick="window.location.assign('/bloomJS/php/paginas/Logout.php')">Cerrar<br>sesión</button>
                 </div>
             </div>
 <?php
         } else {
 ?>
             <div class="usuarioGrande">
-                <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
-                <div class="contenido">
-                    <button id="iniciarSesion">Iniciar sesión</button>
+                <div class="usuarioImgCaja ocultoDerecha">
+                    <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
+                    <div class="contenido">
+                        <button onclick="window.location.assign('/bloomJS/php/paginas/Login.php')" id="iniciarSesion">Iniciar sesión</button>
+                    </div>
                 </div>
             </div> 
 <?php

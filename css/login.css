@@ -49,3 +49,14 @@ main::before {
 form .banda {
     
 }
+p.aviso {
+    color: #ff9238;
+    font-family: auto;
+    font-size: 12pt;
+    font-weight: bold;
+}
+form .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

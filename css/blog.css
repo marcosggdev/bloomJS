@@ -15,6 +15,20 @@ div#entradas {
     align-items: stretch;
     padding: 1em;
 }
+aside#secundario.arriba {
+    align-self: flex-start;
+}
+aside#secundario.abajo {
+    align-self: flex-end;
+}
+aside#secundario.fijo {
+    position: fixed;
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    opacity: 1;
+    transition: opacity 1s;
+}
 aside#secundario {
     display: flex;
     flex-direction: column;
@@ -225,4 +239,17 @@ ul.cronologia li:nth-child(2n+1)::before {
 }
 ul.cronologia li:nth-child(2n+1) {
     left: 203px;
+}
+div.entrada h1 {
+    color: #ffffff;
+    font-family: fantasy;
+    font-size: 26pt;
+    border-bottom: 4px solid #650066;
+    background: repeating-linear-gradient(45deg, #81009c, #b000ff 150px);
+    margin: 0;
+    padding: 0.5em;
+    box-shadow: 2px 2px 5px black;
+}
+div.entrada h1::first-letter {
+    color: #95ff95;
 }

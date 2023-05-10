@@ -47,7 +47,7 @@ class ControlesSubirModelo {
                         dialog.remove();
                     }
                 }
-                req.open("POST", "/bloomJS/php/ProcesarArchivoSubido.php");
+                req.open("POST", "/bloomJS/php/backend/scripts/ProcesarArchivoSubido.php");
                 req.send(formData);
             } else {
                 alert("No puede dejar el archivo .dae o la textura sin incluir, vuelva a intentarlo");
@@ -102,7 +102,7 @@ class ControlesSubirModelo {
                             location.reload();
                         }
                     }
-                    req.open("POST", "../php/procesarRecursoSubido.php");
+                    req.open("POST", "/bloomJS/php/backend/scripts/procesarRecursoSubido.php");
                     req.send(formData);
                     aceptar.disabled = true;
                 });

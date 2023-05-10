@@ -1,8 +1,8 @@
 <?php
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
-require_once RAIZ_WEB . "modelos/ModeloModelos.php";
-require_once RAIZ_WEB . "modelos/ModeloUsuarios.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 
 if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
     //tipo de la forma: defecto, usuario o comunidad. No tiene que ver con la BD

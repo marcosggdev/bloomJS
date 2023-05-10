@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
             let formData = new FormData();
             formData.append("id_target", id_target);
             formData.append("texto", texto);
-            req.open("POST", "/bloomJS/php/ProcesarComentario.php");
+            req.open("POST", "/bloomJS/php/backend/scripts/ProcesarComentario.php");
             req.send(formData);
         });
     }

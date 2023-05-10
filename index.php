@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+session_start();
 ?>
 
 
@@ -12,7 +13,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         ], 
         [
                 RAIZ . "js/general/NavDinamico.js",
-                RAIZ . "js/general/ControladorUsuarioGrande.js"
+                RAIZ . "js/general/AnimacionMostrarIzquierda.js"
         ]
 )?>
 
@@ -73,17 +74,17 @@ require_once RAIZ_WEB . "vistas/Vista.php";
                         <div class="enlace">
                                 <h2>Prueba nuestro editor</h2>
                                         <p>Te ayudará con el diseño de tu página</p>
-                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
+                                <a href="/bloomJS/php/paginas/Editor.php">Editor <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                         <div class="enlace">
                                 <h2>Genera tus propios assets</h2>
                                         <p>Para que no tengas que preouparte por el copyright</p>
-                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
+                                <a href="/bloomJS/php/paginas/Generador.php">Generador <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                         <div class="enlace">
                                 <h2>¡Comparte tus creaciones!</h2>
                                         <p>Descubre las creaciones de otros usuarios</p>
-                                <a href="#">Enlace <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
+                                <a href="/bloomJS/php/paginas/Comunidad.php">Comunidad <img src="/bloomJS/img/iconos/derecha.png" alt=""></a>
                         </div>
                 </div>
             </section>

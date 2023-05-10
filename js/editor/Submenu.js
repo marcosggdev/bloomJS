@@ -175,7 +175,7 @@ class Submenu {
             "dibujarGrid": Renderer.dibujarGrid
         };
         formData.append("rendererParametros", JSON.stringify(rendererParametros));
-        req.open("POST", "/bloomJS/php/generarExportacionCanvas.php");
+        req.open("POST", "/bloomJS/php/backend/scripts/generarExportacionCanvas.php");
         req.send(formData);
     }
 

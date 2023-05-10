@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
-require_once RAIZ_WEB . "modelos/ModeloEntradas.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
 
 Vista::imprimirHead("Bloom - JS", 
     [
@@ -17,13 +17,13 @@ Vista::imprimirHead("Bloom - JS",
     [
         RAIZ . "js/general/NavDinamico.js",
         RAIZ . "js/blog/AsideDinamico.js",
-        RAIZ . "js/blog/ControladorComentar.js",
-        RAIZ . "js/general/ControladorUsuarioGrande.js"
+        RAIZ . "js/blog/ControladorComentar.js"
     ]);
 ?>
 <div id="cabecera">
     <?=Vista::imprimirHeader("Blog", "Aquí podrás leer acerca del desarrollo del proyecto");?>
     <?=Vista::imprimirNav(Vista::$entradas, 3);?>
+    <?=Vista::imprimirUsuario()?>
     <?=Vista::imprimirNavEstatico(Vista::$entradas, 3)?>
 </div>
 <main>

@@ -459,7 +459,24 @@ div.usuarioGrande {
     justify-content: center;
     gap: 1em;
 }
-div.usuarioGrande img {
+div.usuarioGrande div.usuarioImgCaja {
+    display: flex;
+    align-items: center;
+    background: repeating-linear-gradient(45deg, #28002b, #520164 72px);
+    padding-left: 1em;
+    padding-right: 1em;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px black;
+    color: white;
+    gap: 10px;
+    padding: 0.5em;
+    transition: transform 0.5s, filter 0.3s;
+}
+div.usuarioGrande div.usuarioImgCaja:hover {
+    transform: scale(1.1);
+    filter: contrast(0.7);
+}
+div.usuarioGrande div.usuarioImgCaja img {
     width: 75px;
     height: 75px;
     background-color: white;
@@ -470,6 +487,10 @@ div.usuarioGrande img {
 div.usuarioGrande .contenido {
     display: flex;
     flex-direction: column;
+}
+div.usuarioGrande .contenido p {
+    font-family: 'Oleo Script Swash Caps';
+    margin: 0;
 }
 div.usuarioGrande button {
     background-color: #6b79ff;
@@ -487,4 +508,7 @@ div.usuarioGrande button:hover {
     background-color: #939eff;
     box-shadow: 0px 0px 10px #a3acff, inset 0 0 7px #96a0ff;
     border: 4px solid hsl(235, 100%, 98%);
+}
+.ocultoDerecha {
+    left: 100%;
 }
