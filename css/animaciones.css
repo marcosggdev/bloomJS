@@ -83,3 +83,13 @@
         transform: scale(1.2,1.2);
     }
 }
+
+/*fondo movil para cajas*/
+@keyframes animFondo {
+    from {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+}
