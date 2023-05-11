@@ -60,5 +60,16 @@ div.comentario div.usuarioMediano img {
     width: 70px;
 }
 div.comentario .contenido {
-
+     width: 70%;
+}
+div.comentario .contenido p {
+    padding-left: 2em;
+    padding-right: 2em;
+    word-break: break-word;
+}
+div.menuComentar div.cajaControles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
