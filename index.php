@@ -15,13 +15,13 @@ session_start();
         RAIZ . "css/comentarios.css",
         RAIZ . "css/carruselHorizontal.css",
         RAIZ . "css/neon.css",
-        RAIZ . "css/cronologia.css",
-        RAIZ . "css/usuario.css"
+        RAIZ . "css/cronologia.css"
 	], 
 	[
 		RAIZ . "js/general/NavDinamico.js",
 		RAIZ . "js/general/AnimacionMostrarIzquierda.js",
-        RAIZ . "js/blog/ControladorComentar.js"
+        RAIZ . "js/blog/ControladorComentar.js",
+        RAIZ . "js/general/AnimacionDinamicaOnScroll.js"
 	]
 )?>
 
@@ -57,7 +57,7 @@ session_start();
                 la programación de gráficos con JavaScript. Att: Marcos García García</q>
             <p class="breve">¿Te gustan los modelos 3D? ¡Pásate por el editor!</p>
             <section id="editor">
-                <div class="titulo">
+                <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Editor</h1>
                         <a class="boton-neon" href="/bloomJS/php/paginas/Editor.php">Ir al Editor<img src="img/iconos/derecha.png" alt=""/></a>
@@ -67,7 +67,7 @@ session_start();
             </section>
             <p class="breve">¡Y también podrás generar imágenes!</p>
             <section id="generador">
-                <div class="titulo">
+                <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Generador</h1>
                         <a class="boton-neon" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
@@ -80,7 +80,7 @@ session_start();
             <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre el desarrollo de BloomJS y sobre WebGL
             </p>
             <section id="blog">
-                <div class="titulo">
+                <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Blog</h1>
                         <a class="boton-neon" href="/bloomJS/php/paginas/Blog.php">Ir al Blog</a>

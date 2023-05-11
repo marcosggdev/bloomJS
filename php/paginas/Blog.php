@@ -17,8 +17,7 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/entrada.css",
         RAIZ . "css/comentarios.css",
         RAIZ . "css/cronologia.css",
-        RAIZ . "css/neon.css",
-        RAIZ . "css/usuario.css"
+        RAIZ . "css/neon.css"
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",

@@ -53,7 +53,7 @@ if ($formulario) {
                     </div>
                 </div>
                 <div class="info">
-                    <label>¿No tienes cuenta? <a href="/bloomJS/php/Registro.php">Regístrate</a></label>
+                    <label>¿No tienes cuenta? <a href="/bloomJS/php/paginas/Registro.php">Regístrate</a></label>
                 </div>
                 <div class="botonera">
                     <button>Iniciar Sesión</button>

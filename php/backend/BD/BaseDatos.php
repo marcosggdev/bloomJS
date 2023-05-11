@@ -97,7 +97,8 @@ class BaseDatos {
                     "correo VARCHAR(100) NOT NULL,".
                     "nombre VARCHAR(40) UNIQUE NOT NULL,".
                     "clave VARCHAR(15) NOT NULL,".
-                    "imagenPerfil VARCHAR(60) DEFAULT 'assets/defecto/imagenesPerfil/defecto.png');",
+                    "imagenPerfil VARCHAR(60) DEFAULT 'assets/defecto/imagenesPerfil/defecto.png',". 
+                    "rutaCarpeta VARCHAR(100) NOT NULL);",
 
                 "CREATE TABLE IF NOT EXISTS entradas (". 
                     "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 
@@ -115,10 +116,10 @@ class BaseDatos {
                 "ALTER TABLE comentarios ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
-                "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil) VALUES (" . 
-                "'admin@admin.es', 'admin', 'admin', 'assets/defecto/imagenesPerfil/admin.png');",
-                "INSERT IGNORE INTO usuarios (correo, nombre, clave) VALUES (" . 
-                "'anonimo@anonimo.es', 'anonimo', 'anonimo');",
+                "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (" . 
+                "'admin@admin.es', 'admin', 'admin', 'assets/defecto/imagenesPerfil/admin.png', 'usuarios/1_admin@admin.es');",
+                "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (" . 
+                "'anonimo@anonimo.es', 'anonimo', 'anonimo', 'assets/defecto/anonimo.png','usuarios/2_anonimo@anonimo.es');",
 
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
                 "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'assets/defecto/previsualizacion/barril.png', 'defecto', '1');",

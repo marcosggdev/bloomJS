@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
-require_once RAIZ_WEB . "servicios/ServicioUsuarios.php";
+require_once RAIZ_WEB . "php/backend/servicios/ServicioUsuarios.php";
 require_once RAIZ_WEB . "php/Utilidades.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
 session_start();
@@ -41,7 +41,7 @@ if (isset($_POST["correo"]) && isset($_POST["nombre"]) && isset($_POST["clave"])
     } else {
         //no se ha podido crear
         $incorrecto = true;
-        $error = $usuario;
+        $error = "Ha ocurrido un error. ¿Ya existe ese nombre de usuario?";
     }
 }
 

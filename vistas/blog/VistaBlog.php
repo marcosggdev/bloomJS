@@ -81,7 +81,7 @@ class VistaBlog {
         $datosComentarios = ModeloComentarios::getComentariosPorIdEntrada($id);
         self::imprimirComentarios($datosComentarios);
 ?>
-        </div>
+        </div></div>
 <?php
     }
 

@@ -19,12 +19,20 @@ class ServicioUsuarios {
     }
 
     public static function crearUsuario ($correo, $nombre, $clave, $imagenPerfil) {
-        $id = ModeloUsuarios::crearUsuario($correo, $nombre, $clave, $imagenPerfil);
-        if ($id != false) {
+        //crear usuario = crearlo en la BD, crear una carpeta en la carpeta usuarios para el usuario. En la tabla usuarios guardaremos
+        //la ruta a la carpeta, y manejaremos permisos en ella mediante autentificacion con los datos del usuario en cuestion
+
+        //vamos a usar el id del usuario en la BD como nombre de la carpeta: nombre_correo
+        $rutaCarpeta = RAIZ_WEB . "usuarios/".$nombre."_".$correo;
+        $id = ModeloUsuarios::crearUsuario($correo, $nombre, $clave, $imagenPerfil, $rutaCarpeta);
+        
+        if ($id != false && mkdir($rutaCarpeta, "0777")) {
+            //y devolvemos el objeto
             $datosUsuario = ModeloUsuarios::getUsuarioPorNombreYClave($nombre, $clave);
             $usuario = new Usuario($datosUsuario["id"], $datosUsuario["correo"], $datosUsuario["nombre"], $datosUsuario["imagenPerfil"]);
             return $usuario;
         } else {
+            //si no se crea carpeta o sale error de BD
             return false;
         }
     }

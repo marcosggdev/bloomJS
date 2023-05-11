@@ -87,7 +87,7 @@
 /*fondo movil para cajas*/
 @keyframes animFondo {
     from {
-        background-position: 0% 50%;
+        background-position: 100% 50%;
     }
     50% {
         background-position: 50% 50%;

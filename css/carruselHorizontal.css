@@ -6,6 +6,7 @@ div.carruselHorizontal {
     display: flex;
     gap: 2em;
     background-color: #212121;
+    box-sizing: border-box;
 }
 .previewEntrada {
     box-shadow: 2px 2px 5px black;

@@ -50,13 +50,14 @@ class ModeloUsuarios {
         }
     }
 
-    public static function crearUsuario ($correo, $nombre, $clave, $imagenPerfil) {
+    public static function crearUsuario ($correo, $nombre, $clave, $imagenPerfil, $rutaCarpeta) {
         try {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
-            $sql = "INSERT INTO usuarios(correo, nombre, clave, imagenPerfil) VALUES (".
-            ":correo, :nombre, :clave, :imagenPerfil)";
+            $sql = "INSERT INTO usuarios(correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (".
+            ":correo, :nombre, :clave, :imagenPerfil, :rutaCarpeta)";
             $preparada = $pdo->prepare($sql);
-            $preparada->execute([":correo" => $correo, ":nombre" => $nombre, ":clave" => $clave, ":imagenPerfil" => $imagenPerfil]);
+            $preparada->execute([":correo" => $correo, ":nombre" => $nombre, ":clave" => $clave, ":imagenPerfil" => $imagenPerfil,
+            ":rutaCarpeta" => $rutaCarpeta]);
             return $pdo->lastInsertId();
         } catch (PDOException $e) {
             print_r($e->getMessage());
