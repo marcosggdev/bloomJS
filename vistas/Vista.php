@@ -104,6 +104,9 @@ class Vista {
                                 <li><a href="https://antongerdelan.net/opengl/raycasting.html">¿Cómo se realiza ray casting desde screen space con un click?</a></li>
                                 <li><a href="https://nghiaho.com/?page_id=846">¿Cómo se descompone una matriz de rotacion en los ángulos con respecto a xyz que la componen?</a></li>
                             </ul>
+                            <div class="adicional">
+                                <q>Gracias por visitar BloomJS</q>
+                            </div>
                         </div>
                         <div id="logos">
                             <h1>Instituciones</h1>

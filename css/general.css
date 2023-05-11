@@ -278,7 +278,22 @@ main h2 {
 main section p{
     margin-bottom: 0;
 }
+footer::before {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/iconos/icono_flor.png);
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    filter: drop-shadow(2px 4px 6px black) grayscale(1);
+    z-index: -1;
+}
 footer {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 2em;
@@ -287,6 +302,8 @@ footer {
     align-items: center;
     position: relative;
     height: 60vh;
+    padding-top: 8em;
+    padding-bottom: 8em;
 }
 footer div#infoFooter {
     display: flex;
@@ -346,8 +363,10 @@ a.contacto:hover {
     background-color: rgb(57, 57, 57);
     box-shadow: 0 0 40px pink;
 }
-div#interes {
-
+div#interes div.adicional {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 div#interes ul li {
