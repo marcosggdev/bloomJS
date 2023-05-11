@@ -10,6 +10,7 @@ ul.cronologia {
     background-color: rgb(248 209 255);
     gap: 2em;
     box-shadow: 0 0 21px #320034;
+    align-self: center;
 }
 ul.cronologia li {
     position: relative;

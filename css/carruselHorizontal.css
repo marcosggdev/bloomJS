@@ -1,6 +1,6 @@
 div.carruselHorizontal {
     width: 80%;
-    height: 70vh;
+    height: 90vh;
     overflow-y: hidden;
     overflow-x: scroll;
     display: flex;
@@ -12,6 +12,7 @@ div.carruselHorizontal {
     display: flex;
     flex-direction: column;
     background-color: #deffdd;
+    width: 400px;
 }
 .previewEntrada:first-of-type {
     box-shadow: none;
@@ -46,7 +47,7 @@ div.carruselHorizontal {
     z-index: 1;
 }
 .previewEntrada img {
-    height: 60%;
+    width: 500px;
 }
 .previewEntrada h1 {
     font-size: 14pt;

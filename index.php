@@ -50,9 +50,10 @@ session_start();
             <img src="/bloomJS/img/tecnologias_web.png" alt="">
             <p>Te invitamos a pasarte por la zona del editor o por el blog, donde podrás aprender sobre la programación de gráficos en 
                 JavaScript</p>
+            <img id="welcome" src="img/welcome.png" alt="">
             <q>Esta es mi página para el proyecto de CFGS Desarrollo de Aplicaciones Web, espero que te sea útil y que aprendas sobre 
                 la programación de gráficos con JavaScript. Att: Marcos García García</q>
-            <p class="breve">¡Tenemos un editor muy chulo!</p>
+            <p class="breve">¿Te gustan los modelos 3D? ¡Pásate por el editor!</p>
             <section id="editor">
                 <div class="titulo">
                     <div class="contenido">
@@ -65,18 +66,24 @@ session_start();
             <p class="breve">¡Y también podrás generar imágenes!</p>
             <section id="generador">
                 <div class="titulo">
-                    <h1 class="texto-neon">Generador</h1>
-                    <a class="boton-neon" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
+                    <div class="contenido">
+                        <h1 class="texto-neon">Generador</h1>
+                        <a class="boton-neon" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
+                    </div> 
                 </div>
                 <!--insertar aqui imagenes generadas en el generador-->
             </section>
             <?=VistaBlog::imprimirEntrada("1", "/bloomJS/blog/0_Notas de desarrollo.php")?>
-            <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre cómo fue el desarrollo del proyecto, o conceptos básicos
-                sobre WebGL. También tenemos una cronología del desarrollo del proyecto.
-            </p>
             <?=VistaBlog::imprimirEntrada("2", "/bloomJS/blog/1_Introduccion.php")?>
+            <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre el desarrollo de BloomJS y sobre WebGL
+            </p>
             <section id="blog">
-                <h1>Blog</h1>
+                <div class="titulo">
+                    <div class="contenido">
+                        <h1 class="texto-neon">Blog</h1>
+                        <a class="boton-neon" href="/bloomJS/php/paginas/Blog.php">Ir al Blog</a>
+                    </div>
+                </div>
                 <?=VistaBlog::imprimirCarruselEntradas();?>
             </section>
         </div>
