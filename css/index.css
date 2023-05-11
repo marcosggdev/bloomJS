@@ -298,3 +298,12 @@ section#blog div.titulo {
     background: url(../img/blog.jpg);
     background-size: cover;
 }
+div.entrada {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    box-sizing: border-box;
+}
+div.entrada div.menuComentar textarea {
+    width: 60%;
+}
