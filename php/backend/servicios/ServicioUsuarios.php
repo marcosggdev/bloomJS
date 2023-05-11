@@ -24,8 +24,8 @@ class ServicioUsuarios {
 
         //vamos a usar el id del usuario en la BD como nombre de la carpeta: nombre_correo
         $rutaCarpeta = RAIZ_WEB . "usuarios/".$nombre."_".$correo;
-        $id = ModeloUsuarios::crearUsuario($correo, $nombre, $clave, $imagenPerfil, $rutaCarpeta);
-        
+        $id = ModeloUsuarios::crearUsuario($correo, $nombre, $clave, $imagenPerfil, "usuarios/".$nombre."_".$correo);
+
         if ($id != false && mkdir($rutaCarpeta, "0777")) {
             //y devolvemos el objeto
             $datosUsuario = ModeloUsuarios::getUsuarioPorNombreYClave($nombre, $clave);
