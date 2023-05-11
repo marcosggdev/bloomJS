@@ -4,6 +4,11 @@ div.menuComentar {
     align-items: stretch;
     gap: 10px;
 }
+div.menuComentar .cabecera {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 div.menuComentar textarea {
     resize: none;
 }
@@ -27,4 +32,33 @@ div.menuComentar .cajaControles img {
     border-radius: 6px;
     opacity: 0;
     transition: opacity 0.2s;
+}
+div.comentario {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffeaff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px purple;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+div.comentario p {
+    margin: 0;
+}
+/*corregir bug de hr invisibles*/
+hr {
+    width: 100%;
+}
+div.comentario div.usuarioMediano {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div.comentario div.usuarioMediano img {
+    width: 70px;
+}
+div.comentario .contenido {
+
 }

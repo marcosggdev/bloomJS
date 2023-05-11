@@ -133,12 +133,12 @@ class Vista {
 ?>
             <div class="usuarioGrande">
                 <div class="usuarioImgCaja ocultoDerecha">
-                    <img src="<?=$usuario->imagenPerfil?>" alt="Imagen de perfil">
+                    <img src="<?="/bloomJS/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
                     <div class="contenido">
                         <p><?=$usuario->nombre?></p>
                         <p><?=$usuario->correo?></p>
                     </div>
-                    <button onclick="window.location.assign('/bloomJS/php/paginas/Logout.php')">Cerrar<br>sesión</button>
+                    <button class="boton-neon" onclick="window.location.assign('/bloomJS/php/paginas/Logout.php')">Cerrar sesión</button>
                 </div>
             </div>
 <?php
@@ -148,7 +148,7 @@ class Vista {
                 <div class="usuarioImgCaja ocultoDerecha">
                     <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
                     <div class="contenido">
-                        <button onclick="window.location.assign('/bloomJS/php/paginas/Login.php')" id="iniciarSesion">Iniciar sesión</button>
+                        <button class="boton-neon" onclick="window.location.assign('/bloomJS/php/paginas/Login.php')" id="iniciarSesion">Iniciar sesión</button>
                     </div>
                 </div>
             </div> 

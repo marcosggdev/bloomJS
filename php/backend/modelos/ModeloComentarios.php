@@ -1,11 +1,11 @@
 <?php
 
-class ModeloComentariosAnonimos {
+class ModeloComentarios {
 
-    public static function getComentarioAnonimo ($id) {
+    public static function getComentario ($id) {
         try {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
-            $sql = "SELECT * FROM comentariosAnonimos WHERE id=:id";
+            $sql = "SELECT * FROM comentarios WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id" => $id]);
@@ -14,7 +14,8 @@ class ModeloComentariosAnonimos {
                 return [
                     'id' => $registro['id'], 
                     'texto' => $registro['texto'], 
-                    'id_target' => $registro['id_target']
+                    'id_target' => $registro['id_target'],
+                    'id_autor' => $registro['id_autor']
                 ];
             }
             return false;
@@ -24,10 +25,10 @@ class ModeloComentariosAnonimos {
         }
     }
 
-    public static function getComentariosAnonimosPorIdEntrada ($id_entrada) {
+    public static function getComentariosPorIdEntrada ($id_entrada) {
         try {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
-            $sql = "SELECT * FROM comentariosAnonimos WHERE id_target=:id_target";
+            $sql = "SELECT * FROM comentarios WHERE id_target=:id_target";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_target" => $id_entrada]);
             $datos = [];
@@ -35,7 +36,8 @@ class ModeloComentariosAnonimos {
                 $datos[] = [
                     'id' => $registro['id'], 
                     'texto' => $registro['texto'], 
-                    'id_target' => $registro['id_target']
+                    'id_target' => $registro['id_target'],
+                    'id_autor' => $registro['id_autor']
                 ];
             }
             return $datos;
@@ -45,13 +47,13 @@ class ModeloComentariosAnonimos {
         }
     }
 
-    public static function insertarComentario ($texto, $id_entrada) {
+    public static function insertarComentario ($texto, $id_entrada, $id_autor) {
 
         try {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
-            $sql = "INSERT INTO comentariosAnonimos(texto, id_target) VALUES (:texto, :id_target)";
+            $sql = "INSERT INTO comentarios(texto, id_target, id_autor) VALUES (:texto, :id_target, :id_autor)";
             $preparada = $pdo->prepare($sql);
-            $preparada->execute([":texto" => $texto, ":id_target" => $id_entrada]);
+            $preparada->execute([":texto" => $texto, ":id_target" => $id_entrada, ":id_autor" => $id_autor]);
             return $pdo->lastInsertId();
         } catch (PDOException $e) {
             print_r($e->getMessage());

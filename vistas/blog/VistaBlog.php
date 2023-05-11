@@ -2,7 +2,8 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
-require_once RAIZ_WEB . "php/backend/modelos/ModeloComentariosAnonimos.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloComentarios.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 
 class VistaBlog {
 
@@ -71,18 +72,32 @@ class VistaBlog {
         ?><div id="<?="entrada_".$id?>" class="entrada"><?php
         //contenido
         include $_SERVER["DOCUMENT_ROOT"] . $ruta;
+?>
+        <div class="contenedorComentarios">
+<?php
         //menu comentarios
         self::imprimirMenuComentar($id);
         //comentarios. id de la entrada es el parametro de la funcion
-        $datosComentarios = ModeloComentariosAnonimos::getComentariosAnonimosPorIdEntrada($id);
+        $datosComentarios = ModeloComentarios::getComentariosPorIdEntrada($id);
         self::imprimirComentarios($datosComentarios);
-        ?></div><?php
+?>
+        </div>
+<?php
     }
 
     public static function imprimirMenuComentar ($id_entrada) {
 ?>
         <div class="menuComentar">
-            <h2>Publicar un comentario anónimo</h2>
+            <div class="cabecera">
+                <?php
+                if (isset($_SESSION["usuario"])) {
+                    echo "<h2>Publicar un comentario</h2>";
+                } else {
+                    echo "<h2>Publicar un comentario anónimo</h2>";
+                    echo "<a class='boton-neon-verde' href='/bloomJS/php/paginas/Login.php'>Iniciar sesión</a>";
+                }
+                ?>
+            </div>
             <textarea name="" id="" cols="30" rows="10">
 
             </textarea>
@@ -91,10 +106,13 @@ class VistaBlog {
                 <button class="botonComentarEntrada">Comentar</button>
                 <img src="/bloomJS/img/gif/completado.gif" alt="">
             </div>
+            <hr>
         </div>
 <?php
     }
 
+    //imprime comentario y datos del autor simples, como nombre de usuario, link a su pagina personal publica
+    //y su imagen de perfil
     public static function imprimirComentarios ($datosComentarios) {
 ?>
         <div class="comentarios">
@@ -109,9 +127,20 @@ class VistaBlog {
 
     //en el futuro paginar resultados
     public static function imprimirComentario ($datosComentario) {
+        //COMENTARIO: id, texto, id_target, id_autor
+        //USUARIO: id, correo, nombre, clave, imagenPerfil
+        $datosAutor = ModeloUsuarios::getUsuario($datosComentario["id_autor"]);
 ?>
         <div id="<?=$datosComentario["id"]?>" class="comentario">
-            <p><?=$datosComentario["texto"]?></p>
+            <div class="usuarioMediano">
+                <img src="<?="/bloomJS/".$datosAutor["imagenPerfil"]?>" alt="Imagen de perfil">
+                <div class="datos">
+                    <p><?=$datosAutor["nombre"]?></p>
+                </div>
+            </div>
+            <div class="contenido">
+                <p><?=$datosComentario["texto"]?></p>
+            </div>
         </div>
 <?php
     }

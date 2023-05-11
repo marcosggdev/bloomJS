@@ -15,11 +15,13 @@ session_start();
         RAIZ . "css/comentarios.css",
         RAIZ . "css/carruselHorizontal.css",
         RAIZ . "css/neon.css",
-        RAIZ . "css/cronologia.css"
+        RAIZ . "css/cronologia.css",
+        RAIZ . "css/usuario.css"
 	], 
 	[
 		RAIZ . "js/general/NavDinamico.js",
-		RAIZ . "js/general/AnimacionMostrarIzquierda.js"
+		RAIZ . "js/general/AnimacionMostrarIzquierda.js",
+        RAIZ . "js/blog/ControladorComentar.js"
 	]
 )?>
 

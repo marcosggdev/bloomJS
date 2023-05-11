@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
+session_start();
 
 Vista::imprimirHead("Bloom - JS", 
     [
@@ -9,7 +10,8 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/index.css", 
         RAIZ . "css/editor.css",
         RAIZ . "css/animaciones.css",
-        RAIZ . "vistas/editor/subirModelo.css"
+        RAIZ . "vistas/editor/subirModelo.css",
+        RAIZ . "css/neon.css"
     ], 
     [
         RAIZ . "js/editor/Defecto.js",
@@ -44,7 +46,8 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Renderer.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js"
+        RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "css/usuario.css"
     ]);
 ?>
 <div id="cabecera">

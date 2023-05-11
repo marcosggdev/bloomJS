@@ -103,17 +103,22 @@ class BaseDatos {
                     "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 
                     "ruta VARCHAR(100) UNIQUE NOT NULL);",
 
-                "CREATE TABLE IF NOT EXISTS comentariosAnonimos (" . 
+                //id_autor null => comentario anonimo
+                "CREATE TABLE IF NOT EXISTS comentarios (" . 
                     "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," . 
                     "texto VARCHAR(200) NOT NULL," . 
-                    "id_target INT NOT NULL);",
+                    "id_target INT NOT NULL,". 
+                    "id_autor INT NOT NULL);",
                 
                 "ALTER TABLE modelos ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
-                "ALTER TABLE comentariosAnonimos ADD FOREIGN KEY(id_target) REFERENCES entradas(id);",
+                "ALTER TABLE comentarios ADD FOREIGN KEY(id_target) REFERENCES entradas(id);",
+                "ALTER TABLE comentarios ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
+                "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil) VALUES (" . 
+                "'admin@admin.es', 'admin', 'admin', 'assets/defecto/imagenesPerfil/admin.png');",
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave) VALUES (" . 
-                "'admin@admin.es', 'admin', 'admin');",
+                "'anonimo@anonimo.es', 'anonimo', 'anonimo');",
 
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
                 "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'assets/defecto/previsualizacion/barril.png', 'defecto', '1');",
@@ -126,11 +131,11 @@ class BaseDatos {
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/3_Matrices.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/4_MatrizMVP.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/5_WebGL.php')",
-                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo1', '1');",
-                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo2', '2');",
-                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo3', '3');",
-                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo4', '4');",
-                "INSERT IGNORE INTO comentariosAnonimos (texto, id_target) VALUES ('hola mundo5', '5');"
+                "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo1 admin', '1', '1');",
+                "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo2 anonimo', '2', '2');",
+                "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo3 anonimo', '3', '2');",
+                "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo4 anonimo', '4', '2');",
+                "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo5 admin', '5', '1');"
             ];
             for ($i = 0; $i < count($consultas); $i++) {
                 $con->query($consultas[$i]);

@@ -1,13 +1,16 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+session_start();
 
 Vista::imprimirHead("Bloom - JS", 
     [
         RAIZ . "css/general.css", 
         RAIZ . "css/index.css", 
         RAIZ . "css/Generador.css",
-        RAIZ . "css/animaciones.css"
+        RAIZ . "css/animaciones.css",
+        RAIZ . "css/neon.css",
+        RAIZ . "css/usuario.css"
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",

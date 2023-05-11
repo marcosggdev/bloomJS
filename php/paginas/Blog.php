@@ -7,6 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
+session_start();
 
 Vista::imprimirHead("Bloom - JS", 
     [
@@ -15,7 +16,9 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/blog.css",
         RAIZ . "css/entrada.css",
         RAIZ . "css/comentarios.css",
-        RAIZ . "css/cronologia.css"
+        RAIZ . "css/cronologia.css",
+        RAIZ . "css/neon.css",
+        RAIZ . "css/usuario.css"
     ], 
     [
         RAIZ . "js/general/NavDinamico.js",
