@@ -39,20 +39,18 @@ div.presets {
     grid-template-columns: repeat(2,1fr);
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
     gap: 10px;
 }
 div.preset {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     padding: 1em;
     box-sizing: border-box;
     background-color: #212121;
     box-shadow: 2px 2px 5px black;
     border-radius: 5px;
     width: 100%;
-    height: min-content;
 }
 div.preset:hover {
     background-color: #383838;
