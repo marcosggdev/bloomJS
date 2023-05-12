@@ -37,7 +37,7 @@ if ($imprimir) {
         <?=Vista::imprimirHeader("Perfil", "Aquí podrás revisar tu perfil");?>
     </div>
     <main>
-        <a class="miga boton-neon-purple" href="/bloomJS/index.php">Volver a Inicio</a>
+        <a class="miga boton-neon-purple" href="/bloomJS/index.php">Volver a Inicio<img src="/bloomJS/img/iconos/izquierda.png" alt=""></a>
         <?=Vista::imprimirUsuario()?>
         <h1>Entrada personal</h1>
 <?php
@@ -56,6 +56,7 @@ if ($imprimir) {
         }
 ?>
         <button id="editarPaginaPersonal" class="boton-neon-purple">Editar</button>
+        <hr>
         <h1>Configuración</h1>
         <div class="configuracion">
             <div class="campo">
@@ -80,6 +81,7 @@ if ($imprimir) {
                 </div>
             </div>
         </div>
+        <hr>
         <h1>Assets privados</h1>
         <div class="assetsPrivados">
 <?php

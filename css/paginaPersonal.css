@@ -6,6 +6,12 @@ main {
 }
 a.miga {
     align-self: center;
+    margin-top: 4em;
+    margin-bottom: 4em;
+}
+a.miga img {
+    width: 50px;
+    height: 50px;
 }
 div.configuracion {
     display: flex;
@@ -33,6 +39,7 @@ div.configuracion label {
     background-color: #212121;
     grid-row-gap: 1em;
     grid-column-gap: 1em;
+    overflow-y: scroll;
 }
 .assetsPrivados .plantilla {
     background-color: #1c001f;
