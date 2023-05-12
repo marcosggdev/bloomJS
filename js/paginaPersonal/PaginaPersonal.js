@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
     let editarPagina = document.getElementById("editarPaginaPersonal");
     editarPagina.addEventListener("click", () => {
-        
+        editarPagina.style.display = "none";
         //contenedor entrada
         let contenido = document.querySelector(".paginaPersonal");
 
@@ -44,6 +44,7 @@ window.addEventListener("load", () => {
         cancelar.addEventListener("click", () => {
             //recuperar contenido previo del div
             contenido.outerHTML = subContenido;
+            editarPagina.style.display = "flex";
         });
 
         botonera.appendChild(guardar);

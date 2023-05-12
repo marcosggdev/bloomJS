@@ -55,12 +55,30 @@ if ($imprimir) {
             }
         }
 ?>
-        <button id="editarPaginaPersonal">Editar</button>
+        <button id="editarPaginaPersonal" class="boton-neon-purple">Editar</button>
         <h1>Configuración</h1>
         <div class="configuracion">
-            <label>Nombre: <input type="text" value="<?=$usuario->nombre?>" disabled></label>
-            <label>Correo: <input type="text" value="<?=$usuario->correo?>" disabled></label>
-            <label>Contraseña: <input type="password" placeholder="Contraseña" disabled></label>
+            <div class="campo">
+                <p class="nombre">Nombre: </p>
+                <div class="valor">
+                    <input type="text" value="<?=$usuario->nombre?>" disabled>
+                    <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                </div>
+            </div>
+            <div class="campo">
+                <p class="nombre">Correo: </p>
+                <div class="valor">
+                    <input type="text" value="<?=$usuario->correo?>" disabled>
+                    <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                </div>
+            </div>
+            <div class="campo">
+                <p class="nombre">Contraseña: </p>
+                <div class="valor">
+                    <input type="password" placeholder="Contraseña" disabled>
+                    <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                </div>
+            </div>
         </div>
         <h1>Assets privados</h1>
         <div class="assetsPrivados">

@@ -10,14 +10,17 @@ a.miga {
 div.configuracion {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 35%;
     align-self: center;
     gap: 10px;
+    align-items: stretch;
 }
 div.configuracion label {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    box-sizing: border-box;
 }
 .assetsPrivados {
     display: grid;
@@ -63,4 +66,50 @@ div.paginaPersonal .botonera {
     margin-bottom: 1em;
     background: linear-gradient(45deg, #330028, #3300287a);
     padding: 1em;
+}
+#editarPaginaPersonal {
+    align-self: center;
+}
+div.configuracion img {
+    width: 25px;
+    height: 25px;
+}
+button.editar {
+    border: none;
+    background-color: blue;
+}
+div.campo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+div.campo div.valor {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+}
+div.campo div.valor button {
+    background-color: rgb(127 210 127);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 7px black;
+    transition: transform 0.2s;
+}
+div.campo div.valor button:hover {
+    background-color: rgb(142, 225, 142);
+}
+div.campo div.valor button:active {
+    box-shadow: 0px 0px 2px black;
+}
+div.campo div.valor input:disabled {
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    text-align: center;
+    color: darkgrey;
+    font-family: 'Roboto Condensed';
+    font-weight: 100;
+    font-size: 11pt;
+    padding: 0.6em;
 }
