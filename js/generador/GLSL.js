@@ -27,3 +27,34 @@ var FRAGMENT_SHADER_ONDA_ESFERICA =
 "       gl_FragColor = uColor;"+
 "   }"+
 "}\n";
+
+//------------------------------------------ONDAS-SENOIDALES---------------------------------
+var VERTEX_SHADER_ONDAS_SENOIDALES = 
+
+"uniform mat4 m;\n" +
+"uniform mat4 v;\n" +
+"uniform mat4 p;\n" +
+
+"attribute vec3 aPos;\n" +
+"varying vec3 vPos;"+
+
+"void main(){\n" +
+"   gl_Position = p * v * m * vec4(aPos, 1.0);\n" +
+"   vPos = aPos;"+
+"}\n";
+
+var FRAGMENT_SHADER_ONDAS_SENOIDALES =
+"precision mediump float;\n" +
+
+"uniform vec4 uColor;\n"+
+"varying vec3 vPos;"+
+
+"void main() {\n" +
+"   float x0 = vPos.x;"+
+"      y0"
+"   if (r < 1.0) {"+
+"       discard;"+
+"   } else { "+
+"       gl_FragColor = uColor;"+
+"   }"+
+"}\n";

@@ -52,6 +52,7 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Hitbox.js",
         RAIZ . "js/generador/GLSL.js",
         RAIZ . "js/generador/OndaEsferica.js",
+        RAIZ . "js/generador/OndasSenoidalesDesfasadas.js",
         RAIZ . "js/generador/ControladorPresets.js",
         RAIZ . "js/generador/Main.js",
     ]);
@@ -67,12 +68,12 @@ Vista::imprimirHead("Bloom - JS",
             <div class="menu">
                 <h1>Presets</h1>
                 <div class="presets">
-                    <div id="OndaEsferica" class="preset">
+                    <div id="ondaEsferica" class="preset">
                         <img src="/bloomJS/img/generador/ondaEsferica.png" alt="">
                         <p>Onda esférica</p>
                         <small>Onda con la forma de una gota de agua que cae en un estanque calmado</small>
                     </div>
-                    <div id="OndasSenoidalesDesfasadas" class="preset">
+                    <div id="ondasSenoidalesDesfasadas" class="preset">
                         <img src="/bloomJS/img/generador/ondasSenoidales.png" alt="">
                         <p>Ondas Senoidales</p>
                         <small>Forma hecha con formas senoidales desfasadas y con diferentes amplitudes. Útil para decorar 

@@ -1,7 +1,7 @@
-class OndaEsferica extends Modelo2D {
+class OndasSenoidalesDesfasadas extends Modelo2D {
 
     constructor () {
-        super(0, 0, 0, -80, 0, 0, 10, 10, null, VERTEX_SHADER_ONDA_ESFERICA, FRAGMENT_SHADER_ONDA_ESFERICA, Color.AZUL);
+        super(0, 0, 0, 0, 0, 0, 10, 10, null, VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL);
     }
 
     //tendra color pero no textura. El shader no utilizara textura
