@@ -238,7 +238,6 @@ class Renderer {
     static anadirGraficoDibujable (grafico) {
         this.dibujables.push(grafico);
         Renderer.dibujar();
-        GUI.actualizarMenuGlobal();
     }
 
     static eliminarGraficoDibujable (id) {

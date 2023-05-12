@@ -523,7 +523,7 @@ class Modelo3D {
         }
     }
 
-    iniciar () {0
+    iniciar () {
         //matriz del modelo
         this.matrizM = new Matriz4X4();
         this.actualizarMatrizM();

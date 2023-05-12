@@ -7,49 +7,106 @@ Vista::imprimirHead("Bloom - JS",
     [
         RAIZ . "css/general.css", 
         RAIZ . "css/index.css", 
-        RAIZ . "css/Generador.css",
         RAIZ . "css/animaciones.css",
-        RAIZ . "css/neon.css"
+        RAIZ . "css/neon.css",
+        RAIZ . "css/general.css", 
+        RAIZ . "css/index.css", 
+        RAIZ . "css/editor.css",
+        RAIZ . "css/animaciones.css",
+        RAIZ . "vistas/editor/subirModelo.css",
+        RAIZ . "css/neon.css",
+        RAIZ . "css/generador.css"
     ], 
     [
-        RAIZ . "js/general/NavDinamico.js",
-        RAIZ . "js/generador/Submenu.js",
-        RAIZ . "js/generador/Herramienta.js",
-        RAIZ . "js/generador/ControladorHerramientas.js",
-        RAIZ . "js/generador/MenuHerramientas.js",
-       
-        RAIZ . "js/generador/Lienzo.js",
-        RAIZ . "js/generador/Contenedor.js",
-        RAIZ . "js/generador/Main.js"
+        RAIZ . "js/editor/Defecto.js",
+        RAIZ . "js/webgl/GLSL.js",
+        RAIZ . "js/webgl/Color.js",
+        RAIZ . "js/webgl/Material.js",
+        RAIZ . "js/webgl/Dae.js",
+        RAIZ . "js/webgl/Modelo2D.js",
+        RAIZ . "js/webgl/Lienzo.js",
+        RAIZ . "js/webgl/GridGenerador.js",
+        RAIZ . "js/webgl/Utilidades.js",
+        RAIZ . "js/webgl/ArcballCamera.js",
+        RAIZ . "js/editor/ControlesSubirModelo.js",
+        RAIZ . "js/webgl/LineaRecta.js",
+        RAIZ . "js/webgl/Triangulo.js",
+        RAIZ . "js/webgl/matematicas/Vector4x1.js",
+        RAIZ . "js/webgl/matematicas/Matriz2x2.js",
+        RAIZ . "js/webgl/matematicas/Matriz3x3.js",
+        RAIZ . "js/webgl/matematicas/Matriz4x4.js",
+        RAIZ . "js/webgl/matematicas/Quaternion.js",
+        RAIZ . "js/editor/BotonBooleano.js",
+        RAIZ . "js/editor/GUI.js",
+        RAIZ . "js/editor/MenuSeleccion.js",
+        RAIZ . "js/editor/BotonIcono.js",
+        RAIZ . "js/editor/FuncionesIconos.js",
+        RAIZ . "js/editor/Submenu.js",
+        RAIZ . "js/editor/Boton.js",
+        RAIZ . "js/editor/BarraHerramientas.js",
+        RAIZ . "js/editor/VentanaCanvas.js",
+        RAIZ . "js/editor/Escena.js",
+        RAIZ . "js/webgl/Renderer.js",
+        RAIZ . "js/webgl/Modelo3D.js",
+        RAIZ . "js/webgl/PuntoLuz.js",
+        RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "js/generador/Main.js",
     ]);
 ?>
 <div id="cabecera">
     <?=Vista::imprimirHeader("Generador", "Aquí podrás generar imágenes con patrones para tus páginas");?>
     <?=Vista::imprimirNav(Vista::$entradas, 2);?>
     <?=Vista::imprimirUsuario()?>
-    <?=Vista::imprimirNavEstatico(Vista::$entradas, 2)?>
 </div>
 <main>
-    <div id="frame">
-        <div id="guia">
-            <h1>Guía de uso</h1>
-            <ul id="listaPasos">
-                <li>Haga click en cualquier punto del lienzo que desee utilizar como origen
-                    <button id="siguiente">Siguiente</button>
-                </li>
-            </ul>
+    <div id="lienzo">
+        <div id="gui">
+            <div class="menu">
+                <h1>Presets</h1>
+                <div class="presets">
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                    <div class="preset">
+                        <img src="/bloomJS/img/barril_blender.jpg" alt="">
+                        <p>Nombre</p>
+                        <small>Descripción</small>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="lienzo">
-
-        </div>
-    </div>
-    <div id="patrones">
-        <img class="flecha" src="/bloomJS/img/iconos/izquierda.png" alt="Izquierda">
-        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
-        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
-        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
-        <img id="patron1" class="patron" src="/bloomJS/img/iconos/github.png" alt="Icono Github">
-        <img class="flecha" src="/bloomJS/img/iconos/derecha.png" alt="Izquierda">
     </div>
 </main>
 <?=Vista::imprimirFooter();?>
