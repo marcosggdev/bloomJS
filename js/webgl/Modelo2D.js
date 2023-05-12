@@ -44,7 +44,7 @@ class Modelo2D {
             0,0,
             1,0,
             1,1,
-            0,0,
+            1,0,
             1,1,
             0,1    
         ];
@@ -59,9 +59,6 @@ class Modelo2D {
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
-
-        //matriz modeloVista
-        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
 
         //shaders y programa
         this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -89,8 +86,8 @@ class Modelo2D {
         }
 
         //si se pasa una textura, se carga. En caso contrario se ignora la textura
-        if (this.rutaTextura !== "") {
-            await this.cargarTextura(this.rutaTextura)
+        if (this.rutaTextura !== null) {
+            this.cargarTextura(this.rutaTextura)
             .then((imagen) => {
     
                 gl.bindTexture(gl.TEXTURE_2D, textura);
@@ -113,12 +110,12 @@ class Modelo2D {
         gl.uniform1i(this.samplerLoc, 0);
 
         //uniforms matrices
-        this.mv = gl.getUniformLocation(this.programa, "mv");
-        gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
-        this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
         this.m = gl.getUniformLocation(this.programa, "m");
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+        this.v = gl.getUniformLocation(this.programa, "v");
+        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+        this.p = gl.getUniformLocation(this.programa, "p");
+        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
 
         Renderer.anadirGraficoDibujable(this);
     }

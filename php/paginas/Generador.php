@@ -50,6 +50,9 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
         RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "js/generador/GLSL.js",
+        RAIZ . "js/generador/OndaEsferica.js",
+        RAIZ . "js/generador/ControladorPresets.js",
         RAIZ . "js/generador/Main.js",
     ]);
 ?>

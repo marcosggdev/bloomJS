@@ -51,6 +51,7 @@ div.preset {
     box-shadow: 2px 2px 5px black;
     border-radius: 5px;
     width: 100%;
+    user-select: none;
 }
 div.preset:hover {
     background-color: #383838;
@@ -58,4 +59,14 @@ div.preset:hover {
 div.preset img {
     width: 100%;
     box-shadow: 1px 1px 3px black;
+}
+div.preset p {
+    text-align: justify;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    text-decoration: underline;
+    font-size: 14pt;
+}
+div.preset small {
+    text-align: justify;
 }
