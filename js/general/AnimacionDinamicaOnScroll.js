@@ -21,8 +21,6 @@ window.addEventListener("load", () => {
                 let topElemento = elementos[i].getBoundingClientRect().top;
                 let bottomElemento = elementos[i].getBoundingClientRect().bottom;
 
-                console.log(bottomElemento);
-
                 if (topElemento - window.innerHeight < 0) {
                     elementos[i].classList.add("animado");
                     elementos[i].style.animationPlayState = "running";

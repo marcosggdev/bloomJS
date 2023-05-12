@@ -46,9 +46,9 @@ window.addEventListener("load", () => {
                             afterTextarea.parentNode.removeChild(afterTextarea);
                         }
                         textarea.value = "";
+                        let nuevoId = this.responseText;
+                        anadirComentarioNuevo(comentarios, texto, id_target, nuevoId);
                     }, 3000);
-                    let nuevoId = this.responseText;
-                    anadirComentarioNuevo(comentarios, texto, id_target, nuevoId);
                 }
             }
             let formData = new FormData();

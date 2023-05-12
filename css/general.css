@@ -508,6 +508,12 @@ div.usuarioGrande .contenido p {
     font-family: 'Oleo Script Swash Caps';
     margin: 0;
 }
+div.usuarioGrande .contenido a {
+    color: rgb(56, 56, 255);
+}
+div.usuarioGrande .contenido a:hover {
+    color: rgb(133, 133, 255);
+}
 .ocultoDerecha {
     left: 100%;
 }

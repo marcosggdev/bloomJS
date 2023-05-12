@@ -6,6 +6,15 @@ require_once RAIZ_WEB . "php/DTO/Usuario.php";
 
 class ServicioUsuarios {
 
+    public static function getUsuario ($id) {
+        $datosUsuario = ModeloUsuarios::getUsuario($id);
+        if ($datosUsuario != false) {
+            $usuario = new Usuario($datosUsuario["id"], $datosUsuario["correo"], $datosUsuario["nombre"], $datosUsuario["imagenPerfil"]);
+            return $usuario;
+        }
+        return false;
+    }
+
     //accede a datos para comprobar si existe un usuario adecuado y devuelve true o false
     public static function comprobarInicioSesion ($nombre, $clave) {
         $datosUsuario = ModeloUsuarios::getUsuarioPorNombreYClave($nombre, $clave);

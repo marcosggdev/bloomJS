@@ -132,6 +132,7 @@ class BaseDatos {
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/3_Matrices.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/4_MatrizMVP.php')",
                 "INSERT IGNORE INTO entradas (ruta) VALUES ('blog/5_WebGL.php')",
+
                 "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo1 admin', '1', '1');",
                 "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo2 anonimo', '2', '2');",
                 "INSERT IGNORE INTO comentarios (texto, id_target, id_autor) VALUES ('hola mundo3 anonimo', '3', '2');",

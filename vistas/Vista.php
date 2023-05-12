@@ -135,7 +135,7 @@ class Vista {
                 <div class="usuarioImgCaja ocultoDerecha">
                     <img src="<?="/bloomJS/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
                     <div class="contenido">
-                        <p><?=$usuario->nombre?></p>
+                        <p><a href="/bloomJS/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
                         <p><?=$usuario->correo?></p>
                     </div>
                     <button class="boton-neon" onclick="window.location.assign('/bloomJS/php/paginas/Logout.php')">Cerrar sesión</button>
