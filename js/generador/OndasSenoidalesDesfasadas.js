@@ -11,7 +11,7 @@ class OndasSenoidalesDesfasadas extends Forma {
         this.periodo = new NumericoDOM(1, 1, 1, 0.1);
         this.anguloZ = new NumericoDOM(1, 1, 1, 0.1);
         this.rellenoInferior = new BooleanoDOM(true);
-        this.colorDOM = new ColorDOM(Color.AZUL);
+        this.colorRelleno = new ColorDOM(Color.Blanco);
 
         this.parametros = [
             "amplitud",
@@ -20,7 +20,7 @@ class OndasSenoidalesDesfasadas extends Forma {
             "periodo",
             "anguloZ",
             "rellenoInferior",
-            "colorDOM"
+            "colorRelleno"
         ];
 
         this.nombres = [
@@ -30,7 +30,7 @@ class OndasSenoidalesDesfasadas extends Forma {
             "Periodo",
             "Ángulo Z",
             "Relleno Inferior",
-            "Color"
+            "Color de relleno"
         ];
 
         this.asociacionNombresParametros = {
@@ -40,7 +40,7 @@ class OndasSenoidalesDesfasadas extends Forma {
             "Periodo": "periodo",
             "Ángulo Z": "anguloZ",
             "Relleno Inferior": "rellenoInferior",
-            "Color": "colorDOM"
+            "Color de relleno": "colorRelleno"
         };
 
         //declaramos como se va a representar estos datos en el DOM. Numerico, Booleano... etc son tipos de datos. Por ejemplo queremos que
@@ -52,7 +52,7 @@ class OndasSenoidalesDesfasadas extends Forma {
             "periodo": "NumericoDOM",
             "anguloZ": "NumericoDOM",
             "rellenoInferior": "BooleanoDOM",
-            "color": "ColorDOM"
+            "colorRelleno": "ColorDOM"
         }
 
     }
@@ -99,8 +99,8 @@ class OndasSenoidalesDesfasadas extends Forma {
         gl.uniform1f(this.rellenoInferiorLoc, (this.rellenoInferior == true) ? "1.0": "0.0");
         this.uColor = gl.getUniformLocation(this.programa, "uColor");
         gl.uniform4f(this.uColor, this.color.R, this.color.G, this.color.B, this.color.A);
-        this.colorRellenoLoc = gl.getUniformLocation(this.programa, "colorRellenoLoc");
-        gl.uniform4f(this.colorRellenoLoc, this.colorRelleno.R, this.color.G, this.color.B, this.color.A);
+        this.colorRellenoLoc = gl.getUniformLocation(this.programa, "colorRelleno");
+        gl.uniform4f(this.colorRellenoLoc, this.color.R, this.color.G, this.color.B, this.color.A);
 
         Renderer.anadirGraficoDibujable(this);
     }
@@ -127,6 +127,7 @@ class OndasSenoidalesDesfasadas extends Forma {
         gl.uniform1f(this.periodoLoc, this.periodo);
         gl.uniform1f(this.rellenoInferiorLoc, (this.rellenoInferior == true) ? "1.0": "0.0");
         gl.uniform4f(this.uColor, this.color.R, this.color.G, this.color.B, this.color.A);
+        gl.uniform4f(this.colorRellenoLoc, this.colorRelleno.color.R, this.colorRelleno.color.G, this.colorRelleno.color.B, this.colorRelleno.color.A);
 
         //atributos
         gl.enableVertexAttribArray(this.aPosLoc);

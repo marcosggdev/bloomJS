@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloComentarios.php";
@@ -148,23 +147,21 @@ class VistaBlog {
     //carrusel horizontal donde se van presentando previews de las entradas
     public static function imprimirCarruselEntradas () {
         $datosEntradas = ModeloEntradas::getEntradas();
-?>
-        <div class="carruselHorizontal">
-<?php
+        echo "<div class='carruselHorizontal'>\n";
             foreach ($datosEntradas as $datosEntrada) {
                 $nombreEntrada = explode("blog/", $datosEntrada["ruta"])[1];
-                echo "<div class='previewEntrada'>";
-                echo "<div class='contenido'>";
-                self::imprimirPreviewEntrada($datosEntrada["ruta"]);
-                echo "</div><div class='control'>";
-                ?>
-                <button class="caja-neon" onclick="window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=<?=$nombreEntrada?>')">Leer más</button>
-                <?php
-                echo "</div></div>";
-            }
-?>
-        </div>
-<?
+                echo "" . 
+                "   <div class='previewEntrada'>\n" . 
+                "       <div class='contenido'>\n";
+                            self::imprimirPreviewEntrada($datosEntrada["ruta"]);
+                echo "" . 
+                "       </div>\n" . 
+                "       <div class='control'>\n" . 
+                "           <button class='caja-neon' onclick=\"window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=$nombreEntrada')\">Leer más</button>\n" . 
+                "       </div>\n" . 
+                "   </div>\n";
+            }   
+        echo "</div>\n";
     }
 
     //lee una entrada y genera algo para resumirla. En este caso podria ser la imagen del inicio, el titulo y un numero

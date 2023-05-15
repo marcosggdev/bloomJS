@@ -112,6 +112,7 @@ var FRAGMENT_SHADER_ONDAS_SENOIDALES =
 "precision mediump float;\n" +
 
 "uniform vec4 uColor;\n"+
+"uniform vec4 colorRelleno;"+
 "uniform float amplitud;"+
 "uniform float desfaseX;"+
 "uniform float desfaseY;"+
@@ -129,7 +130,7 @@ var FRAGMENT_SHADER_ONDAS_SENOIDALES =
 "   } else { "+
 "       if (rellenoInferior == 1.0) {"+
 "           if (vPos.y < y) {"+
-"               gl_FragColor = uColor;"+
+"               gl_FragColor = colorRelleno;"+
 "           } else { "+
 "               discard;"+
 "           }"+

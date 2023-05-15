@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
