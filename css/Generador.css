@@ -16,21 +16,89 @@ div.menu {
     box-sizing: border-box;
     pointer-events: all;
 }
+/*despliega hacia izquierda, pero se situa en derecha*/
+div.menu-desplegable-izquierda .iconoBooleano {
+    position: absolute;
+    content: " ";
+    top: 25px;
+    right: 100%;
+    width: 50px;
+    height: 50px;
+    background-color: pink;
+    z-index: 250;
+    border-radius: 50px;
+    box-sizing: border-box;
+    transition: transform 0.1s;
+}
+div.menu-desplegable-izquierda .iconoBooleano:hover{
+    transform: scale(1.1);
+}
+div.menu-desplegable-izquierda {
+    position: absolute;
+    display: flex;
+    background-color: grey;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #271427;
+    box-shadow: 2px 2px 5px black;
+    color: white;
+    height: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    pointer-events: all;
+    right: -20%;
+    transition: right 0.3s;
+    width: 25%;
+}
 div#lienzo {
     position: relative;
-    height: 90vh;
-    width: 90vw;
+    /* height: 100%; */
+    /* width: 100%; */
     display: flex;
     flex-direction: row;
     align-items: stretch;
     align-self: center;
 }
-canvas {
-    width: 60%;
-    height: 100%;
-    right: 0;
-    position: absolute;
+div.ventana {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
+div.nombreValor input {
+    width: 40%;
+}
+div.nombreValor p {
+    margin: 0;
+}
+/*override de editor.css para aumentar z index del menu de la ventana*/
+div#barraHerramientas {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: #212121;
+    pointer-events: all;
+    flex-grow: 1;
+    height: 50px;
+    z-index: 1;
+}
+div.barraCierre {
+    gap: 1em;
+}
+div.boton {
+    color: white;
+}
+/*------------------------------------------------------------------*/
+div.contenedorCanvas {
+    width: 100%;
+}
+/*canvas {
+    height: 100%;
+    width: auto;
+}*/
 div.menu > h1, div.menu p {
     margin: 0;
 }

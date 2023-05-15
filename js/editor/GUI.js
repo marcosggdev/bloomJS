@@ -196,6 +196,78 @@ class GUI {
         contenedor.appendChild(nodo);
     }
 
+    //par nombre valor donde el valor es editable
+    static anadirNombreValorNumericoEditable (objeto, contenedor, nombre, valor) {
+        let nodo = document.createElement("div");
+        nodo.className = "nombreValor";
+
+        let p = document.createElement("p");
+        p.textContent = nombre;
+
+        nodo.appendChild(p);
+
+        let input = document.createElement("input");
+        input.type = "number";
+        input.step = 0.1;
+        input.min = -9000;
+        input.max = 9000;
+        input.value = valor;
+        input.addEventListener("input", () => {
+            let parametros = contenedor.querySelectorAll(".nombreValor");
+            
+            let cambiosOBJ = {};
+
+            for (let i = 0; i < parametros.length; i++) {
+                //nombre a mostrar de la variable
+                let nombre = parametros[i].querySelector("p").textContent;
+                //nombre de la variable
+                let parametro = objeto.asociacionNombresParametros[nombre];
+                let valor = parametros[i].querySelector("input").value;
+                cambiosOBJ[parametro] = valor; 
+            }
+            objeto.actualizarParametros(cambiosOBJ);
+        });
+
+        nodo.appendChild(input);
+
+        contenedor.appendChild(nodo);
+    }
+
+        //par nombre valor donde el valor es editable pero de tipos definidos, como BooleanoDOM o ColorDOM. Se trata de utilizar
+        //esas clases para obtener la representacion DOM del input, guardado dentro del objeto por el tipo de dato y su nodo
+        static anadirInputEditable (objeto, contenedor, nombre) {
+
+            //nodo padre
+            let nodo = document.createElement("div");
+            nodo.className = "nombreValor";
+    
+            //nombre del atributo
+            let p = document.createElement("p");
+            p.textContent = nombre;
+            nodo.appendChild(p);
+            let input = objeto[objeto.asociacionNombresParametros[nombre]].nodo;
+
+            input.addEventListener("input", () => {
+                let parametros = contenedor.querySelectorAll(".nombreValor");
+                
+                let cambiosOBJ = {};
+    
+                for (let i = 0; i < parametros.length; i++) {
+                    //nombre a mostrar de la variable
+                    let nombre = parametros[i].querySelector("p").textContent;
+                    //nombre de la variable
+                    let parametro = objeto.asociacionNombresParametros[nombre];
+                    let valor = parametros[i].querySelector("input").value;
+                    cambiosOBJ[parametro] = valor; 
+                }
+                objeto.actualizarParametros(cambiosOBJ);
+            });
+    
+            nodo.appendChild(input);
+    
+            contenedor.appendChild(nodo);
+        }
+
     static anadirLineaNombresValores (contenedor, nombres, valores, clase) {
         let nodo = document.createElement("div");
         nodo.className = clase;
@@ -320,6 +392,18 @@ class GUI {
         });
         iconos.appendChild(img);
         nodo.appendChild(iconos);
+        contenedor.appendChild(nodo);
+    }
+
+    //como barra cierre pero sin boton de cierre
+    static crearBarraTitulo (contenedor, titulo) {
+        let nodo = document.createElement("div");
+        nodo.className = "barraCierre";
+
+        let h2 = document.createElement("h2");
+        h2.textContent = titulo;
+        nodo.appendChild(h2);
+
         contenedor.appendChild(nodo);
     }
 

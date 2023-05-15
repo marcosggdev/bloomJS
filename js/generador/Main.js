@@ -11,16 +11,18 @@ window.addEventListener('load', () => {
         console.log("Error al obtener el contexto del canvas");
         return;
     }
-    
-    let lienzo = document.getElementById("lienzo");
-    lienzo.appendChild(canvas);
+
+    let contenedorCanvas = document.querySelector(".contenedorCanvas");
+    contenedorCanvas.appendChild(canvas);
+
+    GUIGenerador.crearInterfaz(document.querySelector(".ventana .barra"));
 
     //camara que el renderer utiliza para dibujar
-    let arcballCamera = new ArcballCamera(0, 0, 0, 30, 0, 0);
+    let camaraSimple = new CamaraSimple(0, 0, 0);
     //se encarga de dibujar en el canvas
-    Renderer.iniciar(arcballCamera, 640, 480);
+    Renderer.iniciar(camaraSimple, 1024, 768);
 
-    let grid = new GridGenerador();
+   // let grid = new GridGenerador();
     let aps = 24;
     let spa = 1 / aps;
     setInterval(Renderer.ciclo, spa);   

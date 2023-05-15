@@ -1,10 +1,10 @@
 class Forma extends Modelo2D {
 
-    constructor () {
-        super(0, 0, 0, 0, 0, 0, 10, 10, null, VERTEX_SHADER_ONDA_ESFERICA, FRAGMENT_SHADER_ONDA_ESFERICA, Color.AZUL);
+    constructor (x,y,escalaX,escalaY,VERTEX_SHADER, FRAGMENT_SHADER, color) {
+        super(x, y, 0, 0, 0, 0, escalaX, escalaY, null, VERTEX_SHADER, FRAGMENT_SHADER, color);
     }
 
-    //tendra color pero no textura. El shader no utilizara textura
+    //tendra color pero no textura. El shader no utilizara textura NI PERSPECTIVA
     async iniciar () {
 
         //matriz del modelo
@@ -31,8 +31,6 @@ class Forma extends Modelo2D {
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
         this.v = gl.getUniformLocation(this.programa, "v");
         gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
-        this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
         this.uColor = gl.getUniformLocation(this.programa, "uColor");
         gl.uniform4f(this.uColor, this.color.R, this.color.G, this.color.B, this.color.A);
 
@@ -48,8 +46,6 @@ class Forma extends Modelo2D {
         this.matrizM.escalar(this.factorX, this.factorY, 1.0);
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
-
-        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
 
         gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());

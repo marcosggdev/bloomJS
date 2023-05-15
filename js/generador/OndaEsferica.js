@@ -1,4 +1,4 @@
-class OndaEsferica extends Modelo2D {
+class OndaEsferica extends Forma {
 
     constructor () {
         super(0, 0, 0, -80, 0, 0, 10, 10, null, VERTEX_SHADER_ONDA_ESFERICA, FRAGMENT_SHADER_ONDA_ESFERICA, Color.AZUL);

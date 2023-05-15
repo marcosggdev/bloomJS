@@ -179,4 +179,26 @@ class Submenu {
         req.send(formData);
     }
 
+    crearImagenGenerador () {
+        //crear y mostrar menu para elegir preset
+        let menu = GUIGenerador.crearMenuElegirPreset();
+        document.getElementById("gui").appendChild(menu);
+    }
+
+    crearMenuAjustesGenerador () {
+
+    }
+
+    crearMenuControlesGenerador () {
+
+    }
+
+    crearMenuGuiaUso () {
+
+    }
+
+    exportarImagenGenerador () {
+
+    }
+
 }

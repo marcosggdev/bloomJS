@@ -24,10 +24,11 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Material.js",
         RAIZ . "js/webgl/Dae.js",
         RAIZ . "js/webgl/Modelo2D.js",
+        RAIZ . "js/generador/Forma.js",
         RAIZ . "js/webgl/Lienzo.js",
         RAIZ . "js/webgl/GridGenerador.js",
         RAIZ . "js/webgl/Utilidades.js",
-        RAIZ . "js/webgl/ArcballCamera.js",
+        RAIZ . "js/webgl/CamaraSimple.js",
         RAIZ . "js/editor/ControlesSubirModelo.js",
         RAIZ . "js/webgl/LineaRecta.js",
         RAIZ . "js/webgl/Triangulo.js",
@@ -36,8 +37,13 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/matematicas/Matriz3x3.js",
         RAIZ . "js/webgl/matematicas/Matriz4x4.js",
         RAIZ . "js/webgl/matematicas/Quaternion.js",
-        RAIZ . "js/editor/BotonBooleano.js",
+        RAIZ . "js/generador/BotonBooleano.js",
+        RAIZ . "js/generador/tipos/BooleanoDOM.js",
+        RAIZ . "js/generador/tipos/ColorDOM.js",
+        RAIZ . "js/generador/tipos/NumericoDOM.js",
         RAIZ . "js/editor/GUI.js",
+        RAIZ . "js/general/UI.js",
+        RAIZ . "js/generador/GUIGenerador.js",
         RAIZ . "js/editor/MenuSeleccion.js",
         RAIZ . "js/editor/BotonIcono.js",
         RAIZ . "js/editor/FuncionesIconos.js",
@@ -53,7 +59,6 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/generador/GLSL.js",
         RAIZ . "js/generador/OndaEsferica.js",
         RAIZ . "js/generador/OndasSenoidalesDesfasadas.js",
-        RAIZ . "js/generador/ControladorPresets.js",
         RAIZ . "js/generador/Main.js",
     ]);
 ?>
@@ -63,26 +68,19 @@ Vista::imprimirHead("Bloom - JS",
     <?=Vista::imprimirUsuario()?>
 </div>
 <main>
-    <div id="lienzo">
-        <div id="gui">
-            <div class="menu">
-                <h1>Presets</h1>
-                <div class="presets">
-                    <div id="ondaEsferica" class="preset">
-                        <img src="/bloomJS/img/generador/ondaEsferica.png" alt="">
-                        <p>Onda esférica</p>
-                        <small>Onda con la forma de una gota de agua que cae en un estanque calmado</small>
-                    </div>
-                    <div id="ondasSenoidalesDesfasadas" class="preset">
-                        <img src="/bloomJS/img/generador/ondasSenoidales.png" alt="">
-                        <p>Ondas Senoidales</p>
-                        <small>Forma hecha con formas senoidales desfasadas y con diferentes amplitudes. Útil para decorar 
-                            encabezados.
-                        </small>
-                    </div>
-                </div>
+    <div class="ventana">
+        <div class="barra">
+
+        </div>
+        <div id="lienzo">
+            <div id="gui">
+
+            </div>
+            <div class="contenedorCanvas">
+
             </div>
         </div>
+
     </div>
 </main>
 <?=Vista::imprimirFooter();?>
