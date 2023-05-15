@@ -60,7 +60,7 @@ session_start();
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Editor</h1>
-                        <a class="boton-neon" href="/bloomJS/php/paginas/Editor.php">Ir al Editor<img src="img/iconos/derecha.png" alt=""/></a>
+                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Editor.php">Ir al Editor<img src="img/iconos/derecha.png" alt=""/></a>
                     </div>
                 </div>
                 <!--insertar aqui modelo 3d cuando funcione la exportacion-->
@@ -70,7 +70,7 @@ session_start();
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Generador</h1>
-                        <a class="boton-neon" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
+                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
                     </div> 
                 </div>
                 <!--insertar aqui imagenes generadas en el generador-->
@@ -83,7 +83,7 @@ session_start();
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Blog</h1>
-                        <a class="boton-neon" href="/bloomJS/php/paginas/Blog.php">Ir al Blog</a>
+                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Blog.php">Ir al Blog</a>
                     </div>
                 </div>
                 <?=VistaBlog::imprimirCarruselEntradas();?>
