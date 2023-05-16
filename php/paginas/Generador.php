@@ -59,7 +59,7 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/generador/GLSL.js",
         RAIZ . "js/generador/OndaEsferica.js",
         RAIZ . "js/generador/OndasSenoidalesDesfasadas.js",
-        RAIZ . "js/generador/Main.js",
+        RAIZ . "js/generador/Main.js"
     ]);
 ?>
 <div id="cabecera">

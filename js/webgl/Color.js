@@ -10,7 +10,7 @@ class Color {
         this.G = G / 255;
         this.B = B / 255;
         this.A = A / 255;
-        this.hexadecimal = this.conversionHexadecimal(R / 255,G / 255,B / 255,A / 255);
+        this.hexadecimal = this.conversionHexadecimal(this.R, this.G, this.B, this.A);
     }
 
     toString () {
@@ -40,10 +40,7 @@ class Color {
         let r = R.toString(16);
         let g = G.toString(16);
         let b = B.toString(16);
-
-        //no multiplicamos por 255
         let a = A.toString(16);
-        //let a = Math.round(A * 255).toString(16);
 
         if (r.length == 1) {
             r = "0" + r;

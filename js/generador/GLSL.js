@@ -118,25 +118,39 @@ var FRAGMENT_SHADER_ONDAS_SENOIDALES =
 
 "uniform vec4 uColor;\n"+
 "uniform vec4 colorRelleno;"+
+"uniform vec4 colorBorde;"+
 "uniform float rellenoInferior;"+
 
 "varying vec3 vPos;"+
 
 "void main() {\n" +
+
 "   float y = amplitud * sin(periodo * vPos.x + desfaseX) + desfaseY;"+
 "   float grosor = 0.005;"+
 "   float distancia = abs(y - vPos.y);"+
+
 "   if (distancia < grosor) {"+
-"       gl_FragColor = uColor;"+
+
+"       gl_FragColor = colorBorde;"+
+
 "   } else { "+
+
 "       if (rellenoInferior == 1.0) {"+
+
 "           if (vPos.y < y) {"+
+
 "               gl_FragColor = colorRelleno;"+
+
 "           } else { "+
+
 "               discard;"+
+
 "           }"+
+
 "       } else {"+
+
 "           discard;"+
+
 "       }"+
 "   }"+
 "}\n";
