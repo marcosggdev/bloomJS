@@ -1,19 +1,23 @@
-class OndasSenoidalesDesfasadas extends Forma {
+class OndaSenoidalDesfasada extends Forma {
 
-    constructor () {
-        super(0,0,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL);
+    constructor (z) {
+        super(0,0,z,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL);
     }
 
     async iniciar () {
 
-        //parametros especificos de shader (uniforms) => override de iniciar y dibujar
-        this.amplitud = new NumericoDOM(1, -100, 100, 0.1);
+        //manejamos capa a traves de la posicion Z
+
+        //parametros onda
+        this.amplitud = new NumericoDOM(0.3, -100, 100, 0.1);
         this.desfaseX = new NumericoDOM(0, -20000, 20000, 0.1);
         this.desfaseY = new NumericoDOM(0, -20000, 20000, 0.1);
-        this.periodo = new NumericoDOM(1, -20000, 20000, 0.1);
+        this.periodo = new NumericoDOM(7, -20000, 20000, 0.3);
+
+        //colores onda
         this.rellenoInferior = new BooleanoDOM(true);
-        this.colorRelleno = new ColorDOM(new Color(255,0,0,255));
-        this.colorBorde = new ColorDOM(new Color(0, 255, 0, 255));
+        this.colorRelleno = new ColorDOM(new Color(255,151,66,255));
+        this.colorBorde = new ColorDOM(new Color(255, 136, 0, 255));
 
         this.parametros = [
             "amplitud",

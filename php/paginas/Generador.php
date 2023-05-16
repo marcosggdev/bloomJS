@@ -57,8 +57,10 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/PuntoLuz.js",
         RAIZ . "js/webgl/Hitbox.js",
         RAIZ . "js/generador/GLSL.js",
+        RAIZ . "js/generador/GrupoFormas.js",
         RAIZ . "js/generador/OndaEsferica.js",
-        RAIZ . "js/generador/OndasSenoidalesDesfasadas.js",
+        RAIZ . "js/generador/OndaSenoidalDesfasada.js",
+        RAIZ . "js/generador/OndasSenoidales.js",
         RAIZ . "js/generador/Main.js"
     ]);
 ?>

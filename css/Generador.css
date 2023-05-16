@@ -30,6 +30,16 @@ div.menu-desplegable-izquierda .iconoBooleano {
     box-sizing: border-box;
     transition: transform 0.1s;
 }
+div.datos {
+    overflow-y: scroll;
+}
+div.menu-desplegable-izquierda .presentacion p {
+    margin: 0;
+    font-size: 11pt;
+}
+div.menu-desplegable-izquierda .presentacion small {
+    font-size: 9pt;
+}
 div.menu-desplegable-izquierda .iconoBooleano:hover{
     transform: scale(1.1);
 }
@@ -51,10 +61,19 @@ div.menu-desplegable-izquierda {
     transition: right 0.3s;
     width: 25%;
 }
+div.menu-desplegable-izquierda div img {
+    width: 100%;
+}
+div.menu-desplegable-izquierda div.presentacion {
+    padding: 1em;
+    background-color: #212121;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px pink;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
 div#lienzo {
     position: relative;
-    /* height: 100%; */
-    /* width: 100%; */
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -137,4 +156,40 @@ div.preset p {
 }
 div.preset small {
     text-align: justify;
+}
+div.submenu {
+    display: flex;
+    flex-direction: column;
+}
+div.submenu ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #212121;
+    gap: 10px;
+}
+div.submenu ul li {
+    padding: 0.5em;
+    box-sizing: border-box;
+    background-color: purple;
+    box-shadow: 0 0 5px pink;
+    color: pink;
+    transition: color 0.5s, transform 0.3s;
+    user-select: none;
+}
+div.submenu ul li:not(.activo):hover {
+    transform: scale(1.1);
+}
+div.submenu ul li.activo {
+    background-color: pink;
+    box-shadow: 0 0 10px pink;
+    color: purple;
+}
+div.submenu .datos {
+    overflow-y: scroll;
+    background-color: pink;
+    color: black;
+    padding: 1em;
+    box-sizing: border-box;
 }

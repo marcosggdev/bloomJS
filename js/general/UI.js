@@ -37,7 +37,7 @@ class UI {
     }
 
     static anadirValor (contenedor, valor) {
-        let p = document.createElement("valor");
+        let p = document.createElement("p");
         p.textContent = valor;
         contenedor.appendChild(p);
     }

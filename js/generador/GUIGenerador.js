@@ -79,14 +79,14 @@ class GUIGenerador  extends GUI {
                     presets[i].addEventListener("click", () => {
                         //crear forma
                         let id = presets[i].id;
-                        let forma = null;
+                        let grupoFormas = null;
 
                         switch (id) {
                             case "ondaEsferica":
-                                forma = new OndaEsferica(); 
+                                grupoFormas = new OndasEsfericas();
                                 break;
                             case "ondasSenoidalesDesfasadas":
-                                forma = new OndasSenoidalesDesfasadas(); 
+                                grupoFormas = new OndasSenoidales();
                                 break;
                         }
 
@@ -94,18 +94,51 @@ class GUIGenerador  extends GUI {
                         menu.parentNode.removeChild(menu);
 
                         //pasar datos al menu lateral de parametros
+
+                        //menu con 2 pestañas: parametros de grupo y parametros de forma. En cada uno se muestra el parametro correspondiente
+                        //con nombre y valor en un input editable personalizado con las clases de generador->tipos
+                        let presentacion = document.createElement("div");
+                        presentacion.className = "presentacion";
+
                         let img = presets[i].querySelector("img").src;
                         let nombre = presets[i].querySelector("p").textContent;
                         let descripcion = presets[i].querySelector("small").textContent;
                         let menuLateral = document.querySelector("div#gui .menu-desplegable-izquierda");
-                        UI.anadirImagen(menuLateral, img);
-                        UI.anadirValor(menuLateral, nombre);
-                        UI.anadirValor(menuLateral, descripcion);
 
-                        //cargar parametros editables de la forma, guardados en cada clase
-                        for (let i = 0; i < forma.nombres.length; i++) {
-                            GUI.anadirInputEditable(forma, menuLateral, forma.nombres[i]);
+                        UI.anadirImagen(presentacion, img);
+                        UI.anadirValor(presentacion, nombre);
+                        UI.anadirValor(presentacion, descripcion);
+                        menuLateral.appendChild(presentacion);
+
+                        //submenu en funcion de pestaña
+                        let submenu = document.createElement("div");
+                        submenu.className = "submenu";
+
+                        let ul = document.createElement("ul");
+                        let li = document.createElement("li");
+                        li.textContent = "Grupo";
+                        li.className = "activo";
+                        let li2 = document.createElement("li");
+                        li2.textContent = "Forma";
+                        ul.appendChild(li);
+                        ul.appendChild(li2);
+
+                        let datos = document.createElement("div");
+                        datos.className = "datos";
+                        //para las formas del grupo
+                        for (let i = 0; i < grupoFormas.formas.length; i++) {
+                            
+                            let forma = grupoFormas.formas[i];
+
+                            //cargar parametros editables de la forma, guardados en cada clase
+                            for (let j = 0; j < forma.nombres.length; j++) {
+                                GUI.anadirInputEditable(forma, datos, forma.nombres[j]);
+                            }
                         }
+
+                        submenu.appendChild(ul);
+                        submenu.appendChild(datos);
+                        menuLateral.appendChild(submenu);
                     });
                 }
             }
