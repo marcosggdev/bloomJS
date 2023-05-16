@@ -2,16 +2,16 @@ class OndasSenoidalesDesfasadas extends Forma {
 
     constructor () {
 
-        super(0,0,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.BLANCO);
+        super(0,0,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL);
 
         //parametros especificos de shader (uniforms) => override de iniciar y dibujar
         this.amplitud = new NumericoDOM(0.4, -100, 100, 0.1);
         this.desfaseX = new NumericoDOM(0, -20000, 20000, 0.1);
         this.desfaseY = new NumericoDOM(0, -20000, 20000, 0.1);
-        this.periodo = new NumericoDOM(1, 1, 1, 0.1);
-        this.anguloZ = new NumericoDOM(1, 1, 1, 0.1);
-        this.rellenoInferior = new BooleanoDOM(true);
-        this.colorRelleno = new ColorDOM(Color.Blanco);
+        this.periodo = new NumericoDOM(1, -20000, 20000, 0.1);
+        this.anguloZ = new NumericoDOM(1, -20000, 20000, 0.1);
+        this.rellenoInferior = new BooleanoDOM(false);
+        this.colorRelleno = new ColorDOM(new Color(255,0,0,255));
 
         this.parametros = [
             "amplitud",
@@ -57,7 +57,7 @@ class OndasSenoidalesDesfasadas extends Forma {
 
     }
 
-    iniciar () {
+    async iniciar () {
 
         //matriz del modelo
         this.matrizM = new Matriz4X4();
@@ -127,7 +127,15 @@ class OndasSenoidalesDesfasadas extends Forma {
         gl.uniform1f(this.periodoLoc, this.periodo);
         gl.uniform1f(this.rellenoInferiorLoc, (this.rellenoInferior == true) ? "1.0": "0.0");
         gl.uniform4f(this.uColor, this.color.R, this.color.G, this.color.B, this.color.A);
-        gl.uniform4f(this.colorRellenoLoc, this.colorRelleno.color.R, this.colorRelleno.color.G, this.colorRelleno.color.B, this.colorRelleno.color.A);
+        if (this.colorRelleno != null) {
+            gl.uniform4f(this.colorRellenoLoc, this.colorRelleno.color.R, this.colorRelleno.color.G, this.colorRelleno.color.B, this.colorRelleno.color.A);
+            //console.log("!=null");
+            //console.log(this.colorRelleno.color.toString());
+        } else {
+            gl.uniform4f(this.colorRellenoLoc, this.color.R, this.color.G, this.color.B, this.color.A);
+            //console.log("null");
+        }
+        
 
         //atributos
         gl.enableVertexAttribArray(this.aPosLoc);
@@ -137,26 +145,33 @@ class OndasSenoidalesDesfasadas extends Forma {
 
         //dibujado
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
-        console.dir(this.color.toString());
     }
 
     actualizarParametros (cambiosOBJ) {
+        //console.dir(cambiosOBJ);
         //actualizar valores. Nota: las variables son objetos del DOM, por lo que hay que modificar su valor
         let parametros = Object.keys(cambiosOBJ);
 
         //para ello separamos en tipos
         for (let i = 0; i < parametros.length; i++) {
-            
-            switch (parametros[i].constructor.name) {
+
+            switch (this[parametros[i]].constructor.name) {
+
                 case "NumericoDOM":
-                    this[parametros[i]].numero = cambiosOBJ[parametros[i]]; 
+                    this[parametros[i]].numero = cambiosOBJ[parametros[i]];
                     break;
                 case "BooleanoDOM":
-                    this[parametros[i]].booleano = cambiosOBJ[parametros[i]]; 
+                    this[parametros[i]].booleano = cambiosOBJ[parametros[i]];
                     break;
                 case "ColorDOM":
-                    let colorHexa = cambiosOBJ[parametros[i]];
-                    let color = Color.convertirHexadecimalRGBA(colorHexa);
+                    //el input type color no tiene soporte para alpha => concatenar ff
+                    //colorhexa viene en formato de 6 digitos donde max = ff para cada par => 255 en rgb
+                    let colorHexa = cambiosOBJ[parametros[i]] + "ff";
+                    let r255 = parseInt(colorHexa[1] + colorHexa[2], 16);
+                    let g255 = parseInt(colorHexa[3] + colorHexa[4], 16);
+                    let b255 = parseInt(colorHexa[5] + colorHexa[6], 16);
+                    let a255 = parseInt("ff", 16);
+                    let color = new Color(r255,g255,b255,a255);
                     this[parametros[i]].color = color;
                     break;
             }

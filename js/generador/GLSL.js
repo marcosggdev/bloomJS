@@ -111,12 +111,13 @@ var VERTEX_SHADER_ONDAS_SENOIDALES =
 var FRAGMENT_SHADER_ONDAS_SENOIDALES =
 "precision mediump float;\n" +
 
-"uniform vec4 uColor;\n"+
-"uniform vec4 colorRelleno;"+
 "uniform float amplitud;"+
 "uniform float desfaseX;"+
 "uniform float desfaseY;"+
 "uniform float periodo;"+
+
+"uniform vec4 uColor;\n"+
+"uniform vec4 colorRelleno;"+
 "uniform float rellenoInferior;"+
 
 "varying vec3 vPos;"+

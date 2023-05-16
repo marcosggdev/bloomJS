@@ -3,14 +3,14 @@ class Color {
     static FONDO = new Color(0,0,0,255);
     static BLANCO = new Color(255,255,255,255);
     static AZUL = new Color(0, 0, 255, 255);
-    static AZUL_CIELO = new Color(176, 217, 219);
+    static AZUL_CIELO = new Color(176, 217, 219, 255);
 
     constructor (R,G,B,A) {
-        this.R = R;
-        this.G = G;
-        this.B = B;
-        this.A = A;
-        this.hexadecimal = this.conversionHexadecimal(R,G,B,A);
+        this.R = R / 255;
+        this.G = G / 255;
+        this.B = B / 255;
+        this.A = A / 255;
+        this.hexadecimal = this.conversionHexadecimal(R / 255,G / 255,B / 255,A / 255);
     }
 
     toString () {
@@ -41,8 +41,9 @@ class Color {
         let g = G.toString(16);
         let b = B.toString(16);
 
-        //multiplicamos por 255
-        let a = Math.round(A * 255).toString(16);
+        //no multiplicamos por 255
+        let a = A.toString(16);
+        //let a = Math.round(A * 255).toString(16);
 
         if (r.length == 1) {
             r = "0" + r;
@@ -66,8 +67,9 @@ class Color {
         let g = color.G.toString(16);
         let b = color.B.toString(16);
 
-        //multiplicamos por 255
-        let a = Math.round(color.A * 255).toString(16);
+        //no multiplicamos por 255
+        let a = color.A.toString(16);
+        //let a = Math.round(color.A * 255).toString(16);
 
         if (r.length == 1) {
             r = "0" + r;
@@ -85,8 +87,10 @@ class Color {
         return "#" + r + g + b + a;
     }
 
-    static convertirHexadecimalRGBA (colorHexa) {
+    static convertirHexadecimalRGBA (h) {
         let r = 0, g = 0, b = 0, a = 1;
+
+        //suponemos que h es un codigo hexadecimal de 6 digitos y 1 simbolo #: #rrggbbaa
 
         if (h.length == 5) {
           r = "0x" + h[1] + h[1];
