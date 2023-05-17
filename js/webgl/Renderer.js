@@ -1,10 +1,10 @@
 class Renderer {
 
-    static fondo = new Color(0.3, 0.3, 0.3, 1.0);
+    static fondo = new Color(85, 85, 85, 255);
 
     static camara = null;
-    static ancho = 640;
-    static alto = 480;
+    static ancho = 1024;
+    static alto = 768;
     static dibujables = [];
 
     static dibujarHitbox = false;

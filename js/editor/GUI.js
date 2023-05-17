@@ -462,7 +462,7 @@ class GUI {
         plantilla
         .then(
             function (html) {
-
+                
                 //1 contenedor y 1 script
                 let contenido = document.createElement("div");
                 contenido.innerHTML += html;

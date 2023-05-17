@@ -3,14 +3,26 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
+require_once RAIZ_WEB . "php/DTO/Usuario.php";
 
 if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
     //tipo de la forma: defecto, usuario o comunidad. No tiene que ver con la BD
     switch ($_POST["tipo"]) {
-        case "defecto": $modelosRegistros = ModeloModelos::getModelosPorDefecto(); break;
-        case "usuario": $modelosRegistros = ModeloModelos::getModelosPorIdAutor(1); break;
-        case "comunidad": $modelosRegistros = ModeloModelos::getModelosComunidad(); break;
+        case "defecto": 
+            $modelosRegistros = ModeloModelos::getModelosPorDefecto(); 
+            break;
+        case "usuario": 
+            session_start();
+            if (isset($_SESSION["usuario"])) {
+                $usuario = $_SESSION["usuario"];
+                $modelosRegistros = ModeloModelos::getModelosPorIdAutor($usuario->id); 
+            }
+            break;
+        case "comunidad": 
+            $modelosRegistros = ModeloModelos::getModelosComunidad(); 
+            break;
     }
+    print_r($modelosRegistros);
 ?>
     <div class="contenedor">
 <?php
