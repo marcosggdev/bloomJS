@@ -141,8 +141,6 @@ class Modelo3D {
                 this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
                     this.anguloX, this.anguloY, this.anguloZ, 
                     this.factorX, this.factorY, this.factorZ, factoresHitbox);
-
-                Renderer.anadirGraficoDibujable(this);
             }
         );
 
@@ -239,8 +237,6 @@ class Modelo3D {
                 this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
                     this.anguloX, this.anguloY, this.anguloZ,
                     this.factorX, this.factorY, this.factorZ, factoresHitbox);
-
-                Renderer.anadirGraficoDibujable(this);
             }
         );
     }
@@ -617,8 +613,6 @@ class Modelo3D {
         this.hitbox = new Hitbox(this.posX, this.posY, this.posZ,
             this.anguloX, this.anguloY, this.anguloZ, 
             this.factorX, this.factorY, this.factorZ, factoresHitbox);
-
-        Renderer.anadirGraficoDibujable(this);
     }
 
     calcularFactoresHitbox (vertices) {

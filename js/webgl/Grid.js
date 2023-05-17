@@ -41,8 +41,6 @@ class Grid extends Modelo2D {
         gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(Renderer.camara.matrizV).obtenerArrayPorColumnas());
         this.pInversa = gl.getUniformLocation(this.programa, "pInversa");
         gl.uniformMatrix4fv(this.pInversa, false, Matriz4X4.obtenerInversa(Renderer.matrizP).obtenerArrayPorColumnas());
-
-        Renderer.anadirGraficoDibujable(this);
     }
 
     dibujar () {

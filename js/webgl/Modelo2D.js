@@ -116,8 +116,6 @@ class Modelo2D {
         gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
         this.p = gl.getUniformLocation(this.programa, "p");
         gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
-
-        Renderer.anadirGraficoDibujable(this);
     }
 
     cargarTextura (url) {

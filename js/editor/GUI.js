@@ -33,8 +33,8 @@ class GUI {
         //barra de herramientas
         let barraHerramientas = new BarraHerramientas([
             new Boton("Escena", "desplegar", [
-                ["Añadir Modelo3D", "Modelos"],
-                ["anadirModelo3D", "crearMenuModelos"]
+                ["Crear Escena", "Añadir Modelo3D", "Modelos"],
+                ["crearEscena", "anadirModelo3D", "crearMenuModelos"]
             ]),
             new Boton("Editor", "desplegar", [
                 ["Ajustes", "Controles"],

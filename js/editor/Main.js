@@ -20,13 +20,9 @@ window.addEventListener('load', () => {
 
     //camara que el renderer utiliza para dibujar
     let arcballCamera = new ArcballCamera(0, 0, 0, 30, -90, 30);
-    //se encarga de dibujar en el canvas
-    Renderer.iniciar(arcballCamera, 1024, 768);
 
-    //el menu global se actualiza cada vez que se añade o borra un grafico dibujable
-
-    //let hitbox = new Hitbox(barril);
-    let grid = new Grid();
+    //por defecto no existe escena => se pasa null como argumento
+    Renderer.iniciar(arcballCamera, 1024, 768, null);
     let aps = 24;
     let spa = 1 / aps;
     setInterval(Renderer.ciclo, spa);

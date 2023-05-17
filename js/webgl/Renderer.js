@@ -5,7 +5,6 @@ class Renderer {
     static camara = null;
     static ancho = 1024;
     static alto = 768;
-    static dibujables = [];
 
     static dibujarHitbox = false;
     static dibujarLineasSeleccion = false;
@@ -139,11 +138,16 @@ class Renderer {
         menu.appendChild(contenido);
     }
 
-    static iniciar (camara = null, ancho, alto) {
+    static iniciar (camara = null, ancho, alto, dibujables) {
 
         Renderer.camara = camara;
         Renderer.ancho = ancho;
         Renderer.alto = alto;
+
+        Renderer.dibujables = [];
+        if (dibujables != null) {
+            Renderer.dibujables = dibujables;
+        }
 
         gl.canvas.width = Renderer.ancho;   //dimensionar canvas
         gl.canvas.height = Renderer.alto;

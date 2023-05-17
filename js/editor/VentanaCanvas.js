@@ -3,6 +3,7 @@ class VentanaCanvas {
     static botones = [];
     static menuSeleccion = null;
     static objetoSeleccionado = null;
+    static escena = null;
 
     static teclas = {
         82: "r",
@@ -19,7 +20,10 @@ class VentanaCanvas {
     constructor () {
         //botones de la ventana del canvas
         VentanaCanvas.botones = [];
+
         this.nodo = this.crearNodo();
+
+        this.escena = null;
     }
 
     crearNodo () {
@@ -262,6 +266,20 @@ class VentanaCanvas {
         VentanaCanvas.objetoSeleccionado.eliminar();
         VentanaCanvas.deseleccionarObjeto();
         GUI.actualizarMenuGlobal();
+    }
+
+    //por ejemplo, objeto creado o eliminado
+    static actualizarVentanaCanvas () {
+        GUI.actualizarMenuGlobal();
+    }
+
+    static anadirModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
+        let modelo = new Modelo(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial);        
+    }
+
+    static setEscena (escena) {
+        VentanaCanvas.escena = escena;
+        Renderer.dibujables = escena.dibujables;
     }
 
 }

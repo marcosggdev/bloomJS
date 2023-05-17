@@ -41,6 +41,12 @@ class Submenu {
         console.log("c2");
     }
 
+    crearEscena () {
+        let escena = new Escena();
+        //ahora ya no sera null si lo era
+        VentanaCanvas.setEscena(escena);
+    }
+
     //permite añadir un modelo 3D a la escena. Para ello se sube al servidor el archivo dae y la textura
     anadirModelo3D () {
         let dialog = document.createElement("dialog");
