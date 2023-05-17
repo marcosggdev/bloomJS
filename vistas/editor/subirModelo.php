@@ -25,6 +25,10 @@
                 <label for="textura">Imagen con la textura del Modelo3D</label>
                 <input id="textura" type="file" name="textura" accept="image/*">
             </div>
+            <div class="campo">
+                <label for="previsualizacion">Imagen de previsualización del Modelo3D</label>
+                <input id="previsualizacion" type="file" name="textura" accept="image/*">
+            </div>
             <input type="button" value="Subir">
         </form>
 </div>

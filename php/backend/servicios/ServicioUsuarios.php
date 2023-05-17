@@ -35,15 +35,21 @@ class ServicioUsuarios {
         $rutaCarpeta = RAIZ_WEB . "usuarios/".$nombre."_".$correo;
         $id = ModeloUsuarios::crearUsuario($correo, $nombre, $clave, $imagenPerfil, "usuarios/".$nombre."_".$correo);
 
-        if ($id != false && mkdir($rutaCarpeta, "0777")) {
+        //usuario bd creado, carpeta y archivo creados
+        if ($id != false && mkdir($rutaCarpeta, 0777) && fopen($rutaCarpeta . "/entradaPersonal.html", "w")) {
+
             //y devolvemos el objeto
             $datosUsuario = ModeloUsuarios::getUsuarioPorNombreYClave($nombre, $clave);
             $usuario = new Usuario($datosUsuario["id"], $datosUsuario["correo"], $datosUsuario["nombre"], $datosUsuario["imagenPerfil"]);
             return $usuario;
+
         } else {
-            //si no se crea carpeta o sale error de BD
+
+            //algo no se ha conseguido crear. Futuro: revertir cambios que si se han hecho
             return false;
+
         }
+
     }
 
 }

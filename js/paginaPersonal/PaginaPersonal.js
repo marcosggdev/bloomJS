@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
         let subContenido = contenido.outerHTML;
         
         contenido.innerHTML = "";
-        console.log(subContenido);        
+        console.log(subContenido);
         //escribimos y añadimos subcontenido en un textarea
         let textarea = document.createElement("textarea");
         textarea.value = subContenido;

@@ -48,7 +48,11 @@ if ($imprimir) {
             if ($nombreArchivo == "entradaPersonal.html") {
                 $ruta = RAIZ_WEB . "usuarios/" . $usuario->nombre . "_" . $usuario->correo . "/" . $nombreArchivo;
                 $archivo = fopen($ruta, "r");
-                $texto = fread($archivo, filesize($ruta));
+                if (filesize($ruta) > 0) {
+                    $texto = fread($archivo, filesize($ruta));
+                } else {
+                    $texto = "<p>¡Ups!<img style='width:15px;display:inline' src='/bloomJS/img/iconos/advertencia.png'/></p> <br>¡Aún no has editado tu página personal! :(";
+                }
                 echo "<div class='paginaPersonal'>";
                 echo $texto;
                 echo "</div>";

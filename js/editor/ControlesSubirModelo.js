@@ -13,9 +13,11 @@ class ControlesSubirModelo {
         let inputDescripcion = dialog.querySelector("#descripcion");
         let inputDae = dialog.querySelector("#dae");
         let inputTextura = dialog.querySelector("#textura");
+        let inputPrevisualizacion = dialog.querySelector("#previsualizacion");
 
         let archivoDae = null;
         let textura = null;
+        let previsualizacion = null;
 
         inputDae.addEventListener('input', (e) => {
             archivoDae = e.target.files[0];
@@ -23,6 +25,10 @@ class ControlesSubirModelo {
 
         inputTextura.addEventListener("input", (e) => {
             textura = e.target.files[0];
+        });
+
+        inputPrevisualizacion.addEventListener("input", (e) => {
+            previsualizacion = e.target.files[0];
         });
 
         //boton enviar
@@ -33,24 +39,28 @@ class ControlesSubirModelo {
             let descripcion = inputDescripcion.value;
 
             //si se han añanido ambos
-            if (archivoDae != null && textura != null) {
+            if (archivoDae != null && textura != null && previsualizacion != null) {
+
                 let formData = new FormData();
                 formData.append("nombre", nombre);
                 formData.append("descripcion", descripcion);
                 formData.append("archivoDae", archivoDae);
                 formData.append("textura", textura);
+                formData.append("previsualizacion", previsualizacion);
     
                 let req = new XMLHttpRequest();
                 req.onreadystatechange = function () {
                     if (req.readyState == 4 && req.status == 200) {
-                        console.log(this.responseText);
                         dialog.remove();
                     }
                 }
                 req.open("POST", "/bloomJS/php/backend/scripts/ProcesarArchivoSubido.php");
                 req.send(formData);
+
             } else {
+
                 alert("No puede dejar el archivo .dae o la textura sin incluir, vuelva a intentarlo");
+
             }
         });
 

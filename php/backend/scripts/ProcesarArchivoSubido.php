@@ -13,16 +13,24 @@ $nombre = $_POST["nombre"];
 $descripcion = $_POST["descripcion"];
 $archivoDae = $_FILES['archivoDae'];
 $textura = $_FILES["textura"];
+$previsualizacion = $_FILES["previsualizacion"];
 
 //guardamos los archivos con un nombre nuevo aleatorio y unico (nombre de sistema de archivos)
 $extensionDae = "." . convertirMimeAExtension($archivoDae['type']);
-$extensionTextura = "." . convertirMimeAExtension($textura['type']);
 $nombreDaeConExtension = generarNombreArchivoUnico($extensionDae, RAIZ_WEB . "assets/subidos/modelos");
 $rutaDae = "assets/subidos/modelos/" . $nombreDaeConExtension;
+move_uploaded_file($archivoDae['tmp_name'], "/var/www/html/bloomJS/" . $rutaDae);
+
+$extensionTextura = "." . convertirMimeAExtension($textura['type']);
 $nombreTexturaConExtension = generarNombreArchivoUnico($extensionTextura, RAIZ_WEB . "assets/subidos/texturas");
 $rutaTextura = "assets/subidos/texturas/" . $nombreTexturaConExtension;
-move_uploaded_file($archivoDae['tmp_name'], "/var/www/html/bloomJS/" . $rutaDae);
 move_uploaded_file($textura['tmp_name'], "/var/www/html/bloomJS/" . $rutaTextura);
+
+$extensionPrevisualizacion = "." . convertirMimeAExtension($previsualizacion['type']);
+$nombrePrevisualizacionConExtension = generarNombreArchivoUnico($extensionTextura, RAIZ_WEB . "assets/subidos/previsualizacion");
+$rutaPrevisualizacion = "assets/subidos/previsualizacion/" . $nombrePrevisualizacionConExtension;
+move_uploaded_file($previsualizacion['tmp_name'], "/var/www/html/bloomJS/" . $rutaPrevisualizacion);
+
 
 //añadimos las referencias a la base de datos
 
@@ -31,8 +39,8 @@ session_start();
 if (isset($_SESSION["usuario"])) {
     //iniciada sesion, insertar con id autor correspondiente
     $usuario = $_SESSION["usuario"];
-    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $usuario->id);
+    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, $usuario->id);
 } else {
     //sin iniciar sesion => id_autor = 2 (anonimo)
-    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, 2);
+    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, 2);
 }
