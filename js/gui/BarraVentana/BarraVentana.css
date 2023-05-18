@@ -31,3 +31,6 @@
 .minimizado {
     display: none;
 }
+.BarraVentana.maximizado {
+    height: 5vh;
+}

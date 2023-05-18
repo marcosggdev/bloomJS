@@ -7,6 +7,15 @@
     color: white;
     box-sizing: border-box;
 }
+.MenuInterfaz.maximizado {
+    height: 5vh;
+}
+.MenuInterfaz.maximizado li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .MenuInterfaz li {
     transition: background-color 0.1s, color 0.1s;
     user-select: none;

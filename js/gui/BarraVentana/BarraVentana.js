@@ -49,7 +49,15 @@ class BarraVentana {
             elemento.classList.add("minimizado");
         });
         let ventanaCanvas = document.querySelector(".VentanaCanvas");
+        let barraVentana = document.querySelector(".VentanaCanvas .BarraVentana");
+        let menuInterfaz = document.querySelector(".VentanaCanvas .MenuInterfaz");
+        let interfazCanvas = document.querySelector(".VentanaCanvas .InterfazCanvas");
+        let canvas = document.querySelector("canvas");
         ventanaCanvas.classList.add("maximizado");
+        barraVentana.classList.add("maximizado");
+        menuInterfaz.classList.add("maximizado");
+        interfazCanvas.classList.add("maximizado");
+        canvas.classList.add("maximizado");
     }
 
     static minimizar () {
@@ -58,7 +66,15 @@ class BarraVentana {
             elemento.classList.remove("minimizado");
         });
         let ventanaCanvas = document.querySelector(".VentanaCanvas");
+        let barraVentana = document.querySelector(".VentanaCanvas .BarraVentana");
+        let menuInterfaz = document.querySelector(".VentanaCanvas .MenuInterfaz");
+        let interfazCanvas = document.querySelector(".VentanaCanvas .InterfazCanvas");
+        let canvas = document.querySelector("canvas");
         ventanaCanvas.classList.remove("maximizado");
+        barraVentana.classList.remove("maximizado");
+        menuInterfaz.classList.remove("maximizado");
+        interfazCanvas.classList.remove("maximizado");
+        canvas.classList.remove("maximizado");
     }
 
 }
