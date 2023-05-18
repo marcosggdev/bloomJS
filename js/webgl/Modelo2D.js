@@ -1,7 +1,7 @@
 class Modelo2D {
 
     constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
-         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = null) {
+         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = null, renderer) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -17,7 +17,9 @@ class Modelo2D {
         this.color = color;
         this.crearVertices();
         this.crearCoordsUV();
-        this.iniciar();
+
+        this.matrizM = new Matriz4X4();
+        this.iniciar(renderer);
     }
 
     crearVertices () {
@@ -51,10 +53,9 @@ class Modelo2D {
 
     }
 
-    async iniciar () {
+    async iniciar (renderer) {
 
         //matriz del modelo
-        this.matrizM = new Matriz4X4();
         this.matrizM.identidad();
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
@@ -109,13 +110,13 @@ class Modelo2D {
         this.samplerLoc = gl.getUniformLocation(this.programa, "sampler");
         gl.uniform1i(this.samplerLoc, 0);
 
-        //uniforms matrices
+        //matrices variables
         this.m = gl.getUniformLocation(this.programa, "m");
-        gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
         this.v = gl.getUniformLocation(this.programa, "v");
-        gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+
+        //matrices constantes
         this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.p, false, renderer.matrizP.obtenerArrayPorColumnas());
     }
 
     cargarTextura (url) {

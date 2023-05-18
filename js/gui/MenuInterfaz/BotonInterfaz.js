@@ -15,10 +15,7 @@ class BotonInterfaz {
         nodo.appendChild(p);
         
         nodo.addEventListener("click", callback);
-    }
-
-    static saludar () {
-        console.log("saludar");
+        return nodo;
     }
 
 }

@@ -1,0 +1,50 @@
+.MenuInterfaz {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #390044;
+    color: white;
+    box-sizing: border-box;
+}
+.MenuInterfaz li {
+    transition: background-color 0.1s, color 0.1s;
+    user-select: none;
+    padding: 1em;
+    box-shadow: 0 0 5px pink;
+    background: linear-gradient(45deg, #853780, #4d004d);
+    padding: 1em;
+    text-align: center;
+}
+.MenuInterfaz li:hover {
+    background: linear-gradient(45deg, #bc5ab5, #8a0e8a);
+    box-shadow: 0 0 1px rgb(174, 109, 121), inset 0 0 25px pink;
+}
+.desplegable {
+    /*alterable con hover js*/
+    position: absolute;
+    display: none;
+    pointer-events: none;
+
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    top: 100%;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+}
+.desplegable li {
+    transition: background-color 0.1s, color 0.1s;
+}
+.desplegable.activo {
+    display: flex;
+    pointer-events: all;
+}
+.MenuInterfaz p {
+    margin: 0;
+}
+.SubmenuInterfaz {
+    position: relative;
+}

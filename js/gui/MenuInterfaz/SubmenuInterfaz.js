@@ -1,17 +1,34 @@
 class SubmenuInterfaz {
 
-    constructor (itemsInterfaz) {
+    constructor (nombre, itemsInterfaz) {
+        this.nombre = nombre;
         this.itemsInterfaz = itemsInterfaz;
-        this.nodo = this.crearNodo(itemsInterfaz);
+        this.nodo = this.crearNodo(nombre, itemsInterfaz);
     }
 
-    crearNodo (itemsInterfaz) {
-        let nodo = document.createElement("ul");
-        nodo.className = "Submenu";
+    crearNodo (nombre, itemsInterfaz) {
+        let nodo = document.createElement("li");
+        nodo.className = "SubmenuInterfaz";
 
+        let p = document.createElement("p");
+        p.textContent = nombre;
+        nodo.appendChild(p);
+
+        let ul = document.createElement("ul");
+        ul.className = "desplegable";
         for (let i = 0; i < itemsInterfaz.length; i++) {
-            nodo.appendChild(itemsInterfaz[i].nodo);
+            ul.appendChild(itemsInterfaz[i].nodo);
         }
+        nodo.appendChild(ul);
+
+        nodo.addEventListener("mouseenter", () => {
+            ul.classList.add("activo");
+        });
+
+        nodo.addEventListener("mouseleave", () => {
+            ul.classList.remove("activo");
+        });
+
         return nodo;
     }
 
