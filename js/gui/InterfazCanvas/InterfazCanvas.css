@@ -5,9 +5,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 33%;
     height: 100%;
 }
-.InterfazCanvas div[class*='Menu'] img {
-    width: 100%;
+.MenuGeneral {
+    display: flex;
+    flex-direction: column;
+    background-color: #1f001f;
+    color: white;
+    padding: 1em;
+    box-sizing: border-box;
 }
