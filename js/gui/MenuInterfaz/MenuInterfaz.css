@@ -15,6 +15,7 @@
     background: linear-gradient(45deg, #853780, #4d004d);
     padding: 1em;
     text-align: center;
+    min-width: 10%;
 }
 .MenuInterfaz li:hover {
     background: linear-gradient(45deg, #bc5ab5, #8a0e8a);

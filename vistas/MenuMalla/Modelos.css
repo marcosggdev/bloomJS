@@ -1,0 +1,23 @@
+div.mallaModelos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1em;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px black;
+    background-color: #212121;
+}
+div.plantilla.modelo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: purple;
+    box-shadow: 0px 0px 5px black;
+    padding: 1em;
+    box-sizing: border-box;
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+div.plantilla p, div.plantilla h4 {
+    margin: 0;
+}

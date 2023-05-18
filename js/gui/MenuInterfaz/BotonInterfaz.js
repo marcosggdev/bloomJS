@@ -1,12 +1,12 @@
 class BotonInterfaz {
 
-    constructor (nombre, callback) {
+    constructor (nombre, funcion) {
         this.nombre = nombre;
-        this.callback = callback;
-        this.nodo = this.crearNodo(nombre, callback);
+        this.funcion = funcion;
+        this.nodo = this.crearNodo(nombre, funcion);
     }
 
-    crearNodo (nombre, callback) {
+    crearNodo (nombre, funcion) {
         let nodo = document.createElement("li");
         nodo.className = "BotonInterfaz";
 
@@ -14,7 +14,14 @@ class BotonInterfaz {
         p.textContent = nombre;
         nodo.appendChild(p);
         
-        nodo.addEventListener("click", callback);
+        nodo.addEventListener("click", () => {
+            //cerrar submenu con click
+            if (this.nodo.parentNode.classList.contains("desplegable")) {
+                this.nodo.parentNode.classList.remove("activo");
+            }
+            //accion
+            funcion();
+        });
         return nodo;
     }
 

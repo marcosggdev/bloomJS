@@ -32,4 +32,39 @@ class SubmenuInterfaz {
         return nodo;
     }
 
+    sustituirOpciones (itemsInterfaz) {
+
+        let lis = this.nodo.querySelectorAll("li");
+        for (let i = 0; i < lis.length; i++) {
+            lis[i].parentNode.removeChild(lis[i]);
+            lis[i] = null;
+        }
+
+        for (let i = 0; i < itemsInterfaz.length; i++) {
+            this.nodo.querySelector("ul").appendChild(itemsInterfaz.nodo);
+        }
+
+    }
+
+    anadirOpcion (itemInterfaz) {
+        this.itemsInterfaz.push(itemInterfaz);
+        this.nodo.appendChild(itemInterfaz.nodo);
+    }
+
+    eliminarOpcion (itemInterfaz) {
+        for (let i = 0; i < this.itemsInterfaz.length; i++) {
+            if (this.itemsInterfaz[i] == itemInterfaz) {
+                this.itemsInterfaz = this.itemsInterfaz.splice(i, 1);
+            }
+        }
+        this.recalcularDOM();
+    }
+
+    recalcularDOM () {
+        this.nodo.querySelector("ul").innerHTML = "";
+        for (let i = 0; i < this.itemsInterfaz.length; i++) {
+            this.nodo.querySelector("ul").appendChild(this.itemsInterfaz[i].nodo);
+        }
+    }
+
 }

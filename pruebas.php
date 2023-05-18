@@ -10,10 +10,14 @@ require_once RAIZ_WEB . "vistas/Vista.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-
-<?php
-    $imports = [
+    <?= Vista::imprimirEstilos([
+        RAIZ . "css/general.css", 
+        RAIZ . "css/animaciones.css",
+        RAIZ . "vistas/editor/subirModelo.css",
+        RAIZ . "css/neon.css",
+        RAIZ . "js/prueba/prueba.css"
+    ]); ?>
+    <?= Vista::imprimirScripts([
         RAIZ . "js/editor/Defecto.js",
         RAIZ . "js/webgl/GLSL.js",
         RAIZ . "js/webgl/Color.js",
@@ -46,13 +50,27 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         RAIZ . "js/webgl/ArcballCamera.js",
         RAIZ . "js/prueba/Main.js",
         RAIZ . "js/webgl/Escena.js"
-    ];
-    foreach ($imports as $import) {
-        echo "<script src='$import'></script>";
-    }
-?>
+    ]) ?>
 
-<?= Vista::cargarComponentes("js/gui", ["BarraVentana", "InterfazCanvas", "MenuInterfaz", "VentanaCanvas"]); ?>
+<?= Vista::importarRecursos([
+        //MENU INTERFAZ
+        RAIZ . "js/gui/MenuInterfaz/BotonInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/SubmenuInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/SubmenuEscena.js",
+        RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.css"
+]) ?>
+
+<?= Vista::importarRecursos([
+        //MENUS DE LA INTERFAZ DE USUARIO 
+        RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.css",
+        RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
+        RAIZ . "js/gui/InterfazCanvas/Menu.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuMalla.js"
+]) ?>
+
+<?= Vista::cargarComponentes("js/gui", ["BarraVentana", "VentanaCanvas"]); ?>
 </head>
 <body>
     <div id="cabecera">
@@ -62,7 +80,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
     </div>
     <main>
-    
+        
     </main>
     <?=Vista::imprimirFooter();?>
 </body>

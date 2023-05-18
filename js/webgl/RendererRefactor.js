@@ -52,7 +52,9 @@ class RendererRefactor {
     actualizar () {
         //actualizar matrizV
         this.camara.actualizar();
-        this.escena.actualizar();
+        if (this.escena != null) {
+            this.escena.actualizar();
+        }
     }
 
     dibujar () {

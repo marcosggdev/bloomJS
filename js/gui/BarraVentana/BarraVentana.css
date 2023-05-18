@@ -28,3 +28,6 @@
 .BarraVentana .botones .BotonImagen:hover {
     transform: scale(1.1);
 }
+.minimizado {
+    display: none;
+}

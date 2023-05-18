@@ -1,3 +1,13 @@
 .InterfazCanvas {
     position: relative;
 }
+.InterfazCanvas div[class*='Menu'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33%;
+    height: 100%;
+}
+.InterfazCanvas div[class*='Menu'] img {
+    width: 100%;
+}

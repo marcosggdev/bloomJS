@@ -174,4 +174,27 @@ class Vista {
         };
     }
 
+    public static function imprimirScripts ($scripts) {
+        foreach ($scripts as $script) {
+            echo "<script src='$script'></script>";
+        }
+    }
+
+    public static function imprimirEstilos ($estilos) {
+        foreach ($estilos as $estilo) {
+            echo "<link rel='stylesheet' href='$estilo'/>";
+        }
+    }
+
+    public static function importarRecursos ($recursos) {
+        foreach($recursos as $recurso) {
+            $extension = explode(".", $recurso)[1];
+            if ($extension == "css") {
+                echo "<link rel='stylesheet' href='$recurso'/>";
+            } elseif ($extension == "js") {
+                echo "<script src='$recurso'></script>";
+            }
+        }
+    }
+
 }

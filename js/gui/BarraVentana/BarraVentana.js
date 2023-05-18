@@ -4,16 +4,6 @@
  */
 class BarraVentana {
 
-    /*
-        <link rel="stylesheet" href="js/gui/BarraVentana/BarraVentana.css">
-        <script src="js/gui/BarraVentana/BotonImagen.js"></script>
-        <script src="js/gui/BarraVentana/BarraVentana.js"></script>
-        <script>
-            let barra = new BarraVentana("Titulo",["/bloomJS/img/iconos/minimizar.png", "/bloomJS/img/iconos/maximizar.png"], 
-            [BarraVentana.minimizar, BarraVentana.maximizar]);
-        </script>
-    */
-
     constructor (titulo, rutas, callbacks) {
 
         this.titulo = titulo;
@@ -53,11 +43,22 @@ class BarraVentana {
     }
 
     static maximizar () {
-        console.log("maximizar");
+        //elementos que no estan dentro de ventana y que no contienen ventana
+        let elementos = document.body.querySelectorAll(":not(.VentanaCanvas *):not(.VentanaCanvas):not(*:has(.VentanaCanvas))");
+        Array.from(elementos).forEach((elemento) => {
+            elemento.classList.add("minimizado");
+        });
+        let ventanaCanvas = document.querySelector(".VentanaCanvas");
+        ventanaCanvas.classList.add("maximizado");
     }
 
     static minimizar () {
-        console.log("minimizar");
+        let elementos = document.body.querySelectorAll(":not(.VentanaCanvas *):not(.VentanaCanvas):not(*:has(.VentanaCanvas))");
+        Array.from(elementos).forEach((elemento) => {
+            elemento.classList.remove("minimizado");
+        });
+        let ventanaCanvas = document.querySelector(".VentanaCanvas");
+        ventanaCanvas.classList.remove("maximizado");
     }
 
 }

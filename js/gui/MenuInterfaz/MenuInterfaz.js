@@ -1,27 +1,5 @@
 class MenuInterfaz {
 
-    /*
-    <link rel="stylesheet" href="js/gui/MenuInterfaz/MenuInterfaz.css">
-    <script src="js/gui/MenuInterfaz/BotonInterfaz.js"></script>
-    <script src="js/gui/MenuInterfaz/MenuInterfaz.js"></script>
-    <script src="js/gui/MenuInterfaz/SubmenuInterfaz.js"></script>
-        <script>
-        let menu = new MenuInterfaz(
-            [
-                new BotonInterfaz("Nombre", MenuInterfaz.saludar),
-                new SubmenuInterfaz("Desplegable",
-                    [
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                    ])
-            ]);
-        document.body.appendChild(menu.nodo);
-    </script>
-    */
     //itemsInterfaz: array de objetos de tipo ItemsInterfaz, que incluye botones, menus desplegables, etc.
     constructor (itemsInterfaz) {
 
