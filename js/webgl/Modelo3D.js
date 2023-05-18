@@ -32,6 +32,8 @@ class Modelo3D {
         this.rutaTextura = rutaTextura;
         this.rutaMaterial = rutaMaterial;
 
+        this.seleccionable = true;
+
         //carga de forma distinta en funcion del modo de shader
         this.cargar(modo);
     }

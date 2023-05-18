@@ -62,4 +62,15 @@ class Escena {
         }
     }
 
+    comprobarSeleccionDeModelo (rayoClick) {
+        for (let i = 0; i < this.dibujables.length; i++) {
+            if (LineaRecta.comprobarInterseccionLineaModelo(rayoClick, this.dibujables[i])) {
+                if (this.dibujables[i].seleccionable == true) {
+                    return this.dibujables[i];
+                }
+            }
+        }
+        return false;
+    }
+    
 }

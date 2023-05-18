@@ -1,6 +1,6 @@
 class LineaRecta {
 
-    constructor (coordXGL, coordYGL) {
+    constructor (coordXGL, coordYGL, renderer) {
         this.coordXGL = coordXGL;
         this.coordYGL = coordYGL;
         this.VSHADER_SOURCE = VERTEX_SHADER_LINEA_RECTA;
@@ -9,18 +9,18 @@ class LineaRecta {
         //precision en pasos al convertir la linea a puntos
         this.precision = 100;
 
-        this.crearVertices(this.coordXGL, this.coordYGL);
-        this.iniciar();
+        this.crearVertices(this.coordXGL, this.coordYGL, renderer);
+        this.iniciar(renderer);
     }
 
-    crearVertices (coordXGL, coordYGL) {
+    crearVertices (coordXGL, coordYGL, renderer) {
 
         //inversas de matrices
-        let pInversa = Matriz4X4.obtenerInversa(Renderer.matrizP);
-        let vInversa = Matriz4X4.obtenerInversa(Renderer.camara.matrizV);
+        let pInversa = Matriz4X4.obtenerInversa(renderer.matrizP);
+        let vInversa = Matriz4X4.obtenerInversa(renderer.camara.matrizV);
 
         //linea recta que une camara con centro
-        let v1 = Renderer.camara.obtenerPosicionCamara();
+        let v1 = renderer.camara.obtenerPosicionCamara();
 
         //obtener vector director de la linea
         let vectorClickV = new Vector4X1([coordXGL, coordYGL, -1.0, 1.0]);
@@ -49,10 +49,10 @@ class LineaRecta {
         ];
 
         //aprovechamos para obtener malla de vertices
-        this.crearVerticesInterseccion(v1, v2);
+        this.crearVerticesInterseccion(v1, v2, renderer);
     }
 
-    crearVerticesInterseccion (v1, v2) {
+    crearVerticesInterseccion (v1, v2, renderer) {
         let vectorDirector = Vector4X1.restarVectores(v2, v1);
         vectorDirector.normalizar();
         let origen = v1;
@@ -61,7 +61,7 @@ class LineaRecta {
 
         let precision = this.precision;
         for (let i = 0; i < precision; i++) {
-            let punto = Vector4X1.sumarVectores(origen, Vector4X1.multiplicarVectorPorEscalar(vectorDirector, i/precision * Renderer.camara.radio));
+            let punto = Vector4X1.sumarVectores(origen, Vector4X1.multiplicarVectorPorEscalar(vectorDirector, i/precision * renderer.camara.radio));
             for (let j = 0; j < 3; j++) {
                 verticesInterseccion.push(punto.datos[j]);
             }
@@ -70,13 +70,13 @@ class LineaRecta {
         this.verticesInterseccion = verticesInterseccion;
     }
 
-    iniciar () {
-        if (Renderer.dibujarLineasSeleccion) {
+    iniciar (renderer) {
+        if (this.visible == true) {
             //shaders y programa
             this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
             this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
             this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
-            gl.useProgram(this.programa);    
+            gl.useProgram(this.programa);
 
             //attribute aPos
             this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
@@ -86,11 +86,9 @@ class LineaRecta {
 
             //uniforms matrices
             this.v = gl.getUniformLocation(this.programa, "v");
-            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, renderer.camara.matrizV.obtenerArrayPorColumnas());
             this.p = gl.getUniformLocation(this.programa, "p");
-            gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
-
-            Renderer.anadirGraficoDibujable(this);
+            gl.uniformMatrix4fv(this.p, false, renderer.matrizP.obtenerArrayPorColumnas());
         }
     }
 
@@ -98,11 +96,11 @@ class LineaRecta {
 
     }
 
-    dibujar () {
-        if (Renderer.dibujarLineasSeleccion) {
+    dibujar (renderer) {
+        if (this.visible) {
             gl.useProgram(this.programa);
 
-            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, renderer.camara.matrizV.obtenerArrayPorColumnas());
     
             //atributos
             gl.enableVertexAttribArray(this.aPosLoc);
@@ -117,7 +115,13 @@ class LineaRecta {
 
     static comprobarInterseccionLineaModelo (linea, modelo) {
         //return this.comprobarInterseccionLineaHitbox (linea, modelo.hitbox);
-        return this.interseccionLineaHitboxPorCercaniaAlCentro(linea, modelo.hitbox);
+        if (modelo.hitbox != null) {
+            return this.interseccionLineaHitboxPorCercaniaAlCentro(linea, modelo.hitbox);
+        } else {
+            //no hitbox => no colisionable/seleccionable
+            return false;
+        }
+        
     }
 
     static comprobarInterseccionLineaHitbox (linea, hitbox) {

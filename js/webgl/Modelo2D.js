@@ -15,6 +15,9 @@ class Modelo2D {
         this.VSHADER_SOURCE = VSHADER_SOURCE;
         this.FSHADER_SOURCE = FSHADER_SOURCE;
         this.color = color;
+
+        this.seleccionable = true;
+
         this.crearVertices();
         this.crearCoordsUV();
 
