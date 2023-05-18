@@ -34,6 +34,8 @@
     left: 50%;
     width: 100%;
     transform: translateX(-50%);
+
+    z-index: 1;
 }
 .desplegable li {
     transition: background-color 0.1s, color 0.1s;

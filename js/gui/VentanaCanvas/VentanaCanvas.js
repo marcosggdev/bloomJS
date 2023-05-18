@@ -18,7 +18,7 @@ class VentanaCanvas {
             ]);
         this.interfazCanvas = new InterfazCanvas();
         //canvas es un nodo
-        this.canvas = new Canvas(renderer, canvas);
+        this.canvas = new Canvas(this, renderer, canvas);
 
         this.nodo = this.crearNodo();
     }

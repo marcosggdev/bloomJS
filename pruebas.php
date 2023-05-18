@@ -63,6 +63,8 @@ require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
     <script src="js/prueba/Main.js"></script>
     <link rel="stylesheet" href="js/gui/VentanaCanvas/Canvas.css">
     <script src="js/webgl/Escena.js"></script>
+    <link rel="stylesheet" href="js/gui/InterfazCanvas/InterfazCanvas.css">
+    <script src="js/gui/VentanaCanvas/ControlesCanvas.js"></script>
 </head>
 <body>
 
