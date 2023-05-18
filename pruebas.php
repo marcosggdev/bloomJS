@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
+require_once RAIZ_WEB . "vistas/Vista.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 
 
 <?php
-    $imports =     [
+    $imports = [
         RAIZ . "js/editor/Defecto.js",
         RAIZ . "js/webgl/GLSL.js",
         RAIZ . "js/webgl/Color.js",
@@ -40,33 +41,29 @@ require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
         RAIZ . "js/editor/BarraHerramientas.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js"
+        RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "js/webgl/RendererRefactor.js",
+        RAIZ . "js/webgl/ArcballCamera.js",
+        RAIZ . "js/prueba/Main.js",
+        RAIZ . "js/webgl/Escena.js"
     ];
     foreach ($imports as $import) {
         echo "<script src='$import'></script>";
     }
 ?>
 
-<link rel="stylesheet" href="js/gui/MenuInterfaz/MenuInterfaz.css">
-    <script src="js/gui/MenuInterfaz/BotonInterfaz.js"></script>
-    <script src="js/gui/MenuInterfaz/MenuInterfaz.js"></script>
-    <script src="js/gui/MenuInterfaz/SubmenuInterfaz.js"></script>
-    <link rel="stylesheet" href="js/gui/BarraVentana/BarraVentana.css">
-    <script src="js/gui/BarraVentana/BotonImagen.js"></script>
-    <script src="js/gui/BarraVentana/BarraVentana.js"></script>
-    <script src="js/gui/VentanaCanvas/VentanaCanvas.js"></script>
-    <script src="js/gui/InterfazCanvas/InterfazCanvas.js"></script>
-    <script src="js/gui/VentanaCanvas/Canvas.js"></script>
-
-    <script src="js/webgl/RendererRefactor.js"></script>
-    <script src="js/webgl/ArcballCamera.js"></script>
-    <script src="js/prueba/Main.js"></script>
-    <link rel="stylesheet" href="js/gui/VentanaCanvas/Canvas.css">
-    <script src="js/webgl/Escena.js"></script>
-    <link rel="stylesheet" href="js/gui/InterfazCanvas/InterfazCanvas.css">
-    <script src="js/gui/VentanaCanvas/ControlesCanvas.js"></script>
+<?= Vista::cargarComponentes("js/gui", ["BarraVentana", "InterfazCanvas", "MenuInterfaz", "VentanaCanvas"]); ?>
 </head>
 <body>
-
+    <div id="cabecera">
+        <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
+        <?=Vista::imprimirNav(Vista::$entradas, 1);?>
+        <?=Vista::imprimirUsuario()?>
+        <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
+    </div>
+    <main>
+    
+    </main>
+    <?=Vista::imprimirFooter();?>
 </body>
 </html>

@@ -3,20 +3,11 @@
  */
 class VentanaCanvas {
 
-    constructor (renderer, canvas) {
+    constructor (barraVentana, menuInterfaz, interfazCanvas, renderer, canvas) {
         this.renderer = renderer;
-        this.barraVentana = new BarraVentana("Titulo", ["/bloomJS/img/iconos/minimizar.png", "/bloomJS/img/iconos/maximizar.png"],
-            [BarraVentana.minimizar, BarraVentana.maximizar]);
-        this.menu = new MenuInterfaz(
-            [
-                new BotonInterfaz("Nombre", MenuInterfaz.saludar),
-                new SubmenuInterfaz("Desplegable",
-                    [
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                        new BotonInterfaz("Nombre2", MenuInterfaz.saludar)
-                    ])
-            ]);
-        this.interfazCanvas = new InterfazCanvas();
+        this.barraVentana = barraVentana;
+        this.menu = menuInterfaz;
+        this.interfazCanvas = interfazCanvas;
         //canvas es un nodo
         this.canvas = new Canvas(this, renderer, canvas);
 

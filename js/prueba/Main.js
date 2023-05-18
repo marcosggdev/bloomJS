@@ -24,21 +24,25 @@ window.addEventListener('load', () => {
 
     //crear contenedor DOM. Canvas tendra asociado el renderer y creamos interfaz de usuario. Pasamos el renderer y el canvas asociados
     //ancho y alto de resolucion definidos en Renderer. Despues escalado por js a width 100% height auto.
-    let ventanaCanvas = new VentanaCanvas(renderer, canvas);
+    let barraVentana = new BarraVentana("BloomJS - Editor", ["/bloomJS/img/iconos/minimizar.png", "/bloomJS/img/iconos/maximizar.png"],
+    [BarraVentana.minimizar, BarraVentana.maximizar]);
+
+    let menuInterfaz = new MenuInterfaz(
+        [
+            new BotonInterfaz("Nombre", MenuInterfaz.saludar),
+            new SubmenuInterfaz("Desplegable",
+                [
+                    new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
+                    new BotonInterfaz("Nombre2", MenuInterfaz.saludar)
+                ])
+        ]);
+    
+    let interfazCanvas = new InterfazCanvas();
+
+    let ventanaCanvas = new VentanaCanvas(barraVentana, menuInterfaz, interfazCanvas, renderer, canvas);
     document.body.appendChild(ventanaCanvas.nodo);
 
     let aps = 24;
     let spa = 1 / aps;
     setInterval(() => {renderer.ciclo()}, spa);
-
-
-    //carga valores por defecto del css de elementos que cambian para guardarlos ante alteraciones
-    //Defecto.cargarValores();
-
-    //camara que el renderer utiliza para dibujar
-    //let arcballCamera = new ArcballCamera(0, 0, 0, 30, -90, 30);
-
-    //por defecto no existe escena => se pasa null como argumento
-    /*Renderer.iniciar(arcballCamera, 1024, 768, null);
-    */
 });

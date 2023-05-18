@@ -158,4 +158,20 @@ class Vista {
 <?php
     }
 
+    public static function cargarComponentes ($rutaComponentes, $componentes) {
+        //ej: $componentes = ["BarraVentana", "InterfazCanvas", "MenuInterfaz", "VentanaCanvas"];
+        foreach($componentes as $componente) {
+            $rutaCarpeta = $rutaComponentes . "/" . $componente;
+            $nombres = scandir(RAIZ_WEB . $rutaCarpeta);
+            foreach ($nombres as $nombre) {
+                $ruta = $rutaCarpeta."/".$nombre;
+                if (explode(".", $nombre)[1] == "css") {
+                    echo "<link rel='stylesheet' href='$ruta'/>";
+                } elseif (explode(".", $nombre)[1] == "js") {
+                    echo "<script src='$ruta'></script>";
+                }
+            }
+        };
+    }
+
 }
