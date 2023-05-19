@@ -15,3 +15,19 @@
     padding: 1em;
     box-sizing: border-box;
 }
+.BarraCierre {
+    display: flex;
+    justify-content: flex-end;
+}
+.BarraCierre img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.1s;
+    box-shadow: 0 0 15px pink;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 229, 229);
+}
+.BarraCierre img:hover {
+    transform: scale(1.05);
+}

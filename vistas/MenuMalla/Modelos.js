@@ -1,17 +1,19 @@
-let malla = document.querySelector(".mallaModelos");
-let plantillas = malla.querySelectorAll(".plantilla.modelo");
-for (let i = 0; i < plantillas.length; i++) {
+Array.from(document.querySelector(".mallaModelos").querySelectorAll(".plantilla.modelo")).forEach(plantilla => {
 
-    let rutaModelo = plantillas[i].querySelector("#rutaModelo").value;
-    let rutaTextura = plantillas[i].querySelector("#rutaTextura").value;
-
-    plantillas[i].addEventListener("click", () => {
+    plantilla.addEventListener("click", () => {
         //click en una plantilla
-        Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",rutaModelo,null,rutaTextura,null)
-        .then(
-            function (modelo) {
-                RendererRefactor.escena.anadirDibujable(modelo);
-            }
-        );
+        if (RendererRefactor.escena != null) {
+            Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",
+            plantilla.querySelector("#rutaModelo").value,null,
+            plantilla.querySelector("#rutaTextura").value,null)
+            .then(
+                function (modelo) {
+                    RendererRefactor.escena.anadirDibujable(modelo);
+                }
+            );
+        } else {
+            alert("Primero crea una escena");
+        }
     });
-}
+
+});

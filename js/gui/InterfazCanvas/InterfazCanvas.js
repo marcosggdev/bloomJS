@@ -15,17 +15,21 @@ class InterfazCanvas {
     }
 
     anadirMenu (menu) {
+
         this.menus.push(menu);
         this.nodo.appendChild(menu.nodo);
+
     }
 
-    eliminarMenu (menu) {
+    eliminarMenu (menuNodo) {
+        
         for (let i = 0; i < this.menus.length; i++) {
-            if (menus[i] == menu) {
-                this.menus = this.menus.splice(i, 1);
+            if (this.menus[i].nodo == menuNodo) {
+                menuNodo.remove();  
+                this.menus.splice(i, 1);
             }
         }
-        menu.parentNode.removeChild(menu);
+
     }
 
     buscarMenuPorTitulo (titulo) {

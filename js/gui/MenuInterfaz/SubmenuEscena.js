@@ -2,9 +2,9 @@ class SubmenuEscena extends SubmenuInterfaz {
 
     constructor (renderer, interfazCanvas) {
         super("Escena", [
-                new BotonInterfaz("Crear escena", () => {SubmenuEscena.crearEscena(renderer)}),
+                new BotonInterfaz("Crear escena", () => {SubmenuEscena.crearEscena()}),
                 new BotonInterfaz("Cargar escena", () => {SubmenuEscena.cargarEscena()}),
-                new BotonInterfaz("Añadir modelo", () => {SubmenuEscena.anadirModelo(renderer, interfazCanvas)})
+                new BotonInterfaz("Añadir modelo", () => {SubmenuEscena.anadirModelo(interfazCanvas)})
         ]);
     }
 
@@ -25,8 +25,9 @@ class SubmenuEscena extends SubmenuInterfaz {
         console.log("cargar escena");
     }
 
-    static anadirModelo (renderer, interfazCanvas) {
+    static anadirModelo (interfazCanvas) {
 
+        //buscar si ya existe
         let antiguoMenu = interfazCanvas.buscarMenuPorTitulo("Añadir modelo");
 
         if (antiguoMenu == null) {
@@ -35,10 +36,6 @@ class SubmenuEscena extends SubmenuInterfaz {
             "defecto", 0, null, 3);
             interfazCanvas.anadirMenu(menuAnadirModelo);
 
-        } else {
-            
-            interfazCanvas.mostrarMenu(antiguoMenu);
-            
         }
 
     }
