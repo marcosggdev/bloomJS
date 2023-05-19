@@ -10,6 +10,7 @@ class GUI {
             if (i == indice) {
                 li.className = "actual";
             }
+            li.id = nombres[i];
             nodo.appendChild(li);
         }
 

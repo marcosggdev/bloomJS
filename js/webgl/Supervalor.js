@@ -4,8 +4,9 @@
  */
 class Supervalor {
 
-    constructor (objeto, variable, nombre, valor) {
+    constructor (objeto, tipo, variable, nombre, valor) {
         this.objeto = objeto;
+        this.tipo = tipo;
         this.variable = variable;
         this.nombre = nombre;
         this.valor = valor;
@@ -28,11 +29,22 @@ class Supervalor {
                 valorDOM.step = 1;
                 valorDOM.value = valor;
                 break;
+            case "Color":
+                valorDOM.type="text";
+                valorDOM.value = valor.toString();
+                break;
+            default: 
+                if (valor == null) {
+                    valorDOM.value = "null";
+                } else {
+                    valorDOM.value = valor;
+                }
+                break;
         }
 
         //cambiar input = cambiar objeto
         valorDOM.addEventListener("input", (e) => {
-            this.objeto[variable] = e.target.value;
+            this.objeto.actualizarValor(variable, e.target.value);
         });
 
         nodo.appendChild(valorDOM);

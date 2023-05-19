@@ -32,8 +32,17 @@ class SubmenuEscena extends SubmenuInterfaz {
 
         if (antiguoMenu == null) {
 
-            let menuAnadirModelo = new MenuMalla("Añadir modelo", "/bloomJS/vistas/MenuMalla/Modelos.php", 
-            "defecto", 0, null, 3);
+            let menuAnadirModelo = new MenuAlternar("Modelos", 
+            ["Defecto", "Personal", "Comunidad"], 
+            [
+                new MenuMalla("Por defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                "defecto", 0, null, 3),
+                new MenuMalla("Personal", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                "usuario", 0, null, 3),
+                new MenuMalla("Comunidad", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                "comunidad", 0, null, 3)
+            ]);
+
             interfazCanvas.anadirMenu(menuAnadirModelo);
 
         }

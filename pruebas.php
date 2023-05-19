@@ -66,6 +66,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.css",
         RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
         RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuAlternar.js",
         RAIZ . "js/gui/InterfazCanvas/Menu.js",
         RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
         RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js"

@@ -8,6 +8,9 @@
 }
 .BarraVentana h1 {
     margin: 0;
+    user-select: none;
+    color: white;
+    padding-left: 1em;
 }
 .BarraVentana .botones {
     display: flex;
@@ -24,6 +27,7 @@
     padding: 3px;
     border-radius: 5px;
     transition: transform 0.2s;
+    user-select: none;
 }
 .BarraVentana .botones .BotonImagen:hover {
     transform: scale(1.1);

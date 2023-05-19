@@ -6,6 +6,7 @@ class RendererRefactor {
     constructor (camara, ancho, alto, fondo) {
 
         RendererRefactor.camara = camara;
+        RendererRefactor.dibujarHitbox = true;
 
         this.ancho = ancho;
         this.alto = alto;

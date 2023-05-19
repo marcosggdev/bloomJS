@@ -15,10 +15,40 @@
     padding: 1em;
     box-sizing: border-box;
     overflow-y: scroll;
+    width: 40%;
+}
+.barraPestanas {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    background-color: #410041;
+    border-radius: 5px;
+}
+.barraPestanas li {
+    padding: 10px;
+    user-select: none;
+    width: 25%;
+    text-align: center;
+}
+.barraPestanas li:hover {
+    background-color: rgb(158, 42, 158);
+}
+.barraPestanas li.actual {
+    background-color: rgb(34, 0, 34);
+    color: rgb(146, 146, 146);
+}
+.MenuGeneral .contenedorSubmenus {
+    display: flex;
+    flex-direction: column;
+}
+.contenedorSubmenus .submenus .submenu {
+    width: 100%;
 }
 .BarraCierre {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 }
 .BarraCierre img {
     width: 25px;
@@ -45,6 +75,7 @@
 }
 .ListaPestanas li {
     padding: 10px;
+    user-select: none;
 }
 .ListaPestanas li.actual {
     color: rgb(164, 164, 164);
@@ -55,4 +86,7 @@
 }
 .ListaPestanas li:not(.actual):hover {
     background-color: rgb(172, 36, 172);
+}
+.invisible {
+    display: none;
 }

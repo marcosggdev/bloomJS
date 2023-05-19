@@ -151,58 +151,68 @@ class ControlesCanvas {
 
     //comprobar posicion del click y buscar objeto que interseque
     controladorSeleccionObjeto (canvas, e) {
-        //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
-        let xCanvas = canvas.getBoundingClientRect().left;
-        let yCanvas = canvas.getBoundingClientRect().top;
-        let anchoCanvas = canvas.getBoundingClientRect().width;
-        let altoCanvas = canvas.getBoundingClientRect().height;
-        let centroX = xCanvas + anchoCanvas / 2;
-        let centroY = yCanvas + altoCanvas / 2;
+        if (RendererRefactor.escena != null) {
+            //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
+            let xCanvas = canvas.getBoundingClientRect().left;
+            let yCanvas = canvas.getBoundingClientRect().top;
+            let anchoCanvas = canvas.getBoundingClientRect().width;
+            let altoCanvas = canvas.getBoundingClientRect().height;
+            let centroX = xCanvas + anchoCanvas / 2;
+            let centroY = yCanvas + altoCanvas / 2;
 
-        let coordXPixeles = e.clientX - centroX;
-        let coordYPixeles = - (e.clientY - centroY);
+            let coordXPixeles = e.clientX - centroX;
+            let coordYPixeles = - (e.clientY - centroY);
 
-        //convertir coordenadas del click a coords de opengl: minimo = -1, maximo = 1;
-        //ancho = 2, xPixeles = xGL => xGL = (xPixeles * 2) / ancho
-        let coordXGL = coordXPixeles * 2 / anchoCanvas;
-        let coordYGL = coordYPixeles * 2 / altoCanvas;
+            //convertir coordenadas del click a coords de opengl: minimo = -1, maximo = 1;
+            //ancho = 2, xPixeles = xGL => xGL = (xPixeles * 2) / ancho
+            let coordXGL = coordXPixeles * 2 / anchoCanvas;
+            let coordYGL = coordYPixeles * 2 / altoCanvas;
 
-        let rayoClick = new LineaRecta(coordXGL, coordYGL);
+            let rayoClick = new LineaRecta(coordXGL, coordYGL);
 
-        let click = false;
-
-        //false no seleccionado, modelo si seleccionado ese modelo
-        let acierto = RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
-
-        if (!acierto) {
-            if (this.objetoSeleccionado != null) {
+            let acierto = RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
+            if (!acierto) {
+                //click en "aire". Deseleccionar objeto = borrar menu seleccion
                 this.deseleccionarObjeto();
+            } else {
+                //se ha hecho click en un objeto. Comprobamos que no es el seleccionado actualmente
+                if (acierto != this.objetoSeleccionado) {
+                    this.seleccionarObjeto(acierto);
+                } else {
+                    //es distinto
+                    
+                }
             }
-        } else {
-            this.seleccionarObjeto(acierto);
+
+            rayoClick = null;
         }
-        rayoClick = null;
     }
 
     //se ha seleccionado un objeto
     seleccionarObjeto (objeto) {
-        let menuSeleccion = new MenuSeleccion("Selección", objeto);
-        VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
-        //canvas: mostrar menu, funcionactualizar, seleccionar y llamar a la funcion de global
-        /*GUI.menuSeleccion.mostrar(objeto);
+        let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
+        if (menuSeleccion != null) {
+            //borramos el que hay y creamos uno nuevo
+            VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion);
+            let nuevoMenu = new MenuSeleccion("Selección", objeto);
+            VentanaCanvas.interfazCanvas.anadirMenu(nuevoMenu);
+
+        } else {
+            //crear otro
+            let menuSeleccion = new MenuSeleccion("Selección", objeto);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
+        }
         this.objetoSeleccionado = objeto;
-        this.globalSeleccionarObjeto(objeto);
-        canvas.focus();*/
     }
 
     //se deselecciona un objeto
     deseleccionarObjeto () {
-        if (this.objetoSeleccionado != null) {
             //reset + deseleccion en menu global
-            GUI.menuSeleccion.ocultar();
+            let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
+            if (menuSeleccion != null) {
+                VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
+            }
             this.objetoSeleccionado = null;
-            this.globalOcultarObjeto();
-        }
     }
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global

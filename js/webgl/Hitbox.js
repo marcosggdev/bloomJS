@@ -220,7 +220,7 @@ class Hitbox {
             this.uColorLoc = gl.getUniformLocation(this.programa, "uColor");
             gl.uniform3f(this.uColorLoc, Hitbox.color[0], Hitbox.color[1], Hitbox.color[2]);
 
-            RendererRefactor.anadirGraficoDibujable(this);
+            RendererRefactor.escena.anadirDibujable(this);
         } else {
             //la creamos almenos porque influye en la actualizacion de factoresHitboxActuales
             this.matrizM = new Matriz4X4();

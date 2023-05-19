@@ -34,19 +34,42 @@ class Modelo3D {
 
         this.seleccionable = true;
 
-        let variablesMostrar = ["posX", "posY", "posZ", "anguloX", "anguloY", "anguloZ", "factorX", "factorY", "factorZ", 
-        "modo", "color", "material"];
-        let nombresMostrar = ["pos. x", "pos. y", "pos. z", "ángulo x", "ángulo y", "ángulo z", "escala x", "escala y", "escala z", 
-        "Shader", "Color", "Material"];
-        this.supervalores = this.crearSupervaloresMostrar(variablesMostrar, nombresMostrar);
+        let propiedadesObjeto = {
+            "x": "posX",
+            "y": "posY",
+            "z": "posZ",
+            "angulo x": "anguloX",
+            "angulo y": "anguloY",
+            "angulo z": "anguloZ",
+            "escala x": "factorX",
+            "escala y": "factorY",
+            "escala z": "factorZ"
+        };
+        let propiedadesAdicionales = {
+            "Modo": "modo",
+            "Color": "color",
+            "Textura": "rutaTextura",
+            "Material": "rutaMaterial"
+        };
+
+        this.crearSupervaloresMostrar(propiedadesObjeto, propiedadesAdicionales);
     }
 
-    crearSupervaloresMostrar (variablesMostrar, nombresMostrar) {
-        let supervalores = [];
-        for (let i = 0; i < variablesMostrar.length; i++) {
-            supervalores.push(new Supervalor(this, variablesMostrar[i], nombresMostrar[i], this[variablesMostrar[i]]));
+    crearSupervaloresMostrar (propiedadesObjeto, propiedadesAdicionales) {
+
+        let supervaloresObjeto = [];
+        let supervaloresAdicionales = [];
+
+        let iterable = Object.keys(propiedadesObjeto);
+        for (let i = 0; i < iterable.length; i++) {
+            supervaloresObjeto.push(new Supervalor(this, "Objeto", propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
         }
-        return supervalores;
+        iterable = Object.keys(propiedadesAdicionales);
+        for (let i = 0; i < iterable.length; i++) {
+            supervaloresAdicionales.push(new Supervalor(this, "Objeto", propiedadesAdicionales[iterable[i]], iterable[i], this[propiedadesAdicionales[iterable[i]]]));
+        }
+        this.supervaloresObjeto = supervaloresObjeto;
+        this.supervaloresAdicionales = supervaloresAdicionales;
     }
 
     static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
@@ -281,7 +304,7 @@ class Modelo3D {
                 }
             )
             .catch(error => {
-                console.log("Error al cargar el archivo .dae o la textura del objeto");
+                alert("Error al cargar el archivo .dae o la textura del objeto");
                 console.error(error);
             });
         });
@@ -745,6 +768,32 @@ class Modelo3D {
         this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
         this.matrizM.rotarConRespectoAWorld(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+    }
+
+    /**
+     * 
+     * @param {*} variable 
+     * @param {*} valor 
+     * Se llama cuando cambia el input del menu selección de un objeto. Este input, segun ha sido definido en la clase
+     * Supervalor (donde se crea) llamara a esta funcion para actualizar el objeto con el nuevo valor de la propiedad
+     * que se ha editado. Sin embargo, el objeto tiene asociada una hitbox y tambien hay que actualizar, de ahi que se llame
+     * a este metodo para gestionar esa sincronizacion modelo - hitbox
+     */
+    actualizarValor (variable, valor) {
+        switch (variable) {
+            case "posX":
+            case "posY":
+            case "posZ":
+                this.mover(variable, valor); break;
+            case "anguloX":
+            case "anguloY":
+            case "anguloZ":
+                this.rotar(variable, valor); break;
+            case "factorX":
+            case "factorY":
+            case "factorZ":
+                this.escalar(variable, valor); break;
+        }
     }
 
     mover (atributo, valor) {

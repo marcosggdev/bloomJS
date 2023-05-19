@@ -21,6 +21,8 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
             if (isset($_SESSION["usuario"])) {
                 $usuario = $_SESSION["usuario"];
                 $modelosRegistros = ModeloModelos::getModelosPorIdAutor($usuario->id); 
+            } else {
+                $modelosRegistros = [];
             }
             break;
         case "comunidad": 
