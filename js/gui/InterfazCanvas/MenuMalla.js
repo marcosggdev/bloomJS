@@ -11,13 +11,16 @@ class MenuMalla extends MenuGeneral {
     }
 
     ampliarNodo (plantilla, tipo, limit, filas, columnas) {
-
         //cargar malla desde servidor
         let req = new XMLHttpRequest();
         let self = this;
         req.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 self.nodo.innerHTML += this.responseText;
+                let scriptInput = self.nodo.querySelector("input[class='script'][type='hidden']");
+                let scriptDOM = document.createElement("script");
+                scriptDOM.src = scriptInput.value;
+                self.nodo.appendChild(scriptDOM);
             }
         };
         let formData = new FormData();

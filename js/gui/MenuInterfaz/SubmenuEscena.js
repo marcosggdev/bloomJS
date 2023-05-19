@@ -4,7 +4,7 @@ class SubmenuEscena extends SubmenuInterfaz {
         super("Escena", [
                 new BotonInterfaz("Crear escena", () => {SubmenuEscena.crearEscena(renderer)}),
                 new BotonInterfaz("Cargar escena", () => {SubmenuEscena.cargarEscena()}),
-                new BotonInterfaz("Añadir modelo", () => {SubmenuEscena.anadirModelo(interfazCanvas)})
+                new BotonInterfaz("Añadir modelo", () => {SubmenuEscena.anadirModelo(renderer, interfazCanvas)})
         ]);
     }
 
@@ -12,10 +12,10 @@ class SubmenuEscena extends SubmenuInterfaz {
      * Se crea una escena vacia. Esto por defecto añade el dibujable del Grid. La escena se guarda en renderer. La escena de renderer
      * se considera la escena actual (la que se esta dibujando, actualizando, etc)
      */
-    static crearEscena (renderer) {
-        if (renderer.escena == null) {
-            let escena = new Escena(renderer);
-            renderer.escena = escena;
+    static crearEscena () {
+        if (RendererRefactor.escena == null) {
+            let escena = new Escena();
+            RendererRefactor.escena = escena;
         } else {
             alert("pisando escena actual de render. ¿Está seguro? Escena.js");
         }
@@ -25,7 +25,7 @@ class SubmenuEscena extends SubmenuInterfaz {
         console.log("cargar escena");
     }
 
-    static anadirModelo (interfazCanvas) {
+    static anadirModelo (renderer, interfazCanvas) {
 
         let antiguoMenu = interfazCanvas.buscarMenuPorTitulo("Añadir modelo");
 

@@ -1,6 +1,6 @@
 class LineaRecta {
 
-    constructor (coordXGL, coordYGL, renderer) {
+    constructor (coordXGL, coordYGL) {
         this.coordXGL = coordXGL;
         this.coordYGL = coordYGL;
         this.VSHADER_SOURCE = VERTEX_SHADER_LINEA_RECTA;
@@ -9,18 +9,18 @@ class LineaRecta {
         //precision en pasos al convertir la linea a puntos
         this.precision = 100;
 
-        this.crearVertices(this.coordXGL, this.coordYGL, renderer);
-        this.iniciar(renderer);
+        this.crearVertices(this.coordXGL, this.coordYGL);
+        this.iniciar();
     }
 
-    crearVertices (coordXGL, coordYGL, renderer) {
+    crearVertices (coordXGL, coordYGL) {
 
         //inversas de matrices
-        let pInversa = Matriz4X4.obtenerInversa(renderer.matrizP);
-        let vInversa = Matriz4X4.obtenerInversa(renderer.camara.matrizV);
+        let pInversa = Matriz4X4.obtenerInversa(RendererRefactor.matrizP);
+        let vInversa = Matriz4X4.obtenerInversa(RendererRefactor.camara.matrizV);
 
         //linea recta que une camara con centro
-        let v1 = renderer.camara.obtenerPosicionCamara();
+        let v1 = RendererRefactor.camara.obtenerPosicionCamara();
 
         //obtener vector director de la linea
         let vectorClickV = new Vector4X1([coordXGL, coordYGL, -1.0, 1.0]);
@@ -49,10 +49,10 @@ class LineaRecta {
         ];
 
         //aprovechamos para obtener malla de vertices
-        this.crearVerticesInterseccion(v1, v2, renderer);
+        this.crearVerticesInterseccion(v1, v2);
     }
 
-    crearVerticesInterseccion (v1, v2, renderer) {
+    crearVerticesInterseccion (v1, v2) {
         let vectorDirector = Vector4X1.restarVectores(v2, v1);
         vectorDirector.normalizar();
         let origen = v1;
@@ -61,7 +61,7 @@ class LineaRecta {
 
         let precision = this.precision;
         for (let i = 0; i < precision; i++) {
-            let punto = Vector4X1.sumarVectores(origen, Vector4X1.multiplicarVectorPorEscalar(vectorDirector, i/precision * renderer.camara.radio));
+            let punto = Vector4X1.sumarVectores(origen, Vector4X1.multiplicarVectorPorEscalar(vectorDirector, i/precision * RendererRefactor.camara.radio));
             for (let j = 0; j < 3; j++) {
                 verticesInterseccion.push(punto.datos[j]);
             }
@@ -70,7 +70,7 @@ class LineaRecta {
         this.verticesInterseccion = verticesInterseccion;
     }
 
-    iniciar (renderer) {
+    iniciar () {
         if (this.visible == true) {
             //shaders y programa
             this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -86,9 +86,9 @@ class LineaRecta {
 
             //uniforms matrices
             this.v = gl.getUniformLocation(this.programa, "v");
-            gl.uniformMatrix4fv(this.v, false, renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
             this.p = gl.getUniformLocation(this.programa, "p");
-            gl.uniformMatrix4fv(this.p, false, renderer.matrizP.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
         }
     }
 
@@ -96,11 +96,11 @@ class LineaRecta {
 
     }
 
-    dibujar (renderer) {
+    dibujar () {
         if (this.visible) {
             gl.useProgram(this.programa);
 
-            gl.uniformMatrix4fv(this.v, false, renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
     
             //atributos
             gl.enableVertexAttribArray(this.aPosLoc);

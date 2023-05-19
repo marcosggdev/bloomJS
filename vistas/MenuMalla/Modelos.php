@@ -44,4 +44,5 @@ if (isset($_POST["tipo"]) && isset($_POST["numero"])) {
     <?php
     }
     echo "</div>";
+    echo "<input class='script' type='hidden' value='/bloomJS/vistas/MenuMalla/Modelos.js'/>";
 }

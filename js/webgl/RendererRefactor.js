@@ -1,10 +1,14 @@
 class RendererRefactor {
 
-    constructor (camara, ancho, alto, escena, fondo) {
-        this.camara = camara;
+    static escena = null;
+    static camara = null;
+
+    constructor (camara, ancho, alto, fondo) {
+
+        RendererRefactor.camara = camara;
+
         this.ancho = ancho;
         this.alto = alto;
-        this.escena = escena;
         this.fondo = fondo;
 
         this.iniciar();
@@ -40,8 +44,8 @@ class RendererRefactor {
     iniciarMatrices () {
         //crear matriz perspectiva
         this.aspecto = gl.canvas.width / gl.canvas.height;
-        this.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
-        this.matrizV = this.camara.matrizV;
+        RendererRefactor.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+        RendererRefactor.matrizV = RendererRefactor.camara.matrizV;
     }
 
     ciclo () {
@@ -51,16 +55,16 @@ class RendererRefactor {
 
     actualizar () {
         //actualizar matrizV
-        this.camara.actualizar();
-        if (this.escena != null) {
-            this.escena.actualizar();
+        RendererRefactor.camara.actualizar();
+        if (RendererRefactor.escena != null) {
+            RendererRefactor.escena.actualizar();
         }
     }
 
     dibujar () {
         this.limpiarFondo();
-        if (this.escena != null) {
-            this.escena.dibujar(this);
+        if (RendererRefactor.escena != null) {
+            RendererRefactor.escena.dibujar(this);
         }
     }
 }

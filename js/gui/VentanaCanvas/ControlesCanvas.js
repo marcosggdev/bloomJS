@@ -7,7 +7,7 @@ class ControlesCanvas {
     }
 
     //gestiona controles de teclas, raton, camara y objeto seleccionado
-    constructor (ventanaCanvas, renderer, canvas) {
+    constructor (ventanaCanvas, canvas) {
 
         //teclas
         this.rotando = false;
@@ -23,16 +23,16 @@ class ControlesCanvas {
         this.camaraMovida = false;
         this.objetoSeleccionado = null;
 
-        this.crearControles(ventanaCanvas, renderer, canvas);
+        this.crearControles(ventanaCanvas, canvas);
 
     }
 
-    crearControles (ventanaCanvas, renderer, canvas) {
+    crearControles (ventanaCanvas, canvas) {
 
         canvas.addEventListener('mousemove', (e) => {
             if (this.moviendoCamara) {   
-                renderer.camara.anguloY += e.movementX;
-                renderer.camara.anguloXPropio += e.movementY;
+                RendererRefactor.camara.anguloY += e.movementX;
+                RendererRefactor.camara.anguloXPropio += e.movementY;
                 this.camaraMovida = true;
             }
 
@@ -73,11 +73,11 @@ class ControlesCanvas {
                             this.interfazCanvas.menuSeleccion.actualizarDatos(this.objetoSeleccionado);
                         } else {
                             //otro click implica controlador seleccion
-                            this.controladorSeleccionObjeto(canvas, e, renderer);
+                            this.controladorSeleccionObjeto(canvas, e);
                         }
                     } else {
                         //sin ningun objeto seleccionado, controlador seleccion
-                        this.controladorSeleccionObjeto(canvas, e, renderer);
+                        this.controladorSeleccionObjeto(canvas, e);
                     }
                 }
                 this.camaraMovida = false;
@@ -95,10 +95,10 @@ class ControlesCanvas {
                 e.preventDefault();
                 //zoom de la camara
                 if (e.deltaY < 0) {
-                    renderer.camara.radio-=0.5;
+                    RendererRefactor.camara.radio-=0.5;
                     //zoom out de la camara
                 } else if (e.deltaY > 0) {
-                    renderer.camara.radio+=0.5;
+                    RendererRefactor.camara.radio+=0.5;
                 }
             }
         });
@@ -150,7 +150,7 @@ class ControlesCanvas {
     }
 
     //comprobar posicion del click y buscar objeto que interseque
-    controladorSeleccionObjeto (canvas, e, renderer) {
+    controladorSeleccionObjeto (canvas, e) {
         //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
         let xCanvas = canvas.getBoundingClientRect().left;
         let yCanvas = canvas.getBoundingClientRect().top;
@@ -167,12 +167,12 @@ class ControlesCanvas {
         let coordXGL = coordXPixeles * 2 / anchoCanvas;
         let coordYGL = coordYPixeles * 2 / altoCanvas;
 
-        let rayoClick = new LineaRecta(coordXGL, coordYGL, renderer);
+        let rayoClick = new LineaRecta(coordXGL, coordYGL);
 
         let click = false;
 
         //false no seleccionado, modelo si seleccionado ese modelo
-        renderer.escena.comprobarSeleccionDeModelo(rayoClick);
+        RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
 
         if (!click) {
             if (this.objetoSeleccionado != null) {
@@ -238,7 +238,7 @@ class ControlesCanvas {
 
     setEscena (escena) {
         this.escena = escena;
-        Renderer.dibujables = escena.dibujables;
+        RendererRefactor.dibujables = escena.dibujables;
     }
 
 }

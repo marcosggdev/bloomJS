@@ -169,7 +169,7 @@ class Hitbox {
     }
 
     iniciar () {
-        if (Renderer.dibujarHitbox) {
+        if (RendererRefactor.dibujarHitbox) {
             //matriz del modelo
             this.matrizM = new Matriz4X4();
             this.actualizarMatrizModelo();
@@ -190,9 +190,9 @@ class Hitbox {
             this.m = gl.getUniformLocation(this.programa, "m");
             gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
             this.v = gl.getUniformLocation(this.programa, "v");
-            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
             this.p = gl.getUniformLocation(this.programa, "p");
-            gl.uniformMatrix4fv(this.p, false, Renderer.matrizP.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
 
             //uniforms ancho alto y profundidad
             this.anchoLoc = gl.getUniformLocation(this.programa, "ancho");
@@ -220,7 +220,7 @@ class Hitbox {
             this.uColorLoc = gl.getUniformLocation(this.programa, "uColor");
             gl.uniform3f(this.uColorLoc, Hitbox.color[0], Hitbox.color[1], Hitbox.color[2]);
 
-            Renderer.anadirGraficoDibujable(this);
+            RendererRefactor.anadirGraficoDibujable(this);
         } else {
             //la creamos almenos porque influye en la actualizacion de factoresHitboxActuales
             this.matrizM = new Matriz4X4();
@@ -237,13 +237,13 @@ class Hitbox {
 
     dibujar () {
 
-        if (Renderer.dibujarHitbox) {
+        if (RendererRefactor.dibujarHitbox) {
             gl.useProgram(this.programa);
 
             //matriz del modelo
             this.actualizarMatrizModelo();
     
-            gl.uniformMatrix4fv(this.v, false, Renderer.camara.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
             gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
     
             //atributos
@@ -284,9 +284,9 @@ class Hitbox {
     }
 
     eliminar () {
-        for (let i = 0; i < Renderer.dibujables.length; i++) {
-            if (Renderer.dibujables[i] == this) {
-                Renderer.dibujables.splice(i, 1);
+        for (let i = 0; i < RendererRefactor.dibujables.length; i++) {
+            if (RendererRefactor.dibujables[i] == this) {
+                RendererRefactor.dibujables.splice(i, 1);
             }
         }
     }

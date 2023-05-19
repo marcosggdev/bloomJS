@@ -4,15 +4,13 @@
  */
 class Escena {
 
-    constructor (renderer) {
-        //utilidad
-        this.renderer = renderer;
+    constructor () {
 
         this.dibujables = [
-            new Grid(renderer)
+            new Grid()
         ];
         this.iluminacion = [];
-        this.camara = renderer.camara;
+        this.camara = RendererRefactor.camara;
     }
 
     anadirDibujable (dibujable) {
@@ -56,9 +54,9 @@ class Escena {
         }
     }
 
-    dibujar (renderer) {
+    dibujar () {
         for (let i = 0; i < this.dibujables.length; i++) {
-            this.dibujables[i].dibujar(renderer);
+            this.dibujables[i].dibujar();
         }
     }
 

@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
     let camara = new ArcballCamera(0, 0, 0, 30, -90, 30);
 
     //crear renderer
-    let renderer = new RendererRefactor(camara, 1024, 768, null, new Color(80,80,80,255));
+    let renderer = new RendererRefactor(camara, 1024, 768, new Color(80,80,80,255));
 
     //crear contenedor DOM. Canvas tendra asociado el renderer y creamos interfaz de usuario. Pasamos el renderer y el canvas asociados
     //ancho y alto de resolucion definidos en Renderer. Despues escalado por js a width 100% height auto.
