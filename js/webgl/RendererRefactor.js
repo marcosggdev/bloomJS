@@ -12,7 +12,28 @@ class RendererRefactor {
         this.alto = alto;
         this.fondo = fondo;
 
+        let propiedadesObjeto = {
+            "Ancho": "ancho",
+            "Alto": "alto",
+            "Fondo": "fondo",
+            "Camara": "camara",
+            "Dibujar hitbox": "dibujarHitbox"
+        };
+
+        this.crearSupervaloresMostrar(propiedadesObjeto);
+
         this.iniciar();
+    }
+
+    crearSupervaloresMostrar (propiedadesObjeto) {
+
+        let supervaloresObjeto = [];
+
+        let iterable = Object.keys(propiedadesObjeto);
+        for (let i = 0; i < iterable.length; i++) {
+            supervaloresObjeto.push(new Supervalor(this, "Objeto", propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
+        }
+        this.supervaloresObjeto = supervaloresObjeto;
     }
 
     iniciar () {

@@ -28,12 +28,11 @@ window.addEventListener('load', () => {
     let menuInterfaz = new MenuInterfaz(
         [
             new SubmenuEscena(renderer, interfazCanvas),
-            new BotonInterfaz("Nombre", MenuInterfaz.saludar),
-            new SubmenuInterfaz("Desplegable",
+            new SubmenuInterfaz("Editor", 
                 [
-                    new BotonInterfaz("Nombre2", MenuInterfaz.saludar),
-                    new BotonInterfaz("Nombre2", MenuInterfaz.saludar)
-                ])
+                    new BotonInterfaz("Controles", MenuInterfaz.controles),
+                    new BotonInterfaz("Ajustes", ()=>{MenuInterfaz.ajustes(renderer)})
+                ]),
         ]);
 
     let ventanaCanvas = new VentanaCanvas(barraVentana, menuInterfaz, interfazCanvas, renderer, canvas);

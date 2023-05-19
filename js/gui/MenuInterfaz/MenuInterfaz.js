@@ -24,4 +24,14 @@ class MenuInterfaz {
         console.log("saludar");
     }
 
+    static controles () {
+        let menuControles = new MenuGeneral("Controles");
+        VentanaCanvas.interfazCanvas.anadirMenu(menuControles);
+    }
+
+    static ajustes (renderer) {
+        let menuAjustes = new MenuEdicion("Ajustes", renderer);
+        VentanaCanvas.interfazCanvas.anadirMenu(menuAjustes);
+    }
+
 }

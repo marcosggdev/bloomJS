@@ -67,7 +67,6 @@
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 10px;
     background-color: rgb(70, 0, 70);
     border-radius: 5px;
     padding-left: 1em;
@@ -76,6 +75,7 @@
 .ListaPestanas li {
     padding: 10px;
     user-select: none;
+    width: 25%;
 }
 .ListaPestanas li.actual {
     color: rgb(164, 164, 164);
@@ -89,4 +89,7 @@
 }
 .invisible {
     display: none;
+}
+.BarraCierre h1 {
+    user-select: none;
 }
