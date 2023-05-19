@@ -36,13 +36,13 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         RAIZ . "js/webgl/matematicas/Matriz4x4.js",
         RAIZ . "js/webgl/matematicas/Quaternion.js",
         RAIZ . "js/editor/BotonBooleano.js",
-        RAIZ . "js/editor/GUI.js",
-        RAIZ . "js/editor/MenuSeleccion.js",
+        RAIZ . "js/gui/GUI.js",
         RAIZ . "js/editor/BotonIcono.js",
         RAIZ . "js/editor/FuncionesIconos.js",
         RAIZ . "js/editor/Submenu.js",
         RAIZ . "js/editor/Boton.js",
         RAIZ . "js/editor/BarraHerramientas.js",
+        RAIZ . "js/webgl/Supervalor.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
         RAIZ . "js/webgl/Hitbox.js",
@@ -62,12 +62,13 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 ]) ?>
 
 <?= Vista::importarRecursos([
-        //MENUS DE LA INTERFAZ DE USUARIO 
+        //MENUS DE LA INTERFAZ CANVAS (DE USUARIO) 
         RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.css",
         RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
         RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
         RAIZ . "js/gui/InterfazCanvas/Menu.js",
-        RAIZ . "js/gui/InterfazCanvas/MenuMalla.js"
+        RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js"
 ]) ?>
 
 <?= Vista::cargarComponentes("js/gui", ["BarraVentana", "VentanaCanvas"]); ?>

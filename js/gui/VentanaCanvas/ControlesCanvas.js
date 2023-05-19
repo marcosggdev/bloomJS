@@ -172,23 +172,27 @@ class ControlesCanvas {
         let click = false;
 
         //false no seleccionado, modelo si seleccionado ese modelo
-        RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
+        let acierto = RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
 
-        if (!click) {
+        if (!acierto) {
             if (this.objetoSeleccionado != null) {
                 this.deseleccionarObjeto();
             }
+        } else {
+            this.seleccionarObjeto(acierto);
         }
         rayoClick = null;
     }
 
     //se ha seleccionado un objeto
     seleccionarObjeto (objeto) {
+        let menuSeleccion = new MenuSeleccion("Selección", objeto);
+        VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
         //canvas: mostrar menu, funcionactualizar, seleccionar y llamar a la funcion de global
-        GUI.menuSeleccion.mostrar(objeto);
+        /*GUI.menuSeleccion.mostrar(objeto);
         this.objetoSeleccionado = objeto;
         this.globalSeleccionarObjeto(objeto);
-        canvas.focus();
+        canvas.focus();*/
     }
 
     //se deselecciona un objeto

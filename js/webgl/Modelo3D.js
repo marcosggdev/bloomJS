@@ -33,6 +33,20 @@ class Modelo3D {
         this.rutaMaterial = rutaMaterial;
 
         this.seleccionable = true;
+
+        let variablesMostrar = ["posX", "posY", "posZ", "anguloX", "anguloY", "anguloZ", "factorX", "factorY", "factorZ", 
+        "modo", "color", "material"];
+        let nombresMostrar = ["pos. x", "pos. y", "pos. z", "ángulo x", "ángulo y", "ángulo z", "escala x", "escala y", "escala z", 
+        "Shader", "Color", "Material"];
+        this.supervalores = this.crearSupervaloresMostrar(variablesMostrar, nombresMostrar);
+    }
+
+    crearSupervaloresMostrar (variablesMostrar, nombresMostrar) {
+        let supervalores = [];
+        for (let i = 0; i < variablesMostrar.length; i++) {
+            supervalores.push(new Supervalor(this, variablesMostrar[i], nombresMostrar[i], this[variablesMostrar[i]]));
+        }
+        return supervalores;
     }
 
     static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
