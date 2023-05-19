@@ -22,18 +22,30 @@ class Supervalor {
         nombreDOM.textContent = nombre;
         nodo.appendChild(nombreDOM);
 
+        let contenedorValor = document.createElement("div");
+        contenedorValor.className = "contenedorValor";
+
         let valorDOM = document.createElement("input");
+
         switch (typeof valor) {
             case "number":
-                valorDOM.type = "number";
-                valorDOM.step = 1;
+                valorDOM.type = "range";
+                valorDOM.min = -50;
+                valorDOM.max = 50;
+                valorDOM.step = 0.1;
                 valorDOM.value = valor;
+                valorDOM.addEventListener("input", () => {
+                    this.objeto.actualizarValor(variable, valorDOM.value);  
+                });
                 break;
             case "Color":
-                valorDOM.type="text";
+                valorDOM.type="color";
                 valorDOM.value = valor.toString();
                 break;
             default: 
+                valorDOM.addEventListener("input", (e) => {
+                    this.objeto.actualizarValor(variable, e.target.value);
+                });
                 if (valor == null) {
                     valorDOM.value = "null";
                 } else {
@@ -42,10 +54,6 @@ class Supervalor {
                 break;
         }
 
-        //cambiar input = cambiar objeto
-        valorDOM.addEventListener("input", (e) => {
-            this.objeto.actualizarValor(variable, e.target.value);
-        });
 
         nodo.appendChild(valorDOM);
 

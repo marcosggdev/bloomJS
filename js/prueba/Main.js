@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
     }
 
     //camara del renderer
-    let camara = new ArcballCamera(0, 0, 0, 30, -90, 30);
+    let camara = new ArcballCamera(0, 0, 0, 30, 0, 30);
 
     //crear renderer
     let renderer = new RendererRefactor(camara, 1024, 768, new Color(80,80,80,255));

@@ -1,4 +1,4 @@
-Array.from(document.querySelector(".mallaModelos").querySelectorAll(".plantilla.modelo")).forEach(plantilla => {
+Array.from(document.querySelectorAll(".mallaModelos .plantilla.modelo")).forEach(plantilla => {
 
     plantilla.addEventListener("click", () => {
         //click en una plantilla
@@ -9,6 +9,11 @@ Array.from(document.querySelector(".mallaModelos").querySelectorAll(".plantilla.
             .then(
                 function (modelo) {
                     RendererRefactor.escena.anadirDibujable(modelo);
+                }
+            )
+            .then(
+                function () {
+                    document.querySelector(".MenuGeneral:has(.mallaModelos .plantilla.modelo)").remove();
                 }
             );
         } else {
