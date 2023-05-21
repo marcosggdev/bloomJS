@@ -1,18 +1,15 @@
 class RendererRefactor {
 
-    static escena = null;
-    static camara = null;
+    static iniciar (ancho, alto, fondo, camara, escena) {
 
-    constructor (camara, ancho, alto, fondo) {
-
+        RendererRefactor.ancho = ancho;
+        RendererRefactor.alto = alto;
+        RendererRefactor.fondo = fondo;
         RendererRefactor.camara = camara;
+        RendererRefactor.escena = escena;
+
         RendererRefactor.dibujarHitbox = false;
-
-        this.ancho = ancho;
-        this.alto = alto;
-        this.fondo = fondo;
-
-        let propiedadesObjeto = {
+        RendererRefactor.propiedadesObjeto = {
             "Ancho": "ancho",
             "Alto": "alto",
             "Fondo": "fondo",
@@ -20,73 +17,71 @@ class RendererRefactor {
             "Dibujar hitbox": "dibujarHitbox"
         };
 
-        this.crearSupervaloresMostrar(propiedadesObjeto);
+        RendererRefactor.supervaloresObjeto = RendererRefactor.crearSupervaloresMostrar(RendererRefactor.propiedadesObjeto);
+        RendererRefactor.configurar();
 
-        this.iniciar();
     }
 
-    crearSupervaloresMostrar (propiedadesObjeto) {
-
+    static crearSupervaloresMostrar (propiedadesObjeto) {
         let supervaloresObjeto = [];
 
         let iterable = Object.keys(propiedadesObjeto);
         for (let i = 0; i < iterable.length; i++) {
             supervaloresObjeto.push(new Supervalor(this, "Objeto", propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
         }
-        this.supervaloresObjeto = supervaloresObjeto;
+        RendererRefactor.supervaloresObjeto = supervaloresObjeto;
     }
 
-    iniciar () {
-        gl.canvas.width = this.ancho;   //dimensionar canvas
-        gl.canvas.height = this.alto;
+    static configurar () {
+        gl.canvas.width = RendererRefactor.ancho;   //dimensionar canvas
+        gl.canvas.height = RendererRefactor.alto;
 
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);   //redimensionar canvas
 
         //limpiar fondo a negro
-        this.limpiarFondo();
+        RendererRefactor.limpiarFondo();
 
         //habilita cull face, depth test y inversion eje y de texturas
-        this.habilitarPropiedades();
+        RendererRefactor.habilitarPropiedades();
 
         //matrices vista y perspectiva
-        this.iniciarMatrices();
+        RendererRefactor.iniciarMatrices();
     }
 
-    limpiarFondo () {
-        gl.clearColor(this.fondo.R, this.fondo.G, this.fondo.B, this.fondo.A);
+    static limpiarFondo () {
+        gl.clearColor(RendererRefactor.fondo.R, RendererRefactor.fondo.G, RendererRefactor.fondo.B, RendererRefactor.fondo.A);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
 
-    habilitarPropiedades () {
+    static habilitarPropiedades () {
         gl.enable(gl.CULL_FACE);    //cull face
         gl.enable(gl.DEPTH_TEST);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
     }
 
-    iniciarMatrices () {
+    static iniciarMatrices () {
         //crear matriz perspectiva
-        this.aspecto = gl.canvas.width / gl.canvas.height;
-        RendererRefactor.matrizP = Utilidades.crearMatrizPerspectiva(60.0, this.aspecto, 0.1, 1000.0);
+        RendererRefactor.aspecto = gl.canvas.width / gl.canvas.height;
+        RendererRefactor.matrizP = Utilidades.crearMatrizPerspectiva(60.0, RendererRefactor.aspecto, 0.1, 1000.0);
         RendererRefactor.matrizV = RendererRefactor.camara.matrizV;
     }
 
-    ciclo () {
-        this.actualizar();
-        this.dibujar();
+    static ciclo () {
+        RendererRefactor.actualizar();
+        RendererRefactor.dibujar();
+        window.requestAnimationFrame(Renderer.ciclo);
     }
 
-    actualizar () {
-        //actualizar matrizV
-        RendererRefactor.camara.actualizar();
+    static actualizar () {
         if (RendererRefactor.escena != null) {
             RendererRefactor.escena.actualizar();
         }
     }
 
-    dibujar () {
-        this.limpiarFondo();
+    static dibujar () {
+        RendererRefactor.limpiarFondo();
         if (RendererRefactor.escena != null) {
-            RendererRefactor.escena.dibujar(this);
+            RendererRefactor.escena.dibujar();
         }
     }
 }

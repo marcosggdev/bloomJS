@@ -29,8 +29,8 @@ class MenuInterfaz {
         VentanaCanvas.interfazCanvas.anadirMenu(menuControles);
     }
 
-    static ajustes (renderer) {
-        let menuAjustes = new MenuEdicion("Ajustes", renderer);
+    static ajustes () {
+        let menuAjustes = new MenuEdicion("Ajustes", Renderer);
         VentanaCanvas.interfazCanvas.anadirMenu(menuAjustes);
     }
 

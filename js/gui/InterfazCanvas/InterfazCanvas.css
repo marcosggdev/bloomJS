@@ -93,3 +93,11 @@
 .BarraCierre h1 {
     user-select: none;
 }
+.InputPersonalizado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.InputPersonalizado img {
+    height: 20px;
+}

@@ -6,81 +6,75 @@ class ControlesCanvas {
         83: "s"
     }
 
+    static rotando = false;
+    static trasladando = false;
+    static escalando = false;
+
+    static mouseX = 0;
+    static mouseY = 0;
+    static moviendoCamara = false;
+    static camaraMovida = false;
+    static objetoSeleccionado = null;
+
     //gestiona controles de teclas, raton, camara y objeto seleccionado
-    constructor (ventanaCanvas, canvas) {
-
-        //teclas
-        this.rotando = false;
-        this.trasladando = false;
-        this.escalando = false;
-
-        //raton
-        this.mouseX = 0;
-        this.mouseY = 0;
-
-        //camara
-        this.moviendoCamara = false;
-        this.camaraMovida = false;
-        this.objetoSeleccionado = null;
-
-        this.crearControles(ventanaCanvas, canvas);
-
+    constructor (canvas) {
+        ControlesCanvas.crearControles(canvas);
     }
 
-    crearControles (ventanaCanvas, canvas) {
+    static crearControles (canvas) {
 
         canvas.addEventListener('mousemove', (e) => {
-            if (this.moviendoCamara) {   
+            if (ControlesCanvas.moviendoCamara) {   
                 RendererRefactor.camara.anguloY += e.movementX;
                 RendererRefactor.camara.anguloXPropio += e.movementY;
-                this.camaraMovida = true;
+                ControlesCanvas.camaraMovida = true;
             }
 
             //coords del mouse en pixeles con respecto al centro visible del canvas
             let centroCanvasX = canvas.getBoundingClientRect().width / 2;
             let centroCanvasY = canvas.getBoundingClientRect().height / 2
-            this.mouseX = e.clientX - canvas.getBoundingClientRect().left - centroCanvasX;
-            this.mouseY = -(e.clientY - canvas.getBoundingClientRect().top - centroCanvasY); //barraHeeramientas mide 50px de alto
+            ControlesCanvas.mouseX = e.clientX - canvas.getBoundingClientRect().left - centroCanvasX;
+            ControlesCanvas.mouseY = -(e.clientY - canvas.getBoundingClientRect().top - centroCanvasY); //barraHeeramientas mide 50px de alto
 
-            if (this.rotando) {
-                Modelo3D.rotarObjetoTecla(this.objetoSeleccionado);
-            } else if (this.trasladando) {
-                Modelo3D.trasladarObjetoTecla(this.objetoSeleccionado);
-            } else if (this.escalando) {
-                Modelo3D.escalarObjetoTecla(this.objetoSeleccionado);
+            if (ControlesCanvas.rotando) {
+                Modelo3D.rotarObjetoTecla(ControlesCanvas.objetoSeleccionado);
+            } else if (ControlesCanvas.trasladando) {
+                Modelo3D.trasladarObjetoTecla(ControlesCanvas.objetoSeleccionado);
+            } else if (ControlesCanvas.escalando) {
+                Modelo3D.escalarObjetoTecla(ControlesCanvas.objetoSeleccionado);
             }
         });
 
         canvas.addEventListener('mousedown', (e) => {
             if (e.button == 2) {
-                this.moviendoCamara = true;
+                ControlesCanvas.moviendoCamara = true;
             }
         });
     
         canvas.addEventListener('mouseup', (e) => {
 
             if (e.button == 2) {
-                this.moviendoCamara = false;
+                ControlesCanvas.moviendoCamara = false;
             } else if (e.button == 0) {
-                if (!this.camaraMovida) {
-                    if (this.objetoSeleccionado != null) {
+                if (!ControlesCanvas.camaraMovida) {
+                    if (ControlesCanvas.objetoSeleccionado != null) {
                         //comprobar aplicacion de rst por teclado y aplicar.Despues no controladorSeleccion porque usamos el click para "guardar"
                         //no queremos deseleccionar otra cosa sin querer
-                        if (this.rotando || this.trasladando || this.escalando) {
-                            this.rotando = false;
-                            this.trasladando = false;
-                            this.escalando = false;
-                            this.interfazCanvas.menuSeleccion.actualizarDatos(this.objetoSeleccionado);
+                        if (ControlesCanvas.rotando || ControlesCanvas.trasladando || ControlesCanvas.escalando) {
+                            ControlesCanvas.rotando = false;
+                            ControlesCanvas.trasladando = false;
+                            ControlesCanvas.escalando = false;
+                            ControlesCanvas.interfazCanvas.menuSeleccion.actualizarDatos(ControlesCanvas.objetoSeleccionado);
                         } else {
                             //otro click implica controlador seleccion
-                            this.controladorSeleccionObjeto(canvas, e);
+                            ControlesCanvas.controladorSeleccionObjeto(canvas, e);
                         }
                     } else {
                         //sin ningun objeto seleccionado, controlador seleccion
-                        this.controladorSeleccionObjeto(canvas, e);
+                        ControlesCanvas.controladorSeleccionObjeto(canvas, e);
                     }
                 }
-                this.camaraMovida = false;
+                ControlesCanvas.camaraMovida = false;
             }
         });
 
@@ -105,23 +99,23 @@ class ControlesCanvas {
 
         canvas.addEventListener("keydown", (e) => {
 
-            if (this.objetoSeleccionado != null) {
+            if (ControlesCanvas.objetoSeleccionado != null) {
 
-                let tecla = this.teclas[e.keyCode];
+                let tecla = ControlesCanvas.teclas[e.keyCode];
 
                 //MODELOS RST
-                if (this.objetoSeleccionado.constructor.name == "Modelo3D") {
+                if (ControlesCanvas.objetoSeleccionado.constructor.name == "Modelo3D") {
                     switch (tecla) {
-                        case "r": this.estadoRotar(); break;
-                        case "t": this.estadoTrasladar(); break;
+                        case "r": ControlesCanvas.estadoRotar(); break;
+                        case "t": ControlesCanvas.estadoTrasladar(); break;
                         case "s": 
-                            this.estadoEscalar();
+                            ControlesCanvas.estadoEscalar();
                             break;
                     }
                 //PUNTOS DE LUZ T
-                } else if (this.objetoSeleccionado.constructor.name == "PuntoLuz") {
+                } else if (ControlesCanvas.objetoSeleccionado.constructor.name == "PuntoLuz") {
                     switch (tecla) {
-                        case "t": this.estadoTrasladar(); break;
+                        case "t": ControlesCanvas.estadoTrasladar(); break;
                     } 
                 }
 
@@ -131,26 +125,26 @@ class ControlesCanvas {
 
     }
 
-    estadoRotar () {
-        this.rotando = true;
+    static estadoRotar () {
+        ControlesCanvas.rotando = true;
     }
 
-    estadoTrasladar () {
-        this.trasladando = true;
+    static estadoTrasladar () {
+        ControlesCanvas.trasladando = true;
     }
 
-    estadoEscalar () {
-        this.escalando = true; 
+    static estadoEscalar () {
+        ControlesCanvas.escalando = true; 
         //coords en el momento de pulsar la tecla; util para escala
-        this.mouseXTecla = this.mouseX; 
-        this.mouseYTecla = this.mouseY;
-        this.factorXInicial = this.objetoSeleccionado.factorX;
-        this.factorYInicial = this.objetoSeleccionado.factorY;
-        this.factorZInicial = this.objetoSeleccionado.factorZ;
+        ControlesCanvas.mouseXTecla = ControlesCanvas.mouseX; 
+        ControlesCanvas.mouseYTecla = ControlesCanvas.mouseY;
+        ControlesCanvas.factorXInicial = ControlesCanvas.objetoSeleccionado.factorX;
+        ControlesCanvas.factorYInicial = ControlesCanvas.objetoSeleccionado.factorY;
+        ControlesCanvas.factorZInicial = ControlesCanvas.objetoSeleccionado.factorZ;
     }
 
     //comprobar posicion del click y buscar objeto que interseque
-    controladorSeleccionObjeto (canvas, e) {
+    static controladorSeleccionObjeto (canvas, e) {
         if (RendererRefactor.escena != null) {
             //construimos linea recta paralela al eje camara - centro, que pase por donde se hace click
             let xCanvas = canvas.getBoundingClientRect().left;
@@ -173,11 +167,11 @@ class ControlesCanvas {
             let acierto = RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
             if (!acierto) {
                 //click en "aire". Deseleccionar objeto = borrar menu seleccion
-                this.deseleccionarObjeto();
+                ControlesCanvas.deseleccionarObjeto();
             } else {
                 //se ha hecho click en un objeto. Comprobamos que no es el seleccionado actualmente
-                if (acierto != this.objetoSeleccionado) {
-                    this.seleccionarObjeto(acierto);
+                if (acierto != ControlesCanvas.objetoSeleccionado) {
+                    ControlesCanvas.seleccionarObjeto(acierto);
                 } else {
                     //es distinto
                     
@@ -189,7 +183,7 @@ class ControlesCanvas {
     }
 
     //se ha seleccionado un objeto
-    seleccionarObjeto (objeto) {
+    static seleccionarObjeto (objeto) {
         let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
         if (menuSeleccion != null) {
             //borramos el que hay y creamos uno nuevo
@@ -202,22 +196,22 @@ class ControlesCanvas {
             let menuSeleccion = new MenuSeleccion("Selección", objeto);
             VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
         }
-        this.objetoSeleccionado = objeto;
+        ControlesCanvas.objetoSeleccionado = objeto;
     }
 
     //se deselecciona un objeto
-    deseleccionarObjeto () {
+    static deseleccionarObjeto () {
             //reset + deseleccion en menu global
             let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
             if (menuSeleccion != null) {
                 VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
             }
-            this.objetoSeleccionado = null;
+            ControlesCanvas.objetoSeleccionado = null;
     }
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global
-    globalSeleccionarObjeto (objeto) {
-        this.globalOcultarObjeto();
+    static globalSeleccionarObjeto (objeto) {
+        ControlesCanvas.globalOcultarObjeto();
         let objetosDibujables = document.querySelectorAll(".objetoDibujable");
         Array.from(objetosDibujables).forEach((e) => {
             if (e.objeto == objeto) {
@@ -227,7 +221,7 @@ class ControlesCanvas {
     }
 
     //gestiona la deseleccion de un objeto en el menu global
-    globalOcultarObjeto () {
+    static globalOcultarObjeto () {
         //desseleccionarlo del menu global
         let objetosDibujables = document.querySelectorAll(".objetoDibujable");
         Array.from(objetosDibujables).forEach((e) => {
@@ -235,23 +229,23 @@ class ControlesCanvas {
         });
     }
 
-    eliminarSeleccionado () {
-        this.objetoSeleccionado.eliminar();
-        this.deseleccionarObjeto();
+    static eliminarSeleccionado () {
+        ControlesCanvas.objetoSeleccionado.eliminar();
+        ControlesCanvas.deseleccionarObjeto();
         GUI.actualizarMenuGlobal();
     }
 
     //por ejemplo, objeto creado o eliminado
-    actualizarVentanaCanvas () {
+    static actualizarVentanaCanvas () {
         GUI.actualizarMenuGlobal();
     }
 
-    anadirModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
+    static anadirModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
         let modelo = new Modelo(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial);        
     }
 
-    setEscena (escena) {
-        this.escena = escena;
+    static setEscena (escena) {
+        ControlesCanvas.escena = escena;
         RendererRefactor.dibujables = escena.dibujables;
     }
 

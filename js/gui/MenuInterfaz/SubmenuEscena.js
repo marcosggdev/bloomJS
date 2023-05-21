@@ -1,6 +1,6 @@
 class SubmenuEscena extends SubmenuInterfaz {
 
-    constructor (renderer, interfazCanvas) {
+    constructor (interfazCanvas) {
         super("Escena", [
                 new BotonInterfaz("Crear escena", () => {SubmenuEscena.crearEscena()}),
                 new BotonInterfaz("Cargar escena", () => {SubmenuEscena.cargarEscena()}),

@@ -10,10 +10,10 @@ class Supervalor {
         this.variable = variable;
         this.nombre = nombre;
         this.valor = valor;
-        this.nodo = this.crearNodo(variable, nombre, valor);
+        this.nodo = this.crearNodo(variable, nombre, valor, tipo);
     }
 
-    crearNodo (variable, nombre, valor) {
+    crearNodo (variable, nombre, valor, tipo) {
 
         let nodo = document.createElement("div");
         nodo.className = "Supervalor";
@@ -25,37 +25,66 @@ class Supervalor {
         let contenedorValor = document.createElement("div");
         contenedorValor.className = "contenedorValor";
 
-        let valorDOM = document.createElement("input");
+        let contenedorValorInput = document.createElement("div");
+        contenedorValorInput.className = "InputPersonalizado " + tipo;
+        let valorInput = document.createElement("input");
 
-        switch (typeof valor) {
-            case "number":
-                valorDOM.type = "range";
-                valorDOM.min = -50;
-                valorDOM.max = 50;
-                valorDOM.step = 0.1;
-                valorDOM.value = valor;
-                valorDOM.addEventListener("input", () => {
-                    this.objeto.actualizarValor(variable, valorDOM.value);  
+        switch (tipo) {
+
+            case "Numerico":
+                valorInput.type = "range";
+                valorInput.min = -50;
+                valorInput.max = 50;
+                valorInput.step = 0.1;
+                valorInput.value = valor;
+                valorInput.addEventListener("input", () => {
+                    this.objeto.actualizarValor(variable, valorInput.value);  
                 });
                 break;
-            case "Color":
-                valorDOM.type="color";
-                valorDOM.value = valor.toString();
+
+            case "Shader": 
+                let img = document.createElement("img");
+                img.src = "/bloomJS/img/iconos/shader.png";
+                contenedorValorInput.appendChild(img);
+                valorInput.type = "text";
+                valorInput.disabled = true;
                 break;
+
+            case "Color":
+                valorInput.type="color";
+                valorInput.value = "kekw";
+                break;
+
+            case "Textura": 
+                let img2 = document.createElement("img");
+                img2.src = "/bloomJS/img/iconos/textura.png";
+                contenedorValorInput.appendChild(img2);
+                valorInput.type = "text";
+                valorInput.disabled = true;
+                break;
+
+            case "Material": 
+                let img3 = document.createElement("img");
+                img3.src = "/bloomJS/img/iconos/material.png";
+                contenedorValorInput.appendChild(img3);
+                valorInput.type = "text";
+                valorInput.disabled = true;
+                break;
+
             default: 
-                valorDOM.addEventListener("input", (e) => {
+            valorInput.addEventListener("input", (e) => {
                     this.objeto.actualizarValor(variable, e.target.value);
                 });
                 if (valor == null) {
-                    valorDOM.value = "null";
+                    valorInput.value = "null";
                 } else {
-                    valorDOM.value = valor;
+                    valorInput.value = valor;
                 }
                 break;
         }
 
-
-        nodo.appendChild(valorDOM);
+        contenedorValorInput.appendChild(valorInput);
+        nodo.appendChild(contenedorValorInput);
 
         return nodo;
     }

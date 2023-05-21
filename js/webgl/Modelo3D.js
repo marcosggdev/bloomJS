@@ -52,21 +52,40 @@ class Modelo3D {
             "Material": "rutaMaterial"
         };
 
-        this.crearSupervaloresMostrar(propiedadesObjeto, propiedadesAdicionales);
+        let tiposInputObjeto = [
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico",
+            "Numerico"
+        ];
+        
+        let tiposInputAdicionales = [
+            "Shader",
+            "Color",
+            "Textura",
+            "Material"
+        ];
+
+        this.crearSupervaloresMostrar(propiedadesObjeto, propiedadesAdicionales, tiposInputObjeto, tiposInputAdicionales);
     }
 
-    crearSupervaloresMostrar (propiedadesObjeto, propiedadesAdicionales) {
+    crearSupervaloresMostrar (propiedadesObjeto, propiedadesAdicionales, tiposInputObjeto, tiposInputAdicionales) {
 
         let supervaloresObjeto = [];
         let supervaloresAdicionales = [];
 
         let iterable = Object.keys(propiedadesObjeto);
         for (let i = 0; i < iterable.length; i++) {
-            supervaloresObjeto.push(new Supervalor(this, "Objeto", propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
+            supervaloresObjeto.push(new Supervalor(this, tiposInputObjeto[i], propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
         }
         iterable = Object.keys(propiedadesAdicionales);
         for (let i = 0; i < iterable.length; i++) {
-            supervaloresAdicionales.push(new Supervalor(this, "Objeto", propiedadesAdicionales[iterable[i]], iterable[i], this[propiedadesAdicionales[iterable[i]]]));
+            supervaloresAdicionales.push(new Supervalor(this, tiposInputAdicionales[i], propiedadesAdicionales[iterable[i]], iterable[i], this[propiedadesAdicionales[iterable[i]]]));
         }
         this.supervaloresObjeto = supervaloresObjeto;
         this.supervaloresAdicionales = supervaloresAdicionales;

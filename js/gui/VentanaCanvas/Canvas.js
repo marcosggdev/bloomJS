@@ -3,9 +3,9 @@
  */
 class Canvas {
 
-    constructor (ventanaCanvas, nodo) {
+    constructor (nodo) {
         this.nodo = nodo;
-        this.controles = new ControlesCanvas(ventanaCanvas, nodo);
+        this.controles = new ControlesCanvas(nodo);
     }
 
 }
