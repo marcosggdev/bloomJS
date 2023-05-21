@@ -69,10 +69,11 @@ class RendererRefactor {
     static ciclo () {
         RendererRefactor.actualizar();
         RendererRefactor.dibujar();
-        window.requestAnimationFrame(Renderer.ciclo);
+        window.requestAnimationFrame(RendererRefactor.ciclo);
     }
 
     static actualizar () {
+        RendererRefactor.camara.actualizar();
         if (RendererRefactor.escena != null) {
             RendererRefactor.escena.actualizar();
         }

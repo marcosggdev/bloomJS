@@ -48,6 +48,7 @@ class Supervalor {
                 contenedorValorInput.appendChild(img);
                 valorInput.type = "text";
                 valorInput.disabled = true;
+                valorInput.value = valor;
                 break;
 
             case "Color":
@@ -61,6 +62,10 @@ class Supervalor {
                 contenedorValorInput.appendChild(img2);
                 valorInput.type = "text";
                 valorInput.disabled = true;
+                valorInput.value = valor;
+                if (valor == null) {
+                    valorInput.value = "null";
+                }
                 break;
 
             case "Material": 
@@ -69,6 +74,10 @@ class Supervalor {
                 contenedorValorInput.appendChild(img3);
                 valorInput.type = "text";
                 valorInput.disabled = true;
+                valorInput.value = valor;
+                if (valor == null) {
+                    valorInput.value = "null";
+                }
                 break;
 
             default: 

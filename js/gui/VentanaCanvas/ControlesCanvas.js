@@ -6,28 +6,29 @@ class ControlesCanvas {
         83: "s"
     }
 
-    static rotando = false;
-    static trasladando = false;
-    static escalando = false;
+    static iniciar (canvas) {
+        ControlesCanvas.rotando = false;
+        ControlesCanvas.trasladando = false;
+        ControlesCanvas.escalando = false;
+        ControlesCanvas.mouseX = 0;
+        ControlesCanvas.mouseY = 0;
+        ControlesCanvas.moviendoCamara = false;
+        ControlesCanvas.camaraMovida = false;
+        ControlesCanvas.objetoSeleccionado = null;
 
-    static mouseX = 0;
-    static mouseY = 0;
-    static moviendoCamara = false;
-    static camaraMovida = false;
-    static objetoSeleccionado = null;
-
-    //gestiona controles de teclas, raton, camara y objeto seleccionado
-    constructor (canvas) {
         ControlesCanvas.crearControles(canvas);
     }
 
     static crearControles (canvas) {
 
         canvas.addEventListener('mousemove', (e) => {
+
             if (ControlesCanvas.moviendoCamara) {   
+                
                 RendererRefactor.camara.anguloY += e.movementX;
                 RendererRefactor.camara.anguloXPropio += e.movementY;
                 ControlesCanvas.camaraMovida = true;
+
             }
 
             //coords del mouse en pixeles con respecto al centro visible del canvas
@@ -108,9 +109,7 @@ class ControlesCanvas {
                     switch (tecla) {
                         case "r": ControlesCanvas.estadoRotar(); break;
                         case "t": ControlesCanvas.estadoTrasladar(); break;
-                        case "s": 
-                            ControlesCanvas.estadoEscalar();
-                            break;
+                        case "s": ControlesCanvas.estadoEscalar(); break;
                     }
                 //PUNTOS DE LUZ T
                 } else if (ControlesCanvas.objetoSeleccionado.constructor.name == "PuntoLuz") {
@@ -125,14 +124,6 @@ class ControlesCanvas {
 
     }
 
-    static estadoRotar () {
-        ControlesCanvas.rotando = true;
-    }
-
-    static estadoTrasladar () {
-        ControlesCanvas.trasladando = true;
-    }
-
     static estadoEscalar () {
         ControlesCanvas.escalando = true; 
         //coords en el momento de pulsar la tecla; util para escala
@@ -141,6 +132,14 @@ class ControlesCanvas {
         ControlesCanvas.factorXInicial = ControlesCanvas.objetoSeleccionado.factorX;
         ControlesCanvas.factorYInicial = ControlesCanvas.objetoSeleccionado.factorY;
         ControlesCanvas.factorZInicial = ControlesCanvas.objetoSeleccionado.factorZ;
+    }
+    
+    static estadoRotar () {
+        ControlesCanvas.rotando = true;
+    }
+
+    static estadoTrasladar () {
+        ControlesCanvas.trasladando = true;
     }
 
     //comprobar posicion del click y buscar objeto que interseque

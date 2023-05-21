@@ -5,7 +5,7 @@ class Canvas {
 
     constructor (nodo) {
         this.nodo = nodo;
-        this.controles = new ControlesCanvas(nodo);
+        ControlesCanvas.iniciar(nodo);
     }
 
 }
