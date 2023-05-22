@@ -53,7 +53,13 @@ class Supervalor {
 
             case "Color":
                 valorInput.type="color";
-                valorInput.value = "kekw";
+                //en el futuro habra que convertir el valor (Color) en un string #123456 para aplicarlo al input
+                //el hexa si estuviese en rgb estaria en rango 0-255 cada color
+                valorInput.value = valor;
+                if (valor == null) {
+                    valorInput.value = "#ffffff";
+                }
+                valorInput.disabled = true;
                 break;
 
             case "Textura": 

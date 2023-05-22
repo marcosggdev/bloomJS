@@ -754,9 +754,8 @@ class Modelo3D {
     }
 
     actualizar () {
-
         this.actualizarSupervalores();
-
+        
         if (this.funcionActualizar != null) {
             this.funcionActualizar(this);
         } else {
@@ -997,9 +996,9 @@ class Modelo3D {
         let deltaDistancia = distanciaActual - distanciaInicial;
         
         //en delta = 0, escala no modificada. Despues aumenta/decrece exponencialmente
-        modelo.factorX = Modelo3D.escala(VentanaCanvas.factorXInicial, deltaDistancia, distanciaInicial);
-        modelo.factorY = Modelo3D.escala(VentanaCanvas.factorYInicial, deltaDistancia, distanciaInicial);
-        modelo.factorZ = Modelo3D.escala(VentanaCanvas.factorZInicial, deltaDistancia, distanciaInicial);
+        modelo.factorX = Modelo3D.escala(ControlesCanvas.factorXInicial, deltaDistancia, distanciaInicial);
+        modelo.factorY = Modelo3D.escala(ControlesCanvas.factorYInicial, deltaDistancia, distanciaInicial);
+        modelo.factorZ = Modelo3D.escala(ControlesCanvas.factorZInicial, deltaDistancia, distanciaInicial);
         modelo.hitbox.actualizarEscala(modelo.factorX, modelo.factorY, modelo.factorZ, distanciaInicial);
 
         //reset de contador para que se tome nuevos factores como punto de partida en animacion de seleccion

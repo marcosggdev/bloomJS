@@ -29,11 +29,15 @@ window.addEventListener('load', () => {
     let menuInterfaz = new MenuInterfaz(
         [
             new SubmenuEscena(interfazCanvas),
-            new SubmenuInterfaz("Editor", 
-                [
+            new SubmenuInterfaz("Editor", [
                     new BotonInterfaz("Controles", MenuInterfaz.controles),
                     new BotonInterfaz("Ajustes", ()=>{MenuInterfaz.ajustes(renderer)})
-                ]),
+            ]),
+            new SubmenuInterfaz("Exportar", [
+                new BotonInterfaz("Imagen", MenuInterfaz.exportarImagen),
+                new BotonInterfaz("Escena", MenuInterfaz.exportarEscena),
+                new BotonInterfaz("Gráficos 3D", MenuInterfaz.exportarGraficos3D)
+            ])
         ]);
 
     VentanaCanvas.iniciar(barraVentana, menuInterfaz, interfazCanvas, canvas);

@@ -72,7 +72,6 @@ class ControlesCanvas {
                             ControlesCanvas.rotando = false;
                             ControlesCanvas.trasladando = false;
                             ControlesCanvas.escalando = false;
-                            //VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección").actualizarDatos(ControlesCanvas.objetoSeleccionado);
                         } else {
                             //otro click implica controlador seleccion
                             ControlesCanvas.controladorSeleccionObjeto(canvas, e);
