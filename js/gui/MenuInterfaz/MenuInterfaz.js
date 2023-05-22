@@ -64,7 +64,7 @@ class MenuInterfaz {
         }, 1000);
         setTimeout(()=>{a.click}, 1000);
         setTimeout(()=>{a=null}, 2000);
-        
+        Escena.leerEscenaSerializada(serializacion);
     }
 
     static exportarGraficos3D () {

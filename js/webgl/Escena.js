@@ -43,11 +43,6 @@ class Escena {
         this.camara = camara;
     }
 
-    exportar () {
-        //implementar para exportar escena
-        
-    }
-
     actualizar () {
         for (let i = 0; i < this.dibujables.length; i++) {
             this.dibujables[i].actualizar();
@@ -84,7 +79,7 @@ class Escena {
             }
         }
         serializacion += "}";
-        serializacion += ";iluminacion={";
+        serializacion += "eoliluminacion={";
         for (let i = 0 ; i < this.iluminacion.length; i++) {
             serializacion += this.iluminacion[i].serializar();
             if (i + 1 < this.dibujables.length) {
@@ -92,10 +87,36 @@ class Escena {
             }
         }
         serializacion += "}";
-        serializacion += ";camara={";
+        serializacion += "eolcamara={";
         serializacion += this.camara.serializar();
-        serializacion += "};"
+        serializacion += "}"
         return serializacion;
+    }
+
+    static leerEscenaSerializada (serializacion) {
+        //serializacion de la forma: 
+        //  dibujables={{clase=clase;variables={nombre=valor;...}},...}eoliluminacion={{clase=clase;valor=valor},...}eolcamara={}
+        let lineas = serializacion.split("eol");
+        for (let i = 0; i < lineas.length; i++) {
+            variable = lineas[i].split("=")[0];
+            datos = lineas[i].split("=")[1];
+            datos.shift();
+            datos.pop();
+            switch (variable) {
+                case "dibujables":
+                    //datos de la forma {obj1},{obj2},...
+                    let objetos = datos.split(",");
+                    for (let j = 0; j < objetos.length; j++) {
+                        let objeto = objetos[i];
+                        objeto.shift();
+                        objeto.pop();
+                        let clase = objeto.split(";")[0];
+                        let variables = objeto.split(";")[1];
+                    }
+                case "iluminacion":
+                case "camara":
+            }
+        }
     }
     
 }
