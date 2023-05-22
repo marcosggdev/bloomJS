@@ -2,7 +2,7 @@ class Grid extends Modelo2D {
 
     constructor () {
         //se crea un modelo2D de escala ancho y alto, en el plano XZ, con shaders de grid sin color
-        super(0, 0, 0, -90, 0, 0, 1000, 1000, null, VERTEX_SHADER_GRID, FRAGMENT_SHADER_GRID, null);
+        super(0, 0, 0, -90, 0, 0, 100, 100, null, VERTEX_SHADER_GRID, FRAGMENT_SHADER_GRID, null);
         this.seleccionable = false;
     }
 
@@ -73,6 +73,10 @@ class Grid extends Modelo2D {
             gl.enable(gl.CULL_FACE);
         }
 
+    }
+
+    serializar () {
+        return "clase=Grid;variables={}";
     }
 
 }

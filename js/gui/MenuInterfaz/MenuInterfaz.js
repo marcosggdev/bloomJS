@@ -53,7 +53,17 @@ class MenuInterfaz {
     static exportarEscena () {
         //dibujables, iluminacion y camara. Se serializan todos los datos y se escriben en un archivo con una extension. Por ejemplo
         //extension .bloom. El programa utilizara estos archivos para cargar datos despues
-        let serializacion = Renderer.escena.serializar();
+        let serializacion = RendererRefactor.escena.serializar();
+        let datos = "data:text/json;charset=utf-8," + encodeURIComponent(serializacion);
+        let a = document.createElement("a");
+        a.href = datos;
+        a.download = "Escena.json";
+        setTimeout(function () {
+            a.click();
+            setTimeout(function () {a = null;}, 1000);
+        }, 1000);
+        setTimeout(()=>{a.click}, 1000);
+        setTimeout(()=>{a=null}, 2000);
         
     }
 

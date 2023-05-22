@@ -72,7 +72,30 @@ class Escena {
     }
 
     serializar () {
-        
+        //devuelve un string con toda la informacion de la escena de forma que sea legible por la funcion leer deserializar para
+        //crear de nuevo la misma escena
+        let serializacion = "";
+        //serializar dibujables, iluminacion y camara
+        serializacion += "dibujables={"
+        for (let i = 0; i < this.dibujables.length; i++) {
+            serializacion += this.dibujables[i].serializar();
+            if (i + 1 < this.dibujables.length) {
+                serializacion += ","
+            }
+        }
+        serializacion += "}";
+        serializacion += ";iluminacion={";
+        for (let i = 0 ; i < this.iluminacion.length; i++) {
+            serializacion += this.iluminacion[i].serializar();
+            if (i + 1 < this.dibujables.length) {
+                serializacion += ","
+            }
+        }
+        serializacion += "}";
+        serializacion += ";camara={";
+        serializacion += this.camara.serializar();
+        serializacion += "};"
+        return serializacion;
     }
     
 }

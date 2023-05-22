@@ -33,7 +33,7 @@ class CamaraSimple {
     }
 
     serializar () {
-        return "posX:"+this.posXCentro+";posY:"+this.posYCentro+";posZ:";
+        return "clase=CamaraSimple;variables={posX:"+this.posXCentro+";posY:"+this.posYCentro+";posZ:"+this.posZ+"}";
     }
 
 }
