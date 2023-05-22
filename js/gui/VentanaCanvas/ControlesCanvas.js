@@ -38,12 +38,19 @@ class ControlesCanvas {
             ControlesCanvas.mouseY = -(e.clientY - canvas.getBoundingClientRect().top - centroCanvasY); //barraHeeramientas mide 50px de alto
 
             if (ControlesCanvas.rotando) {
+                VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección").actualizar();
                 Modelo3D.rotarObjetoTecla(ControlesCanvas.objetoSeleccionado);
+
             } else if (ControlesCanvas.trasladando) {
+                VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección").actualizar();
                 Modelo3D.trasladarObjetoTecla(ControlesCanvas.objetoSeleccionado);
+
             } else if (ControlesCanvas.escalando) {
+                VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección").actualizar();
                 Modelo3D.escalarObjetoTecla(ControlesCanvas.objetoSeleccionado);
+
             }
+
         });
 
         canvas.addEventListener('mousedown', (e) => {
@@ -65,7 +72,7 @@ class ControlesCanvas {
                             ControlesCanvas.rotando = false;
                             ControlesCanvas.trasladando = false;
                             ControlesCanvas.escalando = false;
-                            ControlesCanvas.interfazCanvas.menuSeleccion.actualizarDatos(ControlesCanvas.objetoSeleccionado);
+                            //VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección").actualizarDatos(ControlesCanvas.objetoSeleccionado);
                         } else {
                             //otro click implica controlador seleccion
                             ControlesCanvas.controladorSeleccionObjeto(canvas, e);
@@ -100,9 +107,12 @@ class ControlesCanvas {
 
         canvas.addEventListener("keydown", (e) => {
 
+            console.dir(ControlesCanvas.objetoSeleccionado);
+
             if (ControlesCanvas.objetoSeleccionado != null) {
 
                 let tecla = ControlesCanvas.teclas[e.keyCode];
+                console.log("tecla con objeto seleccionado");
 
                 //MODELOS RST
                 if (ControlesCanvas.objetoSeleccionado.constructor.name == "Modelo3D") {

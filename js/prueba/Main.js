@@ -11,6 +11,7 @@ window.addEventListener('load', () => {
         console.log("Error al obtener el contexto del canvas");
         return;
     }
+    canvas.tabIndex = 0;
 
     //camara del renderer
     let camara = new ArcballCamera(0, 0, 0, 30, 0, 30);

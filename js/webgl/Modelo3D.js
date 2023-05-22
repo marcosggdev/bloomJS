@@ -34,7 +34,7 @@ class Modelo3D {
 
         this.seleccionable = true;
 
-        let propiedadesObjeto = {
+        this.propiedadesObjeto = {
             "x": "posX",
             "y": "posY",
             "z": "posZ",
@@ -45,14 +45,14 @@ class Modelo3D {
             "escala y": "factorY",
             "escala z": "factorZ"
         };
-        let propiedadesAdicionales = {
+        this.propiedadesAdicionales = {
             "Modo": "modo",
             "Color": "color",
             "Textura": "rutaTextura",
             "Material": "rutaMaterial"
         };
 
-        let tiposInputObjeto = [
+        this.tiposInputObjeto = [
             "Numerico",
             "Numerico",
             "Numerico",
@@ -64,28 +64,40 @@ class Modelo3D {
             "Numerico"
         ];
         
-        let tiposInputAdicionales = [
+        this.tiposInputAdicionales = [
             "Shader",
             "Color",
             "Textura",
             "Material"
         ];
 
-        this.crearSupervaloresMostrar(propiedadesObjeto, propiedadesAdicionales, tiposInputObjeto, tiposInputAdicionales);
+        this.crearSupervalores();
     }
 
-    crearSupervaloresMostrar (propiedadesObjeto, propiedadesAdicionales, tiposInputObjeto, tiposInputAdicionales) {
+    actualizarSupervalores () {
+        let iterable = Object.keys(this.propiedadesObjeto);
+        for (let i = 0; i < iterable.length; i++) {
+            this.supervaloresObjeto[i].actualizarValor(this[this.propiedadesObjeto[iterable[i]]], this.tiposInputObjeto[i]);
+        }
+
+        iterable = Object.keys(this.propiedadesAdicionales);
+        for (let i = 0; i < iterable.length; i++) {
+            this.supervaloresAdicionales[i].actualizarValor(this[this.propiedadesAdicionales[iterable[i]]], this.tiposInputAdicionales[i]);
+        }
+    }
+
+    crearSupervalores () {
 
         let supervaloresObjeto = [];
         let supervaloresAdicionales = [];
 
-        let iterable = Object.keys(propiedadesObjeto);
+        let iterable = Object.keys(this.propiedadesObjeto);
         for (let i = 0; i < iterable.length; i++) {
-            supervaloresObjeto.push(new Supervalor(this, tiposInputObjeto[i], propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
+            supervaloresObjeto.push(new Supervalor(this, this.tiposInputObjeto[i], this.propiedadesObjeto[iterable[i]], iterable[i], this[this.propiedadesObjeto[iterable[i]]]));
         }
-        iterable = Object.keys(propiedadesAdicionales);
+        iterable = Object.keys(this.propiedadesAdicionales);
         for (let i = 0; i < iterable.length; i++) {
-            supervaloresAdicionales.push(new Supervalor(this, tiposInputAdicionales[i], propiedadesAdicionales[iterable[i]], iterable[i], this[propiedadesAdicionales[iterable[i]]]));
+            supervaloresAdicionales.push(new Supervalor(this, this.tiposInputAdicionales[i], this.propiedadesAdicionales[iterable[i]], iterable[i], this[this.propiedadesAdicionales[iterable[i]]]));
         }
         this.supervaloresObjeto = supervaloresObjeto;
         this.supervaloresAdicionales = supervaloresAdicionales;
@@ -742,12 +754,16 @@ class Modelo3D {
     }
 
     actualizar () {
+
+        this.actualizarSupervalores();
+
         if (this.funcionActualizar != null) {
             this.funcionActualizar(this);
         } else {
             //actualizando sin funcion definida
         }
     }
+
 /*
     dibujar () {
         gl.useProgram(this.programa);
@@ -897,8 +913,8 @@ class Modelo3D {
         //calcularemos el angulo con trigonometria. obtenemos coords de forma estatica desde VentanaCanvas
 
         //sabemos coords del mouse respecto al centro visible del canvas
-        let centroX = VentanaCanvas.mouseX;
-        let centroY = VentanaCanvas.mouseY;
+        let centroX = ControlesCanvas.mouseX;
+        let centroY = ControlesCanvas.mouseY;
         let vectorCentro = new Vector4X1([centroX, centroY, 0, 1]);
 
         //computar coord screen del centro del modelo
@@ -926,8 +942,8 @@ class Modelo3D {
     static trasladarObjetoTecla (modelo) {
         //obtenemos las coords del raton en coordenadas de screen
         //sabemos coords del mouse respecto al centro visible del canvas
-        let centroX = VentanaCanvas.mouseX;
-        let centroY = VentanaCanvas.mouseY;
+        let centroX = ControlesCanvas.mouseX;
+        let centroY = ControlesCanvas.mouseY;
 
         let centroXGL = 2 * centroX / RendererRefactor.ancho;
         let centroYGL = 2 * centroY / RendererRefactor.alto;
@@ -964,7 +980,7 @@ class Modelo3D {
         //distancia en screen space entre raton y modelo => factor exponencial para escalar.
 
         //pos el raton cuando se pulso la tecla t (referencia porque en ese punto, tamaño = tamaño inicial)
-        let posInicial = new Vector4X1([VentanaCanvas.mouseXTecla *2 / RendererRefactor.ancho, VentanaCanvas.mouseYTecla * 2 / RendererRefactor.alto, -1, 1]);
+        let posInicial = new Vector4X1([ControlesCanvas.mouseXTecla *2 / RendererRefactor.ancho, ControlesCanvas.mouseYTecla * 2 / RendererRefactor.alto, -1, 1]);
         //pos modelo en screenSpace
         let posModelo = RendererRefactor.matrizP.multiplicarVector(RendererRefactor.camara.matrizV.multiplicarVector(modelo.matrizM.multiplicarVector
             (new Vector4X1([modelo.posX, modelo.posY, modelo.posZ, 1]))));
@@ -973,7 +989,7 @@ class Modelo3D {
 
 
         //pos actual del mouse
-        let posActual = new Vector4X1([VentanaCanvas.mouseX*2 / RendererRefactor.ancho, VentanaCanvas.mouseY* 2 / RendererRefactor.alto, -1, 1]);
+        let posActual = new Vector4X1([ControlesCanvas.mouseX*2 / RendererRefactor.ancho, ControlesCanvas.mouseY* 2 / RendererRefactor.alto, -1, 1]);
         //distancia screen mouse - screen modelo
         let distanciaActual = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posActual, posModelo));
 

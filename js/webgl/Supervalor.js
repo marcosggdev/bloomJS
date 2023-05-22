@@ -98,4 +98,21 @@ class Supervalor {
         return nodo;
     }
 
+    actualizarValor (valor, tipo) {
+        this.valor = valor;
+        this.actualizarNodo(valor, tipo);
+    }
+
+    actualizarNodo (valor, tipo) {
+        let input = this.nodo.querySelector("input");
+        switch (tipo) {
+            case "Color": 
+            
+                break;
+            default:
+                input.value = valor;
+                break;
+        }
+    }
+
 }

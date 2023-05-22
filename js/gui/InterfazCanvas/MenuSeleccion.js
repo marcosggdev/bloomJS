@@ -51,4 +51,27 @@ class MenuSeleccion extends MenuGeneral {
         this.nodo.appendChild(propiedades);
     }
 
+    actualizarDatos (modelo) {
+        
+        let submenuObjeto = this.nodo.querySelector(".propiedades.objeto");
+        let submenuAdicionales = this.nodo.querySelector(".propiedades.adicionales");
+
+        submenuObjeto.innerHTML = "";
+        submenuAdicionales.innerHTML = "";
+
+        for (let i = 0; i < modelo.supervaloresObjeto.length; i++) {
+            submenuObjeto.appendChild(modelo.supervaloresObjeto[i].nodo);
+        }
+
+        for (let i = 0; i < modelo.supervaloresAdicionales.length; i++) {
+            submenuAdicionales.appendChild(modelo.supervaloresAdicionales[i].nodo);
+        }
+    }
+
+    actualizar () {
+        if (ControlesCanvas.objetoSeleccionado != null) {
+            this.actualizarDatos(ControlesCanvas.objetoSeleccionado);
+        }
+    }
+
 }
