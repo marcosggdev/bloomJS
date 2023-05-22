@@ -35,18 +35,19 @@ class MenuInterfaz {
     }
 
     static exportarImagen () {
-        let promise = new Promise(resolve => {
+        RendererRefactor.guardarConfiguracionPrevia();
+        RendererRefactor.configuracionExportarImagen();
+        setTimeout(function () {
             let enlaceAuxiliar = document.createElement('a');
             enlaceAuxiliar.download = 'BloomJS.png';
-            enlaceAuxiliar.href = canvas.toDataURL();
-            resolve(enlaceAuxiliar);
-        });
-        promise.then(
-            function (a) {
-                a.click();
-                a = null;
-            }
-        );
+            //png, segundo parametro indica calidad. 1 maxima, 0 minima, 0.92 por defecto ( sin parametro )
+            //toDataURL puede no funcionar bien si no se usan atributos con el contexto del canvas. En este caso se tuvo que utilizar
+            //el atributo: { preserveDrawingBuffer: true }; Sino, la imagen obtenida, era vacia (transparente totalmente)
+            enlaceAuxiliar.href = canvas.toDataURL("image/png", 1);
+            enlaceAuxiliar.click();
+            enlaceAuxiliar = null;
+            setTimeout(RendererRefactor.cargarConfiguracionPrevia, 1000);
+        }, 1000);
     }
 
     static exportarEscena () {

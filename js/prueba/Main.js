@@ -6,7 +6,8 @@ window.addEventListener('load', () => {
         console.log("Error al obtener el canvas");
         return;
     }
-    gl = canvas.getContext("webgl");
+    let atributosContexto = { preserveDrawingBuffer: true };
+    gl = canvas.getContext("webgl", atributosContexto);
     if (!gl) {
         console.log("Error al obtener el contexto del canvas");
         return;
@@ -17,7 +18,7 @@ window.addEventListener('load', () => {
     let camara = new ArcballCamera(0, 0, 0, 30, 0, 30);
 
     //crear renderer
-    RendererRefactor.iniciar(1024, 768, new Color(80,80,80,255), camara, null);
+    RendererRefactor.iniciar(1920, 1080, new Color(80,80,80,255), camara, null);
 
     //crear contenedor DOM. Canvas tendra asociado el renderer y creamos interfaz de usuario. Pasamos el renderer y el canvas asociados
     //ancho y alto de resolucion definidos en Renderer. Despues escalado por js a width 100% height auto.

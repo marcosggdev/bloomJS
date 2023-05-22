@@ -499,7 +499,7 @@ var FRAGMENT_SHADER_GRID =
 "    float distanciaRenderizado = 30.0;"+
 "    float distanciaVisionMinima = 10.0;"+
 "    float distanciaCentro = pow(pow(unprojectedVector.x, 2.0) + pow(unprojectedVector.z, 2.0), 0.5);" +
-"    float factorProfundidad = distanciaVisionMinima / (2.0 * distanciaCentro);" +
+"    float factorProfundidad = 1.0;" +
 //grid
 "    if (distanciaCentro > distanciaRenderizado) { discard;}"+
 "    if (mod(unprojectedVector.x, 10.0) < 0.2 || mod(unprojectedVector.z, 10.0) < 0.2) {" +

@@ -13,3 +13,6 @@ canvas.maximizado {
     height: 100vh;
     overflow: hidden;
 }
+.VentanaCanvas {
+    background-color: none;
+}

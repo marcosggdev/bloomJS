@@ -9,6 +9,7 @@ class RendererRefactor {
         RendererRefactor.escena = escena;
 
         RendererRefactor.dibujarHitbox = false;
+        RendererRefactor.dibujarGrid = false;
         RendererRefactor.propiedadesObjeto = {
             "Ancho": "ancho",
             "Alto": "alto",
@@ -20,6 +21,17 @@ class RendererRefactor {
         RendererRefactor.supervaloresObjeto = RendererRefactor.crearSupervaloresMostrar(RendererRefactor.propiedadesObjeto);
         RendererRefactor.configurar();
 
+        //variables que influyen en exportacion
+        RendererRefactor.exportacion = [
+            "fondo",
+            "ancho",
+            "alto",
+            "dibujarHitbox",
+            "dibujarGrid"
+        ];
+
+        //variables temporales
+        RendererRefactor.configuracionPrevia = {};
     }
 
     static crearSupervaloresMostrar (propiedadesObjeto) {
@@ -85,4 +97,33 @@ class RendererRefactor {
             RendererRefactor.escena.dibujar();
         }
     }
+
+    static configuracionExportarImagen () {
+        RendererRefactor.dibujarHitbox = false;
+        RendererRefactor.dibujarGrid = false;
+        RendererRefactor.fondo = new Color(0,0,0,1);
+    }
+
+    static configuracionPrevia () {
+        RendererRefactor.dibujarHitbox = RendererRefactor.dibujarHitboxPrevio;
+    }
+
+    static guardarConfiguracionPrevia () {
+ 
+        for (let i = 0; i < RendererRefactor.exportacion.length; i++) {
+            let nombre = RendererRefactor.exportacion[i];
+            RendererRefactor.configuracionPrevia[nombre] = RendererRefactor[nombre];
+        }
+
+    }
+
+    static cargarConfiguracionPrevia () {
+
+        for (let i = 0; i < RendererRefactor.exportacion.length; i++) {
+            let nombre = RendererRefactor.exportacion[i];
+            RendererRefactor[nombre] = RendererRefactor.configuracionPrevia[nombre];
+        }
+
+    }
+
 }
