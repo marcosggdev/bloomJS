@@ -214,7 +214,6 @@ class ControlesCanvas {
             if (menuSeleccion != null) {
                 VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
             }
-            ControlesCanvas.objetoSeleccionado = null;
     }
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global

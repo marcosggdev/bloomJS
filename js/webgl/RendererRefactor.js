@@ -9,7 +9,7 @@ class RendererRefactor {
         RendererRefactor.escena = escena;
 
         RendererRefactor.dibujarHitbox = false;
-        RendererRefactor.dibujarGrid = false;
+        RendererRefactor.dibujarGrid = true;
         RendererRefactor.propiedadesObjeto = {
             "Ancho": "ancho",
             "Alto": "alto",
