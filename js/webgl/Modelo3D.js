@@ -150,13 +150,13 @@ class Modelo3D {
         //matriz del modelo
         this.actualizarMatrizM();
 
-        gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
+        gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
 
         //atributos
-        gl.enableVertexAttribArray(this.aPosLoc);
+        //gl.enableVertexAttribArray(this.aPosLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+        //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
         gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
 
         gl.enableVertexAttribArray(this.aTexLoc);
@@ -308,9 +308,7 @@ class Modelo3D {
     
                     //uniforms matrices
                     this.m = gl.getUniformLocation(this.programa, "m");
-                    gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
                     this.v = gl.getUniformLocation(this.programa, "v");
-                    gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
                     this.p = gl.getUniformLocation(this.programa, "p");
                     gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
     
@@ -667,9 +665,7 @@ class Modelo3D {
 
         //uniforms matrices
         this.m = gl.getUniformLocation(this.programa, "m");
-        gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
         this.v = gl.getUniformLocation(this.programa, "v");
-        gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
         this.p = gl.getUniformLocation(this.programa, "p");
         gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
 
