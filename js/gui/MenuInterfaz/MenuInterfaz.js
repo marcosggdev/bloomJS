@@ -51,7 +51,10 @@ class MenuInterfaz {
     }
 
     static exportarEscena () {
-
+        //dibujables, iluminacion y camara. Se serializan todos los datos y se escriben en un archivo con una extension. Por ejemplo
+        //extension .bloom. El programa utilizara estos archivos para cargar datos despues
+        let serializacion = Renderer.escena.serializar();
+        
     }
 
     static exportarGraficos3D () {

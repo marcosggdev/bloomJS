@@ -70,5 +70,9 @@ class Escena {
         }
         return false;
     }
+
+    serializar () {
+        
+    }
     
 }
