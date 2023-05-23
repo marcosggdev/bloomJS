@@ -48,8 +48,24 @@ class ArcballCamera {
     }
 
     serializar () {
-        return "posXCentro:"+this.posXCentro+";posYCentro:"+this.posYCentro+";posZCentro:"+this.posZCentro+";radio:"+this.radio+";anguloY:"+
-        this.anguloY+";anguloXPropio:"+this.anguloXPropio;
+        //posXCentro, posYCentro, posZCentro, radio, anguloY, anguloXPropio
+        let jsonOBJ = {
+            "clase": "ArcballCamera",
+            "parametros": {
+                "posXCentro": this.posXCentro,
+                "posYCentro": this.posYCentro,
+                "posZCentro": this.posZCentro,
+                "radio": this.radio,
+                "anguloY": this.anguloY,
+                "anguloXPropio": this.anguloXPropio
+            }
+        };
+        return jsonOBJ;
+    }
+
+    static deserializar (json) {
+        return new ArcballCamera(json.parametros.posXCentro, json.parametros.posYCentro, json.parametros.posZCentro, json.parametros.radio,
+            json.parametros.anguloY, json.parametros.anguloXPropio);
     }
 
 }

@@ -76,7 +76,11 @@ class Grid extends Modelo2D {
     }
 
     serializar () {
-        return "clase=Grid;variables={}";
+        let jsonOBJ = {
+            "clase": "Grid",
+            "parametros": {}
+        };
+        return jsonOBJ;
     }
 
 }

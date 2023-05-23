@@ -4,11 +4,15 @@
  */
 class Escena {
 
-    constructor () {
+    constructor (dibujables) {
 
-        this.dibujables = [
-            new Grid()
-        ];
+        if (dibujables != null) {
+            this.dibujables = dibujables;
+        } else {
+            this.dibujables = [
+                new Grid()
+            ];
+        }
         this.iluminacion = [];
         this.camara = RendererRefactor.camara;
     }
@@ -45,13 +49,17 @@ class Escena {
 
     actualizar () {
         for (let i = 0; i < this.dibujables.length; i++) {
-            this.dibujables[i].actualizar();
+            if (this.dibujables[i] != null) {
+                this.dibujables[i].actualizar();
+            }
         }
     }
 
     dibujar () {
         for (let i = 0; i < this.dibujables.length; i++) {
-            this.dibujables[i].dibujar();
+            if (this.dibujables[i] != null) {
+                this.dibujables[i].dibujar();
+            }
         }
     }
 
@@ -68,55 +76,72 @@ class Escena {
 
     serializar () {
         //devuelve un string con toda la informacion de la escena de forma que sea legible por la funcion leer deserializar para
-        //crear de nuevo la misma escena
-        let serializacion = "";
-        //serializar dibujables, iluminacion y camara
-        serializacion += "dibujables={"
+        //crear de nuevo la misma escena.
+        let dibujables = [];
         for (let i = 0; i < this.dibujables.length; i++) {
-            serializacion += this.dibujables[i].serializar();
-            if (i + 1 < this.dibujables.length) {
-                serializacion += ","
-            }
+            dibujables.push(this.dibujables[i].serializar());
         }
-        serializacion += "}";
-        serializacion += "eoliluminacion={";
-        for (let i = 0 ; i < this.iluminacion.length; i++) {
-            serializacion += this.iluminacion[i].serializar();
-            if (i + 1 < this.dibujables.length) {
-                serializacion += ","
-            }
+
+        let iluminacion = [];
+        for (let i = 0; i < this.iluminacion.length; i++) {
+            iluminacion.push(this.iluminacion[i].serializar());
         }
-        serializacion += "}";
-        serializacion += "eolcamara={";
-        serializacion += this.camara.serializar();
-        serializacion += "}"
-        return serializacion;
+
+        let camara = this.camara.serializar();
+
+        let serializacionOBJ = {
+            "dibujables": dibujables,
+            "iluminacion": iluminacion,
+            "camara": camara
+        };
+
+        return JSON.stringify(serializacionOBJ);
     }
 
     static leerEscenaSerializada (serializacion) {
-        //serializacion de la forma: 
-        //  dibujables={{clase=clase;variables={nombre=valor;...}},...}eoliluminacion={{clase=clase;valor=valor},...}eolcamara={}
-        let lineas = serializacion.split("eol");
-        for (let i = 0; i < lineas.length; i++) {
-            variable = lineas[i].split("=")[0];
-            datos = lineas[i].split("=")[1];
-            datos.shift();
-            datos.pop();
-            switch (variable) {
-                case "dibujables":
-                    //datos de la forma {obj1},{obj2},...
-                    let objetos = datos.split(",");
-                    for (let j = 0; j < objetos.length; j++) {
-                        let objeto = objetos[i];
-                        objeto.shift();
-                        objeto.pop();
-                        let clase = objeto.split(";")[0];
-                        let variables = objeto.split(";")[1];
-                    }
-                case "iluminacion":
-                case "camara":
+        let json = JSON.parse(serializacion);
+
+        let escena = new Escena(null);
+
+        let dibujables = json.dibujables;
+        for (let i = 0; i < dibujables.length; i++) {
+            let clase = dibujables[i].clase;
+            
+            switch (clase) {
+                case "Modelo3D": 
+                    let obj = null;
+                    Modelo3D.deserializar(dibujables[i]).then(
+                        function (modelo) {
+                            obj = modelo;
+                            if (obj != null) {
+                                escena.anadirDibujable(obj);
+                            }
+                        }
+                    );
+                    break;
             }
         }
+
+        console.dir(escena);
+
+        let iluminacion = json.iluminacion;
+        for (let i = 0; i < iluminacion.length; i++) {
+            let clase = iluminacion[i].clase;
+            let parametros = iluminacion[i].parametros;
+            let obj = new clase(parametros);
+            escena.anadirIluminacion(obj);
+        }
+
+        let camara = json.camara;
+        let clase = camara.clase;
+        let obj = null;
+        switch (clase) {
+            case "ArcballCamera":
+                obj = ArcballCamera.deserializar(camara); break;
+        }
+        RendererRefactor.camara = obj;
+        escena.camara = obj;
+        RendererRefactor.escena = escena;
     }
     
 }

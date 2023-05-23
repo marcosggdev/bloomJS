@@ -1029,9 +1029,41 @@ class Modelo3D {
 
     serializar () {
         //posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial
-        return "clase=Modelo3D;variables={posX:"+this.posX+";posY:"+this.posY+";posZ:"+this.posZ+";anguloX:"+this.anguloX+";anguloY:"
-        +this.anguloY+";anguloZ:"+this.anguloZ+";factorX:"+this.factorX+";factorY:"+this.factorY+";factorZ:"+this.factorZ+";modo:"+this.modo+
-        ";rutaArchivoDae:"+this.rutaArchivoDae+";"+this.color.serializar()+";rutaTextura:"+this.rutaTextura+";rutaMaterial:"+this.rutaMaterial
-        +";funcionActualizar:"+this.funcionActualizar.toString()+"}";
+        let jsonOBJ = {
+            "clase": "Modelo3D",
+            "parametros": {
+                "posX": this.posX,
+                "posY": this.posY,
+                "posZ": this.posZ,
+                "anguloX": this.anguloX,
+                "anguloY": this.anguloY,
+                "anguloZ": this.anguloZ,
+                "factorX": this.factorX,
+                "factorY": this.factorY,
+                "factorZ": this.factorZ,
+                "modo": this.modo,
+                "rutaArchivoDae": this.rutaArchivoDae,
+                "color": this.color,
+                "rutaTextura": this.rutaTextura,
+                "rutaMaterial": this.rutaMaterial
+            }
+        };
+        return jsonOBJ;
+    }
+
+    static deserializar (json) {
+        //posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial
+        return new Promise(resolve => {
+            let parametros = json.parametros;
+            let color = Color.deserializar(parametros.color);
+            Modelo3D.crearModelo(parametros.posX, parametros.posY, parametros.posZ, parametros.anguloX, parametros.anguloY, parametros.anguloZ,
+                parametros.factorX, parametros.factorY, parametros.factorZ, parametros.modo, parametros.rutaArchivoDae,
+                color, parametros.rutaTextura, parametros.rutaMaterial)
+            .then(
+                function (modelo) {
+                    resolve(modelo);
+                }
+            );
+        });
     }
 }   

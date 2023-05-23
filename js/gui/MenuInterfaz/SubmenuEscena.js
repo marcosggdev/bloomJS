@@ -14,7 +14,7 @@ class SubmenuEscena extends SubmenuInterfaz {
      */
     static crearEscena () {
         if (RendererRefactor.escena == null) {
-            let escena = new Escena();
+            let escena = new Escena(null);
             RendererRefactor.escena = escena;
         } else {
             alert("pisando escena actual de render. ¿Está seguro? Escena.js");

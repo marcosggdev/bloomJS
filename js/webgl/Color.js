@@ -106,4 +106,12 @@ class Color {
         return new Color(r,g,b,a);
     }
 
+    serializar () {
+
+    }
+
+    static deserializar (json) {
+        
+    }
+
 }

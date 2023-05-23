@@ -33,7 +33,16 @@ class CamaraSimple {
     }
 
     serializar () {
-        return "clase=CamaraSimple;variables={posX:"+this.posXCentro+";posY:"+this.posYCentro+";posZ:"+this.posZ+"}";
+        //posX, posY, posZ
+        let jsonOBJ = {
+            "clase": "CamaraSimple",
+            "parametros": {
+                "posX": this.posX,
+                "posY": this.posY,
+                "posZ": this.posZ
+            }
+        };
+        return jsonOBJ;
     }
 
 }
