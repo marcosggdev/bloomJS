@@ -48,6 +48,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         RAIZ . "js/webgl/Hitbox.js",
         RAIZ . "js/webgl/RendererRefactor.js",
         RAIZ . "js/webgl/ArcballCamera.js",
+        RAIZ . "js/webgl/Grupo.js",
         RAIZ . "js/prueba/Main.js",
         RAIZ . "js/webgl/Escena.js"
     ]) ?>
@@ -67,6 +68,7 @@ require_once RAIZ_WEB . "vistas/Vista.php";
         RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
         RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
         RAIZ . "js/gui/InterfazCanvas/MenuAlternar.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
         RAIZ . "js/gui/InterfazCanvas/Menu.js",
         RAIZ . "js/gui/InterfazCanvas/MenuEdicion.js",
         RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",

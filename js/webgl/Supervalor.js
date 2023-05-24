@@ -86,6 +86,15 @@ class Supervalor {
                 }
                 break;
 
+            case "boton":
+                valorInput.type = "text";
+                valorInput.disabled = true;
+                valorInput.value = valor;
+                if (valor == null) {
+                    valorInput.value = "null";
+                }
+                break;
+
             default: 
             valorInput.addEventListener("input", (e) => {
                     this.objeto.actualizarValor(variable, e.target.value);

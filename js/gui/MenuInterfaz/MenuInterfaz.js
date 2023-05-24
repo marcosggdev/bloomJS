@@ -25,7 +25,7 @@ class MenuInterfaz {
     }
 
     static controles () {
-        let menuControles = new MenuGeneral("Controles");
+        let menuControles = new MenuDisplay("Controles", VentanaCanvas, "controles");
         VentanaCanvas.interfazCanvas.anadirMenu(menuControles);
     }
 
