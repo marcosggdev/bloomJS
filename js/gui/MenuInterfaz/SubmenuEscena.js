@@ -22,9 +22,16 @@ class SubmenuEscena extends SubmenuInterfaz {
         }
     }
 
+    /**
+     * Guarda la escena en el servidor en una carpeta. Habra un .json con los datos serializados de la escena y habra
+     * una imagen de previsualizacion, obtenida como render del canvas
+     */
     static guardarEscena () {
         let serializacion = RendererRefactor.escena.serializar();
         let datos = "data:text/json;charset=utf-8," + encodeURIComponent(serializacion);
+        let canvas = document.querySelector("canvas");
+        let datosImagen = canvas.toDataURL();
+
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -46,12 +53,17 @@ class SubmenuEscena extends SubmenuInterfaz {
         };
         let formData = new FormData();
         formData.append("escenaSerializada", datos);
+        formData.append("imagen", datosImagen);
         req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
         req.send(formData);
     }
 
+    /**
+     * Muestra un menu con las escenas del usuario. Si hace click en alguna, el menu se cerrara y se cargara dicha escena
+     */
     static cargarEscena () {
-        console.log("cargar escena");
+        let menu = new MenuMalla("Escenas", "/bloomJS/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
+        VentanaCanvas.interfazCanvas.anadirMenu(menu);
     }
 
     static anadirModelo (interfazCanvas) {
