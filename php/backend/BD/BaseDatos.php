@@ -117,9 +117,9 @@ class BaseDatos {
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (" . 
-                "'admin@admin.es', 'admin', 'admin', 'assets/defecto/imagenesPerfil/admin.png', 'usuarios/1_admin@admin.es');",
+                "'admin@admin.es', 'admin', 'admin', 'assets/defecto/imagenesPerfil/admin.png', 'usuarios/admin_admin@admin.es');",
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (" . 
-                "'anonimo@anonimo.es', 'anonimo', 'anonimo', 'assets/defecto/imagenesPerfil/defecto.png','usuarios/2_anonimo@anonimo.es');",
+                "'anonimo@anonimo.es', 'anonimo', 'anonimo', 'assets/defecto/imagenesPerfil/defecto.png','usuarios/anonimo_anonimo@anonimo.es');",
 
                 "INSERT IGNORE INTO modelos (nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
                 "'Barril', 'Modelo por defecto', 'assets/defecto/modelos/barril.dae', 'assets/defecto/texturas/barril.jpg', 'assets/defecto/previsualizacion/barril.png', 'defecto', '1');",

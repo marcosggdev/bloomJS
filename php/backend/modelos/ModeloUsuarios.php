@@ -16,7 +16,8 @@ class ModeloUsuarios {
                     'correo' => $registro['correo'], 
                     'nombre' => $registro['nombre'], 
                     'clave' => $registro['clave'],
-                    'imagenPerfil' => $registro['imagenPerfil']
+                    'imagenPerfil' => $registro['imagenPerfil'],
+                    'rutaCarpeta' => $registro["rutaCarpeta"]
                 ];
             }
             return false;

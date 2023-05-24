@@ -101,3 +101,36 @@
 .InputPersonalizado img {
     height: 20px;
 }
+dialog {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    border: none;
+    box-shadow: 2px 2px 5px black;
+}
+dialog button.aceptar {
+    background-color: #4bb54b;
+    padding: 1em;
+    padding-left: 4em;
+    padding-right: 4em;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 11pt;
+    box-shadow: 1px 1px 5px black;
+}
+dialog button.aceptar:hover {
+    box-shadow: 0 0 2px black;
+    background-color: #348134;
+}
+dialog button.aceptar:focus {
+    outline: none;
+}
+dialog::backdrop {
+    background-color: #b6b6b6d4;
+}
