@@ -31,24 +31,31 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
     $escenas = array_values($escenas);
 
     echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
-    echo "<div class='mallaEscenas'>";
+    echo "<div class='MallaEscenas'>";
 
     for ($i = 0; $i < count($escenas); $i++) {
         //cada escena tendra 1 imagen en png y 1 json
         $archivosEscena = scandir($rutaCarpeta . "/" . $escenas[$i]);
 
         $rutaImagen = "assets/defecto/escenas/defecto.png";
+        $rutaJSON = null;
+
         for ($j = 0; $j < count($archivosEscena); $j++) {
             if (preg_match("/.png$/", $archivosEscena[$j])) {
                 $nombreImagen = $archivosEscena[$j];
                 $rutaImagen = $rutaCarpeta . "/" . $escenas[$i] . "/" . $nombreImagen;
                 $rutaImagen = explode(RAIZ_WEB, $rutaImagen)[1];
+            } elseif (preg_match("/.json/", $archivosEscena[$j])) {
+                $rutaJSON = $rutaCarpeta . "/" . $escenas[$i] . "/" . $archivosEscena[$j];
             }
         }
+        $archivoJSON = fopen($rutaJSON, "r");
+        $escenaJSON = fread($archivoJSON, filesize($rutaJSON));
     ?>    
         <div class="plantilla escena" style="display:flex;flex-direction:column">
             <h4>Escena <?= $i ?></h4>
             <img src="<?= $rutaImagen ?>" alt="Plantilla de una escena">
+            <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
         </div>
     <?php
     }

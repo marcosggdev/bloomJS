@@ -51,9 +51,14 @@ class SubmenuEscena extends SubmenuInterfaz {
                 dialog.showModal();
             }
         };
+
+        let escenaJSON = {
+            "serializacion": serializacion,
+            "imagen": datosImagen
+        };
+
         let formData = new FormData();
-        formData.append("escenaSerializada", datos);
-        formData.append("imagen", datosImagen);
+        formData.append("escenaJSON", JSON.stringify(escenaJSON));
         req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
         req.send(formData);
     }

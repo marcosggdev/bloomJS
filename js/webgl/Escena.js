@@ -99,7 +99,10 @@ class Escena {
     }
 
     static leerEscenaSerializada (serializacion) {
-        let json = JSON.parse(serializacion);
+
+        let jsonOBJ = JSON.parse(serializacion);
+  
+        let json = JSON.parse(jsonOBJ.serializacion);
 
         let escena = new Escena(null);
 
@@ -121,8 +124,6 @@ class Escena {
                     break;
             }
         }
-
-        console.dir(escena);
 
         let iluminacion = json.iluminacion;
         for (let i = 0; i < iluminacion.length; i++) {
