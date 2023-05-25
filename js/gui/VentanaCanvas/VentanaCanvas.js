@@ -35,7 +35,8 @@ class VentanaCanvas {
         nodo.className = "VentanaCanvas";
 
         nodo.appendChild(VentanaCanvas.barraVentana.nodo);
-        nodo.appendChild(VentanaCanvas.menuInterfaz.nodo);
+        VentanaCanvas.barraVentana.setMenuInterfaz(VentanaCanvas.menuInterfaz.nodo);
+        //nodo.appendChild(VentanaCanvas.menuInterfaz.nodo);
         nodo.appendChild(VentanaCanvas.interfazCanvas.nodo);
         VentanaCanvas.interfazCanvas.nodo.appendChild(VentanaCanvas.canvas.nodo);
 

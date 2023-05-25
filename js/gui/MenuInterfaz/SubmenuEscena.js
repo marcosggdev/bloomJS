@@ -89,6 +89,17 @@ class SubmenuEscena extends SubmenuInterfaz {
                 "comunidad", 0, null, 3)
             ]);
 
+            let subirModelo = document.createElement("button");
+            subirModelo.id = "subirModelo";
+            subirModelo.textContent = "Subir";
+
+            subirModelo.addEventListener("click", () => {
+                let parametros = { "paginaVolver": "/bloomJS/pruebas.php" };
+                Utilidades.cargarPlantilla(VentanaCanvas.interfazCanvas.nodo, "/bloomJS/vistas/editor/subirModelo.php", parametros);
+            });
+
+            menuAnadirModelo.nodo.querySelector(".submenu#Personal .BarraCierre").appendChild(subirModelo);
+
             interfazCanvas.anadirMenu(menuAnadirModelo);
 
         }

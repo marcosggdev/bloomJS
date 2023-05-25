@@ -77,4 +77,10 @@ class BarraVentana {
         canvas.classList.remove("maximizado");
     }
 
+    //para añadir un menu interfaz a posteriori contenido en el nodo de la barra de la ventana y ahorrar espacio
+    setMenuInterfaz (menuInterfaz) {
+        console.dir(menuInterfaz);
+        this.nodo.querySelector("h1").after(menuInterfaz);
+    }
+
 }

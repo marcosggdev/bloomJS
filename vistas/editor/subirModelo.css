@@ -1,25 +1,56 @@
-#subirModelo {
-    width: 50%;
+#dialogSubirModelo {
+    position: absolute;
+    padding: 2em;
+    overflow-y: scroll;
 }
-#subirModelo #barraVentana {
-    justify-content: flex-end;
+#dialogSubirModelo::backdrop {
+    background-color: #dededed1;
 }
-#subirModelo img {
+#dialogSubirModelo #barraVentana {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#dialogSubirModelo img {
     width: 25px;
     height: 25px;
 }
-#subirModelo img:hover {
+#dialogSubirModelo img:hover {
     transform: scale(1.1);
 }
-#subirModelo form {
+#dialogSubirModelo form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
     background-color: rgb(255, 255, 170);
     padding: 1em;
+    height: 100%;
+    justify-content: center;
+    font-size: 11pt;
 }
-#subirModelo form .campo {
+#dialogSubirModelo form .campo {
     display: flex;
     justify-content: space-between;
+}
+#dialogSubirModelo #contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    flex-grow: 1;
+}
+#dialogSubirModelo input[type='button'] {
+    background-color: #63b55e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 1em;
+    width: 30%;
+    align-self: center;
+    box-shadow: 2px 2px 5px black;
+}
+#dialogSubirModelo input[type='button']:hover {
+    box-shadow: inset 0 0 5px black;
+    background-color: #4a9a46;
 }

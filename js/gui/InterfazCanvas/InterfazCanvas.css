@@ -1,5 +1,8 @@
 .InterfazCanvas {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .InterfazCanvas div[class*='Menu'] {
     position: absolute;
@@ -15,7 +18,7 @@
     padding: 1em;
     box-sizing: border-box;
     overflow-y: scroll;
-    width: 40%;
+    min-width: 40%;
 }
 .barraPestanas {
     margin: 0;

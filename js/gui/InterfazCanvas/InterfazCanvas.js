@@ -53,4 +53,20 @@ class InterfazCanvas {
         }
     }
 
+    cargarDialogSubirModelo () {
+        return new Promise(resolve => {
+            let dialog = document.createElement("dialog");
+            dialog.id = "subirModelo";
+    
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    resolve(this.responseText);
+                }
+            };
+            req.open("GET", "/bloomJS/vistas/editor/subirModelo.php");
+            req.send();
+        });
+    }
+
 }

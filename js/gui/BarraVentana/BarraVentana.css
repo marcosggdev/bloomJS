@@ -1,16 +1,19 @@
 .BarraVentana {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: purple;
-    box-shadow: inset 0 0 46px pink;
+    justify-content: flex-start;
+    background: linear-gradient(45deg, #3e143b, #3a003c);
+    align-items: stretch;
 }
 .BarraVentana h1 {
     margin: 0;
     user-select: none;
     color: white;
     padding-left: 1em;
+    align-self: center;
+    padding-right: 1em;
+    font-size: 14pt;
+    font-family: 'Oleo Script Swash Caps';
 }
 .BarraVentana .botones {
     display: flex;
@@ -18,7 +21,9 @@
     gap: 5px;
     padding: 5px;
     box-sizing: border-box;
-    background-color: #390044;
+    background: linear-gradient(45deg, #212121, #99749b);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
 .BarraVentana .botones .BotonImagen {
     width: 25px;

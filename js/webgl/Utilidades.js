@@ -65,4 +65,57 @@ class Utilidades {
         return mayor;
     }
 
+    /**
+     * Carga del servidor el contenido html, css y js de una plantilla, de forma que sea funcional (el codigo) y el diseño aplique
+     * de forma modularizada en plantillas guardadas en la carpeta vista del servidor. De esta forma podemos construir elementos
+     * de forma modularizada utilizando js pero escribiendo los nodos con html
+     */
+    static cargarPlantilla (contenedor, plantilla, parametros) {
+
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                //PLANTILLAS DE LA FORMA PLANTILLA {plantilla, adicional{estilo, js}}
+                let respuestaDOM = document.createElement("div");
+                respuestaDOM.innerHTML += this.responseText;
+
+                //siempre habra
+                let plantillaDOM = respuestaDOM.querySelector("#plantilla");
+
+                //puede no haber, tener estilo pero no js...
+                let adicionalDOM = respuestaDOM.querySelector("#adicional");
+
+                if (adicionalDOM != null) {
+
+                    let estilo = adicionalDOM.querySelector("#estilo");
+                    if (estilo != null) {
+                        plantillaDOM.insertAdjacentHTML("afterbegin", estilo.innerHTML);
+                    }
+
+                    let scriptRuta = adicionalDOM.querySelector("#script").value;
+                    if (scriptRuta != null) {
+                        let script = document.createElement("script");
+                        script.src = scriptRuta;
+                        contenedor.insertAdjacentElement("beforeend", script);
+                    }
+
+                }
+
+                //se entiende que siempre habra
+                contenedor.insertAdjacentHTML("beforeend", plantillaDOM.innerHTML);
+                
+            }
+        };
+        let formData = new FormData();
+        let keys = Object.keys(parametros);
+        for (let i = 0; i < keys.length; i++) {
+            let key = keys[i];
+            let valor = parametros[key];
+            formData.append(key, valor);
+        }
+        req.open("POST", plantilla);
+        req.send(formData);
+        
+    }
+
 }

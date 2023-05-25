@@ -39,8 +39,16 @@ session_start();
 if (isset($_SESSION["usuario"])) {
     //iniciada sesion, insertar con id autor correspondiente
     $usuario = $_SESSION["usuario"];
-    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, $usuario->id);
+    if (!ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, $usuario->id)) {
+        echo "<script>alert('Hubo un error en la base de datos al insertar el modelo')</script>";
+    } else {
+        echo "<script>alert('El modelo se ha subido de forma correcta')</script>";
+    }
 } else {
     //sin iniciar sesion => id_autor = 2 (anonimo)
-    ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, 2);
+    if (!ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, 2)) {
+        echo "<script>alert('Hubo un error en la base de datos al insertar el modelo')</script>";
+    } else {
+        echo "<script>alert('El modelo se ha subido de forma correcta')</script>";
+    }
 }
