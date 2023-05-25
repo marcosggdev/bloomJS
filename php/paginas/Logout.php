@@ -25,6 +25,11 @@ Vista::imprimirHead("Bloom - JS",
 <main>
     <div class="contenido">
         <p>Has cerrado la sesión con éxito</p>
+        <?php
+            if (isset($_POST["paginaVolver"])) {
+                echo "<a href='".$_POST["paginaVolver"]."'>Volver</a>";
+            }
+        ?>
         <a href="/bloomJS/index.php">Volver a Inicio</a>
         <a href="/bloomJS/php/paginas/Blog.php">Blog sobre el desarrollo del proyecto</a>
     </div>

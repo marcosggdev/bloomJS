@@ -138,7 +138,10 @@ class Vista {
                         <p><a href="/bloomJS/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
                         <p><?=$usuario->correo?></p>
                     </div>
-                    <button class="boton-neon" onclick="window.location.assign('/bloomJS/php/paginas/Logout.php')">Cerrar sesión</button>
+                    <form action="/bloomJS/php/paginas/Logout.php" method="POST">
+                        <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
+                        <input class="boton-neon" type="submit" value="Cerrar sesión">
+                    </form>
                 </div>
             </div>
 <?php
@@ -148,7 +151,10 @@ class Vista {
                 <div class="usuarioImgCaja ocultoDerecha">
                     <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
                     <div class="contenido">
-                        <button class="boton-neon" onclick="window.location.assign('/bloomJS/php/paginas/Login.php')" id="iniciarSesion">Iniciar sesión</button>
+                        <form action="/bloomJS/php/paginas/Login.php" method="POST">
+                            <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
+                            <input class="boton-neon" id="iniciarSesion" type="submit" value="Iniciar sesión">
+                        </form>
                     </div>
                 </div>
             </div> 

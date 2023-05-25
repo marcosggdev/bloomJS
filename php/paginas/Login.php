@@ -17,7 +17,11 @@ if (isset($_POST["nombre"]) && isset($_POST["clave"])) {
     if ($usuario) {
         $formulario = false;
         $_SESSION["usuario"] = $usuario;
-        header("Location:/bloomJS/index.php");
+        if (isset($_POST["paginaVolver"])) {
+            header("Location:" . $_POST["paginaVolver"]);
+        } else {
+            header("Location:/bloomJS/index.php");
+        }
     } else {
         $incorrecto = true;
     }
@@ -35,6 +39,11 @@ if ($formulario) {
 ?>
     <main>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
+            <?php
+                if (isset($_POST["paginaVolver"])) {
+                    echo "<input type='hidden' name='paginaVolver' value='".$_POST["paginaVolver"]."'>";
+                }
+            ?>
             <h1>Iniciar sesión...</h1>
             <div class="contenido">
 <?php

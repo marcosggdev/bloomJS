@@ -2,6 +2,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
