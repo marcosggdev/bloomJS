@@ -6,6 +6,12 @@ class Escena {
 
     constructor (dibujables) {
 
+        //parametros de BD
+        this.id = null;
+        this.nombre = "Escena";
+        this.descripcion = "";
+
+        //parametros del objeto
         if (dibujables != null) {
             this.dibujables = dibujables;
         } else {

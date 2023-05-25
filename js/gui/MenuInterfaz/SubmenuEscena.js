@@ -14,27 +14,34 @@ class SubmenuEscena extends SubmenuInterfaz {
      * se considera la escena actual (la que se esta dibujando, actualizando, etc)
      */
     static crearEscena () {
+
+        //crear escena porque no hay
         if (RendererRefactor.escena == null) {
-            let escena = new Escena(null);
-            RendererRefactor.escena = escena;
+            //formulario para pedir nombre y descripcion para crear la escena
+            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": false});
+
         } else {
-            alert("pisando escena actual de render. ¿Está seguro? Escena.js");
+            //crear otra escena y sustituir la previa. Guardar cambios?
+            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": true});
+            
         }
     }
 
     /**
      * Guarda la escena en el servidor en una carpeta. Habra un .json con los datos serializados de la escena y habra
-     * una imagen de previsualizacion, obtenida como render del canvas
+     * una imagen de previsualizacion, obtenida como render del canvas.
+     * Si no existe la escena, se crea una nueva y se guarda la serializacion y un render. Si ya existe, entonces
+     * actualizamos la serializacion antigua con la nueva y actualizamos el render
      */
     static guardarEscena () {
         let serializacion = RendererRefactor.escena.serializar();
-        let datos = "data:text/json;charset=utf-8," + encodeURIComponent(serializacion);
         let canvas = document.querySelector("canvas");
         let datosImagen = canvas.toDataURL();
 
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+
                 let dialog = document.createElement("dialog");
                 dialog.innerHTML += this.responseText;
                 let botonera = document.createElement("div");
@@ -49,10 +56,13 @@ class SubmenuEscena extends SubmenuInterfaz {
                 dialog.appendChild(botonera);
                 VentanaCanvas.interfazCanvas.nodo.appendChild(dialog);
                 dialog.showModal();
+
             }
         };
 
         let escenaJSON = {
+            "id_escena": RendererRefactor.escena.id,
+            "nombre": RendererRefactor.escena.nombre,
             "serializacion": serializacion,
             "imagen": datosImagen
         };

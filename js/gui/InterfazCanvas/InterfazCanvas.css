@@ -18,7 +18,6 @@
     padding: 1em;
     box-sizing: border-box;
     overflow-y: scroll;
-    min-width: 40%;
 }
 .barraPestanas {
     margin: 0;
@@ -78,7 +77,6 @@
 .ListaPestanas li {
     padding: 10px;
     user-select: none;
-    width: 25%;
 }
 .ListaPestanas li.actual {
     color: rgb(164, 164, 164);
@@ -103,6 +101,17 @@
 }
 .InputPersonalizado img {
     height: 20px;
+}
+dialog .botonera {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+dialog .botonera button:focus {
+    outline: none;
 }
 dialog {
     background-color: #ffffff;

@@ -92,17 +92,19 @@ class Utilidades {
                         plantillaDOM.insertAdjacentHTML("afterbegin", estilo.innerHTML);
                     }
 
+                }
+
+                //se entiende que siempre habra
+                contenedor.insertAdjacentHTML("beforeend", plantillaDOM.innerHTML);
+
+                if (adicionalDOM != null) {
                     let scriptRuta = adicionalDOM.querySelector("#script").value;
                     if (scriptRuta != null) {
                         let script = document.createElement("script");
                         script.src = scriptRuta;
                         contenedor.insertAdjacentElement("beforeend", script);
                     }
-
                 }
-
-                //se entiende que siempre habra
-                contenedor.insertAdjacentHTML("beforeend", plantillaDOM.innerHTML);
                 
             }
         };

@@ -8,6 +8,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloEscenas.php";
 session_start();
 
 if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero"]) && isset($_POST["filas"]) && isset($_POST["columnas"])) {
@@ -21,44 +22,60 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
     //array con las escenas del usuario: array con rutas de /usuario/escenas/
     $usuario = $_SESSION["usuario"];
     $datosUsuario = ModeloUsuarios::getUsuario($usuario->id);
-    $rutaCarpeta = RAIZ_WEB . $datosUsuario["rutaCarpeta"] . "/escenas";
-    $escenas = scandir($rutaCarpeta);
-    for ($i = 0; $i < count($escenas); $i++) {
-        if ($escenas[$i] == "." || $escenas[$i] == "..") {
-            unset($escenas[$i]);
+    $datosEscenas = ModeloEscenas::getEscenasPorIdUsuario($usuario->id);
+
+    print_r($datosUsuario);
+    print_r($datosEscenas);
+
+    //cada escena
+    foreach ($datosEscenas as $datosEscena) {
+
+        $rutaCarpeta = RAIZ_WEB . $datosUsuario["rutaCarpeta"] . "/escenas/" . $datosEscena["ruta"];
+        //archivos de escena
+        $archivos = scandir($rutaCarpeta);
+        for ($i = 0; $i < count($archivos); $i++) {
+            if ($archivos[$i] == "." || $archivos[$i] == "..") {
+                unset($archivos[$i]);
+            }
         }
-    }
-    $escenas = array_values($escenas);
+        $archivos = array_values($archivos);
 
-    echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
-    echo "<div class='MallaEscenas'>";
-
-    for ($i = 0; $i < count($escenas); $i++) {
-        //cada escena tendra 1 imagen en png y 1 json
-        $archivosEscena = scandir($rutaCarpeta . "/" . $escenas[$i]);
-
+        //procesamos cada archivo dentro de la carpeta de la escena
         $rutaImagen = "assets/defecto/escenas/defecto.png";
         $rutaJSON = null;
 
-        for ($j = 0; $j < count($archivosEscena); $j++) {
-            if (preg_match("/.png$/", $archivosEscena[$j])) {
-                $nombreImagen = $archivosEscena[$j];
-                $rutaImagen = $rutaCarpeta . "/" . $escenas[$i] . "/" . $nombreImagen;
+        for ($i = 0; $i < count($archivos); $i++) {
+
+            if (preg_match("/.png$/", $archivos[$i])) {
+
+                $rutaImagen = $rutaCarpeta . "/escenas/" . $datosEscena["ruta"] . "/" . $archivos[$i];
                 $rutaImagen = explode(RAIZ_WEB, $rutaImagen)[1];
-            } elseif (preg_match("/.json/", $archivosEscena[$j])) {
-                $rutaJSON = $rutaCarpeta . "/" . $escenas[$i] . "/" . $archivosEscena[$j];
+
+            } elseif (preg_match("/.json$/", $archivosEscena[$j])) {
+
+                $rutaJSON = $rutaCarpeta . "/escenas/" . $datosEscena["ruta"] . "/" . $archivos[$i];
+
             }
+
         }
+
         $archivoJSON = fopen($rutaJSON, "r");
         $escenaJSON = fread($archivoJSON, filesize($rutaJSON));
-    ?>    
+
+        echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
+        echo "<div class='MallaEscenas'>";
+
+
+?>
         <div class="plantilla escena" style="display:flex;flex-direction:column">
-            <h4>Escena <?= $i ?></h4>
+            <h4><?= $datosEscena["nombre"] ?></h4>
             <img src="<?= $rutaImagen ?>" alt="Plantilla de una escena">
             <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
+            <input type="hidden" id="id_escena" value="<?= $datosEscena["id"] ?>">
         </div>
-    <?php
+<?
     }
+
     echo "</div>";
     echo "<input class='script' type='hidden' value='/bloomJS/vistas/MenuMalla/escenas/Escenas.js'/>";
 

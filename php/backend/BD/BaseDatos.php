@@ -110,10 +110,18 @@ class BaseDatos {
                     "texto VARCHAR(200) NOT NULL," . 
                     "id_target INT NOT NULL,". 
                     "id_autor INT NOT NULL);",
+
+                "CREATE TABLE IF NOT EXISTS escenas (" . 
+                    "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," .
+                    "nombre VARCHAR(40) DEFAULT 'Escena'," .
+                    "descripcion VARCHAR(200) DEFAULT 'Escena de  BloomJS'," .  
+                    "ruta VARCHAR(200) UNIQUE NOT NULL," .
+                    "id_autor INT NOT NULL);",
                 
                 "ALTER TABLE modelos ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
                 "ALTER TABLE comentarios ADD FOREIGN KEY(id_target) REFERENCES entradas(id);",
                 "ALTER TABLE comentarios ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
+                "ALTER TABLE escenas ADD FOREIGN KEY(id_autor) REFERENCES usuarios(id);",
 
                 //primero datos en usuarios pork en modelos hay fk y daria error al no existir aun el dato
                 "INSERT IGNORE INTO usuarios (correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (" . 
