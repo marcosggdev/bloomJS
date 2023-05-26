@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
             new SubmenuEscena(interfazCanvas),
             new SubmenuInterfaz("Editor", [
                     new BotonInterfaz("Controles", MenuInterfaz.controles),
-                    new BotonInterfaz("Ajustes", ()=>{MenuInterfaz.ajustes(renderer)})
+                    new BotonInterfaz("Ajustes", ()=>{MenuInterfaz.ajustes(RendererRefactor)})
             ]),
             new SubmenuInterfaz("Exportar", [
                 new BotonInterfaz("Imagen", MenuInterfaz.exportarImagen),

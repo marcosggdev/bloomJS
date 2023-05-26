@@ -34,43 +34,40 @@ class SubmenuEscena extends SubmenuInterfaz {
      */
     static guardarEscena () {
 
-        if (RendererRefactor.escena != null) {
-            //datos
-            let serializacionOBJ = RendererRefactor.escena.serializar();
-            let canvas = document.querySelector("canvas");
-            let datosImagen = canvas.toDataURL();
-    
-            let req = new XMLHttpRequest();
-            req.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-    
-                    let dialog = document.createElement("dialog");
-                    dialog.innerHTML += this.responseText;
-                    let botonera = document.createElement("div");
-                    let aceptar = document.createElement("button");
-                    aceptar.textContent = "Aceptar";
-                    aceptar.className = "aceptar";
-                    aceptar.addEventListener("click", () => {
-                        dialog.close();
-                        dialog.remove();
-                    });
-                    botonera.appendChild(aceptar);
-                    dialog.appendChild(botonera);
-                    VentanaCanvas.interfazCanvas.nodo.appendChild(dialog);
-                    dialog.showModal();
-    
-                }
-            };
-    
-            let formData = new FormData();
-            formData.append("escena", JSON.stringify(serializacionOBJ));
-            formData.append("imagen", JSON.stringify(datosImagen));
+        //datos
+        let serializacionOBJ = RendererRefactor.escena.serializar();
+        let canvas = document.querySelector("canvas");
+        let datosImagen = canvas.toDataURL();
 
-            req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
-            req.send(formData);
-        } else {
-            alert("¡Aún no has creado una escena!");
-        }
+        let req = new XMLHttpRequest();
+        req.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                let dialog = document.createElement("dialog");
+                dialog.innerHTML += this.responseText;
+                let botonera = document.createElement("div");
+                let aceptar = document.createElement("button");
+                aceptar.textContent = "Aceptar";
+                aceptar.className = "aceptar";
+                aceptar.addEventListener("click", () => {
+                    dialog.close();
+                    dialog.remove();
+                });
+                botonera.appendChild(aceptar);
+                dialog.appendChild(botonera);
+                VentanaCanvas.interfazCanvas.nodo.appendChild(dialog);
+                dialog.showModal();
+
+            }
+        };
+
+        let formData = new FormData();
+        formData.append("escena", JSON.stringify(serializacionOBJ));
+        formData.append("imagen", JSON.stringify(datosImagen));
+
+        req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
+        req.send(formData);
+
     }
 
     /**

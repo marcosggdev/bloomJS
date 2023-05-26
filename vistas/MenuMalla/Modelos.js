@@ -17,7 +17,10 @@ Array.from(plantillas).forEach((plantilla) => {
             )
             .then(
                 function () {
-                    document.querySelector(".MenuGeneral:has(.mallaModelos .plantilla.modelo)").remove();
+                    menu = document.querySelector(".MenuGeneral:has(.mallaModelos .plantilla.modelo)")
+                    if (menu != null) {
+                        menu.remove();
+                    }
                     Array.from(scripts).forEach((s) => {s.remove()});
                     Array.from(links).forEach((l) => {l.remove()});
                 }

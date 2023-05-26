@@ -74,6 +74,7 @@ class Utilidades {
 
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
+
             if (this.readyState == 4 && this.status == 200) {
                 //PLANTILLAS DE LA FORMA PLANTILLA {estilo <link>? plantilla <html> <input hidden scriptsrc>?
 
@@ -90,6 +91,7 @@ class Utilidades {
                 //se entiende que siempre habra
                 contenedor.insertAdjacentHTML("beforeend", respuestaDOM.innerHTML);
             }
+            
         };
         let formData = new FormData();
         let keys = Object.keys(parametros);

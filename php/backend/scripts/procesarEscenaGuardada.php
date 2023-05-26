@@ -28,10 +28,14 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
         mkdir($rutaCarpeta, 0777, true);
     }
 
-    //carpeta de la escena
     $escena = ModeloEscenas::getEscena($escenaSerializada->id);
-    
-    if ($escena !== false) {
+    if (!$escena) {
+        echo "false";
+    } else {
+        print_r($escena);
+    }
+
+    if ($escena != false) {
 
         //ya existe => actualizar imagen y json
         $datosEscena = ModeloEscenas::getEscena($escena->id);
@@ -72,8 +76,9 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
 
         }
 
-        echo "<p class='servidor-info'>¡La escena se ha actualizado con éxito!</p>";
+        echo "<p>¡La escena se ha actualizado con éxito!</p>";
 
+    //escena de BD es false
     } else {
 
         //no existe. crear carpeta y meter dentro imagen y json y guardar registro en BD
@@ -108,12 +113,12 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
 
         $id = ModeloEscenas::crearEscena($escenaSerializada->titulo, $escenaSerializada->descripcion, $nombreEscena, $usuario->id);
 
-        echo "<p class='servidor-info'>¡La escena se ha creado con éxito!</p>";
+        echo "<p>¡La escena se ha creado con éxito!</p>";
 
     }
 } else {
 
-    echo "<p class='servidor-error'>¡Ups! Algo ha salido mal. No ha iniciado sesion o ha habido un error con el envío de la serialización de la escena o la imagen " . 
+    echo "<p>¡Ups! Algo ha salido mal. No ha iniciado sesion o ha habido un error con el envío de la serialización de la escena o la imagen " . 
     "de previsualización</p>";
 
 }

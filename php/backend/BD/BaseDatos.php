@@ -113,7 +113,7 @@ class BaseDatos {
 
                 "CREATE TABLE IF NOT EXISTS escenas (" . 
                     "id INT AUTO_INCREMENT PRIMARY KEY NOT NULL," .
-                    "nombre VARCHAR(40) DEFAULT 'Escena'," .
+                    "titulo VARCHAR(40) DEFAULT 'Escena'," .
                     "descripcion VARCHAR(200) DEFAULT 'Escena de  BloomJS'," .  
                     "ruta VARCHAR(200) UNIQUE NOT NULL," .
                     "id_autor INT NOT NULL);",

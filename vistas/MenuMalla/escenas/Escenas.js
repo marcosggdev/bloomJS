@@ -4,7 +4,9 @@ Array.from(document.querySelectorAll(".MallaEscenas .plantilla.escena")).forEach
 
         Escena.leerEscenaSerializada(plantilla.querySelector("#serializacion").value);
         VentanaCanvas.interfazCanvas.eliminarMenu(VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Escenas").nodo);
-        Escena.id = plantilla.querySelector("#id_escena").value;
+        Escena.id = plantilla.querySelector("#id").value;
+        Escena.titulo = plantilla.querySelector("#titulo").value;
+        Escena.descripcion = plantilla.querySelector("#descripcion").value;
         
     });
 

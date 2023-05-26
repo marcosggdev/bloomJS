@@ -13,9 +13,11 @@ class ModeloEscenas {
             if ($preparada->rowCount() > 0) {
                 $registro = $preparada->fetch();
                 return [
-                    'id' => $registro['id'],
-                    'nombre' => $registro['nombre'], 
-                    'ruta' => $registro['ruta']
+                    'id' => $registro['id'], 
+                    'titulo' => $registro['titulo'], 
+                    'descripcion' => $registro['descripcion'], 
+                    'ruta' => $registro['ruta'],
+                    'id_autor' => $registro['id_autor']
                 ];
             }
             return false;
@@ -36,7 +38,7 @@ class ModeloEscenas {
             while ($registro = $preparada->fetch()) {
                 $array = [
                     'id' => $registro['id'], 
-                    'nombre' => $registro['nombre'], 
+                    'titulo' => $registro['titulo'], 
                     'descripcion' => $registro['descripcion'], 
                     'ruta' => $registro['ruta'],
                     'id_autor' => $registro['id_autor']
@@ -50,13 +52,13 @@ class ModeloEscenas {
         }
     }
 
-    public static function crearEscena ($nombre, $descripcion, $ruta, $id_autor) {
+    public static function crearEscena ($titulo, $descripcion, $ruta, $id_autor) {
         try {
             $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
-            $sql = "INSERT INTO escenas(nombre, descripcion, ruta, id_autor) VALUES (".
-            ":nombre, :descripcion, :ruta, :id_autor)";
+            $sql = "INSERT INTO escenas(titulo, descripcion, ruta, id_autor) VALUES (".
+            ":titulo, :descripcion, :ruta, :id_autor)";
             $preparada = $pdo->prepare($sql);
-            $preparada->execute([":nombre" => $nombre, ":descripcion" => $descripcion, ":ruta" => $ruta, ":id_autor" => $id_autor]);
+            $preparada->execute([":titulo" => $titulo, ":descripcion" => $descripcion, ":ruta" => $ruta, ":id_autor" => $id_autor]);
             return $pdo->lastInsertId();
         } catch (PDOException $e) {
             print_r($e->getMessage());
