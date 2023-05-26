@@ -17,6 +17,8 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
     $escenaSerializada = json_decode($_POST["escena"]);
     $imagen = $_POST["imagen"];
 
+    print_r($escenaSerializada);
+
     //el .json se guardara en la carpeta del usuario, por lo que es necesario haber iniciado sesion. En caso contrario
     //devolvemos alert indicando que inicie sesion
     $usuario = $_SESSION["usuario"];
@@ -30,6 +32,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
 
     $escena = ModeloEscenas::getEscena($escenaSerializada->id);
     if (!$escena) {
+        echo "id: " . $escenaSerializada->id . "<br>";
         echo "false";
     } else {
         print_r($escena);

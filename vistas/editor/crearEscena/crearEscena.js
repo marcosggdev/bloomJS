@@ -4,13 +4,9 @@ dialog.showModal();
 sustituir = dialog.querySelector("#sustituir").value;
 
 if (sustituir) {
-
     //crear
     crear = dialog.querySelector("#crear");
     crear.addEventListener("click", () => {
-
-        //guardamos escena actual antes de crear una nueva
-        SubmenuEscena.guardarEscena();
 
         //crear escena
         titulo = dialog.querySelector("#titulo").value;

@@ -113,7 +113,7 @@ class Escena {
 
         let escena = new Escena(null);
         escena.id = json.id;
-        escena.nombre = json.nombre;
+        escena.titulo = json.titulo;
         escena.descripcion = json.descripcion;
 
         let dibujables = json.dibujables;

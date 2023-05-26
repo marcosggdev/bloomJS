@@ -12,7 +12,7 @@ require_once RAIZ_WEB . "php/backend/modelos/ModeloEscenas.php";
 session_start();
 
 if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero"]) && isset($_POST["filas"]) && isset($_POST["columnas"])) {
-
+    
     //sanitizar
     $_POST["tipo"] = trim(strip_tags($_POST["tipo"]));
     $_POST["numero"] = trim(strip_tags($_POST["numero"]));
@@ -71,10 +71,10 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
         <div class="plantilla escena" style="display:flex;flex-direction:column">
             <h4><?= $datosEscena["id"] . " - " . $datosEscena["titulo"] ?></h4>
             <img src="<?= $rutaImagen ?>" alt="Plantilla de una escena">
+            <input id="id" type="hidden" value="<?= $datosEscena["id"] ?>">
+            <input id="titulo" type="hidden" value="<?= $datosEscena["titulo"] ?>">
+            <input id="descripcion" type="hidden" value="<?= $datosEscena["descripcion"] ?>">
             <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
-            <input type="hidden" id="id" value="<?= $datosEscena["id"] ?>">
-            <input type="hidden" id="titulo" value="<?= $datosEscena["titulo"] ?>">
-            <input type="hidden" id="descripcion" value="<?= $datosEscena["descripcion"] ?>">
         </div>
 <?
     }
