@@ -19,12 +19,11 @@ class SubmenuEscena extends SubmenuInterfaz {
         if (RendererRefactor.escena == null) {
             //formulario para pedir nombre y descripcion para crear la escena
             Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": false});
-
         } else {
             //crear otra escena y sustituir la previa. Guardar cambios?
-            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": true});
-            
+            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": true});   
         }
+        
     }
 
     /**
@@ -34,51 +33,61 @@ class SubmenuEscena extends SubmenuInterfaz {
      * actualizamos la serializacion antigua con la nueva y actualizamos el render
      */
     static guardarEscena () {
-        let serializacion = RendererRefactor.escena.serializar();
-        let canvas = document.querySelector("canvas");
-        let datosImagen = canvas.toDataURL();
 
-        let req = new XMLHttpRequest();
-        req.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
+        if (RendererRefactor.escena != null) {
+            //datos
+            let serializacionOBJ = RendererRefactor.escena.serializar();
+            let canvas = document.querySelector("canvas");
+            let datosImagen = canvas.toDataURL();
+    
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+    
+                    let dialog = document.createElement("dialog");
+                    dialog.innerHTML += this.responseText;
+                    let botonera = document.createElement("div");
+                    let aceptar = document.createElement("button");
+                    aceptar.textContent = "Aceptar";
+                    aceptar.className = "aceptar";
+                    aceptar.addEventListener("click", () => {
+                        dialog.close();
+                        dialog.remove();
+                    });
+                    botonera.appendChild(aceptar);
+                    dialog.appendChild(botonera);
+                    VentanaCanvas.interfazCanvas.nodo.appendChild(dialog);
+                    dialog.showModal();
+    
+                }
+            };
+    
+            let formData = new FormData();
+            formData.append("escena", JSON.stringify(serializacionOBJ));
+            formData.append("imagen", JSON.stringify(datosImagen));
 
-                let dialog = document.createElement("dialog");
-                dialog.innerHTML += this.responseText;
-                let botonera = document.createElement("div");
-                let aceptar = document.createElement("button");
-                aceptar.textContent = "Aceptar";
-                aceptar.className = "aceptar";
-                aceptar.addEventListener("click", () => {
-                    dialog.close();
-                    dialog.remove();
-                });
-                botonera.appendChild(aceptar);
-                dialog.appendChild(botonera);
-                VentanaCanvas.interfazCanvas.nodo.appendChild(dialog);
-                dialog.showModal();
-
-            }
-        };
-
-        let escenaJSON = {
-            "id_escena": RendererRefactor.escena.id,
-            "nombre": RendererRefactor.escena.nombre,
-            "serializacion": serializacion,
-            "imagen": datosImagen
-        };
-
-        let formData = new FormData();
-        formData.append("escenaJSON", JSON.stringify(escenaJSON));
-        req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
-        req.send(formData);
+            req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
+            req.send(formData);
+        } else {
+            alert("¡Aún no has creado una escena!");
+        }
     }
 
     /**
      * Muestra un menu con las escenas del usuario. Si hace click en alguna, el menu se cerrara y se cargara dicha escena
      */
     static cargarEscena () {
-        let menu = new MenuMalla("Escenas", "/bloomJS/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
-        VentanaCanvas.interfazCanvas.anadirMenu(menu);
+        if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Escenas")) {
+            let menu = new MenuMalla("Escenas", "/bloomJS/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
+            let botonCerrar = menu.nodo.querySelector(".BarraCierre img");
+    
+            //añadir que al cerrar el menu se borren los scripts descargados
+            botonCerrar.addEventListener("click", () => {
+                let scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/escenas/Escenas.js']");
+                Array.from(scripts).forEach((s) => {s.remove()});
+            });
+            VentanaCanvas.interfazCanvas.anadirMenu(menu);
+        }
     }
 
     static anadirModelo (interfazCanvas) {
@@ -88,7 +97,7 @@ class SubmenuEscena extends SubmenuInterfaz {
 
         if (antiguoMenu == null) {
 
-            let menuAnadirModelo = new MenuAlternar("Modelos", 
+            let menuAnadirModelo = new MenuAlternar("Añadir modelo", 
             ["Defecto", "Personal", "Comunidad"], 
             [
                 new MenuMalla("Por defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 

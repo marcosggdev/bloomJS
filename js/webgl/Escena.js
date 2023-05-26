@@ -7,8 +7,8 @@ class Escena {
     constructor (dibujables) {
 
         //parametros de BD
-        this.id = null;
-        this.nombre = "Escena";
+        this.id = "";
+        this.titulo = "Escena";
         this.descripcion = "";
 
         //parametros del objeto
@@ -96,21 +96,25 @@ class Escena {
         let camara = this.camara.serializar();
 
         let serializacionOBJ = {
+            "id": String(this.id),
+            "titulo": String(this.titulo),
+            "descripcion": String(this.descripcion),
             "dibujables": dibujables,
             "iluminacion": iluminacion,
             "camara": camara
         };
 
-        return JSON.stringify(serializacionOBJ);
+        return serializacionOBJ;
     }
 
     static leerEscenaSerializada (serializacion) {
-
-        let jsonOBJ = JSON.parse(serializacion);
   
-        let json = JSON.parse(jsonOBJ.serializacion);
+        let json = JSON.parse(serializacion);
 
         let escena = new Escena(null);
+        escena.id = json.id;
+        escena.nombre = json.nombre;
+        escena.descripcion = json.descripcion;
 
         let dibujables = json.dibujables;
         for (let i = 0; i < dibujables.length; i++) {

@@ -24,8 +24,15 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
     $datosUsuario = ModeloUsuarios::getUsuario($usuario->id);
     $datosEscenas = ModeloEscenas::getEscenasPorIdUsuario($usuario->id);
 
-    print_r($datosUsuario);
-    print_r($datosEscenas);
+    echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
+    $estilo = "display: grid;";
+    if ($_POST["columnas"] != "null") {
+        $estilo .= "grid-template-columns: repeat(".$_POST["columnas"].", 1fr);";
+    }
+    if ($_POST["filas"] != "null") {
+        $estilo .= "grid-template-rows: repeat(".$_POST["filas"].", 1fr);";
+    }
+    echo "<div class='MallaEscenas' style='$estilo'>";
 
     //cada escena
     foreach ($datosEscenas as $datosEscena) {
@@ -48,12 +55,11 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
 
             if (preg_match("/.png$/", $archivos[$i])) {
 
-                $rutaImagen = $rutaCarpeta . "/escenas/" . $datosEscena["ruta"] . "/" . $archivos[$i];
+                $rutaImagen = $rutaCarpeta . "/" . $archivos[$i];
                 $rutaImagen = explode(RAIZ_WEB, $rutaImagen)[1];
 
-            } elseif (preg_match("/.json$/", $archivosEscena[$j])) {
-
-                $rutaJSON = $rutaCarpeta . "/escenas/" . $datosEscena["ruta"] . "/" . $archivos[$i];
+            } elseif (preg_match("/.json$/", $archivos[$i])) {
+                $rutaJSON = $rutaCarpeta . "/" . $archivos[$i];
 
             }
 
@@ -61,11 +67,6 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
 
         $archivoJSON = fopen($rutaJSON, "r");
         $escenaJSON = fread($archivoJSON, filesize($rutaJSON));
-
-        echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
-        echo "<div class='MallaEscenas'>";
-
-
 ?>
         <div class="plantilla escena" style="display:flex;flex-direction:column">
             <h4><?= $datosEscena["nombre"] ?></h4>
@@ -77,6 +78,6 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
     }
 
     echo "</div>";
-    echo "<input class='script' type='hidden' value='/bloomJS/vistas/MenuMalla/escenas/Escenas.js'/>";
+    echo "<input id='script' type='hidden' value='/bloomJS/vistas/MenuMalla/escenas/Escenas.js'/>";
 
 }

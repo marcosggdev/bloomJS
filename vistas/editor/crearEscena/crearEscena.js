@@ -1,8 +1,7 @@
 dialog = document.getElementById("crearEscenaDialog");
 dialog.showModal();
 
-sustituir = adicional.querySelector("#sustituir").value;
-
+sustituir = dialog.querySelector("#sustituir").value;
 
 if (sustituir) {
 
@@ -10,12 +9,23 @@ if (sustituir) {
     crear = dialog.querySelector("#crear");
     crear.addEventListener("click", () => {
 
-        titulo = dialog.querySelector("#titulo");
-        descripcion = dialog.querySelector("#descripcion");
+        //guardamos escena actual antes de crear una nueva
+        SubmenuEscena.guardarEscena();
+
+        //crear escena
+        titulo = dialog.querySelector("#titulo").value;
+        descripcion = dialog.querySelector("#descripcion").value;
         escena = new Escena(null);
         escena.titulo = titulo;
         escena.descripcion = descripcion;
         RendererRefactor.escena = escena;
+
+        //borrar nodos
+        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        Array.from(scripts).forEach((s) => {s.remove()});
+        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        Array.from(links).forEach((l) => {l.remove()});
+
         dialog.close();
         dialog.remove();
     });
@@ -23,6 +33,21 @@ if (sustituir) {
     //cancelar
     cancelar = dialog.querySelector("#cancelar");
     cancelar.addEventListener("click", () => {
+
+        //crear escena
+        titulo = dialog.querySelector("#titulo").value;
+        descripcion = dialog.querySelector("#descripcion").value;
+        escena = new Escena(null);
+        escena.titulo = titulo;
+        escena.descripcion = descripcion;
+        RendererRefactor.escena = escena;
+
+        //borrar nodos
+        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        Array.from(scripts).forEach((s) => {s.remove()});
+        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        Array.from(links).forEach((l) => {l.remove()});
+
         dialog.close();
         dialog.remove();
     });
@@ -32,12 +57,19 @@ if (sustituir) {
     //crear
     crear = dialog.querySelector("#crear");
     crear.addEventListener("click", () => {
-        titulo = dialog.querySelector("#titulo");
-        descripcion = dialog.querySelector("#descripcion");
+        titulo = dialog.querySelector("#titulo").value;
+        descripcion = dialog.querySelector("#descripcion").value;
         escena = new Escena(null);
         escena.titulo = titulo;
         escena.descripcion = descripcion;
         RendererRefactor.escena = escena;
+
+        //borrar nodos
+        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        Array.from(scripts).forEach((s) => { s.remove() });
+        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        Array.from(links).forEach((l) => { l.remove() });
+
         dialog.close();
         dialog.remove();
     });
@@ -45,6 +77,13 @@ if (sustituir) {
     //cancelar
     cancelar = dialog.querySelector("#cancelar");
     cancelar.addEventListener("click", () => {
+
+        //borrar nodos
+        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        Array.from(scripts).forEach((s) => { s.remove() });
+        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        Array.from(links).forEach((l) => { l.remove() });
+
         dialog.close();
         dialog.remove();
     });

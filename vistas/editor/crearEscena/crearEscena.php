@@ -1,9 +1,9 @@
-<div id="plantilla">
 <?php
     if (isset($_POST["sustituir"])) {
 
-        if ($_POST["sustituir"] == true) {
+        if ($_POST["sustituir"] == "true") {
 ?>
+            <link rel="stylesheet" href="/bloomJS/vistas/editor/crearEscena/crearEscena.css">
             <dialog id="crearEscenaDialog">
                 <h1>Crear escena</h1>
                 <p>¡Parece que ya tenías una escena abierta! ¿Quieres guardar los cambios antes de crear otra?</p>
@@ -11,11 +11,14 @@
                     <button id="crear" class="boton-aceptar">Sí</button>
                     <button id="cancelar" class="boton-cancelar">No</button>
                 </div>
-                
+                <input type="hidden" id="script" value="/bloomJS/vistas/editor/crearEscena/crearEscena.js">
+                <input type="hidden" id="sustituir" value="<?= $_POST["sustituir"] ?>">
             </dialog>
+            
 <?php
-        } elseif ($_POST["sustituir"] == false) {
+        } elseif ($_POST["sustituir"] == "false") {
 ?>
+            <link rel="stylesheet" href="/bloomJS/vistas/editor/crearEscena/crearEscena.css">
             <dialog id="crearEscenaDialog">
                 <h1>Crear escena</h1>
                 <div class="campo">
@@ -30,13 +33,10 @@
                     <button id="crear" class="boton-aceptar">Crear</button>
                     <button id="cancelar" class="boton-cancelar">Cancelar</button>
                 </div>
+                <input type="hidden" id="script" value="/bloomJS/vistas/editor/crearEscena/crearEscena.js">
+                <input type="hidden" id="sustituir" value="<?= $_POST["sustituir"] ?>">
             </dialog>
 <?php
         }
     }
 ?>
-</div>
-<div id="adicional">
-    <input type="hidden" id="script" value="/bloomJS/vistas/editor/crearEscena/crearEscena.js">
-    <input type="hidden" id="sustituir" value="<?= $_POST["sustituir"] ?>">
-</div>

@@ -12,9 +12,10 @@ require_once RAIZ_WEB . "php/backend/modelos/ModeloEscenas.php";
 session_start();
 
 //recibimos la serializacion de la escena, como un string que escribir en un archivo en formato .json
-if (isset($_SESSION["usuario"]) && isset($_POST["escenaJSON"])) {
+if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imagen"])) {
 
-    $escenaJSON = json_decode($_POST["escenaJSON"]);
+    $escenaSerializada = json_decode($_POST["escena"]);
+    $imagen = $_POST["imagen"];
 
     //el .json se guardara en la carpeta del usuario, por lo que es necesario haber iniciado sesion. En caso contrario
     //devolvemos alert indicando que inicie sesion
@@ -28,12 +29,12 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escenaJSON"])) {
     }
 
     //carpeta de la escena
-    $escena = ModeloEscenas::getEscena($escenaJSON->id_escena);
+    $escena = ModeloEscenas::getEscena($escenaSerializada->id);
     
     if ($escena !== false) {
 
         //ya existe => actualizar imagen y json
-        $datosEscena = ModeloEscenas::getEscena($escenaJSON->id_escena);
+        $datosEscena = ModeloEscenas::getEscena($escena->id);
         $nombreEscena = $datosEscena["nombre"];
         $rutaCarpeta .= "/" . $nombreEscena;
     
@@ -57,7 +58,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escenaJSON"])) {
                 $archivo = fopen($rutaCarpeta . "/" . $nombreEscena . "/" . $archivosEscena[$i], "w");
             
                 //base64,iVBORw0KGgoAAAANSUhEUgAABE...
-                $datos = explode(";", $escenaJSON->imagen)[1];
+                $datos = explode(";", $imagen)[1];
                 $datos = explode(",", $datos)[1];
                 $imagenDecodificada = base64_decode($datos);
                 fwrite($archivo, $imagenDecodificada);
@@ -84,17 +85,17 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escenaJSON"])) {
         $nombreArchivo = generarNombreArchivoUnico(".json", $rutaCarpeta);
         $rutaArchivo = $rutaCarpeta . "/" . $nombreArchivo;
         $archivoJSON = fopen($rutaArchivo, "w");
-        fwrite($archivoJSON, $_POST["escenaJSON"]);
+        fwrite($archivoJSON, $_POST["escena"]);
     
         //La imagen se recibe con funcion toDataURL, que la codifica en un string donde tenemos:
         //tipo mime, codificacion y datos codificados. Tenemos que procesar todo eso.
         //data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABE...
     
         //data:image/png
-        $cabecera = explode(";", $escenaJSON->imagen)[0];
+        $cabecera = explode(";", $imagen)[0];
     
         //base64,iVBORw0KGgoAAAANSUhEUgAABE...
-        $datos = explode(";", $escenaJSON->imagen)[1];
+        $datos = explode(";", $imagen)[1];
         $datos = explode(",", $datos)[1];
     
         $mime = explode(":", $cabecera)[1];
@@ -105,7 +106,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escenaJSON"])) {
         $imagenDecodificada = base64_decode($datos);
         fwrite($archivoImagen, $imagenDecodificada);
 
-        $id = ModeloEscenas::crearEscena($nombre, $descripcion, $ruta, $id_autor);
+        $id = ModeloEscenas::crearEscena($escenaSerializada->titulo, $escenaSerializada->descripcion, $nombreEscena, $usuario->id);
 
         echo "<p class='servidor-info'>¡La escena se ha creado con éxito!</p>";
 

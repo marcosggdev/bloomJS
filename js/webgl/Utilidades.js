@@ -75,37 +75,20 @@ class Utilidades {
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                //PLANTILLAS DE LA FORMA PLANTILLA {plantilla, adicional{estilo, js}}
+                //PLANTILLAS DE LA FORMA PLANTILLA {estilo <link>? plantilla <html> <input hidden scriptsrc>?
+
                 let respuestaDOM = document.createElement("div");
                 respuestaDOM.innerHTML += this.responseText;
 
-                //siempre habra
-                let plantillaDOM = respuestaDOM.querySelector("#plantilla");
-
-                //puede no haber, tener estilo pero no js...
-                let adicionalDOM = respuestaDOM.querySelector("#adicional");
-
-                if (adicionalDOM != null) {
-
-                    let estilo = adicionalDOM.querySelector("#estilo");
-                    if (estilo != null) {
-                        plantillaDOM.insertAdjacentHTML("afterbegin", estilo.innerHTML);
-                    }
-
+                if (respuestaDOM.querySelector("input#script") != null) {
+                    let scriptRuta = respuestaDOM.querySelector("input#script").value;
+                    let script = document.createElement("script");
+                    script.src = scriptRuta;
+                    document.body.insertAdjacentElement("beforeend", script);
                 }
 
                 //se entiende que siempre habra
-                contenedor.insertAdjacentHTML("beforeend", plantillaDOM.innerHTML);
-
-                if (adicionalDOM != null) {
-                    let scriptRuta = adicionalDOM.querySelector("#script").value;
-                    if (scriptRuta != null) {
-                        let script = document.createElement("script");
-                        script.src = scriptRuta;
-                        contenedor.insertAdjacentElement("beforeend", script);
-                    }
-                }
-                
+                contenedor.insertAdjacentHTML("beforeend", respuestaDOM.innerHTML);
             }
         };
         let formData = new FormData();

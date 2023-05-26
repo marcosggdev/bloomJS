@@ -17,7 +17,8 @@ session_start();
         RAIZ . "vistas/editor/subirModelo.css",
         RAIZ . "css/neon.css",
         RAIZ . "js/prueba/prueba.css",
-        RAIZ . "css/botones.css"
+        RAIZ . "css/botones.css",
+        RAIZ . "css/servidor.css"
     ]); ?>
     <?= Vista::imprimirScripts([
         RAIZ . "js/editor/Defecto.js",
