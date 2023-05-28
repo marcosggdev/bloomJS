@@ -11,7 +11,8 @@ require_once RAIZ_WEB . "php/DTO/Usuario.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEscenas.php";
 session_start();
 
-if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero"]) && isset($_POST["filas"]) && isset($_POST["columnas"])) {
+if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && 
+    isset($_POST["numero"]) && isset($_POST["filas"]) && isset($_POST["columnas"])) {
     
     //sanitizar
     $_POST["tipo"] = trim(strip_tags($_POST["tipo"]));
@@ -76,10 +77,12 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) && isset($_POST["numero
             <input id="descripcion" type="hidden" value="<?= $datosEscena["descripcion"] ?>">
             <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
         </div>
-<?
+<?php
     }
 
     echo "</div>";
     echo "<input id='script' type='hidden' value='/bloomJS/vistas/MenuMalla/escenas/Escenas.js'/>";
 
+} else {
+    echo "<p class='servidor error'>Error: algún parámetro necesario para cargar el menú de escenas no está definido</p>";
 }

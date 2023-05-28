@@ -77,7 +77,6 @@ class Utilidades {
 
             if (this.readyState == 4 && this.status == 200) {
                 //PLANTILLAS DE LA FORMA PLANTILLA {estilo <link>? plantilla <html> <input hidden scriptsrc>?
-
                 let respuestaDOM = document.createElement("div");
                 respuestaDOM.innerHTML += this.responseText;
 

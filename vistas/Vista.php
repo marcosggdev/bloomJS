@@ -164,11 +164,12 @@ class Vista {
 <?php
     }
 
+    //ruta componentes desde raiz de server /bloomJS/js/...
     public static function cargarComponentes ($rutaComponentes, $componentes) {
         //ej: $componentes = ["BarraVentana", "InterfazCanvas", "MenuInterfaz", "VentanaCanvas"];
         foreach($componentes as $componente) {
             $rutaCarpeta = $rutaComponentes . "/" . $componente;
-            $nombres = scandir(RAIZ_WEB . $rutaCarpeta);
+            $nombres = scandir("/var/www/html" . $rutaCarpeta);
             foreach ($nombres as $nombre) {
                 $ruta = $rutaCarpeta."/".$nombre;
                 if (explode(".", $nombre)[1] == "css") {
