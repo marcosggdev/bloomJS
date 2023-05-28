@@ -58,6 +58,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) &&
 
                 $rutaImagen = $rutaCarpeta . "/" . $archivos[$i];
                 $rutaImagen = explode(RAIZ_WEB, $rutaImagen)[1];
+                $rutaImagen = "/bloomJS/" . $rutaImagen;
 
             } elseif (preg_match("/.json$/", $archivos[$i])) {
                 $rutaJSON = $rutaCarpeta . "/" . $archivos[$i];
