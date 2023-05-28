@@ -1,5 +1,5 @@
 /**
- * Menu con opciones en una pestaña que permiten desplegar un submenu u otro, obteniendo diferente contenido
+ * Menu con opciones en una pestaña que permiten desplegar un submenu u otro, obteniendo diferente contenido.
  */
 class MenuAlternar extends MenuGeneral {
 
