@@ -3,7 +3,7 @@ dialog.showModal();
 
 sustituir = dialog.querySelector("#sustituir").value;
 
-if (sustituir) {
+if (sustituir == "true") {
     //crear
     crear = dialog.querySelector("#crear");
     crear.addEventListener("click", () => {
@@ -11,6 +11,7 @@ if (sustituir) {
         //crear escena
         titulo = dialog.querySelector("#titulo").value;
         descripcion = dialog.querySelector("#descripcion").value;
+        
         escena = new Escena(null);
         escena.titulo = titulo;
         escena.descripcion = descripcion;
@@ -48,7 +49,7 @@ if (sustituir) {
         dialog.remove();
     });
 
-} else {
+} else if (sustituir == "false") {
 
     //crear
     crear = dialog.querySelector("#crear");

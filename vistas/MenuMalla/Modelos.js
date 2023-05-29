@@ -1,4 +1,5 @@
-plantillas = document.querySelectorAll(".mallaModelos .plantilla.modelo");
+titulo = document.querySelector("#mallaModelosTitulo").value;
+plantillas = document.querySelectorAll(".mallaModelos#" + titulo + " .plantilla.modelo");
 scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/Modelos.js']");
 links = document.querySelectorAll("link[href='/bloomJS/vistas/MenuMalla/Modelos.css']");
 
