@@ -1,5 +1,5 @@
-titulo = document.querySelector("#mallaModelosTitulo").value;
-plantillas = document.querySelectorAll(".mallaModelos#" + titulo + " .plantilla.modelo");
+//titulo = document.querySelector("#mallaModelosTitulo").value;
+plantillas = document.querySelectorAll(".mallaModelos" + " .plantilla.modelo");
 scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/Modelos.js']");
 links = document.querySelectorAll("link[href='/bloomJS/vistas/MenuMalla/Modelos.css']");
 
@@ -9,8 +9,8 @@ Array.from(plantillas).forEach((plantilla) => {
         //click en una plantilla
         if (RendererRefactor.escena != null) {
             Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",
-            plantilla.querySelector("#rutaModelo").value,null,
-            plantilla.querySelector("#rutaTextura").value,null)
+            "/bloomJS/"+plantilla.querySelector("#rutaModelo").value,null,
+            "/bloomJS/"+plantilla.querySelector("#rutaTextura").value,null)
             .then(
                 function (modelo) {
                     RendererRefactor.escena.anadirDibujable(modelo);
