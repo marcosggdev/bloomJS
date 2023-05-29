@@ -1,20 +1,51 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
-require_once RAIZ_WEB . "vistas/Vista.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
+require_once RAIZ_WEB . "vistas/Vista.php";
 session_start();
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-Vista::imprimirHead("Bloom - JS", 
-    [
+    <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas"]); ?>
+
+    <?= Vista::imprimirEstilos([
         RAIZ . "css/general.css", 
-        RAIZ . "css/index.css", 
-        RAIZ . "css/editor.css",
         RAIZ . "css/animaciones.css",
-        RAIZ . "vistas/editor/subirModelo.css",
-        RAIZ . "css/neon.css"
-    ], 
-    [
-        RAIZ . "js/editor/Defecto.js",
+        RAIZ . "css/neon.css",
+        RAIZ . "css/botones.css",
+        RAIZ . "css/servidor.css",
+        RAIZ . "css/editor.css"
+    ]); ?>
+
+<?= Vista::importarRecursos([
+        //MENU INTERFAZ
+        RAIZ . "js/gui/MenuInterfaz/BotonInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/SubmenuInterfaz.js",
+        RAIZ . "js/gui/MenuInterfaz/SubmenuEscena.js",
+        RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.css"
+]) ?>
+
+<?= Vista::importarRecursos([
+        //MENUS DE LA INTERFAZ CANVAS (DE USUARIO) 
+        RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.css",
+        RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuAlternar.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
+        RAIZ . "js/gui/InterfazCanvas/Menu.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuEdicion.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
+        RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js"
+]) ?>
+
+    <?= Vista::imprimirScripts([
         RAIZ . "js/webgl/GLSL.js",
         RAIZ . "js/webgl/Color.js",
         RAIZ . "js/webgl/Material.js",
@@ -23,9 +54,6 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/Lienzo.js",
         RAIZ . "js/webgl/Grid.js",
         RAIZ . "js/webgl/Utilidades.js",
-        RAIZ . "js/webgl/ArcballCamera.js",
-        RAIZ . "js/editor/ControlesSubirModelo.js",
-        RAIZ . "js/editor/Main.js",
         RAIZ . "js/webgl/LineaRecta.js",
         RAIZ . "js/webgl/Triangulo.js",
         RAIZ . "js/webgl/matematicas/Vector4x1.js",
@@ -33,29 +61,29 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "js/webgl/matematicas/Matriz3x3.js",
         RAIZ . "js/webgl/matematicas/Matriz4x4.js",
         RAIZ . "js/webgl/matematicas/Quaternion.js",
-        RAIZ . "js/editor/BotonBooleano.js",
-        RAIZ . "js/editor/GUI.js",
-        RAIZ . "js/editor/MenuSeleccion.js",
-        RAIZ . "js/editor/BotonIcono.js",
-        RAIZ . "js/editor/FuncionesIconos.js",
-        RAIZ . "js/editor/Submenu.js",
-        RAIZ . "js/editor/Boton.js",
-        RAIZ . "js/editor/BarraHerramientas.js",
-        RAIZ . "js/editor/VentanaCanvas.js",
-        RAIZ . "js/editor/Escena.js",
-        RAIZ . "js/webgl/Renderer.js",
+        RAIZ . "js/gui/GUI.js",
+        RAIZ . "js/webgl/Supervalor.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js"
-    ]);
-?>
-<div id="cabecera">
-    <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
-    <?=Vista::imprimirNav(Vista::$entradas, 1);?>
-    <?=Vista::imprimirUsuario()?>
-    <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
-</div>
-<main>
- 
-</main>
-<?=Vista::imprimirFooter();?>
+        RAIZ . "js/webgl/Hitbox.js",
+        RAIZ . "js/webgl/RendererRefactor.js",
+        RAIZ . "js/webgl/ArcballCamera.js",
+        RAIZ . "js/webgl/Grupo.js",
+        RAIZ . "js/webgl/Escena.js",
+        RAIZ . "js/editor/Main.js"
+    ]) ?>
+
+</head>
+<body>
+    <div id="cabecera">
+        <?=Vista::imprimirHeader("Editor", "Aquí podrás generar una escena en 3D para tu página");?>
+        <?=Vista::imprimirNav(Vista::$entradas, 1);?>
+        <?=Vista::imprimirUsuario()?>
+        <?=Vista::imprimirNavEstatico(Vista::$entradas, 1)?>
+    </div>
+    <main>
+        
+    </main>
+    <?=Vista::imprimirFooter();?>
+</body>
+</html>

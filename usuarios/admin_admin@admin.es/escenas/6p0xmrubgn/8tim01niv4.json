@@ -1,1 +1,0 @@
-{"id":"","titulo":"test","descripcion":"test","dibujables":[{"clase":"Grid","parametros":{}}],"iluminacion":[],"camara":{"clase":"ArcballCamera","parametros":{"posXCentro":0,"posYCentro":0,"posZCentro":0,"radio":30,"anguloY":45,"anguloXPropio":23}}}

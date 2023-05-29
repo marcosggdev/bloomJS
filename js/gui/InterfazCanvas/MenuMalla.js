@@ -7,12 +7,12 @@ class MenuMalla extends MenuGeneral {
     //titulo y objetos a representar
     constructor (titulo, plantilla, tipo, limit, filas, columnas) {
         super(titulo);
-        this.ampliarNodo(plantilla, tipo, limit, filas, columnas);
+        this.ampliarNodo(titulo, plantilla, tipo, limit, filas, columnas);
     }
 
-    ampliarNodo (plantilla, tipo, limit, filas, columnas) {
+    ampliarNodo (titulo, plantilla, tipo, limit, filas, columnas) {
         //cargar malla desde servidor
-        Utilidades.cargarPlantilla(this.nodo, plantilla, {"tipo": tipo, "numero": limit, "filas": filas, "columnas": columnas});
+        Utilidades.cargarPlantilla(this.nodo, plantilla, {"titulo":titulo, "tipo": tipo, "numero": limit, "filas": filas, "columnas": columnas});
     }
 
 }

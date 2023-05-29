@@ -3,7 +3,13 @@ class SubmenuEscena extends SubmenuInterfaz {
     constructor (interfazCanvas) {
         super("Escena", [
                 new BotonInterfaz("Crear escena", () => {SubmenuEscena.crearEscena()}),
-                new BotonInterfaz("Guardar escena", () => {SubmenuEscena.guardarEscena()}),
+                new BotonInterfaz("Guardar escena", () => {
+                    if (RendererRefactor.escena != null) {
+                        SubmenuEscena.guardarEscena()
+                    } else {
+                        alert("No hay escena activa");
+                    }
+                }),
                 new BotonInterfaz("Cargar escena", () => {SubmenuEscena.cargarEscena()}),
                 new BotonInterfaz("Añadir modelo", () => {SubmenuEscena.anadirModelo(interfazCanvas)})
         ]);
@@ -41,6 +47,7 @@ class SubmenuEscena extends SubmenuInterfaz {
 
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
+
             if (this.readyState == 4 && this.status == 200) {
 
                 console.log(this.responseText);
@@ -60,6 +67,7 @@ class SubmenuEscena extends SubmenuInterfaz {
                 dialog.showModal();
 
             }
+            
         };
 
         let formData = new FormData();
