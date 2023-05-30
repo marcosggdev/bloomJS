@@ -1,88 +1,90 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 session_start();
-
-Vista::imprimirHead("Bloom - JS", 
-    [
-        RAIZ . "css/general.css", 
-        RAIZ . "css/index.css", 
-        RAIZ . "css/animaciones.css",
-        RAIZ . "css/neon.css",
-        RAIZ . "css/general.css", 
-        RAIZ . "css/index.css", 
-        RAIZ . "css/editor.css",
-        RAIZ . "css/animaciones.css",
-        RAIZ . "vistas/editor/subirModelo.css",
-        RAIZ . "css/neon.css",
-        RAIZ . "css/generador.css"
-    ], 
-    [
-        RAIZ . "js/editor/Defecto.js",
-        RAIZ . "js/webgl/GLSL.js",
-        RAIZ . "js/webgl/Color.js",
-        RAIZ . "js/webgl/Material.js",
-        RAIZ . "js/webgl/Dae.js",
-        RAIZ . "js/webgl/Modelo2D.js",
-        RAIZ . "js/generador/Forma.js",
-        RAIZ . "js/webgl/Lienzo.js",
-        RAIZ . "js/webgl/GridGenerador.js",
-        RAIZ . "js/webgl/Utilidades.js",
-        RAIZ . "js/webgl/CamaraSimple.js",
-        RAIZ . "js/editor/ControlesSubirModelo.js",
-        RAIZ . "js/webgl/LineaRecta.js",
-        RAIZ . "js/webgl/Triangulo.js",
-        RAIZ . "js/webgl/matematicas/Vector4x1.js",
-        RAIZ . "js/webgl/matematicas/Matriz2x2.js",
-        RAIZ . "js/webgl/matematicas/Matriz3x3.js",
-        RAIZ . "js/webgl/matematicas/Matriz4x4.js",
-        RAIZ . "js/webgl/matematicas/Quaternion.js",
-        RAIZ . "js/generador/BotonBooleano.js",
-        RAIZ . "js/generador/tipos/BooleanoDOM.js",
-        RAIZ . "js/generador/tipos/ColorDOM.js",
-        RAIZ . "js/generador/tipos/NumericoDOM.js",
-        RAIZ . "js/editor/GUI.js",
-        RAIZ . "js/general/UI.js",
-        RAIZ . "js/generador/GUIGenerador.js",
-        RAIZ . "js/editor/MenuSeleccion.js",
-        RAIZ . "js/editor/BotonIcono.js",
-        RAIZ . "js/editor/FuncionesIconos.js",
-        RAIZ . "js/editor/Submenu.js",
-        RAIZ . "js/editor/Boton.js",
-        RAIZ . "js/editor/BarraHerramientas.js",
-        RAIZ . "js/editor/VentanaCanvas.js",
-        RAIZ . "js/editor/Escena.js",
-        RAIZ . "js/webgl/Renderer.js",
-        RAIZ . "js/webgl/Modelo3D.js",
-        RAIZ . "js/webgl/PuntoLuz.js",
-        RAIZ . "js/webgl/Hitbox.js",
-        RAIZ . "js/generador/GLSL.js",
-        RAIZ . "js/generador/GrupoFormas.js",
-        RAIZ . "js/generador/OndaEsferica.js",
-        RAIZ . "js/generador/OndaSenoidalDesfasada.js",
-        RAIZ . "js/generador/OndasSenoidales.js",
-        RAIZ . "js/generador/Main.js"
-    ]);
 ?>
-<div id="cabecera">
-    <?=Vista::imprimirHeader("Generador", "Aquí podrás generar imágenes con patrones para tus páginas");?>
-    <?=Vista::imprimirNav(Vista::$entradas, 2);?>
-    <?=Vista::imprimirUsuario()?>
-</div>
-<main>
-    <div class="ventana">
-        <div class="barra">
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Generador</title>
 
-        </div>
-        <div id="lienzo">
-            <div id="gui">
+        <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas"]); ?>
 
-            </div>
-            <div class="contenedorCanvas">
+        <?= Vista::imprimirEstilos([
+            RAIZ . "css/general.css", 
+            RAIZ . "css/animaciones.css",
+            RAIZ . "css/neon.css",
+            RAIZ . "css/botones.css",
+            RAIZ . "css/servidor.css",
+            RAIZ . "css/editor.css"
+        ]); ?>
 
-            </div>
-        </div>
+    <?= Vista::importarRecursos([
+            //MENU INTERFAZ
+            RAIZ . "js/gui/MenuInterfaz/BotonInterfaz.js",
+            RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.js",
+            RAIZ . "js/gui/MenuInterfaz/SubmenuInterfaz.js",
+            RAIZ . "js/gui/MenuInterfaz/SubmenuEscena.js",
+            RAIZ . "js/gui/MenuInterfaz/MenuInterfaz.css"
+    ]) ?>
 
+    <?= Vista::importarRecursos([
+            //MENUS DE LA INTERFAZ CANVAS (DE USUARIO) 
+            RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.css",
+            RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuAlternar.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
+            RAIZ . "js/gui/InterfazCanvas/Menu.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuEdicion.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js"
+    ]) ?>
+
+        <?= Vista::imprimirScripts([
+            RAIZ . "js/webgl/GLSL.js",
+            RAIZ . "js/generador/GLSL.js",
+            RAIZ . "js/webgl/Color.js",
+            RAIZ . "js/webgl/Material.js",
+            RAIZ . "js/webgl/Dae.js",
+            RAIZ . "js/webgl/Modelo2D.js",
+            RAIZ . "js/webgl/Lienzo.js",
+            RAIZ . "js/webgl/GridGenerador.js",
+            RAIZ . "js/webgl/Utilidades.js",
+            RAIZ . "js/webgl/LineaRecta.js",
+            RAIZ . "js/webgl/Triangulo.js",
+            RAIZ . "js/webgl/matematicas/Vector4x1.js",
+            RAIZ . "js/webgl/matematicas/Matriz2x2.js",
+            RAIZ . "js/webgl/matematicas/Matriz3x3.js",
+            RAIZ . "js/webgl/matematicas/Matriz4x4.js",
+            RAIZ . "js/webgl/matematicas/Quaternion.js",
+            RAIZ . "js/gui/GUI.js",
+            RAIZ . "js/webgl/Supervalor.js",
+            RAIZ . "js/webgl/Modelo3D.js",
+            RAIZ . "js/webgl/PuntoLuz.js",
+            RAIZ . "js/webgl/Hitbox.js",
+            RAIZ . "js/webgl/RendererRefactor.js",
+            RAIZ . "js/webgl/CamaraSimple.js",
+            RAIZ . "js/webgl/Grupo.js",
+            RAIZ . "js/webgl/Escena.js",
+            RAIZ . "js/webgl/EscenaGenerador.js",
+            RAIZ . "js/generador/Main.js"
+        ]) ?>
+
+    </head>
+    <body>
+    <div id="cabecera">
+        <?=Vista::imprimirHeader("Generador", "Aquí podrás generar imágenes con patrones para tus páginas");?>
+        <?=Vista::imprimirNav(Vista::$entradas, 2);?>
+        <?=Vista::imprimirUsuario()?>
     </div>
-</main>
-<?=Vista::imprimirFooter();?>
+    <main>
+
+    </main>
+    <?=Vista::imprimirFooter();?>
+    </body>
+</html>

@@ -1,29 +1,56 @@
 window.addEventListener('load', () => {
 
-    //crear canvas y contexto webgl
+    //crear canvas
     canvas = document.createElement("canvas");
     if (!canvas) {
         console.log("Error al obtener el canvas");
         return;
     }
-    gl = canvas.getContext("webgl");
+    let atributosContexto = { preserveDrawingBuffer: true };
+    gl = canvas.getContext("webgl", atributosContexto);
     if (!gl) {
         console.log("Error al obtener el contexto del canvas");
         return;
     }
+    canvas.tabIndex = 0;
 
-    let contenedorCanvas = document.querySelector(".contenedorCanvas");
-    contenedorCanvas.appendChild(canvas);
+    //camara del renderer
+    let camara = new CamaraSimple(0, 0, 0);
 
-    GUIGenerador.crearInterfaz(document.querySelector(".ventana .barra"));
+    //crear renderer
+    RendererRefactor.iniciar(1920, 1080, new Color(80,80,80,255), camara, null);
 
-    //camara que el renderer utiliza para dibujar
-    let camaraSimple = new CamaraSimple(0, 0, 0);
-    //se encarga de dibujar en el canvas
-    Renderer.iniciar(camaraSimple, 1024, 768);
+    //crear contenedor DOM. Canvas tendra asociado el renderer y creamos interfaz de usuario. Pasamos el renderer y el canvas asociados
+    //ancho y alto de resolucion definidos en Renderer. Despues escalado por js a width 100% height auto.
+    let barraVentana = new BarraVentana("BloomJS - Editor", ["/bloomJS/img/iconos/minimizar.png", "/bloomJS/img/iconos/maximizar.png"],
+    [BarraVentana.minimizar, BarraVentana.maximizar]);
 
-   // let grid = new GridGenerador();
-    let aps = 24;
-    let spa = 1 / aps;
-    setInterval(Renderer.ciclo, spa);   
+    let interfazCanvas = new InterfazCanvas();
+
+    //menu de interfaz
+    let menuInterfaz = new MenuInterfaz(
+        [
+            new SubmenuInterfaz("Imagen", [
+                new BotonInterfaz("Cargar", MenuInterfaz.cargarImagen),
+                new BotonInterfaz("Guardar", ()=>{MenuInterfaz.guardarImagen})
+            ]),
+            new BotonInterfaz("Exportar", MenuInterfaz.exportarImagen)
+        ]);
+
+    VentanaCanvas.iniciar(barraVentana, menuInterfaz, interfazCanvas, canvas);
+
+    let main = document.querySelector("main");
+    main.appendChild(VentanaCanvas.nodo);
+
+    //escena del generador
+    EscenaGenerador.crearEscenaGenerador(null)
+    .then(
+        function (escena) {
+            RendererRefactor.escena = escena;
+            console.log(RendererRefactor.escena);
+        }
+    );
+
+    //bucle principal
+    window.requestAnimationFrame(RendererRefactor.ciclo);
 });

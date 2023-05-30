@@ -1,7 +1,7 @@
 class Modelo2D {
 
     constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
-         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = null, renderer) {
+         VSHADER_SOURCE = VERTEX_SHADER_IMAGEN, FSHADER_SOURCE = FRAGMENT_SHADER_IMAGEN, color = null) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -20,9 +20,19 @@ class Modelo2D {
 
         this.crearVertices();
         this.crearCoordsUV();
-
         this.matrizM = new Matriz4X4();
-        this.iniciar(renderer);
+    }
+
+    static async crearModelo2D (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
+        VSHADER_SOURCE, FSHADER_SOURCE, color, renderer) {
+        let modelo2D = new Modelo2D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
+            VSHADER_SOURCE, FSHADER_SOURCE, color, renderer);
+        modelo2D.iniciar()
+        .then(
+            function () {
+                return modelo2D;
+            }
+        );
     }
 
     crearVertices () {
@@ -56,70 +66,72 @@ class Modelo2D {
 
     }
 
-    async iniciar (renderer) {
+    async iniciar () {
+        return new Promise(resolve => {
+            //matriz del modelo
+            this.matrizM.identidad();
+            this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
+            this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
+            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
-        //matriz del modelo
-        this.matrizM.identidad();
-        this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-        this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+            //shaders y programa
+            this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
+            this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
+            this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
+            gl.useProgram(this.programa);    
 
-        //shaders y programa
-        this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
-        this.FSHADER = crearShader(gl, gl.FRAGMENT_SHADER, this.FSHADER_SOURCE);
-        this.programa = crearPrograma(gl, this.VSHADER, this.FSHADER);
-        gl.useProgram(this.programa);    
+            //attribute aPos
+            this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
+            this.aPosBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
 
-        //attribute aPos
-        this.aPosLoc = gl.getAttribLocation(this.programa, "aPos");
-        this.aPosBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            //textura
+            this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
+            this.aTexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.coordsUV), gl.STATIC_DRAW);
 
-        //textura
-        this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
-        this.aTexBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.coordsUV), gl.STATIC_DRAW);
+            var textura = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, textura);
+            if (this.color != null) {
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([this.color.R, this.color.G, 
+                    this.color.B, this.color.A]));
+            }
 
-        var textura = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, textura);
-        if (this.color != null) {
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([this.color.R, this.color.G, 
-                this.color.B, this.color.A]));
-        }
+            //si se pasa una textura, se carga. En caso contrario se ignora la textura
+            if (this.rutaTextura !== null) {
+                this.cargarTextura(this.rutaTextura)
+                .then((imagen) => {
+        
+                    gl.bindTexture(gl.TEXTURE_2D, textura);
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imagen);
+                    if (Utilidades.dimensionesPotenciaDeDos(imagen)) {
+                        gl.generateMipmap(gl.TEXTURE_2D);
+                    } else {
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                        gl.generateMipmap(gl.TEXTURE_2D);
+                    }
+                    
+        
+                });
+            }
 
-        //si se pasa una textura, se carga. En caso contrario se ignora la textura
-        if (this.rutaTextura !== null) {
-            this.cargarTextura(this.rutaTextura)
-            .then((imagen) => {
-    
-                gl.bindTexture(gl.TEXTURE_2D, textura);
-                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imagen);
-                if (Utilidades.dimensionesPotenciaDeDos(imagen)) {
-                    gl.generateMipmap(gl.TEXTURE_2D);
-                } else {
-                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-                    gl.generateMipmap(gl.TEXTURE_2D);
-                }
-                
-    
-            });
-        }
+            this.textura = textura; //guardamos el objeto textura en el objeto
+            this.samplerLoc = gl.getUniformLocation(this.programa, "sampler");
+            gl.uniform1i(this.samplerLoc, 0);
 
-        this.textura = textura; //guardamos el objeto textura en el objeto
-        this.samplerLoc = gl.getUniformLocation(this.programa, "sampler");
-        gl.uniform1i(this.samplerLoc, 0);
+            //matrices variables
+            this.m = gl.getUniformLocation(this.programa, "m");
+            this.v = gl.getUniformLocation(this.programa, "v");
 
-        //matrices variables
-        this.m = gl.getUniformLocation(this.programa, "m");
-        this.v = gl.getUniformLocation(this.programa, "v");
-
-        //matrices constantes
-        this.p = gl.getUniformLocation(this.programa, "p");
-        gl.uniformMatrix4fv(this.p, false, renderer.matrizP.obtenerArrayPorColumnas());
+            //matrices constantes
+            this.p = gl.getUniformLocation(this.programa, "p");
+            gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
+            resolve();
+        });
     }
 
     cargarTextura (url) {
