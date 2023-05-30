@@ -31,8 +31,9 @@ window.addEventListener('load', () => {
     let menuInterfaz = new MenuInterfaz(
         [
             new SubmenuInterfaz("Imagen", [
+                new BotonInterfaz("Crear", MenuInterfaz.crearImagen),
                 new BotonInterfaz("Cargar", MenuInterfaz.cargarImagen),
-                new BotonInterfaz("Guardar", ()=>{MenuInterfaz.guardarImagen})
+                new BotonInterfaz("Guardar", MenuInterfaz.guardarImagen)
             ]),
             new BotonInterfaz("Exportar", MenuInterfaz.exportarImagen)
         ]);
@@ -47,7 +48,6 @@ window.addEventListener('load', () => {
     .then(
         function (escena) {
             RendererRefactor.escena = escena;
-            console.log(RendererRefactor.escena);
         }
     );
 

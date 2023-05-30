@@ -42,24 +42,18 @@ class GridGenerador extends Modelo2D {
             //uniforms matrices
             this.m = gl.getUniformLocation(this.programa, "m");
             this.v = gl.getUniformLocation(this.programa, "v");
-            this.p = gl.getUniformLocation(this.programa, "p");
-            gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
 
             //inversas
             this.mInversa = gl.getUniformLocation(this.programa, "mInversa");
             this.vInversa = gl.getUniformLocation(this.programa, "vInversa");
-            this.pInversa = gl.getUniformLocation(this.programa, "pInversa");
-            gl.uniformMatrix4fv(this.pInversa, false, Matriz4X4.obtenerInversa(RendererRefactor.matrizP).obtenerArrayPorColumnas());
 
             resolve();
         });
     }
 
     dibujar () {
-        
         if (RendererRefactor.dibujarGrid) {
             gl.useProgram(this.programa);
-
             //matriz del modelo
             this.matrizM.identidad();
             this.matrizM.escalar(this.factorX, this.factorY, 1.0);
@@ -67,14 +61,14 @@ class GridGenerador extends Modelo2D {
             this.matrizM.trasladar(this.posX, this.posY, this.posZ);
     
             gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
-            gl.uniformMatrix4fv(this.v, false, RendererRefactor.matrizV.obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
             gl.uniformMatrix4fv(this.mInversa, false, Matriz4X4.obtenerInversa(this.matrizM).obtenerArrayPorColumnas());
-            gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(RendererRefactor.matrizV).obtenerArrayPorColumnas());
+            gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(RendererRefactor.camara.matrizV).obtenerArrayPorColumnas());
     
             //atributos
-           gl.enableVertexAttribArray(this.aPosLoc);
+            //gl.enableVertexAttribArray(this.aPosLoc);
             gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
             gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
     
             //deshabilitamos cull face para que se vea el plano por ambas caras

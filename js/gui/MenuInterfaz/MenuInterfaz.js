@@ -101,4 +101,16 @@ class MenuInterfaz {
         req.send(formData);
     }
 
+    //--------------------------------------------GENERADOR-------------------------------------------------------------
+    /**
+     * Crea un menu de tipo malla y lo añade a la interfaz de la ventana canvas. Esta malla contendra los diferentes tipos
+     * de preforma. El usuario podrá hacer click en alguna preforma y añadirla a la escena para editarla en base a sus parametros
+     */
+    static crearImagen () {
+        if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preformas")) {
+            let menu = new MenuMalla("Preformas", "/bloomJS/vistas/generador/presets/malla/MallaPresets.php", null, 0, null, 2);
+            VentanaCanvas.interfazCanvas.anadirMenu(menu);
+        }
+    }
+
 }

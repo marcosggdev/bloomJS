@@ -24,15 +24,17 @@ class Modelo2D {
     }
 
     static async crearModelo2D (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
-        VSHADER_SOURCE, FSHADER_SOURCE, color, renderer) {
-        let modelo2D = new Modelo2D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
-            VSHADER_SOURCE, FSHADER_SOURCE, color, renderer);
-        modelo2D.iniciar()
-        .then(
-            function () {
-                return modelo2D;
-            }
-        );
+        VSHADER_SOURCE, FSHADER_SOURCE, color) {
+            return new Promise(resolve => {
+                let modelo2D = new Modelo2D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, rutaTextura,
+                    VSHADER_SOURCE, FSHADER_SOURCE, color);
+                modelo2D.iniciar()
+                .then(
+                    function () {
+                        resolve(modelo2D);
+                    }
+                );
+            });
     }
 
     crearVertices () {
@@ -160,7 +162,7 @@ class Modelo2D {
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
         this.matrizM.trasladar(this.posX, this.posY, this.posZ);
 
-        this.matrizMV = Renderer.matrizV.multiplicar(this.matrizM);
+        this.matrizMV = RendererRefactor.matrizV.multiplicar(this.matrizM);
 
         gl.uniformMatrix4fv(this.mv, false, this.matrizMV.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());

@@ -71,6 +71,17 @@ session_start();
             RAIZ . "js/webgl/CamaraSimple.js",
             RAIZ . "js/webgl/Grupo.js",
             RAIZ . "js/webgl/Escena.js",
+
+            RAIZ . "js/generador/Forma.js",
+            RAIZ . "js/generador/GrupoFormas.js",
+            RAIZ . "js/generador/Preformas.js",
+            RAIZ . "js/generador/tipos/BooleanoDOM.js",
+            RAIZ . "js/generador/tipos/ColorDOM.js",
+            RAIZ . "js/generador/tipos/NumericoDOM.js",
+            RAIZ . "js/generador/OndaEsferica.js",
+            RAIZ . "js/generador/OndaSenoidal.js",
+            RAIZ . "js/generador/OndasSenoidales.js",
+
             RAIZ . "js/webgl/EscenaGenerador.js",
             RAIZ . "js/generador/Main.js"
         ]) ?>

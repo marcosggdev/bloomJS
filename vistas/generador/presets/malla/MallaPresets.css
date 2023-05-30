@@ -1,0 +1,22 @@
+.mallaPresets {
+    width: 40%;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.mallaPresets .preset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #212121;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px black;
+    transition: transform 0.3s;
+}
+.mallaPresets .preset:hover {
+    background-color: purple;
+    transform: scale(1.05);
+}
+.mallaPresets img {
+    width: 100%;
+}

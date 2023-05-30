@@ -4,6 +4,18 @@ class OndaEsferica extends Forma {
         super(0, 0, 0, -80, 0, 0, 10, 10, null, VERTEX_SHADER_ONDA_ESFERICA, FRAGMENT_SHADER_ONDA_ESFERICA, Color.AZUL);
     }
 
+    static async crear (x,y,z, escalaX,escalaY,VERTEX_SHADER, FRAGMENT_SHADER, color) {
+        return new Promise(resolve => {
+            let forma = new Forma(x,y,z, escalaX,escalaY,VERTEX_SHADER, FRAGMENT_SHADER, color);
+            forma.iniciar()
+            .then(
+                function () {
+                    resolve(forma);
+                }
+            );
+        });
+    }
+
     //tendra color pero no textura. El shader no utilizara textura
     async iniciar () {
 
@@ -63,5 +75,7 @@ class OndaEsferica extends Forma {
         //dibujado
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
     }
+
+    
 
 }

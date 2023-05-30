@@ -4,10 +4,8 @@ var VERTEX_SHADER_GRID_GENERADOR =
 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
-"uniform mat4 p;\n" +
 "uniform mat4 mInversa;\n"+
 "uniform mat4 vInversa;\n"+
-"uniform mat4 pInversa;\n"+
 
 "attribute vec3 aPos;\n" +
 "varying vec3 vPos;\n"+
@@ -15,13 +13,7 @@ var VERTEX_SHADER_GRID_GENERADOR =
 "varying vec3 farPoint;\n"+
 
 "void main() {\n" +
-"    vec4 unprojectedNear = vInversa * pInversa * vec4(aPos.xy, 0.0, 1.0);\n"+ 
-"    vec4 unprojectedFar = vInversa * pInversa * vec4(aPos.xy, 1.0, 1.0);\n"+ 
-
-"    nearPoint = unprojectedNear.xyz / unprojectedNear.w;\n"+
-"    farPoint = unprojectedFar.xyz / unprojectedFar.w;\n"+
-
-"   gl_Position = p * v * m * vec4(aPos, 1.0);\n"+
+"   gl_Position = v * m * vec4(aPos, 1.0);\n"+
 "   vPos = aPos;\n"+
 "}\n";
 
@@ -30,10 +22,8 @@ var FRAGMENT_SHADER_GRID_GENERADOR =
 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
-"uniform mat4 p;\n" +
 "uniform mat4 mInversa;\n"+
 "uniform mat4 vInversa;\n"+
-"uniform mat4 pInversa;\n"+
 
 "varying vec3 nearPoint;\n"+
 "varying vec3 farPoint;\n"+
@@ -45,12 +35,13 @@ var FRAGMENT_SHADER_GRID_GENERADOR =
 //fade con la lejania
 "    float distanciaRenderizado = 50.0;"+
 "    float distanciaVisionMinima = 20.0;"+
-"    float grosor = 0.1;"+
-"    float offset = 3.0;"+
+"    float grosor = 0.002;"+
+"    float offset = 0.3;"+
 "    float distanciaCentro = pow(pow(unprojectedVector.x, 2.0) + pow(unprojectedVector.y, 2.0), 0.5);" +
 //grid
 "    if (distanciaCentro > distanciaRenderizado) { discard;}"+
-"    if (mod(unprojectedVector.x, offset) < grosor || mod(unprojectedVector.y, offset) < grosor) {" +
+//multiplicamos offset por 16/9, rel aspecto => cuadrados reales (sino serian rectangulos por tener mas ancho que alto)
+"    if (mod(unprojectedVector.x, offset) < grosor || mod(unprojectedVector.y, offset*16.0/9.0) < grosor) {" +
 //ejes
 "       if (abs(unprojectedVector.x) < grosor) {"+
 "           gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);"+ 
