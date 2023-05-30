@@ -14,14 +14,24 @@ class MenuEdicion extends MenuGeneral {
         
         let supervalores = objeto.supervaloresObjeto;
 
-        let contenedorEditables = document.createElement("div");
-        contenedorEditables.className = "contenedorEditables";
+        if (supervalores != null) {
+            let contenedorEditables = document.createElement("div");
+            contenedorEditables.className = "contenedorEditables";
+    
+            for (let i = 0; i < supervalores.length; i++) {
+                contenedorEditables.appendChild(supervalores[i].nodo);
+            }
+    
+            this.nodo.appendChild(contenedorEditables);
+        } else {
+            let contenedorEditables = document.createElement("div");
+            contenedorEditables.className = "contenedorEditables";
 
-        for (let i = 0; i < supervalores.length; i++) {
-            contenedorEditables.appendChild(supervalores[i].nodo);
+            let error = document.createElement("p");
+            error.textContent = "La forma elegida no tiene atributos...";
+            contenedorEditables.appendChild(error);
+            this.nodo.appendChild(contenedorEditables);
         }
-
-        this.nodo.appendChild(contenedorEditables);
     }
 
 }

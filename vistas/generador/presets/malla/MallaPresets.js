@@ -7,7 +7,10 @@ Array.from(presets).forEach((p) => {
         .then(
             function (forma) {
                 RendererRefactor.escena.anadirDibujable(forma);
-                console.log(RendererRefactor.escena);
+                menu = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preformas");
+                VentanaCanvas.interfazCanvas.eliminarMenu(menu.nodo);
+                menuImagen = new MenuEdicion("Selección", forma);
+                VentanaCanvas.interfazCanvas.anadirMenu(menuImagen);
             }
         );
     });

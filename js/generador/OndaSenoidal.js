@@ -1,7 +1,37 @@
 class OndaSenoidal extends Forma {
 
     constructor (z) {
+
         super(0,0,z,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL);
+
+        this.amplitud = 0;
+        this.desfaseX = 0;
+        this.desfaseY = 0;
+        this.periodo = 0;
+        this.rellenoInferior = true;
+        this.colorRelleno = new Color(255,0,0,255);
+        this.colorBorde = new Color(0,255,0,255);
+
+        this.parametros = [
+            ["Amplitud", "amplitud", "NumericoDOM"],
+            ["Desfase X", "desfaseX", "NumericoDOM"],
+            ["Desfase Y", "desfaseY", "NumericoDOM"],
+            ["Periodo", "periodo", "NumericoDOM"],
+            ["Relleno inferior", "rellenoInferior", "BooleanoDOM"],
+            ["Color de relleno", "colorRelleno", "ColorDOM"],
+            ["Color de borde", "colorBorde", "ColorDOM"]
+        ];
+        
+        this.crearSupervalores();
+    }
+
+    crearSupervalores () {
+        //objeto (editables)
+        this.supervaloresObjeto = [];
+        for (let i = 0; i < this.parametros.length; i++) {
+            this.supervaloresObjeto.push(new Supervalor(this, this.parametros[i][0], this.parametros[i][1], this.parametros[i][2], this[this.parametros[i][1]]));
+        }
+        //adicionales (no editables)
     }
 
     static async crear (z) {
@@ -25,7 +55,6 @@ class OndaSenoidal extends Forma {
             this.desfaseX = new NumericoDOM(0, -20000, 20000, 0.1);
             this.desfaseY = new NumericoDOM(0, -20000, 20000, 0.1);
             this.periodo = new NumericoDOM(7, -20000, 20000, 0.3);
-
             //colores onda
             this.rellenoInferior = new BooleanoDOM(true);
             this.colorRelleno = new ColorDOM(new Color(255,151,66,255));
