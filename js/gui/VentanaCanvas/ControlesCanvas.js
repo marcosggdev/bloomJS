@@ -174,8 +174,9 @@ class ControlesCanvas {
 
             let acierto = RendererRefactor.escena.comprobarSeleccionDeModelo(rayoClick);
             if (!acierto) {
-                //click en "aire". Deseleccionar objeto = borrar menu seleccion
+                //click en "aire". Deseleccionar objeto = borrar menu seleccion y objetoSeleccionado = null.
                 ControlesCanvas.deseleccionarObjeto();
+                ControlesCanvas.objetoSeleccionado = null;
             } else {
                 //se ha hecho click en un objeto. Comprobamos que no es el seleccionado actualmente
                 if (acierto != ControlesCanvas.objetoSeleccionado) {

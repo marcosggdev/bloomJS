@@ -10,15 +10,23 @@ class RendererRefactor {
 
         RendererRefactor.dibujarHitbox = false;
         RendererRefactor.dibujarGrid = true;
-        RendererRefactor.propiedadesObjeto = {
-            "Ancho": "ancho",
-            "Alto": "alto",
-            "Fondo": "fondo",
-            "Camara": "camara",
-            "Dibujar hitbox": "dibujarHitbox"
+
+        RendererRefactor.parametros = {
+            "objeto":[
+                ["Ancho", "ancho", "NumericoTexto", 1920],
+                ["Alto", "alto", "NumericoTexto", 1080],
+                ["Fondo", "fondo", "Color", new Color(80,80,80,255)],
+                ["Dibujar Hitbox", "dibujarHitbox", "Booleano", false],
+                ["Dibujar Grid", "dibujarGrid", "Booleano", false]
+            ],
+            "adicionales":[
+                
+            ]
         };
 
-        RendererRefactor.supervaloresObjeto = RendererRefactor.crearSupervaloresMostrar(RendererRefactor.propiedadesObjeto);
+        //crea supervaloresObjeto y supervaloresAdicionales. Los objeto son editables, los adicionales no
+        RendererRefactor.crearSupervalores();
+ 
         RendererRefactor.configurar();
 
         //variables que influyen en exportacion
@@ -34,14 +42,23 @@ class RendererRefactor {
         RendererRefactor.configuracionPrevia = {};
     }
 
-    static crearSupervaloresMostrar (propiedadesObjeto) {
-        let supervaloresObjeto = [];
+    static crearSupervalores () {
 
-        let iterable = Object.keys(propiedadesObjeto);
-        for (let i = 0; i < iterable.length; i++) {
-            supervaloresObjeto.push(new Supervalor(this, "Objeto", propiedadesObjeto[iterable[i]], iterable[i], this[propiedadesObjeto[iterable[i]]]));
+        //OBJETO
+        let supervaloresObjeto = [];
+        let parametrosObjeto = RendererRefactor.parametros.objeto;
+        for (let i = 0; i < parametrosObjeto.length; i++) {
+            supervaloresObjeto.push(new Supervalor(this, parametrosObjeto[2], parametrosObjeto[1], parametrosObjeto[0], this[parametrosObjeto[1]]));
         }
-        RendererRefactor.supervaloresObjeto = supervaloresObjeto;
+
+        //ADICIONALES
+        let supervaloresAdicionales = [];
+        let parametrosAdicionales = RendererRefactor.parametros.adicionales;
+        for (let i = 0; i < parametrosAdicionales.length; i++) {
+            supervaloresAdicionales.push(new Supervalor(this, parametrosAdicionales[2], parametrosAdicionales[1], parametrosAdicionales[0], this[parametrosAdicionales[1]]));
+        }
+        
+        RendererRefactor.supervaloresAdicionales = supervaloresAdicionales;
     }
 
     static configurar () {
