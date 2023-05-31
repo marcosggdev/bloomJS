@@ -23,7 +23,7 @@
 <ul>
     <li>Un libro que me respondió a una extensa cantidad de preguntas sobre los gráficos en los videojuegos:
         <q>Computer Graphics Programming in OpenGL with Java</q>
-        <a href="https://www.amazon.es/Computer-Graphics-Programming-OpenGL-English-ebook/dp/B07HNF4YSN" taget="_blank">Enlace al libro</a></li>
+        <a href="https://www.amazon.es/Computer-Graphics-Programming-OpenGL-English-ebook/dp/B07HNF4YSN" target="_blank">Enlace al libro</a></li>
     <li>Y la página <a href="https://webglfundamentals.org/" target="_blank">WebGLFundamentals</a>, una página que inspiró mi idea para
                 el proyecto de fin de ciclo y al mismo tiempo también contiene información muy útil sobre WebGL.</li>
 </ul>

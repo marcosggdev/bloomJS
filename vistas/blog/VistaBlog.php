@@ -97,10 +97,10 @@ class VistaBlog {
                 }
                 ?>
             </div>
-            <textarea name="" id="" cols="30" rows="10">
+            <textarea cols="30" rows="10">
 
             </textarea>
-            <input type="hidden" id="id_entrada" value="<?=$id_entrada?>">
+            <input type="hidden" class="id_entrada" value="<?=$id_entrada?>">
             <div class="cajaControles">
                 <button class="botonComentarEntrada">Comentar</button>
                 <img src="/bloomJS/img/gif/completado.gif" alt="">
