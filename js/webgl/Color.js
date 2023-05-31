@@ -14,7 +14,7 @@ class Color {
         this.G = G / 255;
         this.B = B / 255;
         this.A = A / 255;
-        this.hexadecimal = this.conversionHexadecimal(this.R, this.G, this.B, this.A);
+        this.hexadecimal = this.conversionHexadecimal(R, G, B, A);
     }
 
     toString () {
