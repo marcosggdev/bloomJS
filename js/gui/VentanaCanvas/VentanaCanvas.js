@@ -9,12 +9,13 @@ class VentanaCanvas {
     static seleccionar = "Click izq."
 
     //canvas es un nodo en argumento, pero dentro se convierte en objeto para envolverlo
-    static iniciar (barraVentana, menuInterfaz, interfazCanvas, canvas) {
+    static iniciar (barraVentana, menuInterfaz, interfazCanvas, canvas, controles) {
 
         VentanaCanvas.barraVentana = barraVentana;
         VentanaCanvas.menuInterfaz = menuInterfaz;
         VentanaCanvas.interfazCanvas = interfazCanvas;
-        VentanaCanvas.canvas = new Canvas(canvas);
+        VentanaCanvas.canvas = new Canvas(canvas, controles);
+
         VentanaCanvas.crearNodo();
         VentanaCanvas.iniciarGrupos();
     }

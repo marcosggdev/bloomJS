@@ -28,17 +28,18 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
         mkdir($rutaCarpeta, 0777, true);
     }
 
-    $escena = ModeloEscenas::getEscena($escenaSerializada->id);
+    //leer para comprobar si existe
+    $datosEscena = ModeloEscenas::getEscena($escenaSerializada->id);
 
-    if ($escena != false) {
+    if ($datosEscena != false) {
 
         //ya existe => actualizar imagen y json
-        $datosEscena = ModeloEscenas::getEscena($escena->id);
-        $nombreEscena = $datosEscena["nombre"];
-        $rutaCarpeta .= "/" . $nombreEscena;
+        $nombreEscena = $datosEscena["titulo"];
+        $rutaEscena = $datosEscena["ruta"];
+        $rutaCarpeta .= "/" . $datosEscena["ruta"];
     
         //metemos json
-        $archivosEscena = scandir($rutaCarpeta . "/" . $nombreEscena);
+        $archivosEscena = scandir($rutaCarpeta);
         for ($i = 0; $i < count($archivosEscena); $i++) {
             if ($archivosEscena[$i] == "." || $archivosEscena[$i] == "..") {
                 unset($archivosEscena[$i]);
@@ -54,7 +55,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
             if (preg_match("/.png$/", $archivosEscena[$i])) {
 
                 //modificar imagen
-                $archivo = fopen($rutaCarpeta . "/" . $nombreEscena . "/" . $archivosEscena[$i], "w");
+                $archivo = fopen($rutaCarpeta . "/" . $archivosEscena[$i], "w");
             
                 //base64,iVBORw0KGgoAAAANSUhEUgAABE...
                 $datos = explode(";", $imagen)[1];
@@ -64,9 +65,9 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
 
             } elseif (preg_match("/.json$/", $archivosEscena[$i])) {
                 //modificar json
-                $rutaArchivo = $rutaCarpeta . "/" . $nombreEscena . "/" . $archivosEscena[$i];
+                $rutaArchivo = $rutaCarpeta . "/" . $archivosEscena[$i];
                 $archivoJSON = fopen($rutaArchivo, "w");
-                fwrite($archivoJSON, $_POST["escenaJSON"]);
+                fwrite($archivoJSON, $_POST["escena"]);
             }
 
         }
@@ -77,8 +78,8 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
     } else {
 
         //no existe. crear carpeta y meter dentro imagen y json y guardar registro en BD
-        $nombreEscena = generarNombreArchivoUnico("", $rutaCarpeta);
-        $rutaCarpeta .= "/" . $nombreEscena;
+        $rutaEscena = generarNombreArchivoUnico("", $rutaCarpeta);
+        $rutaCarpeta .= "/" . $rutaEscena;
         mkdir($rutaCarpeta, 0777, true);
     
         //metemos json
@@ -106,7 +107,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["escena"]) && isset($_POST["imag
         $imagenDecodificada = base64_decode($datos);
         fwrite($archivoImagen, $imagenDecodificada);
 
-        $id = ModeloEscenas::crearEscena($escenaSerializada->titulo, $escenaSerializada->descripcion, $nombreEscena, $usuario->id);
+        $id = ModeloEscenas::crearEscena($escenaSerializada->titulo, $escenaSerializada->descripcion, $rutaEscena, $usuario->id);
 
         echo "<p>¡La escena se ha creado con éxito!</p>";
 

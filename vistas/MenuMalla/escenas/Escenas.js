@@ -15,7 +15,6 @@ Array.from(document.querySelectorAll(".MallaEscenas .plantilla.escena")).forEach
 
         Escena.leerEscenaSerializada(JSON.stringify(json));
         VentanaCanvas.interfazCanvas.eliminarMenu(VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Escenas").nodo);
-        
     });
 
 });

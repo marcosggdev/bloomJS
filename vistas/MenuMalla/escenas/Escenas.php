@@ -62,22 +62,33 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) &&
 
             } elseif (preg_match("/.json$/", $archivos[$i])) {
                 $rutaJSON = $rutaCarpeta . "/" . $archivos[$i];
-
             }
 
         }
 
         $archivoJSON = fopen($rutaJSON, "r");
-        $escenaJSON = fread($archivoJSON, filesize($rutaJSON));
+        if (filesize($rutaJSON) > 0) {
+            $escenaJSON = fread($archivoJSON, filesize($rutaJSON));
 ?>
-        <div class="plantilla escena" style="display:flex;flex-direction:column">
-            <h4><?= $datosEscena["id"] . " - " . $datosEscena["titulo"] ?></h4>
-            <img src="<?= $rutaImagen ?>" alt="Plantilla de una escena">
-            <input id="id" type="hidden" value="<?= $datosEscena["id"] ?>">
-            <input id="titulo" type="hidden" value="<?= $datosEscena["titulo"] ?>">
-            <input id="descripcion" type="hidden" value="<?= $datosEscena["descripcion"] ?>">
-            <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
-        </div>
+            <div class="plantilla escena" style="display:flex;flex-direction:column">
+                <h4><?= $datosEscena["id"] . " - " . $datosEscena["titulo"] ?></h4>
+                <img src="<?= $rutaImagen ?>" alt="Plantilla de una escena">
+                <input id="id" type="hidden" value="<?= $datosEscena["id"] ?>">
+                <input id="titulo" type="hidden" value="<?= $datosEscena["titulo"] ?>">
+                <input id="descripcion" type="hidden" value="<?= $datosEscena["descripcion"] ?>">
+                <input id="serializacion" type="hidden" value='<?= $escenaJSON ?>'>
+            </div>
+<?php
+        } else {
+?>
+            <div class="malla error">
+                <h2>¡Ups!</h2>
+                <p class="malla error">Hubo un error al cargar la escena... ¿Su serialización se ha corrompido o está vacía?</p>
+            </div>
+<?php
+        }
+?>
+
 <?php
     }
 

@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
             ])
         ]);
 
-    VentanaCanvas.iniciar(barraVentana, menuInterfaz, interfazCanvas, canvas);
+    VentanaCanvas.iniciar(barraVentana, menuInterfaz, interfazCanvas, canvas, ControlesCanvas);
 
     let main = document.querySelector("main");
     main.appendChild(VentanaCanvas.nodo);

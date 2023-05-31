@@ -50,7 +50,6 @@ class SubmenuEscena extends SubmenuInterfaz {
 
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log(this.responseText);
                 let dialog = document.createElement("dialog");
                 dialog.innerHTML += this.responseText;
                 let botonera = document.createElement("div");
@@ -84,6 +83,7 @@ class SubmenuEscena extends SubmenuInterfaz {
      */
     static cargarEscena () {
         if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Escenas")) {
+
             let menu = new MenuMalla("Escenas", "/bloomJS/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
             let botonCerrar = menu.nodo.querySelector(".BarraCierre img");
     
@@ -98,35 +98,37 @@ class SubmenuEscena extends SubmenuInterfaz {
 
     static anadirModelo (interfazCanvas) {
 
-        //buscar si ya existe
-        let antiguoMenu = interfazCanvas.buscarMenuPorTitulo("Añadir modelo");
+        if (RendererRefactor.escena != null) {
+            //buscar si ya existe
+            let antiguoMenu = interfazCanvas.buscarMenuPorTitulo("Añadir modelo");
 
-        if (antiguoMenu == null) {
+            if (antiguoMenu == null) {
+                let menuAnadirModelo = new MenuAlternar("Añadir modelo", 
+                ["Defecto", "Personal", "Comunidad"], 
+                [
+                    new MenuMalla("Por defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    "defecto", 0, null, 3),
+                    new MenuMalla("Personal", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    "usuario", 0, null, 3),
+                    new MenuMalla("Comunidad", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    "comunidad", 0, null, 3)
+                ]);
 
-            let menuAnadirModelo = new MenuAlternar("Añadir modelo", 
-            ["Defecto", "Personal", "Comunidad"], 
-            [
-                new MenuMalla("Por defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
-                "defecto", 0, null, 3),
-                new MenuMalla("Personal", "/bloomJS/vistas/MenuMalla/Modelos.php", 
-                "usuario", 0, null, 3),
-                new MenuMalla("Comunidad", "/bloomJS/vistas/MenuMalla/Modelos.php", 
-                "comunidad", 0, null, 3)
-            ]);
+                let subirModelo = document.createElement("button");
+                subirModelo.id = "subirModelo";
+                subirModelo.textContent = "Subir";
 
-            let subirModelo = document.createElement("button");
-            subirModelo.id = "subirModelo";
-            subirModelo.textContent = "Subir";
+                subirModelo.addEventListener("click", () => {
+                    let parametros = { "paginaVolver": "/bloomJS/pruebas.php" };
+                    Utilidades.cargarPlantilla(VentanaCanvas.interfazCanvas.nodo, "/bloomJS/vistas/editor/subirModelo.php", parametros);
+                });
 
-            subirModelo.addEventListener("click", () => {
-                let parametros = { "paginaVolver": "/bloomJS/pruebas.php" };
-                Utilidades.cargarPlantilla(VentanaCanvas.interfazCanvas.nodo, "/bloomJS/vistas/editor/subirModelo.php", parametros);
-            });
+                menuAnadirModelo.nodo.querySelector(".submenu#Personal .BarraCierre").appendChild(subirModelo);
 
-            menuAnadirModelo.nodo.querySelector(".submenu#Personal .BarraCierre").appendChild(subirModelo);
-
-            interfazCanvas.anadirMenu(menuAnadirModelo);
-
+                interfazCanvas.anadirMenu(menuAnadirModelo);
+            }
+        } else {
+            alert("Primero crea una escena");
         }
 
     }

@@ -106,11 +106,11 @@ class Supervalor {
                 
                 if (valor == null) {
                     valorInput.value = "#ffffff";
+                } else {
+                    //el valor hexa de un obj de tipo Color contiene 2 digitos para el alpha. El valor que pide un input color no 
+                    //acepta valores alpha, por o k los limpiamos
+                    valorInput.value = valor.hexadecimal.substring(0, valor.hexadecimal.length - 2);
                 }
-
-                //el valor hexa de un obj de tipo Color contiene 2 digitos para el alpha. El valor que pide un input color no 
-                //acepta valores alpha, por o k los limpiamos
-                valorInput.value = valor.hexadecimal.substring(0, valor.hexadecimal.length - 2);
 
                 valorInput.addEventListener("input", () => {
                     this.objeto.actualizarValor(tipo, variable, valorInput.value);

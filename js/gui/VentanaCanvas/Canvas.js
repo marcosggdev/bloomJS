@@ -3,12 +3,11 @@
  */
 class Canvas {
 
-    constructor (nodo) {
+    constructor (nodo, controles) {
         this.nodo = nodo;
-
-        //si tenemos clase de controles, iniciamos los controles.
-        if (!typeof ControlesCanvas === "undefined") {
-            ControlesCanvas.iniciar(nodo);
+        this.controles = controles;
+        if (controles != null) {
+            controles.iniciar(nodo);
         }
     }
 

@@ -4,6 +4,7 @@ class Grid extends Modelo2D {
         //se crea un modelo2D de escala ancho y alto, en el plano XZ, con shaders de grid sin color
         super(0, 0, 0, -90, 0, 0, 100, 100, null, VERTEX_SHADER_GRID, FRAGMENT_SHADER_GRID, null);
         this.seleccionable = false;
+        this.iniciar();
     }
 
     async iniciar () {
@@ -58,9 +59,9 @@ class Grid extends Modelo2D {
             gl.uniformMatrix4fv(this.vInversa, false, Matriz4X4.obtenerInversa(RendererRefactor.camara.matrizV).obtenerArrayPorColumnas());
     
             //atributos
-            //gl.enableVertexAttribArray(this.aPosLoc);
+            gl.enableVertexAttribArray(this.aPosLoc);
             gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-            //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
             gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
     
             //deshabilitamos cull face para que se vea el plano por ambas caras

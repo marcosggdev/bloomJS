@@ -9,13 +9,17 @@ if (sustituir == "true") {
     crear.addEventListener("click", () => {
 
         //crear escena
-        titulo = dialog.querySelector("#titulo").value;
+        SubmenuEscena.guardarEscena();
+        /*titulo = dialog.querySelector("#titulo").value;
         descripcion = dialog.querySelector("#descripcion").value;
         
         escena = new Escena(null);
         escena.titulo = titulo;
         escena.descripcion = descripcion;
         RendererRefactor.escena = escena;
+*/
+        RendererRefactor.escena = null;
+        SubmenuEscena.crearEscena();
 
         //borrar nodos
         scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
