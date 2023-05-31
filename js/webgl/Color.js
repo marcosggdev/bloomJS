@@ -1,10 +1,14 @@
 class Color {
 
+    //colores definidos en RGB max 255
     static FONDO = new Color(0,0,0,255);
     static BLANCO = new Color(255,255,255,255);
     static AZUL = new Color(0, 0, 255, 255);
     static AZUL_CIELO = new Color(176, 217, 219, 255);
+    static ROJO = new Color(255,0,0,255);
+    static NARANJA = new Color(255,130,0,255);
 
+    //se guarda en valores gl
     constructor (R,G,B,A) {
         this.R = R / 255;
         this.G = G / 255;
@@ -34,7 +38,17 @@ class Color {
         return "color:rgba("+this.R+"-"+this.G+"-"+this.B+"-"+this.A+")";    
     }
 
-    //valores = [rgba]
+    conversionGL (R,G,B,A) {
+        //gl = 1; rgb = 255 => /255
+        return {
+            "R":R/255, 
+            "G":G/255, 
+            "B":B/255, 
+            "A":A/255
+        };
+    }
+
+    //valores = [rgba] con max 255
     conversionHexadecimal (R,G,B,A) { 
         //input tipo rgba(), output tipo hexadecimal #rrggbbaa
         let r = R.toString(16);

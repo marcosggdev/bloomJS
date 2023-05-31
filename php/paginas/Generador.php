@@ -12,7 +12,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Generador</title>
 
-        <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas"]); ?>
+        <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana"]); ?>
 
         <?= Vista::imprimirEstilos([
             RAIZ . "css/general.css", 
@@ -22,6 +22,14 @@ session_start();
             RAIZ . "css/servidor.css",
             RAIZ . "css/editor.css"
         ]); ?>
+
+<?= Vista::importarRecursos([
+            //MENU INTERFAZ
+            RAIZ . "js/gui/VentanaCanvas/Canvas.js",
+            //RAIZ . "js/gui/VentanaCanvas/ControlesCanvas.js",
+            RAIZ . "js/gui/VentanaCanvas/VentanaCanvas.js",
+            RAIZ . "js/gui/VentanaCanvas/Canvas.css"
+    ]) ?>
 
     <?= Vista::importarRecursos([
             //MENU INTERFAZ

@@ -33,12 +33,34 @@ class Supervalor {
 
             case "Numerico":
                 valorInput.type = "range";
-                valorInput.min = -50;
-                valorInput.max = 50;
-                valorInput.step = 0.1;
+                valorInput.min = -10;
+                valorInput.max = 10;
+                valorInput.step = 0.01;
                 valorInput.value = valor;
                 valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(variable, valorInput.value);  
+                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                });
+                break;
+
+            case "NumericoPositivo":
+                valorInput.type = "range";
+                valorInput.min = 0;
+                valorInput.max = 2;
+                valorInput.step = 0.01;
+                valorInput.value = valor;
+                valorInput.addEventListener("input", () => {
+                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                });
+                break;
+
+            case "Periodo":
+                valorInput.type = "range";
+                valorInput.min = 0;
+                valorInput.max = 10;
+                valorInput.step = 0.01;
+                valorInput.value = valor;
+                valorInput.addEventListener("input", () => {
+                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
                 });
                 break;
 
@@ -51,15 +73,36 @@ class Supervalor {
                 valorInput.value = valor;
                 break;
 
+            case "Booleano":
+                valorInput.type = "checkbox";
+                valorInput.addEventListener("change", () => {
+                    let valor = false;
+                    if (valorInput.checked) {
+                        valor = true;
+                    }
+                    this.objeto.actualizarValor(tipo, variable, valor);
+                });
+                if (valor) {
+                    valorInput.checked = true;
+                }
+                break;
+
             case "Color":
-                valorInput.type="color";
+
+                valorInput.type = "color";
                 //en el futuro habra que convertir el valor (Color) en un string #123456 para aplicarlo al input
                 //el hexa si estuviese en rgb estaria en rango 0-255 cada color
-                valorInput.value = valor;
+                
                 if (valor == null) {
                     valorInput.value = "#ffffff";
                 }
-                valorInput.disabled = true;
+
+                console.log(valor.hexadecimal);
+                valorInput.value = valor.hexadecimal;
+
+                valorInput.addEventListener("input", () => {
+                    this.objeto.actualizarValor(tipo, variable, valorInput.value);
+                });
                 break;
 
             case "Textura": 
