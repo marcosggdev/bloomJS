@@ -4,13 +4,14 @@
  */
 class Supervalor {
 
-    constructor (objeto, tipo, variable, nombre, valor) {
+    constructor (objeto, tipo, variable, nombre, valor, editable) {
         this.objeto = objeto;
         this.tipo = tipo;
         this.variable = variable;
         this.nombre = nombre;
         this.valor = valor;
-        this.nodo = this.crearNodo(variable, nombre, valor, tipo);
+        this.editable = editable;
+        this.nodo = this.crearNodo(variable, nombre, valor, tipo, editable);
     }
 
     crearNodo (variable, nombre, valor, tipo) {
@@ -80,7 +81,6 @@ class Supervalor {
                 img.src = "/bloomJS/img/iconos/shader.png";
                 contenedorValorInput.appendChild(img);
                 valorInput.type = "text";
-                valorInput.disabled = true;
                 valorInput.value = valor;
                 break;
 
@@ -122,7 +122,6 @@ class Supervalor {
                 img2.src = "/bloomJS/img/iconos/textura.png";
                 contenedorValorInput.appendChild(img2);
                 valorInput.type = "text";
-                valorInput.disabled = true;
                 valorInput.value = valor;
                 if (valor == null) {
                     valorInput.value = "null";
@@ -134,7 +133,6 @@ class Supervalor {
                 img3.src = "/bloomJS/img/iconos/material.png";
                 contenedorValorInput.appendChild(img3);
                 valorInput.type = "text";
-                valorInput.disabled = true;
                 valorInput.value = valor;
                 if (valor == null) {
                     valorInput.value = "null";
@@ -143,7 +141,6 @@ class Supervalor {
 
             case "boton":
                 valorInput.type = "text";
-                valorInput.disabled = true;
                 valorInput.value = valor;
                 if (valor == null) {
                     valorInput.value = "null";
@@ -160,6 +157,12 @@ class Supervalor {
                     valorInput.value = valor;
                 }
                 break;
+        }
+
+        if (this.editable) {
+            valorInput.disabled = false;
+        } else {
+            valorInput.disabled = true;
         }
 
         contenedorValorInput.appendChild(valorInput);

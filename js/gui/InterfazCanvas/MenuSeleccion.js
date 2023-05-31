@@ -8,6 +8,11 @@ class MenuSeleccion extends MenuGeneral {
 
     ampliarNodo (modelo) {
 
+        let botonCerrar = this.nodo.querySelector(".BarraCierre img");
+        botonCerrar.addEventListener("click", () => {
+            ControlesCanvas.objetoSeleccionado = null;
+        });
+
         let contenedor = document.createElement("div");
 
         GUI.crearListaPestanas(contenedor, ["Objeto", "Adicional"], 0);
@@ -21,15 +26,23 @@ class MenuSeleccion extends MenuGeneral {
 
         let submenuObjeto = document.createElement("div");
         submenuObjeto.className = "propiedades objeto";
-        for (let i = 0; i < modelo.supervaloresObjeto.length; i++) {
-            submenuObjeto.appendChild(modelo.supervaloresObjeto[i].nodo);
+
+        let supervaloresObjeto = modelo.supervalores.filter(supervalor => {
+            return supervalor.editable;
+        });
+        for (let i = 0; i < supervaloresObjeto.length; i++) {
+            submenuObjeto.appendChild(supervaloresObjeto[i].nodo);
         }
         propiedades.appendChild(submenuObjeto);
 
         let submenuAdicionales = document.createElement("div");
         submenuAdicionales.className = "propiedades adicionales invisible";
-        for (let i = 0; i < modelo.supervaloresAdicionales.length; i++) {
-            submenuAdicionales.appendChild(modelo.supervaloresAdicionales[i].nodo);
+
+        let supervaloresAdicionales = modelo.supervalores.filter(supervalor => {
+            return supervalor.editable;
+        });
+        for (let i = 0; i < supervaloresAdicionales.length; i++) {
+            submenuAdicionales.appendChild(supervaloresAdicionales[i].nodo);
         }
         propiedades.appendChild(submenuAdicionales);
 

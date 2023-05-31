@@ -34,73 +34,40 @@ class Modelo3D {
 
         this.seleccionable = true;
 
-        this.propiedadesObjeto = {
-            "x": "posX",
-            "y": "posY",
-            "z": "posZ",
-            "angulo x": "anguloX",
-            "angulo y": "anguloY",
-            "angulo z": "anguloZ",
-            "escala x": "factorX",
-            "escala y": "factorY",
-            "escala z": "factorZ"
-        };
-        this.propiedadesAdicionales = {
-            "Modo": "modo",
-            "Color": "color",
-            "Textura": "rutaTextura",
-            "Material": "rutaMaterial"
-        };
+        this.parametros = [
+            ["x", "posX", "Numerico", true],
+            ["y", "posY", "Numerico", true],
+            ["z", "posZ", "Numerico", true],
+            ["Ángulo x", "anguloX", "Numerico", true],
+            ["Ángulo y", "anguloY", "Numerico", true],
+            ["Ángulo z", "anguloZ", "Numerico", true],
+            ["Escala x", "factorX", "Numerico", true],
+            ["Escala y", "factorY", "Numerico", true],
+            ["Escala z", "factorZ", "Numerico", true],
 
-        this.tiposInputObjeto = [
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico",
-            "Numerico"
-        ];
-        
-        this.tiposInputAdicionales = [
-            "Shader",
-            "Color",
-            "Textura",
-            "Material"
+            ["Modo", "modo", "String", false],
+            ["Color", "color", "Color", false],
+            ["Textura", "rutaTextura", "String", false],
+            ["Material", "rutaMaterial", "string", false]
         ];
 
         this.crearSupervalores();
     }
 
-    actualizarSupervalores () {
-        let iterable = Object.keys(this.propiedadesObjeto);
-        for (let i = 0; i < iterable.length; i++) {
-            this.supervaloresObjeto[i].actualizarValor(this[this.propiedadesObjeto[iterable[i]]], this.tiposInputObjeto[i]);
+    crearSupervalores () {
+        let supervalores = [];
+        for (let i = 0; i < this.parametros.length; i++) {
+            supervalores.push(new Supervalor(this, this.parametros[i][2], this.parametros[i][1], this.parametros[i][0], this[this.parametros[i][1]], this.parametros[i][3]));
         }
-
-        iterable = Object.keys(this.propiedadesAdicionales);
-        for (let i = 0; i < iterable.length; i++) {
-            this.supervaloresAdicionales[i].actualizarValor(this[this.propiedadesAdicionales[iterable[i]]], this.tiposInputAdicionales[i]);
-        }
+        this.supervalores = supervalores;
     }
 
-    crearSupervalores () {
+    actualizarSupervalores () {
 
-        let supervaloresObjeto = [];
-        let supervaloresAdicionales = [];
-
-        let iterable = Object.keys(this.propiedadesObjeto);
-        for (let i = 0; i < iterable.length; i++) {
-            supervaloresObjeto.push(new Supervalor(this, this.tiposInputObjeto[i], this.propiedadesObjeto[iterable[i]], iterable[i], this[this.propiedadesObjeto[iterable[i]]]));
+        for (let i = 0; i < this.parametros.length; i++) {
+            this.supervalores[i].actualizarValor(this[this.parametros[i][1]], this.parametros[i][2]);
         }
-        iterable = Object.keys(this.propiedadesAdicionales);
-        for (let i = 0; i < iterable.length; i++) {
-            supervaloresAdicionales.push(new Supervalor(this, this.tiposInputAdicionales[i], this.propiedadesAdicionales[iterable[i]], iterable[i], this[this.propiedadesAdicionales[iterable[i]]]));
-        }
-        this.supervaloresObjeto = supervaloresObjeto;
-        this.supervaloresAdicionales = supervaloresAdicionales;
+        
     }
 
     static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
