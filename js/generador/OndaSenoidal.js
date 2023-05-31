@@ -2,6 +2,7 @@ class OndaSenoidal extends Forma {
 
     //parametros = [[nombre,identificador,tipo,valor_por_defecto],...]
     static parametros = [
+        ["Capa", "z", "Smallint", 0],   
         ["Amplitud", "amplitud", "NumericoPositivo", 0.55],
         ["Desfase X", "desfaseX", "Numerico", 0],
         ["Desfase Y", "desfaseY", "Numerico", 0],
@@ -36,7 +37,7 @@ class OndaSenoidal extends Forma {
             this.matrizM.identidad();
             this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
             this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+            this.matrizM.trasladar(this.posX, this.posY, this.z.valor);
 
             //shaders y programa
             this.VSHADER = crearShader(gl, gl.VERTEX_SHADER, this.VSHADER_SOURCE);
@@ -85,7 +86,7 @@ class OndaSenoidal extends Forma {
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, 1.0);
         this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-        this.matrizM.trasladar(this.posX, this.posY, this.posZ);
+        this.matrizM.trasladar(this.posX, this.posY, - this.z.valor / 10);
 
         //actualizar matrices M y V
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
@@ -115,14 +116,7 @@ class OndaSenoidal extends Forma {
     actualizarValor (tipo, identificador, valor) {
 
         switch (tipo) {
-            case "Numerico":
-                this[identificador].valor = valor; break;
-            case "NumericoPositivo":
-                this[identificador].valor = valor; break;
-            case "Periodo":
-                this[identificador].valor = valor; break;
-            case "Booleano":
-                this[identificador].valor = valor; break;
+                
             case "Color":
                 let colorHexa = valor + "ff";
                 let r255 = parseInt(colorHexa[1] + colorHexa[2], 16);
@@ -132,6 +126,9 @@ class OndaSenoidal extends Forma {
                 let color = new Color(r255,g255,b255,a255);
                 this[identificador].valor = color;
                 break;
+
+            default:
+                this[identificador].valor = valor; break;
         }
 
     }

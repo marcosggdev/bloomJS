@@ -26,7 +26,7 @@ class InterfazCanvas {
         for (let i = 0; i < this.menus.length; i++) {
             if (this.menus[i].nodo == menuNodo) {
                 //deseleccionamos objeto tb. Se puede entender como codigo adicional al boton de cerrar el menu
-                if (this.menus[i].titulo == "Selección") {
+                if (!typeof ControlesCanvas === "undefined" && this.menus[i].titulo == "Selección") {
                     ControlesCanvas.objetoSeleccionado = null;
                 }
                 menuNodo.remove();  

@@ -53,6 +53,17 @@ class Supervalor {
                 });
                 break;
 
+            case "Smallint":
+                valorInput.type = "number";
+                valorInput.min = -8;
+                valorInput.max = 8;
+                valorInput.step = 1;
+                valorInput.value = valor;
+                valorInput.addEventListener("input", () => {
+                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                });
+                break;
+
             case "Periodo":
                 valorInput.type = "range";
                 valorInput.min = 0;

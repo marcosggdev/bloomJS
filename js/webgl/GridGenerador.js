@@ -2,7 +2,7 @@ class GridGenerador extends Modelo2D {
 
     constructor () {
         //se crea un modelo2D de escala ancho y alto, en el plano XZ, con shaders de grid sin color
-        super(0, 0, 0, 0, 0, 0, 1000, 1000, null, VERTEX_SHADER_GRID_GENERADOR, FRAGMENT_SHADER_GRID_GENERADOR, null);
+        super(0, 0, -9/10, 0, 0, 0, 1000, 1000, null, VERTEX_SHADER_GRID_GENERADOR, FRAGMENT_SHADER_GRID_GENERADOR, null);
     }
 
     static async crearGridGenerador () {
@@ -70,15 +70,9 @@ class GridGenerador extends Modelo2D {
             gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
             //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
             gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
-    
-            //deshabilitamos cull face para que se vea el plano por ambas caras
-            gl.disable(gl.CULL_FACE);
-    
+
             //dibujado
             gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);
-    
-            //anulamos los cambios despues del dibujo para no afectar al resto
-            gl.enable(gl.CULL_FACE);
         }
     }
 

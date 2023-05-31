@@ -68,6 +68,7 @@ class RendererRefactor {
     static habilitarPropiedades () {
         gl.enable(gl.CULL_FACE);    //cull face
         gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LESS);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
     }
 
