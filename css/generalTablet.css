@@ -1,0 +1,5 @@
+body main > .contenido > .entrada {
+    width: auto;
+    display:flex;
+    flex-direction: column;
+}

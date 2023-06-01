@@ -10,7 +10,7 @@ class AsideDinamico {
 
     //desplegable
     static controlesTablet () {
-
+        AsideDinamico.crearBotonDespliegue();
     }
 
     //desplegable

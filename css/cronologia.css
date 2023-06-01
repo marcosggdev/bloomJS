@@ -11,6 +11,8 @@ ul.cronologia {
     gap: 2em;
     box-shadow: 0 0 21px #320034;
     align-self: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 ul.cronologia li {
     position: relative;
