@@ -96,6 +96,12 @@ class Utilidades {
 
                 if (nodosScript.length > 0) {
                     Array.from(nodosScript).forEach((s) => {
+
+                        //limpiar script del DOM
+                        let scriptsBorrar = document.querySelectorAll("script[class='"+s.className+"']");
+                        Array.from(scriptsBorrar).forEach((s) => {s.remove()});
+
+                        //reañadir, con clase e id
                         let script = document.createElement("script");
                         script.innerHTML = s.innerHTML;
                         script.className = s.className;
