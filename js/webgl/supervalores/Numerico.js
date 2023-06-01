@@ -1,56 +1,47 @@
-/**
- * supertipo que contenga: nombre de una variable de un objeto, el valor de la variable, y un nodo con la representacion
- * adecuada del dato.
- */
-class Supervalor {
+class Numerico extends Supervalor {
 
-    constructor (objeto, tipo, variable, nombre, valor, editable) {
-        this.objeto = objeto;
-        this.tipo = tipo;
-        this.variable = variable;
-        this.nombre = nombre;
-        this.valor = valor;
-        this.editable = editable;
-        this.nodo = this.crearNodo(variable, nombre, valor, tipo, editable);
+    constructor (variable, nombre, valor, editable, min, max, step) {
+
+        super("Numerico", variable, nombre, valor, editable);
+
+        this.min = min;
+        this.max = max;
+        this.step = step;
+
+        this.ampliarNodo();
     }
 
-    crearNodo (variable, nombre, valor, tipo) {
+    ampliarNodo () {
 
-        let nodo = document.createElement("div");
-        nodo.className = "Supervalor";
-
-        let nombreDOM = document.createElement("p");
-        nombreDOM.textContent = nombre;
-        nodo.appendChild(nombreDOM);
-
-        let contenedorValor = document.createElement("div");
-        contenedorValor.className = "contenedorValor";
-
-        let contenedorValorInput = document.createElement("div");
-        contenedorValorInput.className = "InputPersonalizado " + tipo;
         let valorInput = document.createElement("input");
+        valorInput.type = "range";
+        valorInput.min = this.min;
+        valorInput.max = this.max;
+        valorInput.step = this.step;
+        valorInput.value = this.valor;
 
-        switch (tipo) {
+        if (!this.editable) {
+            valorInput.disabled = true;
+        }
 
-            case "Numerico":
-                valorInput.type = "range";
-                valorInput.min = -10;
-                valorInput.max = 10;
-                valorInput.step = 0.01;
-                valorInput.value = valor;
-                valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
-                });
-                break;
+        valorInput.addEventListener("input", (e) => {
+            this.valor = e.target.value;
+        });
+
+        let contenedorValorInput = this.nodo.querySelector(".InputPersonalizado");
+        contenedorValorInput.appendChild(valorInput);
+
+        /*
+        switch (this.tipo) {
 
             case "NumericoPositivo":
                 valorInput.type = "range";
                 valorInput.min = 0;
                 valorInput.max = 2;
                 valorInput.step = 0.01;
-                valorInput.value = valor;
+                valorInput.value = this.valor;
                 valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                    this.objeto.actualizarValor(this.tipo, this.variable, valorInput.value);  
                 });
                 break;
 
@@ -59,9 +50,9 @@ class Supervalor {
                 valorInput.min = -8;
                 valorInput.max = 8;
                 valorInput.step = 1;
-                valorInput.value = valor;
+                valorInput.value = this.valor;
                 valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                    this.objeto.actualizarValor(this.tipo, this.variable, valorInput.value);  
                 });
                 break;
 
@@ -70,9 +61,9 @@ class Supervalor {
                 valorInput.min = 0;
                 valorInput.max = 10;
                 valorInput.step = 0.01;
-                valorInput.value = valor;
+                valorInput.value = this.valor;
                 valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(tipo, variable, valorInput.value);  
+                    this.objeto.actualizarValor(this.tipo, this.variable, valorInput.value);  
                 });
                 break;
 
@@ -81,7 +72,7 @@ class Supervalor {
                 img.src = "/bloomJS/img/iconos/shader.png";
                 contenedorValorInput.appendChild(img);
                 valorInput.type = "text";
-                valorInput.value = valor;
+                valorInput.value = this.valor;
                 break;
 
             case "Booleano":
@@ -91,9 +82,9 @@ class Supervalor {
                     if (valorInput.checked) {
                         valor = true;
                     }
-                    this.objeto.actualizarValor(tipo, variable, valor);
+                    this.objeto.actualizarValor(this.tipo, this.variable, this.valor);
                 });
-                if (valor) {
+                if (this.valor) {
                     valorInput.checked = true;
                 }
                 break;
@@ -103,17 +94,15 @@ class Supervalor {
                 valorInput.type = "color";
                 //en el futuro habra que convertir el valor (Color) en un string #123456 para aplicarlo al input
                 //el hexa si estuviese en rgb estaria en rango 0-255 cada color
-                
-                if (valor == null) {
+                if (this.valor == null) {
                     valorInput.value = "#ffffff";
                 } else {
                     //el valor hexa de un obj de tipo Color contiene 2 digitos para el alpha. El valor que pide un input color no 
                     //acepta valores alpha, por o k los limpiamos
-                    valorInput.value = valor.hexadecimal.substring(0, valor.hexadecimal.length - 2);
+                    valorInput.value = this.valor.hexadecimal.substring(0, valor.hexadecimal.length - 2);
                 }
-
                 valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(tipo, variable, valorInput.value);
+                    this.objeto.actualizarValor(this.tipo, this.variable, this.valorInput.value);
                 });
                 break;
 
@@ -122,8 +111,8 @@ class Supervalor {
                 img2.src = "/bloomJS/img/iconos/textura.png";
                 contenedorValorInput.appendChild(img2);
                 valorInput.type = "text";
-                valorInput.value = valor;
-                if (valor == null) {
+                valorInput.value = this.valor;
+                if (this.valor == null) {
                     valorInput.value = "null";
                 }
                 break;
@@ -133,28 +122,28 @@ class Supervalor {
                 img3.src = "/bloomJS/img/iconos/material.png";
                 contenedorValorInput.appendChild(img3);
                 valorInput.type = "text";
-                valorInput.value = valor;
-                if (valor == null) {
+                valorInput.value = this.valor;
+                if (this.valor == null) {
                     valorInput.value = "null";
                 }
                 break;
 
             case "boton":
                 valorInput.type = "text";
-                valorInput.value = valor;
-                if (valor == null) {
+                valorInput.value = this.valor;
+                if (this.valor == null) {
                     valorInput.value = "null";
                 }
                 break;
 
             default: 
-            valorInput.addEventListener("input", (e) => {
-                    this.objeto.actualizarValor(variable, e.target.value);
+                valorInput.addEventListener("input", (e) => {
+                    this.objeto.actualizarValor(this.variable, e.target.value);
                 });
-                if (valor == null) {
+                if (this.valor == null) {
                     valorInput.value = "null";
                 } else {
-                    valorInput.value = valor;
+                    valorInput.value = this.valor;
                 }
                 break;
         }
@@ -164,28 +153,7 @@ class Supervalor {
         } else {
             valorInput.disabled = true;
         }
-
-        contenedorValorInput.appendChild(valorInput);
-        nodo.appendChild(contenedorValorInput);
-
-        return nodo;
-    }
-
-    actualizarValor (valor, tipo) {
-        this.valor = valor;
-        this.actualizarNodo(valor, tipo);
-    }
-
-    actualizarNodo (valor, tipo) {
-        let input = this.nodo.querySelector("input");
-        switch (tipo) {
-            case "Color": 
-            
-                break;
-            default:
-                input.value = valor;
-                break;
-        }
+        */ 
     }
 
 }

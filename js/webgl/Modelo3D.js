@@ -34,38 +34,30 @@ class Modelo3D {
 
         this.seleccionable = true;
 
-        this.parametros = [
-            ["x", "posX", "Numerico", true],
-            ["y", "posY", "Numerico", true],
-            ["z", "posZ", "Numerico", true],
-            ["Ángulo x", "anguloX", "Numerico", true],
-            ["Ángulo y", "anguloY", "Numerico", true],
-            ["Ángulo z", "anguloZ", "Numerico", true],
-            ["Escala x", "factorX", "Numerico", true],
-            ["Escala y", "factorY", "Numerico", true],
-            ["Escala z", "factorZ", "Numerico", true],
+        this.supervalores = [
+            new Numerico("posX", "x", this.posX, true, -10, 10, 1),
+            new Numerico("posY", "y", this.posY, true, -10, 10, 1),
+            new Numerico("posZ", "z", this.posZ, true, -10, 10, 1),
+            new Numerico("anguloX", "ángulo x", this.anguloX, true, -180, 180, 1),
+            new Numerico("anguloY", "ángulo y", this.anguloY, true, -180, 180, 1),
+            new Numerico("anguloZ", "ángulo z", this.anguloZ, true, -180, 180, 1),
+            new Numerico("factorX", "escala x", this.factorX, true, 0, 10, 0.05),
+            new Numerico("factorY", "escala y", this.factorY, true, 0, 10, 0.05),
+            new Numerico("factorZ", "escala z", this.factorZ, true, 0, 10, 0.05),
 
-            ["Modo", "modo", "String", false],
-            ["Color", "color", "Color", false],
-            ["Textura", "rutaTextura", "String", false],
-            ["Material", "rutaMaterial", "string", false]
+            new Texto("modo", "Modo", this.modo, false),
+            new Texto("color", "Color", this.color, false),
+            new Texto("rutaTextura", "Textura", this.rutaTextura, false),
+            new Texto("rutaMaterial", "Material", this.rutaMaterial, false),
         ];
-
-        this.crearSupervalores();
     }
 
-    crearSupervalores () {
-        let supervalores = [];
-        for (let i = 0; i < this.parametros.length; i++) {
-            supervalores.push(new Supervalor(this, this.parametros[i][2], this.parametros[i][1], this.parametros[i][0], this[this.parametros[i][1]], this.parametros[i][3]));
-        }
-        this.supervalores = supervalores;
-    }
+    //los supervalores varian autom. por input del usuario. 60veces por segundo actualizamos las variables de l objeto con las
+    //variables de los inputs de supervalores
+    actualizarEstadoConSupervalores () {
 
-    actualizarSupervalores () {
-
-        for (let i = 0; i < this.parametros.length; i++) {
-            this.supervalores[i].actualizarValor(this[this.parametros[i][1]], this.parametros[i][2]);
+        for (let i = 0; i < this.supervalores.length; i++) {
+            this[this.supervalores[i].variable] = this.supervalores[i].valor;
         }
         
     }
@@ -721,7 +713,8 @@ class Modelo3D {
     }
 
     actualizar () {
-        this.actualizarSupervalores();
+
+        this.actualizarEstadoConSupervalores();
         
         if (this.funcionActualizar != null) {
             this.funcionActualizar(this);

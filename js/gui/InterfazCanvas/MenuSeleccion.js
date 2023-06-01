@@ -24,26 +24,24 @@ class MenuSeleccion extends MenuGeneral {
 
         let propiedades = document.createElement("div");
 
+        //Submenu de atributos editables del objeto
         let submenuObjeto = document.createElement("div");
         submenuObjeto.className = "propiedades objeto";
 
-        let supervaloresObjeto = modelo.supervalores.filter(supervalor => {
-            return supervalor.editable;
-        });
-        for (let i = 0; i < supervaloresObjeto.length; i++) {
-            submenuObjeto.appendChild(supervaloresObjeto[i].nodo);
-        }
-        propiedades.appendChild(submenuObjeto);
-
         let submenuAdicionales = document.createElement("div");
-        submenuAdicionales.className = "propiedades adicionales invisible";
+        submenuAdicionales.className = "propiedades adicionales invisible"; 
 
-        let supervaloresAdicionales = modelo.supervalores.filter(supervalor => {
-            return supervalor.editable;
-        });
-        for (let i = 0; i < supervaloresAdicionales.length; i++) {
-            submenuAdicionales.appendChild(supervaloresAdicionales[i].nodo);
+        for (let i = 0; i < modelo.supervalores.length; i++) {
+            
+            if (modelo.supervalores[i].editable) {
+                submenuObjeto.appendChild(modelo.supervalores[i].nodo);
+            } else {
+                submenuAdicionales.appendChild(modelo.supervalores[i].nodo);
+            }
+
         }
+
+        propiedades.appendChild(submenuObjeto);
         propiedades.appendChild(submenuAdicionales);
 
         //alternar submenus
