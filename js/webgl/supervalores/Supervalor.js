@@ -34,4 +34,10 @@ class Supervalor {
         this.nodo = nodo;
     }
 
+    //cambia valor y actualiza el nodo del dom con el nuevo valor
+    setValor (valor) {
+        this.valor = valor;
+        this.nodo.querySelector("input").value = valor;
+    }
+
 }

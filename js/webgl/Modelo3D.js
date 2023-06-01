@@ -887,9 +887,16 @@ class Modelo3D {
        //por ultimo Descomponer el angulo que hemos obtenido a los 3 ejes para pasarlo a modelo.factorXYZ
         let rotacion = Matriz4X4.crearMatrizRotacionConRespectoAVectorUnitario(vectorDirector, angulo);
         let angulos = Matriz4X4.obtenerAngulosDeMatrizRotacion(rotacion);
-        modelo.anguloX = angulos["anguloX"];
-        modelo.anguloY = angulos["anguloY"];
-        modelo.anguloZ = angulos["anguloZ"];
+
+        //actualizar supervalores o sino se perdera el cambio realizado, mejor que actualizar las variables.
+        for (let i = 0; i < modelo.supervalores.length; i++) {
+            switch (modelo.supervalores[i].variable) {
+                case "anguloX": modelo.supervalores[i].setValor(angulos["anguloX"]); break;
+                case "anguloY": modelo.supervalores[i].setValor(angulos["anguloY"]); break;
+                case "anguloZ": modelo.supervalores[i].setValor(angulos["anguloZ"]); break;
+            }
+        }
+
         modelo.hitbox.actualizarRotacion(modelo.anguloX, modelo.anguloY, modelo.anguloZ);
     }
 
@@ -922,11 +929,16 @@ class Modelo3D {
         let distancia = Vector4X1.obtenerModulo(Vector4X1.restarVectores(posCamara, posModelo));
 
         let coordModelo = Vector4X1.sumarVectores(posCamara, Vector4X1.multiplicarVectorPorEscalar(coordScreenModelo, distancia));
+        
+        //actualizar supervalores o sino se perdera el cambio realizado, mejor que actualizar las variables.
+        for (let i = 0; i < modelo.supervalores.length; i++) {
+            switch (modelo.supervalores[i].variable) {
+                case "posX": modelo.supervalores[i].setValor(coordModelo.datos[0]); break;
+                case "posY": modelo.supervalores[i].setValor(coordModelo.datos[1]); break;
+                case "posZ": modelo.supervalores[i].setValor(coordModelo.datos[2]); break;
+            }
+        }
 
-       // let coordsModelo = vInversa.multiplicarVector(pInversa.multiplicarVector(coordScreenModelo));
-        modelo.posX = coordModelo.datos[0];
-        modelo.posY = coordModelo.datos[1];
-        modelo.posZ = coordModelo.datos[2];
         modelo.hitbox.actualizarPosicion(modelo.posX, modelo.posY, modelo.posZ);
     }
 
@@ -954,15 +966,21 @@ class Modelo3D {
 
         // > 0 si actual > inicial; < 0 si actua < inicial. => mayor si mas lejos del modelo con respecto a inicial
         let deltaDistancia = distanciaActual - distanciaInicial;
-        
-        //en delta = 0, escala no modificada. Despues aumenta/decrece exponencialmente
-        modelo.factorX = Modelo3D.escala(ControlesCanvas.factorXInicial, deltaDistancia, distanciaInicial);
-        modelo.factorY = Modelo3D.escala(ControlesCanvas.factorYInicial, deltaDistancia, distanciaInicial);
-        modelo.factorZ = Modelo3D.escala(ControlesCanvas.factorZInicial, deltaDistancia, distanciaInicial);
+
+        //actualizar supervalores o sino se perdera el cambio realizado, mejor que actualizar las variables.
+        for (let i = 0; i < modelo.supervalores.length; i++) {
+            switch (modelo.supervalores[i].variable) {
+                case "factorX": modelo.supervalores[i].setValor(Modelo3D.escala(ControlesCanvas.factorXInicial, deltaDistancia, distanciaInicial)); break;
+                case "factorY": modelo.supervalores[i].setValor(Modelo3D.escala(ControlesCanvas.factorYInicial, deltaDistancia, distanciaInicial)); break;
+                case "factorZ": modelo.supervalores[i].setValor(Modelo3D.escala(ControlesCanvas.factorZInicial, deltaDistancia, distanciaInicial)); break;
+            }
+        }
+
         modelo.hitbox.actualizarEscala(modelo.factorX, modelo.factorY, modelo.factorZ, distanciaInicial);
 
         //reset de contador para que se tome nuevos factores como punto de partida en animacion de seleccion
         modelo.contador = null;
+
 
     }
 

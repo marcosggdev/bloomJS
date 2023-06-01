@@ -63,6 +63,8 @@ class MenuSeleccion extends MenuGeneral {
     }
 
     actualizarDatos (modelo) {
+
+        console.log("actualizando datos");
         
         let submenuObjeto = this.nodo.querySelector(".propiedades.objeto");
         let submenuAdicionales = this.nodo.querySelector(".propiedades.adicionales");
@@ -70,15 +72,17 @@ class MenuSeleccion extends MenuGeneral {
         submenuObjeto.innerHTML = "";
         submenuAdicionales.innerHTML = "";
 
-        for (let i = 0; i < modelo.supervaloresObjeto.length; i++) {
-            submenuObjeto.appendChild(modelo.supervaloresObjeto[i].nodo);
+        for (let i = 0; i < modelo.supervalores.length; i++) {
+            if (modelo.supervalores[i].editable) {
+                submenuObjeto.appendChild(modelo.supervalores[i].nodo);
+            } else {
+                submenuAdicionales.appendChild(modelo.supervalores[i].nodo);
+            }
         }
 
-        for (let i = 0; i < modelo.supervaloresAdicionales.length; i++) {
-            submenuAdicionales.appendChild(modelo.supervaloresAdicionales[i].nodo);
-        }
     }
 
+    //hay cambios en el objeto, asi que tenemos que sincronizar datos del menu con los del objeto
     actualizar () {
         if (ControlesCanvas.objetoSeleccionado != null) {
             this.actualizarDatos(ControlesCanvas.objetoSeleccionado);
