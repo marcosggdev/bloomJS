@@ -1,4 +1,4 @@
-body main > .contenido > .entrada {
+body main div#entradas > .entrada {
     width: auto;
     display:flex;
     flex-direction: column;
