@@ -1,11 +1,12 @@
 //titulo = document.querySelector("#mallaModelosTitulo").value;
 plantillas = document.querySelectorAll(".mallaModelos" + " .plantilla.modelo");
-scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/Modelos.js']");
 links = document.querySelectorAll("link[href='/bloomJS/vistas/MenuMalla/Modelos.css']");
 
 Array.from(plantillas).forEach((plantilla) => {
-    plantilla.addEventListener("click", () => {
 
+    plantilla.removeEventListener("click", plantilla.onclick);
+
+    plantilla.addEventListener("click", () => {
         //click en una plantilla
         if (RendererRefactor.escena != null) {
             Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",
@@ -22,7 +23,6 @@ Array.from(plantillas).forEach((plantilla) => {
                     if (menu != null) {
                         menu.remove();
                     }
-                    Array.from(scripts).forEach((s) => {s.remove()});
                     Array.from(links).forEach((l) => {l.remove()});
                 }
             );
@@ -31,3 +31,6 @@ Array.from(plantillas).forEach((plantilla) => {
         }
     });
 });
+
+scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/Modelos.js']");
+Array.from(scripts).forEach((s) => {s.remove()});

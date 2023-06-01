@@ -106,7 +106,7 @@ class SubmenuEscena extends SubmenuInterfaz {
                 let menuAnadirModelo = new MenuAlternar("Añadir modelo", 
                 ["Defecto", "Personal", "Comunidad"], 
                 [
-                    new MenuMalla("Por defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    new MenuMalla("Defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
                     "defecto", 0, null, 3),
                     new MenuMalla("Personal", "/bloomJS/vistas/MenuMalla/Modelos.php", 
                     "usuario", 0, null, 3),

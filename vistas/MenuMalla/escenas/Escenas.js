@@ -18,3 +18,6 @@ Array.from(document.querySelectorAll(".MallaEscenas .plantilla.escena")).forEach
     });
 
 });
+
+scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/escenas/Escenas.js']");
+Array.from(scripts).forEach((s) => {s.remove()});

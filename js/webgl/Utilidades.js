@@ -81,14 +81,29 @@ class Utilidades {
                 respuestaDOM.innerHTML += this.responseText;
 
                 if (respuestaDOM.querySelector("input#script") != null) {
+
+                    //scripts externos a la plantilla
                     let scriptRuta = respuestaDOM.querySelector("input#script").value;
                     let script = document.createElement("script");
                     script.src = scriptRuta;
                     document.body.insertAdjacentElement("beforeend", script);
+
                 }
 
-                //se entiende que siempre habra
+                let nodosScript = respuestaDOM.querySelectorAll("script");
+                respuestaDOM.querySelectorAll("script").forEach((s) => {s.remove()});
                 contenedor.insertAdjacentHTML("beforeend", respuestaDOM.innerHTML);
+
+                if (nodosScript.length > 0) {
+                    Array.from(nodosScript).forEach((s) => {
+                        let script = document.createElement("script");
+                        script.innerHTML = s.innerHTML;
+                        script.className = s.className;
+                        script.id = s.id;
+                        document.body.appendChild(script);
+                    });
+                }
+                
             }
             
         };

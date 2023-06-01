@@ -43,6 +43,10 @@ window.addEventListener('load', () => {
 
     VentanaCanvas.iniciar(barraVentana, menuInterfaz, interfazCanvas, canvas, ControlesCanvas);
 
+    let menuGlobal = new MenuGlobal("Global", null);
+    menuGlobal.nodo.querySelector(".BarraCierre img").remove();
+    VentanaCanvas.interfazCanvas.anadirMenu(menuGlobal);
+
     let main = document.querySelector("main");
     main.appendChild(VentanaCanvas.nodo);
 

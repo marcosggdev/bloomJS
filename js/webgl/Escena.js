@@ -21,10 +21,20 @@ class Escena {
         }
         this.iluminacion = [];
         this.camara = RendererRefactor.camara;
+
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != null) {
+            menuGlobal.actualizarObjetos();
+        }
     }
 
     anadirDibujable (dibujable) {
         this.dibujables.push(dibujable);
+
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != null) {
+            menuGlobal.actualizarObjetos();
+        }
     }
 
     eliminarDibujable (dibujable) {
@@ -34,10 +44,20 @@ class Escena {
                 i = this.dibujables.length;
             }
         }
+
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != null) {
+            menuGlobal.actualizarObjetos();
+        }
     }
 
     anadirIluminacion (objetoLuminoso) {
         this.iluminacion.push(objetoLuminoso);
+
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != null) {
+            menuGlobal.actualizarObjetos();
+        }
     }
 
     eliminarIluminacion (objetoLuminoso) {
@@ -46,6 +66,11 @@ class Escena {
                 this.dibujables = this.dibujables.splice(i, 1);
                 i = this.dibujables.length;
             }
+        }
+
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != null) {
+            menuGlobal.actualizarObjetos();
         }
     }
 
