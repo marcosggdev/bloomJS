@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
         let comentarios = contenedorComentarios[i].querySelector(".comentarios");
 
         let boton = menuComentar.querySelector(".botonComentarEntrada");
-        let id_target = menuComentar.querySelector("#id_entrada").value;
+        let id_target = menuComentar.querySelector("input[type='hidden'][class='id_entrada']").value;
         let textarea = menuComentar.querySelector("textarea");
         textarea.value = "";
 
