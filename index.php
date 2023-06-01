@@ -9,25 +9,41 @@ require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 session_start();
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio</title>
 
-<?=Vista::imprimirHead("Bloom - JS", 
-	[
-		RAIZ . "css/general.css", 
-		RAIZ . "css/index.css",
-		RAIZ . "css/animaciones.css",
-        RAIZ . "css/entrada.css",
-        RAIZ . "css/comentarios.css",
-        RAIZ . "css/carruselHorizontal.css",
-        RAIZ . "css/neon.css",
-        RAIZ . "css/cronologia.css"
-	], 
-	[
-		RAIZ . "js/general/NavDinamico.js",
-		RAIZ . "js/general/AnimacionMostrarIzquierda.js",
-        RAIZ . "js/blog/ControladorComentar.js",
-        RAIZ . "js/general/AnimacionDinamicaOnScroll.js"
-	]
-)?>
+        <link rel="stylesheet" href="/bloomJS/css/general.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/generalMovil.css">
+        <link rel="stylesheet" href="/bloomJS/css/generalTablet.css">
+<?php
+$estilos = [
+    RAIZ . "css/index.css",
+    RAIZ . "css/animaciones.css",
+    RAIZ . "css/entrada.css",
+    RAIZ . "css/comentarios.css",
+    RAIZ . "css/carruselHorizontal.css",
+    RAIZ . "css/neon.css",
+    RAIZ . "css/cronologia.css"
+];
+foreach ($estilos as $estilo) {
+    echo "<link rel='stylesheet' href='$estilo'/>";
+}
+$scripts = [
+    RAIZ . "js/general/NavDinamico.js",
+    RAIZ . "js/general/AnimacionMostrarIzquierda.js",
+    RAIZ . "js/blog/ControladorComentar.js",
+    RAIZ . "js/general/AnimacionDinamicaOnScroll.js"
+];
+foreach ($scripts as $script) {
+    echo "<script src='$script'></script>";
+}
+?>
+    </head>
 
     <body>
 
@@ -53,7 +69,7 @@ session_start();
                 JavaScript y PHP. Además, para lograr la generación de gráficos avanzados con la aplicación, se ha utilizado WebGL como 
                 API de gráficos en entorno web.
             </p>
-            <img src="/bloomJS/img/tecnologias_web.png" alt="">
+            <img src="/bloomJS/img/tecnologias_web.png" alt="Listado de las tecnologías web utilizadas en la aplicación: HTML, Javascript, CSS, PHP y OpenGL">
             <p>Te invitamos a pasarte por la zona del editor o por el blog, donde podrás aprender sobre la programación de gráficos en 
                 JavaScript</p>
             <img id="welcome" src="img/welcome.png" alt="">

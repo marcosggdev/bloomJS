@@ -12,26 +12,25 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(221, 221, 221);
-    /*background: url("/bloomJS/img/fondo.jpg");
-    background-position: 50%;
-    background-attachment: fixed;
-    background-size: cover;*/
     scroll-behavior: smooth;
     font-family: "Roboto Condensed";
 }
 
+div.titulo {
+    overflow: hidden;
+}
+
 div#cabecera {
-    /*background: rgb(0 0 0) url(../img/fondo.jpg);*/ 
     background: rgb(0 0 0) url(../img/fondoHeader.png);
     background-color: black;
     background-attachment: fixed;
     background-size: cover;
     background-blend-mode: luminosity;
-    /* box-shadow: 3px 3px 5px black; */
     box-shadow: inset 2px 2px -21px #ff00ec;
     height: 90vh;
     z-index: 1;
     position: relative;
+    overflow: hidden;
 }
 
 header {
@@ -106,12 +105,13 @@ nav, header {
     padding-top: 2em;
     padding-bottom: 2em;
 }
+
 nav {
     position: relative;
     text-align: center;
-    /* background: linear-gradient(to Right, #35353500, #fe83ff69);*/ 
     padding: 0;
 }
+
 nav ul{
     display: flex;
     margin: 0;
@@ -121,6 +121,7 @@ nav ul{
     gap: 4em;
     box-sizing: border-box;
 }
+
 nav ul li {
     position: relative;
     margin: 0;
@@ -271,6 +272,9 @@ main{
     width: 100%;
     gap: 400px;
     box-sizing: border-box;
+}
+main > div.titulo h1 {
+    font-size: 4em;
 }
 main h2 {
     margin-top: 0;

@@ -8,23 +8,43 @@ require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
 session_start();
-
-Vista::imprimirHead("Bloom - JS", 
-    [
-        RAIZ . "css/general.css",
-        RAIZ . "css/animaciones.css",
-        RAIZ . "css/blog.css",
-        RAIZ . "css/entrada.css",
-        RAIZ . "css/comentarios.css",
-        RAIZ . "css/cronologia.css",
-        RAIZ . "css/neon.css"
-    ], 
-    [
-        RAIZ . "js/general/NavDinamico.js",
-        RAIZ . "js/blog/AsideDinamico.js",
-        RAIZ . "js/blog/ControladorComentar.js"
-    ]);
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog</title>
+        <link rel="stylesheet" href="/bloomJS/css/general.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/generalMovil.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/blogMovil.css">
+        <link rel="stylesheet" href="/bloomJS/css/generalTablet.css">
+<?php
+$estilos = [
+    RAIZ . "css/animaciones.css",
+    RAIZ . "css/blog.css",
+    RAIZ . "css/entrada.css",
+    RAIZ . "css/comentarios.css",
+    RAIZ . "css/cronologia.css",
+    RAIZ . "css/neon.css"
+];
+foreach ($estilos as $estilo) {
+    echo "<link rel='stylesheet' href='$estilo'/>";
+}
+$scripts = [
+    RAIZ . "js/general/NavDinamico.js",
+    RAIZ . "js/blog/Main.js",
+    RAIZ . "js/blog/AsideDinamico.js",
+    RAIZ . "js/blog/ControladorComentar.js"
+];
+foreach ($scripts as $script) {
+    echo "<script src='$script'></script>";
+}
+?>
+    </head>
+
 <div id="cabecera">
     <?=Vista::imprimirHeader("Blog", "Aquí podrás leer acerca del desarrollo del proyecto");?>
     <?=Vista::imprimirNav(Vista::$entradas, 3);?>

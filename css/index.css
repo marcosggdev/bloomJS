@@ -289,13 +289,15 @@ section div.titulo a img {
     margin: 2em;
     box-sizing: border-box;
 }
-p.breve:nth-of-type(2n) {
-    align-self: flex-start;
-    padding-right: 70%;
-}
-p.breve:nth-of-type(2n+1) {
-    align-self: flex-end;
-    padding-left: 70%;
+@media (min-width: 1250px) {
+    p.breve:nth-of-type(2n) {
+        align-self: flex-start;
+        padding-right: 70%;
+    }
+    p.breve:nth-of-type(2n+1) {
+        align-self: flex-end;
+        padding-left: 70%;
+    }
 }
 section#blog div.titulo::before {
     background: url(../img/blog.jpg);

@@ -18,7 +18,7 @@
         que aplicar una transformación a todo el modelo consistirá en aplicar esa transformación a todos los vértices que lo componen, individualmente.
         Por tanto, pensemos en un vértice en particular del modelo, en un espacio de 3 dimensiones.
     </p>
-    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/vertice.png" alt="">
+    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/vertice.png" alt="Imagen que muestra el sistema de referencia de WebGL. El eje x horizontal, hacia la derecha, el eje y vertical, hacia arriba y el eje z perpendicular a la pantalla, hacia 'fuera'. Se muestra también un vértice 'v' genérico con coordenadas (x, y, z)">
     <h4>Rotación</h4>
     <p>Antes de nada, nótese que hemos elegido el eje Z apuntando hacia fuera de la pantalla, aunque tenemos el sistema de referencia rotado 
         ligeramente con respecto al eje Y para poder apreciar el plano XZ.
@@ -26,12 +26,12 @@
     <p>Para rotar el punto v con respecto al origen, tenemos que construir una matriz de rotación, sea R, que será una matriz 4x4 de la 
         siguiente forma:
     </p>
-    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/matrices_rotacion.png" alt="">
+    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/matrices_rotacion.png" alt="Fórmulas matemáticas de las matrices de rotación entorno a los ejes x, y, z.">
     <p>Donde los subíndices xyz indican el eje de rotación y donde θ es el ángulo de rotación. Una vez tenemos la matriz, si multiplicamos 
         la matriz por un vector 4x1 (4 filas 1 columna) obtendremos un nuevo vector, que estará rotado un ángulo θ con respecto al eje x, en
         comparación a su posición original antes de la rotación. Las ecuaciones podrían resumirse así:
     </p>
-    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/operacion_rotacion.png" alt="">
+    <img class="ilustracionMatematica" src="/bloomJS/img/blog/3_matrices/operacion_rotacion.png" alt="Fórmula matemática donde se ve que el vector obtenido después de la rotación, es el inicial después de transformarlo con la matriz correspondiente (multiplicar matriz por vector)">
     <p>Donde v' es el nuevo vector, rotado, R es la matriz de rotación y su subíndice indica el eje de rotación, θ indica el ángulo de rotación 
         y v es el vector inicial.
     </p>
@@ -44,9 +44,9 @@
     </p>
     <p>Y obtenemos como resultado de una sola multiplicación el vector correcto, que es sumarle el vector v al vector del punto P (vector que 
         une el origen con el punto p)</p>
-    <img src="/bloomJS/img/blog/3_matrices/traslacion.png" alt="">
+    <img src="/bloomJS/img/blog/3_matrices/traslacion.png" alt="Imagen donde se ven las fórmulas matemáticas de una matriz de traslación. También se ve cómo aplicar la matriz a un vector para obtener el vector trasladado (multiplicar)">
     <h4>Escala</h4>
     <p>Por último tenemos la matriz de escala. Sigue las mismas características que las matrices anteriores, sólo que la matriz cambia a 
         esta:
     </p>
-    <img src="/bloomJS/img/blog/3_matrices/escala.png" alt="">
+    <img src="/bloomJS/img/blog/3_matrices/escala.png" alt="Imagen donde se ven las fórmulas matemáticas para crear una matriz de escala. También se ve cómo aplicar la matriz a un vector para obtener el vector escalado (multiplicar)">
