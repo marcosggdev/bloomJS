@@ -71,7 +71,7 @@ class MenuInterfaz {
             titulo.textContent = "Exportación";
             dialog.appendChild(titulo);
 
-            let progreso = new BarraProgreso("Iniciando proceso", 0, 0, 100, 2);
+            let progreso = new BarraProgreso("Iniciando proceso", 10);
             dialog.appendChild(progreso.nodo);
 
             let botonera = document.createElement("div");
@@ -90,7 +90,7 @@ class MenuInterfaz {
                 a.download = "Escena.json";
                 setTimeout(function () {
                     a.click();
-                    progreso.avanzarPaso("Descargando escena", 20);
+                    progreso.avanzarPaso("Descargando escena", 10);
                     setTimeout(function () { 
                         a = null; 
                         progreso.value = 100;
