@@ -71,8 +71,11 @@ class MenuInterfaz {
             titulo.textContent = "Exportación";
             dialog.appendChild(titulo);
 
-            let progreso = new BarraProgreso("Iniciando proceso", 10);
-            dialog.appendChild(progreso.nodo);
+            let progreso = document.createElement("progress");
+            progreso.value = 0;
+            progreso.min = 0;
+            progreso.max = 100;
+            dialog.appendChild(progreso);
 
             let botonera = document.createElement("div");
             botonera.className = ".Botonera";
