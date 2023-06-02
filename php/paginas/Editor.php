@@ -12,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor</title>
 
-    <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas"]); ?>
+    <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas", "BarraProgreso"]); ?>
 
     <?= Vista::imprimirEstilos([
         RAIZ . "css/general.css", 

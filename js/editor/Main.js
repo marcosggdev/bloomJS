@@ -36,8 +36,7 @@ window.addEventListener('load', () => {
             ]),
             new SubmenuInterfaz("Exportar", [
                 new BotonInterfaz("Imagen", MenuInterfaz.exportarImagen),
-                new BotonInterfaz("Escena", MenuInterfaz.exportarEscena),
-                new BotonInterfaz("Gráficos 3D", MenuInterfaz.exportarGraficos3D)
+                new BotonInterfaz("Escena", MenuInterfaz.exportarEscena)
             ])
         ]);
 

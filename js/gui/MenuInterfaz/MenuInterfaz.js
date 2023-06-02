@@ -40,6 +40,9 @@ class MenuInterfaz {
         }
     }
 
+    /**
+     * Genera una imagen en png de la imagen actual del canvas
+     */
     static exportarImagen () {
         RendererRefactor.guardarConfiguracionPrevia();
         RendererRefactor.configuracionExportarImagen();
@@ -56,22 +59,70 @@ class MenuInterfaz {
         }, 1000);
     }
 
-    static exportarEscena () {
-        //dibujables, iluminacion y camara. Se serializan todos los datos y se escriben en un archivo con una extension. Por ejemplo
-        //extension .bloom. El programa utilizara estos archivos para cargar datos despues
-        let serializacion = RendererRefactor.escena.serializar();
-        let datos = "data:text/json;charset=utf-8," + encodeURIComponent(serializacion);
-        let a = document.createElement("a");
-        a.href = datos;
-        a.download = "Escena.json";
-        setTimeout(function () {
-            a.click();
-            setTimeout(function () {a = null;}, 1000);
-        }, 1000);
-        setTimeout(()=>{a.click}, 1000);
-        setTimeout(()=>{a=null}, 2000);
+    /**
+     * Genera un archivo .js con los datos necesarios para que la escena pueda importarse de nuevo y verse desde el cliente de
+     * bloomJS. Sería el archivo Main de la aplicación del cliente.
+     */
+    static exportarEscena() {
+        if (RendererRefactor.escena != null) {
+            let dialog = document.createElement("dialog");
+
+            let titulo = document.createElement("h2");
+            titulo.textContent = "Exportación";
+            dialog.appendChild(titulo);
+
+            let progreso = new BarraProgreso("Iniciando proceso", 0, 0, 100, 2);
+            dialog.appendChild(progreso.nodo);
+
+            let botonera = document.createElement("div");
+            botonera.className = ".Botonera";
+
+            let exportar = document.createElement("button");
+            exportar.textContent = "Exportar";
+            exportar.addEventListener("click", () => {
+                //dibujables, iluminacion y camara. Se serializan todos los datos y se escriben en un archivo con una extension .json.
+                //Despues, se exporta tambien el archivo Main.js, pensado para ser ejecutado con el cliente de BloomJS, dando ordenes
+                //a la libreria de bloom para generar la escena con los datos del .json
+                let serializacion = RendererRefactor.escena.serializar();
+                let datos = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(serializacion));
+                let a = document.createElement("a");
+                a.href = datos;
+                a.download = "Escena.json";
+                setTimeout(function () {
+                    a.click();
+                    progreso.avanzarPaso("Descargando escena", 20);
+                    setTimeout(function () { 
+                        a = null; 
+                        progreso.value = 100;
+                        setTimeout(function () {
+                            dialog.close();
+                            dialog.remove();
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            });
+            botonera.appendChild(exportar);
+
+            let cancelar = document.createElement("button");
+            cancelar.textContent = "Cancelar";
+            cancelar.addEventListener("click", () => {
+                dialog.close();
+                dialog.remove();
+            });
+            botonera.appendChild(cancelar);
+
+            dialog.appendChild(botonera);
+            document.body.appendChild(dialog);
+            dialog.showModal();
+
+            //Para funcionar correctamente el modelo necesitara el archivo de la textura y del material, además de la serialización,
+            //por lo tanto, vamos a incluirlos en este paso.
+        } else {
+            alert("¡Ups!¡Primero debes crear una escena!");
+        }
     }
 
+    /*
     static exportarGraficos3D () {
         //necesitamos la informacion de los modelos, la camara y el renderer.
         let objetos = [];
@@ -106,6 +157,7 @@ class MenuInterfaz {
         req.open("POST", "/bloomJS/php/backend/scripts/generarExportacionCanvas.php");
         req.send(formData);
     }
+    */ 
 
     //--------------------------------------------GENERADOR-------------------------------------------------------------
     /**
