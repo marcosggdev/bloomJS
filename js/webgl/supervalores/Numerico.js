@@ -75,37 +75,6 @@ class Numerico extends Supervalor {
                 valorInput.value = this.valor;
                 break;
 
-            case "Booleano":
-                valorInput.type = "checkbox";
-                valorInput.addEventListener("change", () => {
-                    let valor = false;
-                    if (valorInput.checked) {
-                        valor = true;
-                    }
-                    this.objeto.actualizarValor(this.tipo, this.variable, this.valor);
-                });
-                if (this.valor) {
-                    valorInput.checked = true;
-                }
-                break;
-
-            case "Color":
-
-                valorInput.type = "color";
-                //en el futuro habra que convertir el valor (Color) en un string #123456 para aplicarlo al input
-                //el hexa si estuviese en rgb estaria en rango 0-255 cada color
-                if (this.valor == null) {
-                    valorInput.value = "#ffffff";
-                } else {
-                    //el valor hexa de un obj de tipo Color contiene 2 digitos para el alpha. El valor que pide un input color no 
-                    //acepta valores alpha, por o k los limpiamos
-                    valorInput.value = this.valor.hexadecimal.substring(0, valor.hexadecimal.length - 2);
-                }
-                valorInput.addEventListener("input", () => {
-                    this.objeto.actualizarValor(this.tipo, this.variable, this.valorInput.value);
-                });
-                break;
-
             case "Textura": 
                 let img2 = document.createElement("img");
                 img2.src = "/bloomJS/img/iconos/textura.png";

@@ -7,6 +7,7 @@ class Color {
     static AZUL_CIELO = new Color(176, 217, 219, 255);
     static ROJO = new Color(255,0,0,255);
     static NARANJA = new Color(255,130,0,255);
+    static TRANSPARENTE = new Color(0,0,0,0);
 
     //se guarda en valores gl
     constructor (R,G,B,A) {
@@ -118,6 +119,16 @@ class Color {
         a = +(a / 255).toFixed(3);
       
         return new Color(r,g,b,a);
+    }
+
+    //lee un hexa de tipo #123456 y devuelve un Color
+    static leerHexa6 (h) {
+        let r = h[1] + h[2];
+        let g = h[3] + h[4];
+        let b = h[5] + h[6];
+        let a = "ff";
+        let hexaCompleto = "#" + r + g + b + a;
+        return Color.convertirHexadecimalRGBA(hexaCompleto);
     }
 
     serializar () {

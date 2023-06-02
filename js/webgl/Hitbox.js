@@ -169,7 +169,6 @@ class Hitbox {
     }
 
     iniciar () {
-        if (RendererRefactor.dibujarHitbox) {
             //matriz del modelo
             this.matrizM = new Matriz4X4();
             this.actualizarMatrizModelo();
@@ -185,12 +184,11 @@ class Hitbox {
             this.aPosBuffer = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+            gl.enableVertexAttribArray(this.aPosLoc);
 
             //uniforms matrices
             this.m = gl.getUniformLocation(this.programa, "m");
-            gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
             this.v = gl.getUniformLocation(this.programa, "v");
-            gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
             this.p = gl.getUniformLocation(this.programa, "p");
             gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
 
@@ -219,16 +217,6 @@ class Hitbox {
             //color
             this.uColorLoc = gl.getUniformLocation(this.programa, "uColor");
             gl.uniform3f(this.uColorLoc, Hitbox.color[0], Hitbox.color[1], Hitbox.color[2]);
-
-            RendererRefactor.escena.anadirDibujable(this);
-        } else {
-            //la creamos almenos porque influye en la actualizacion de factoresHitboxActuales
-            this.matrizM = new Matriz4X4();
-            this.matrizM.identidad();
-            this.matrizM.escalar(this.factorX, this.factorY, this.factorZ);
-            this.matrizM.rotar(this.anguloX, this.anguloY, this.anguloZ);
-            this.matrizM.trasladar(this.posX, this.posY, this.posZ);
-        }
     }
 
     actualizar (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ) {
@@ -247,9 +235,9 @@ class Hitbox {
             gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
     
             //atributos
-            gl.enableVertexAttribArray(this.aPosLoc);
+            
             gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+           //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
             gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
     
             gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);

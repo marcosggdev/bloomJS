@@ -12,7 +12,7 @@ class MenuEdicion extends MenuGeneral {
 
     ampliarNodo (objeto) {
         
-        let supervalores = objeto.supervaloresObjeto;
+        let supervalores = objeto.supervalores;
 
         if (supervalores != null) {
             let contenedorEditables = document.createElement("div");
@@ -28,7 +28,7 @@ class MenuEdicion extends MenuGeneral {
             contenedorEditables.className = "contenedorEditables";
 
             let error = document.createElement("p");
-            error.textContent = "La forma elegida no tiene atributos...";
+            error.textContent = "Aviso: el objeto elegido no tiene supervalores que mostrar...";
             contenedorEditables.appendChild(error);
             this.nodo.appendChild(contenedorEditables);
         }

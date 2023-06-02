@@ -25,13 +25,19 @@ class MenuInterfaz {
     }
 
     static controles () {
-        let menuControles = new MenuDisplay("Controles", VentanaCanvas, "controles");
-        VentanaCanvas.interfazCanvas.anadirMenu(menuControles);
+        let menuControles = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Controles");
+        if (menuControles == null) {
+            menuControles = new MenuDisplay("Controles", ControlesCanvas);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuControles);
+        }
     }
 
     static ajustes () {
-        let menuAjustes = new MenuEdicion("Ajustes", RendererRefactor);
-        VentanaCanvas.interfazCanvas.anadirMenu(menuAjustes);
+        let menuAjustes = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Ajustes");
+        if (menuAjustes == null) {
+            menuAjustes = new MenuEdicion("Ajustes", RendererRefactor);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuAjustes);
+        }
     }
 
     static exportarImagen () {

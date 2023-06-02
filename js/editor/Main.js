@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
         console.log("Error al obtener el canvas");
         return;
     }
-    let atributosContexto = { preserveDrawingBuffer: true };
+    let atributosContexto = { preserveDrawingBuffer: true};
     gl = canvas.getContext("webgl", atributosContexto);
     if (!gl) {
         console.log("Error al obtener el contexto del canvas");

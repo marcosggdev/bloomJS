@@ -95,6 +95,7 @@ class Modelo3D {
 
     dibujar () {
         this[Modelo3D.formasDibujo[this.modo]]();
+        this.hitbox.dibujar();
     }   
 
     dibujarC () {
@@ -721,6 +722,8 @@ class Modelo3D {
         } else {
             //actualizando sin funcion definida
         }
+
+        this.hitbox.actualizar();
     }
 
 /*

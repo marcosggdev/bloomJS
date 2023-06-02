@@ -8,24 +8,24 @@ class RendererRefactor {
         RendererRefactor.camara = camara;
         RendererRefactor.escena = escena;
 
+        RendererRefactor.dibujarFondo = true;
         RendererRefactor.dibujarHitbox = false;
         RendererRefactor.dibujarGrid = true;
+        RendererRefactor.resolucionX = 1920;
+        RendererRefactor.resolucionY = 1080;
+        RendererRefactor.resolucion = "1024x768";
 
-        RendererRefactor.parametros = {
-            "objeto":[
-                ["Ancho", "ancho", "NumericoTexto", 1920],
-                ["Alto", "alto", "NumericoTexto", 1080],
-                ["Fondo", "fondo", "Color", new Color(80,80,80,255)],
-                ["Dibujar Hitbox", "dibujarHitbox", "Booleano", false],
-                ["Dibujar Grid", "dibujarGrid", "Booleano", false]
-            ],
-            "adicionales":[
-                
-            ]
-        };
-
-        //crea supervaloresObjeto y supervaloresAdicionales. Los objeto son editables, los adicionales no
-        RendererRefactor.crearSupervalores();
+        RendererRefactor.supervalores = [
+            new SelectCompuesto(
+                new Select("resolucionX", "Resolución x", RendererRefactor.resolucionX, true, [640, 854, 1280, 1920]),
+                new Select("resolucionY", "Resolución y", RendererRefactor.resolucionY, true, [360, 480, 720, 1080]),
+                "resolucion", RendererRefactor.setResolucion, "Resolución", "x", true
+            ),
+            new ColorS("fondo", "Color de Fondo", RendererRefactor.fondo, true),
+            new Booleano("dibujarFondo", "Dibujar Fondo", RendererRefactor.dibujarFondo, true),
+            new Booleano("dibujarHitbox", "Dibujar Hitbox", RendererRefactor.dibujarHitbox, true),
+            new Booleano("dibujarGrid", "Dibujar Grid", RendererRefactor.dibujarGrid, true)
+        ];
  
         RendererRefactor.configurar();
 
@@ -34,12 +34,22 @@ class RendererRefactor {
             "fondo",
             "ancho",
             "alto",
+            "dibujarFondo",
             "dibujarHitbox",
             "dibujarGrid"
         ];
 
         //variables temporales
         RendererRefactor.configuracionPrevia = {};
+    }
+
+    //el valor llega de un SelectCompuesto: String(resx + separador + resy)
+    static setResolucion (supervalor) {
+        RendererRefactor.resolucionX = supervalor.valor.split(supervalor.separador)[0];
+        RendererRefactor.resolucionY = supervalor.valor.split(supervalor.separador)[1];
+        gl.canvas.width = RendererRefactor.resolucionX;
+        gl.canvas.height = RendererRefactor.resolucionY;
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
 
     static crearSupervalores () {
@@ -97,14 +107,27 @@ class RendererRefactor {
     }
 
     static ciclo () {
-        canvas.focus();
+        //canvas.focus();
         RendererRefactor.actualizar();
         RendererRefactor.dibujar();
         window.requestAnimationFrame(RendererRefactor.ciclo);
     }
 
     static actualizar () {
+
+        console.log(RendererRefactor.resolucionX + ", " + RendererRefactor.resolucionY);
         RendererRefactor.camara.actualizar();
+        
+        //actualizar parametros con valor actual de supervalores
+        for (let i = 0; i < this.supervalores.length; i++) {
+            this[this.supervalores[i].variable] = this.supervalores[i].valor;
+        }
+
+        //actualizar dibujo de color de fondo
+        if (!RendererRefactor.dibujarFondo) {
+            RendererRefactor.fondo = Color.TRANSPARENTE;
+        }
+
         if (RendererRefactor.escena != null) {
             RendererRefactor.escena.actualizar();
         }
@@ -120,7 +143,11 @@ class RendererRefactor {
     static configuracionExportarImagen () {
         RendererRefactor.dibujarHitbox = false;
         RendererRefactor.dibujarGrid = false;
-        RendererRefactor.fondo = new Color(0,0,0,1);
+
+        //dibujar o no el fondo en el render
+        if (!RendererRefactor.dibujarFondo) {
+            RendererRefactor.color = new Color(0,0,0,0);
+        }
     }
 
     static configuracionPrevia () {
@@ -128,12 +155,10 @@ class RendererRefactor {
     }
 
     static guardarConfiguracionPrevia () {
- 
         for (let i = 0; i < RendererRefactor.exportacion.length; i++) {
             let nombre = RendererRefactor.exportacion[i];
             RendererRefactor.configuracionPrevia[nombre] = RendererRefactor[nombre];
         }
-
     }
 
     static cargarConfiguracionPrevia () {

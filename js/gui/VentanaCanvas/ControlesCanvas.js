@@ -6,6 +6,14 @@ class ControlesCanvas {
         83: "s"
     }
 
+    static teclaRotar = "r";
+    static teclaTrasladar = "t";
+    static teclaEscalar = "s";
+    static teclaSeleccionar = "Ctrl. + click izq.";
+    static teclaRotarCamara = "Click der.";
+    static teclaZoomIn = "Ctrl. + rueda arriba";
+    static teclaZoomOut = "Ctrl. + rueda abajo";
+
     static iniciar (canvas) {
         ControlesCanvas.rotando = false;
         ControlesCanvas.trasladando = false;
@@ -15,6 +23,16 @@ class ControlesCanvas {
         ControlesCanvas.moviendoCamara = false;
         ControlesCanvas.camaraMovida = false;
         ControlesCanvas.objetoSeleccionado = null;
+
+        ControlesCanvas.supervalores = [
+            new Texto("teclaRotar", "Rotar", ControlesCanvas.teclaRotar, true),
+            new Texto("teclaTrasladar", "Trasladar", ControlesCanvas.teclaTrasladar, true),
+            new Texto("teclaEscalar", "Escalar", ControlesCanvas.teclaEscalar, true),
+            new Texto("teclaSeleccionar", "Seleccionar", ControlesCanvas.teclaSeleccionar, true),
+            new Texto("teclaRotarCamara", "Rotar cámara", ControlesCanvas.teclaRotarCamara, true),
+            new Texto("teclaZoomIn", "Zoom-in", ControlesCanvas.teclaZoomIn, true),
+            new Texto("teclaZoomOut", "Zoom-out", ControlesCanvas.teclaZoomOut, true)
+        ];
 
         ControlesCanvas.crearControles(canvas);
     }
