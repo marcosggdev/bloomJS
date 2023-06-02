@@ -116,17 +116,21 @@ class Color {
           b = "0x" + h[5] + h[6];
           a = "0x" + h[7] + h[8];
         }
-        a = +(a / 255).toFixed(3);
+        //a = +(a / 255).toFixed(3);
       
+        //todos en rango 0 - 255
         return new Color(r,g,b,a);
     }
 
     //lee un hexa de tipo #123456 y devuelve un Color
     static leerHexa6 (h) {
+
+        //max 255
         let r = h[1] + h[2];
         let g = h[3] + h[4];
         let b = h[5] + h[6];
         let a = "ff";
+
         let hexaCompleto = "#" + r + g + b + a;
         return Color.convertirHexadecimalRGBA(hexaCompleto);
     }

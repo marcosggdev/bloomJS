@@ -50,6 +50,10 @@ class RendererRefactor {
         gl.canvas.width = RendererRefactor.resolucionX;
         gl.canvas.height = RendererRefactor.resolucionY;
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+        //actualizar matriz de perspectiva
+        RendererRefactor.aspecto = gl.canvas.width / gl.canvas.height;
+        RendererRefactor.matrizP = Utilidades.crearMatrizPerspectiva(60.0, RendererRefactor.aspecto, 0.1, 1000.0);
     }
 
     static crearSupervalores () {
@@ -115,7 +119,6 @@ class RendererRefactor {
 
     static actualizar () {
 
-        console.log(RendererRefactor.resolucionX + ", " + RendererRefactor.resolucionY);
         RendererRefactor.camara.actualizar();
         
         //actualizar parametros con valor actual de supervalores
