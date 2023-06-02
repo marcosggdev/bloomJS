@@ -150,3 +150,29 @@ dialog button.aceptar:focus {
 dialog::backdrop {
     background-color: #b6b6b6d4;
 }
+.MenuObjetos .ContenedorObjetos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.MenuObjetos .Objeto {
+    background-color: purple;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0;
+    transition: transform 0.3s;
+    user-select: none;
+}
+.MenuObjetos .Objeto:not(.seleccionable) {
+    background-color: #430043;
+    color: grey;
+}
+.MenuObjetos .Objeto:not(.seleccionado).seleccionable:hover {
+    transform: scale(1.05);
+    background-color: pink;
+    color: black;
+}
+.MenuObjetos .Objeto.seleccionado {
+    background-color: #b4ffac;
+    color: #7d7d7d;
+}

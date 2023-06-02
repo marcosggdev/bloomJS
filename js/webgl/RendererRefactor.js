@@ -97,6 +97,7 @@ class RendererRefactor {
     }
 
     static ciclo () {
+        canvas.focus();
         RendererRefactor.actualizar();
         RendererRefactor.dibujar();
         window.requestAnimationFrame(RendererRefactor.ciclo);

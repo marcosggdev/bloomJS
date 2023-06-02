@@ -193,10 +193,12 @@ class ControlesCanvas {
 
     //se ha seleccionado un objeto
     static seleccionarObjeto (objeto) {
+
         let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
+
         if (menuSeleccion != null) {
             //borramos el que hay y creamos uno nuevo
-            VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion);
+            VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
             let nuevoMenu = new MenuSeleccion("Selección", objeto);
             VentanaCanvas.interfazCanvas.anadirMenu(nuevoMenu);
 
@@ -205,16 +207,29 @@ class ControlesCanvas {
             let menuSeleccion = new MenuSeleccion("Selección", objeto);
             VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
         }
+
+        //actualizar menu global si existe
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != false) {
+            menuGlobal.actualizarSeleccionado(objeto);
+        }
+
         ControlesCanvas.objetoSeleccionado = objeto;
     }
 
     //se deselecciona un objeto
     static deseleccionarObjeto () {
-            //reset + deseleccion en menu global
-            let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
-            if (menuSeleccion != null) {
-                VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
-            }
+        //reset + deseleccion en menu global
+        let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Selección");
+        if (menuSeleccion != null) {
+            VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
+        }
+
+        //actualizar menu global si existe
+        let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+        if (menuGlobal != false) {
+            menuGlobal.actualizarSeleccionado(null);
+        }
     }
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global
@@ -235,26 +250,6 @@ class ControlesCanvas {
         Array.from(objetosDibujables).forEach((e) => {
             e.style.backgroundColor = "#271427";
         });
-    }
-
-    static eliminarSeleccionado () {
-        ControlesCanvas.objetoSeleccionado.eliminar();
-        ControlesCanvas.deseleccionarObjeto();
-        GUI.actualizarMenuGlobal();
-    }
-
-    //por ejemplo, objeto creado o eliminado
-    static actualizarVentanaCanvas () {
-        GUI.actualizarMenuGlobal();
-    }
-
-    static anadirModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
-        let modelo = new Modelo(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial);        
-    }
-
-    static setEscena (escena) {
-        ControlesCanvas.escena = escena;
-        RendererRefactor.dibujables = escena.dibujables;
     }
 
 }
