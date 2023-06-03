@@ -46,9 +46,9 @@ session_start();
             RAIZ . "js/gui/InterfazCanvas/InterfazCanvas.js",
             RAIZ . "js/gui/InterfazCanvas/MenuGeneral.js",
             RAIZ . "js/gui/InterfazCanvas/MenuAlternar.js",
-            RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
             RAIZ . "js/gui/InterfazCanvas/Menu.js",
             RAIZ . "js/gui/InterfazCanvas/MenuEdicion.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
             RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
             RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js",
             RAIZ . "js/gui/InterfazCanvas/MenuObjetos.js"
@@ -72,7 +72,6 @@ session_start();
             RAIZ . "js/webgl/matematicas/Matriz4x4.js",
             RAIZ . "js/webgl/matematicas/Quaternion.js",
             RAIZ . "js/gui/GUI.js",
-            RAIZ . "js/webgl/Supervalor.js",
             RAIZ . "js/webgl/Modelo3D.js",
             RAIZ . "js/webgl/PuntoLuz.js",
             RAIZ . "js/webgl/Hitbox.js",
@@ -80,6 +79,14 @@ session_start();
             RAIZ . "js/webgl/CamaraSimple.js",
             RAIZ . "js/webgl/Grupo.js",
             RAIZ . "js/webgl/Escena.js",
+
+            RAIZ . "js/webgl/supervalores/Supervalor.js",
+            RAIZ . "js/webgl/supervalores/Numerico.js",
+            RAIZ . "js/webgl/supervalores/Texto.js",
+            RAIZ . "js/webgl/supervalores/ColorS.js",
+            RAIZ . "js/webgl/supervalores/Booleano.js",
+            RAIZ . "js/webgl/supervalores/Select.js",
+            RAIZ . "js/webgl/supervalores/SelectCompuesto.js",
 
             RAIZ . "js/generador/Forma.js",
             RAIZ . "js/generador/GrupoFormas.js",

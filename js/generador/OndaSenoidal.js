@@ -79,9 +79,8 @@ class OndaSenoidal extends Forma {
     }
 
     dibujar () {
-
         gl.useProgram(this.programa);
-
+        
         //matriz del modelo
         this.matrizM.identidad();
         this.matrizM.escalar(this.factorX, this.factorY, 1.0);
