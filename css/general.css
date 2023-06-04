@@ -6,6 +6,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Display:wght@400;900&display=swap');
 
+dialog::backdrop {
+    opacity: 0.2;
+}
+
 body {
     width: 100%;
     height: 100%;
@@ -522,4 +526,8 @@ div.usuarioGrande .contenido a:hover {
 }
 .ocultoDerecha {
     left: 100%;
+}
+.gif {
+    width: 100px;
+    height: 100px;
 }
