@@ -42,11 +42,16 @@ var FRAGMENT_SHADER_T =
 
 "varying vec2 vTex;\n" +
 
+"uniform float seleccionado;"+
 "uniform sampler2D sampler;\n" +
 
 "void main(){\n" +
-"    vec4 textura = texture2D(sampler, vTex);\n" +
-"    gl_FragColor = vec4(textura.xyz, 1.0);\n" +
+"    vec4 textura = texture2D(sampler, vTex);"+
+"    if (seleccionado == 0.0) {"+
+"        gl_FragColor = vec4(textura.xyz, 1.0);"+
+"    } else if (seleccionado == 1.0) {"+
+"        gl_FragColor = vec4(0.8, 0.8, 0.8, 0.8) + vec4(textura.xyz, 1.0);"+
+"    }"+
 "}\n";
 
 

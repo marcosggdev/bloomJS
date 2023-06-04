@@ -233,6 +233,12 @@ class ControlesCanvas {
         }
 
         ControlesCanvas.objetoSeleccionado = objeto;
+        for (let i = 0; i < RendererRefactor.escena.dibujables.length; i++) {
+            if (RendererRefactor.escena.dibujables[i].seleccionable) {
+                RendererRefactor.escena.dibujables[i].seleccionado = false;
+            }
+        }
+        ControlesCanvas.objetoSeleccionado.seleccionado = true;
     }
 
     //se deselecciona un objeto
@@ -248,6 +254,12 @@ class ControlesCanvas {
         if (menuGlobal != false) {
             menuGlobal.actualizarSeleccionado(null);
         }
+
+        if (ControlesCanvas.objetoSeleccionado != null) {
+            ControlesCanvas.objetoSeleccionado.seleccionado = false;
+            ControlesCanvas.objetoSeleccionado = null;
+        }
+        
     }
 
     //se selecciona desde canvas por click, y se gestiona la seleccion en el menu global

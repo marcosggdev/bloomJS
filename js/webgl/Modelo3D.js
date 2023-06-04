@@ -33,6 +33,7 @@ class Modelo3D {
         this.rutaMaterial = rutaMaterial;
 
         this.seleccionable = true;
+        this.seleccionado = false;
 
         this.supervalores = [
             new Numerico("posX", "x", this.posX, true, -10, 10, 1),
@@ -124,6 +125,11 @@ class Modelo3D {
 
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
         gl.uniformMatrix4fv(this.v, false, RendererRefactor.camara.matrizV.obtenerArrayPorColumnas());
+        if (this.seleccionado == true) {
+            gl.uniform1f(this.seleccionadoLoc, 1.0);
+        } else if (this.seleccionado == false) {
+            gl.uniform1f(this.seleccionadoLoc, 0.0);
+        }
 
         //atributos
         //gl.enableVertexAttribArray(this.aPosLoc);
@@ -283,6 +289,14 @@ class Modelo3D {
                     this.v = gl.getUniformLocation(this.programa, "v");
                     this.p = gl.getUniformLocation(this.programa, "p");
                     gl.uniformMatrix4fv(this.p, false, RendererRefactor.matrizP.obtenerArrayPorColumnas());
+
+                    //otros uniforms
+                    this.seleccionadoLoc = gl.getUniformLocation(this.programa, "seleccionado");
+                    if (this.seleccionado == true) {
+                        gl.uniform1f(this.seleccionadoLoc, 1.0);
+                    } else if (this.seleccionado == false) {
+                        gl.uniform1f(this.seleccionadoLoc, 0.0);
+                    }
     
                     //crear HITBOX
                     let factoresHitbox = this.calcularFactoresHitbox(this.vertices);
