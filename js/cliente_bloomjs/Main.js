@@ -33,7 +33,7 @@ window.addEventListener('load', () => {
                 Escena.leerEscenaSerializada(this.responseText);
             }
         };
-        req.open("GET", RUTA_BLOOM + NOMBRE_ESCENA);
+        req.open("GET", RUTA_BLOOM + "/Escena/" + NOMBRE_ESCENA);
         req.send();
         window.requestAnimationFrame(RendererRefactor.ciclo);
     } else {

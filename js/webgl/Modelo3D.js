@@ -1051,9 +1051,32 @@ class Modelo3D {
         return new Promise(resolve => {
             let parametros = json.parametros;
             let color = Color.deserializar(parametros.color);
+
+            //al guardar se guarda la ruta segun servidor, pero al importar se importan rutas desde la carpeta de cliente_bloomjs,
+            //donde se habran guardado los archivos en la ruta:
+            //cliente_bloomjs/Escena/Texturas y clinte_bloomjs/Escena/Dae
+            //antes ruta: /bloomJS/assets/subidos/texturas/...
+            //ahora: RUTA_BLOOM + Escena/texturas/...
+
+            let nuevaRutaTextura = null;
+            let nuevaRutaDae = null;
+            let nuevaRutaMaterial = null;
+
+            let partesRutaTextura = parametros.rutaTextura.split("/");
+            let nombreTextura = partesRutaTextura[partesRutaTextura.length - 1];
+            nuevaRutaTextura = RUTA_BLOOM + "Escena/Texturas/" + nombreTextura;
+
+            let partesRutaDae = parametros.rutaArchivoDae.split("/");
+            let nombreDae = partesRutaDae[partesRutaDae.length - 1];
+            nuevaRutaDae = RUTA_BLOOM + "Escena/Dae/" + nombreDae;
+
+            let partesRutaMaterial = parametros.rutaMaterial.split("/");
+            let nombreMaterial = partesRutaMaterial[partesRutaMaterial.length - 1];
+            nuevaRutaMaterial = RUTA_BLOOM + "Escena/Materiales/" + nombreMaterial;
+
             Modelo3D.crearModelo(parametros.posX, parametros.posY, parametros.posZ, parametros.anguloX, parametros.anguloY, parametros.anguloZ,
-                parametros.factorX, parametros.factorY, parametros.factorZ, parametros.modo, parametros.rutaArchivoDae,
-                color, parametros.rutaTextura, parametros.rutaMaterial)
+                parametros.factorX, parametros.factorY, parametros.factorZ, parametros.modo, nuevaRutaDae,
+                color, nuevaRutaTextura, nuevaRutaMaterial)
             .then(
                 function (modelo) {
                     resolve(modelo);

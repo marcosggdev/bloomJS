@@ -1,5 +1,5 @@
 
-RUTA_BLOOM = "/prueba/js/cliente_bloomjs/";
+RUTA_BLOOM = "/test/js/cliente_bloomjs/";
 NOMBRE_ESCENA = "Escena.json";
 
 let archivos = [
