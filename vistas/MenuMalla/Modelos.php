@@ -53,6 +53,7 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
             <input type="hidden" id="rutaModelo" value="<?=$modelosRegistros[$i]["rutaModelo"]?>">
             <input type="hidden" id="rutaTextura" value="<?=$modelosRegistros[$i]["rutaTextura"]?>">
             <input type="hidden" id="nombre" value="<?=$modelosRegistros[$i]["nombre"]?>">
+            <input type="hidden" id="id" value="<?=$modelosRegistros[$i]["id"]?>">
         </div>
     <?php
     }
@@ -68,7 +69,8 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
                         if (RendererRefactor.escena != null) {
                             Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",
                             "/bloomJS/"+plantilla.querySelector("#rutaModelo").value,null,
-                            "/bloomJS/"+plantilla.querySelector("#rutaTextura").value, null, plantilla.querySelector("#nombre").value)
+                            "/bloomJS/"+plantilla.querySelector("#rutaTextura").value, null, plantilla.querySelector("#nombre").value,
+                            plantilla.querySelector("#id").value)
                             .then(
                                 function (modelo) {
                                     RendererRefactor.escena.anadirDibujable(modelo);

@@ -160,4 +160,47 @@ class ModeloModelos {
         }
     }
 
+    /**
+     * Comprueba si el modelo con id = $id pertenece al usuario con id = $id_autor. En caso afirmativo devuelve true. En caso
+     * negativo o de error, devuelve false
+     */
+    public static function comprobarPertenenciaModelo ($id_autor, $id) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor AND id=:id";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id_autor" => $id_autor, "id" => $id]);
+            if ($preparada->rowCount() > 0) {
+                $registro = $preparada->fetch();
+                return [
+                    'id' => $registro['id'], 
+                    'nombre' => $registro['nombre'], 
+                    'descripcion' => $registro['descripcion'], 
+                    'rutaModelo' => $registro['rutaModelo'],
+                    'rutaTextura' => $registro['rutaTextura'],
+                    'previsualizacion' => $registro['previsualizacion'],
+                    'tipo' => $registro['tipo'],
+                    'id_autor' => $registro['id_autor']
+                ];
+            }
+            return false;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function eliminarModeloPorId ($id) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "DELETE FROM modelos WHERE id=:id";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id" => $id]);
+            return true;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

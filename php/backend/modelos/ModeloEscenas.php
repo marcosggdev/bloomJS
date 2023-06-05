@@ -66,4 +66,17 @@ class ModeloEscenas {
         }
     }
 
+    public static function eliminarEscena ($id) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "DELETE FROM escenas WHERE id=:id";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id" => $id]);
+            return true;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

@@ -14,7 +14,7 @@ class Modelo3D {
         "TMI": "dibujarTMI"
     }
     
-    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre) {
+    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre, id) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -32,6 +32,7 @@ class Modelo3D {
         this.rutaTextura = rutaTextura;
         this.rutaMaterial = rutaMaterial;
         this.nombre = nombre;
+        this.id = id;
 
         this.seleccionable = true;
         this.seleccionado = false;
@@ -64,9 +65,9 @@ class Modelo3D {
         
     }
 
-    static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre) {
+    static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre, id) {
         return new Promise(resolve => {
-            let modelo = new Modelo3D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre);
+            let modelo = new Modelo3D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre, id);
             modelo.cargar(modo)
             .then(
                 function () {
@@ -1042,7 +1043,8 @@ class Modelo3D {
                 "color": this.color,
                 "rutaTextura": this.rutaTextura,
                 "rutaMaterial": this.rutaMaterial,
-                "nombre": this.nombre
+                "nombre": this.nombre,
+                "id": this.id
             }
         };
         return jsonOBJ;
@@ -1056,7 +1058,7 @@ class Modelo3D {
 
             Modelo3D.crearModelo(parametros.posX, parametros.posY, parametros.posZ, parametros.anguloX, parametros.anguloY, parametros.anguloZ,
                 parametros.factorX, parametros.factorY, parametros.factorZ, parametros.modo, parametros.rutaArchivoDae,
-                color, parametros.rutaTextura, parametros.rutaMaterial, parametros.nombre)
+                color, parametros.rutaTextura, parametros.rutaMaterial, parametros.nombre, parametros.id)
             .then(
                 function (modelo) {
                     resolve(modelo);

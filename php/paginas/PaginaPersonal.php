@@ -98,17 +98,23 @@ if ($imprimir) {
 <?php
                 //modelos cuyo autor es el usuario propietario de la pagina personal
                 $datosModelos = ModeloModelos::getModelosPorIdAutor($usuario->id);
-                foreach ($datosModelos as $datosModelo) {
-?>
-                    <div class="plantilla">
-                        <div class="cabeceraPlantilla">
-                            <h4><?=$datosModelo["nombre"]?></h4>
-                            <img class="borrar" src="/bloomJS/img/iconos/borrar.png" alt="">
+                if (count($datosModelos) > 0) {
+                    foreach ($datosModelos as $datosModelo) {
+    ?>
+                        <div class="plantilla">
+                            <div class="cabeceraPlantilla">
+                                <h4><?=$datosModelo["nombre"]?></h4>
+                                <img class="borrar" src="/bloomJS/img/iconos/borrar.png" alt="">
+                            </div>
+                            <img src="/bloomJS/<?=$datosModelo["previsualizacion"]?>" alt="">
+                            <p>Autor: <?=$usuario->nombre?></p>
+                            <input id="id" type="hidden" value="<?= $datosModelo["id"] ?>">
                         </div>
-                        <img src="/bloomJS/<?=$datosModelo["previsualizacion"]?>" alt="">
-                        <p>Autor: <?=$usuario->nombre?></p>
-                        <input id="id" type="hidden" value="<?= $datosModelo["id"] ?>">
-                    </div>
+    <?php
+                    }
+                } else {
+?>
+                    <p>No hay modelos que mostrar...</p>
 <?php
                 }
 ?>
