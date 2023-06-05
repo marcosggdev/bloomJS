@@ -104,7 +104,16 @@
     gap: 10px;
 }
 .InputPersonalizado img {
-    height: 20px;
+    height: 100px;
+}
+.InputPersonalizado.Imagen {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-direction: column;
+}
+.InputPersonalizado.Imagen img {
+
 }
 dialog .botonera {
     display: flex;

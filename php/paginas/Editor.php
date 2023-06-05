@@ -73,6 +73,7 @@ session_start();
         RAIZ . "js/webgl/supervalores/Booleano.js",
         RAIZ . "js/webgl/supervalores/Select.js",
         RAIZ . "js/webgl/supervalores/SelectCompuesto.js",
+        RAIZ . "js/webgl/supervalores/Imagen.js",
         RAIZ . "js/webgl/Modelo3D.js",
         RAIZ . "js/webgl/PuntoLuz.js",
         RAIZ . "js/webgl/Hitbox.js",

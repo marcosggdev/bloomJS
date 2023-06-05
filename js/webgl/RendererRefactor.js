@@ -185,7 +185,8 @@ class RendererRefactor {
         let supervalores = JSON.parse(serializacion);
 
         for (let i = 0; i < supervalores.length; i++) {
-            RendererRefactor.supervalores[i].valor = supervalores[i].valor;
+            //guarda valor pero tb acutaliza representacion del DOM
+            RendererRefactor.supervalores[i].setValor(supervalores[i].valor);
         }
     }
 
