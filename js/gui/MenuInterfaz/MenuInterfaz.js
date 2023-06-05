@@ -61,67 +61,115 @@ class MenuInterfaz {
 
     /**
      * Genera un archivo .js con los datos necesarios para que la escena pueda importarse de nuevo y verse desde el cliente de
-     * bloomJS. Sería el archivo Main de la aplicación del cliente.
+     * bloomJS. Sería el archivo Main de la aplicación del cliente. Exporta también los archivos necesarios para el dibujo de los
+     * modelos contenidos en la escena: la textura, el archivo .dae, etc.
      */
     static exportarEscena() {
+
         if (RendererRefactor.escena != null) {
+
             let dialog = document.createElement("dialog");
 
             let titulo = document.createElement("h2");
-            titulo.textContent = "Exportación";
+            titulo.textContent = "Exportando...";
             dialog.appendChild(titulo);
 
-            let progreso = document.createElement("progress");
-            progreso.value = 0;
-            progreso.min = 0;
-            progreso.max = 100;
-            dialog.appendChild(progreso);
+            let iconoCargando = document.createElement("img");
+            iconoCargando.src = "/bloomJS/img/gif/cargando.gif";
+            iconoCargando.className = "gif";
+            dialog.appendChild(iconoCargando);
 
-            let botonera = document.createElement("div");
-            botonera.className = ".Botonera";
-
-            let exportar = document.createElement("button");
-            exportar.textContent = "Exportar";
-            exportar.addEventListener("click", () => {
-                //dibujables, iluminacion y camara. Se serializan todos los datos y se escriben en un archivo con una extension .json.
-                //Despues, se exporta tambien el archivo Main.js, pensado para ser ejecutado con el cliente de BloomJS, dando ordenes
-                //a la libreria de bloom para generar la escena con los datos del .json
-                let serializacion = RendererRefactor.escena.serializar();
-                let datos = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(serializacion));
-                let a = document.createElement("a");
-                a.href = datos;
-                a.download = "Escena.json";
-                setTimeout(function () {
-                    a.click();
-                    progreso.avanzarPaso("Descargando escena", 10);
-                    setTimeout(function () { 
-                        a = null; 
-                        progreso.value = 100;
-                        setTimeout(function () {
-                            dialog.close();
-                            dialog.remove();
-                        }, 1000);
-                    }, 1000);
-                }, 1000);
-            });
-            botonera.appendChild(exportar);
-
-            let cancelar = document.createElement("button");
-            cancelar.textContent = "Cancelar";
-            cancelar.addEventListener("click", () => {
-                dialog.close();
-                dialog.remove();
-            });
-            botonera.appendChild(cancelar);
-
-            dialog.appendChild(botonera);
             document.body.appendChild(dialog);
             dialog.showModal();
 
-            //Para funcionar correctamente el modelo necesitara el archivo de la textura y del material, además de la serialización,
-            //por lo tanto, vamos a incluirlos en este paso.
+            try {
+                //datos de la escena en json
+                let serializacion = RendererRefactor.escena.serializar();
+                let datos = JSON.stringify(serializacion);
+
+                //dibujables necesitan textura y .dae
+                let rutasTexturas = [];
+                let rutasDae = [];
+
+                for (let i = 0; i < RendererRefactor.escena.dibujables.length; i++) {
+                    let dibujable = RendererRefactor.escena.dibujables[i];
+
+                    let rutaTextura = dibujable.rutaTextura;
+                    let rutaDae = dibujable.rutaArchivoDae;
+
+                    if (rutaTextura != null) {
+                        rutasTexturas.push(rutaTextura);
+                    }
+
+                    if (rutaDae != null) {
+                        rutasDae.push(rutaDae);
+                    }
+                }
+
+                let nombresTexturas = [];
+                let nombresDae = [];
+
+                for (let i = 0; i < rutasTexturas.length; i++) {
+                    let subpartes = rutasTexturas[i].split("/");
+                    let ultimaParte = subpartes[subpartes.length - 1];
+                    nombresTexturas.push(ultimaParte);
+                }
+
+                for (let i = 0; i < rutasDae.length; i++) {
+                    let subpartes = rutasDae[i].split("/");
+                    let ultimaParte = subpartes[subpartes.length - 1];
+                    nombresDae.push(ultimaParte);
+                }
+
+                let archivosTexturas = [];
+                for (let i = 0; i < rutasTexturas.length; i++) {
+                    archivosTexturas.push(Utilidades.descargarDesdeUrl(rutasTexturas[i]));
+                }
+
+                let archivosDae = [];
+                for (let i = 0; i < rutasDae.length; i++) {
+                    archivosDae.push(Utilidades.descargarDesdeUrl(rutasDae[i]));
+                }
+
+                Promise.all(archivosTexturas.concat(archivosDae)).then(
+                    function () {
+                        let zip = new JSZip();
+                        let escena = zip.folder("Escena");
+                        escena.file("Escena.json", datos);
+
+                        let texturas = escena.folder("Texturas");
+                        let dae = escena.folder("Dae");
+
+                        for (let i = 0; i < archivosTexturas.length; i++) {
+                            texturas.file(nombresTexturas[i], archivosTexturas[i]);
+                        }
+
+                        for (let i = 0; i < archivosDae.length; i++) {
+                            dae.file(nombresDae[i], archivosDae[i]);
+                        }
+
+                        zip.generateAsync({ "type": "blob" }).then(
+                            function (contenido) {
+                                saveAs(contenido, "Escena.zip");
+                                dialog.close();
+                                dialog.remove();
+                            }
+                        );
+                    }
+                );
+
+            } catch (error) {
+
+                alert("Hubo un error al exportar la escena: " + error);
+                dialog.close();
+                dialog.remove();
+
+            }
+
         } else {
+
             alert("¡Ups!¡Primero debes crear una escena!");
+
         }
     }
 

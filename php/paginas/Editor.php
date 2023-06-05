@@ -11,6 +11,8 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor</title>
+    <script src="/bloomJS/js/lib/Stuk-jszip-2ceb998/vendor/FileSaver.js"></script>
+    <script src="/bloomJS/js/lib/Stuk-jszip-2ceb998/dist/jszip.js"></script>
 
     <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana", "VentanaCanvas", "BarraProgreso"]); ?>
 
