@@ -120,13 +120,16 @@ class Escena {
 
         let camara = this.camara.serializar();
 
+        let rendererRefactor = RendererRefactor.serializar();
+
         let serializacionOBJ = {
             "id": String(this.id),
             "titulo": String(this.titulo),
             "descripcion": String(this.descripcion),
             "dibujables": dibujables,
             "iluminacion": iluminacion,
-            "camara": camara
+            "camara": camara,
+            "rendererRefactor": rendererRefactor
         };
 
         return serializacionOBJ;
@@ -178,6 +181,8 @@ class Escena {
         RendererRefactor.camara = obj;
         escena.camara = obj;
         RendererRefactor.escena = escena;
+
+        RendererRefactor.deserializar(json.rendererRefactor);
     }
     
 }

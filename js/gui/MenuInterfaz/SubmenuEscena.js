@@ -70,6 +70,7 @@ class SubmenuEscena extends SubmenuInterfaz {
         };
 
         let formData = new FormData();
+        //escena y parametros del renderer
         formData.append("escena", JSON.stringify(serializacionOBJ));
         formData.append("imagen", JSON.stringify(datosImagen));
 

@@ -173,4 +173,20 @@ class RendererRefactor {
 
     }
 
+    static serializar () {
+        let serializacion = [];
+        for (let i = 0; i < RendererRefactor.supervalores.length; i++) {
+            serializacion.push(RendererRefactor.supervalores[i]);
+        }
+        return JSON.stringify(serializacion);
+    }
+
+    static deserializar (serializacion) {
+        let supervalores = JSON.parse(serializacion);
+
+        for (let i = 0; i < supervalores.length; i++) {
+            RendererRefactor.supervalores[i].valor = supervalores[i].valor;
+        }
+    }
+
 }
