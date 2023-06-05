@@ -14,7 +14,7 @@ class Modelo3D {
         "TMI": "dibujarTMI"
     }
     
-    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
+    constructor (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre) {
         //constructor con parametros sincronos. Se llama desde generarModelo
         this.posX = posX;
         this.posY = posY;
@@ -31,6 +31,7 @@ class Modelo3D {
         this.color = color;
         this.rutaTextura = rutaTextura;
         this.rutaMaterial = rutaMaterial;
+        this.nombre = nombre;
 
         this.seleccionable = true;
         this.seleccionado = false;
@@ -63,9 +64,9 @@ class Modelo3D {
         
     }
 
-    static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial) {
+    static async crearModelo (posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre) {
         return new Promise(resolve => {
-            let modelo = new Modelo3D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial);
+            let modelo = new Modelo3D(posX, posY, posZ, anguloX, anguloY, anguloZ, factorX, factorY, factorZ, modo, rutaArchivoDae, color, rutaTextura, rutaMaterial, nombre);
             modelo.cargar(modo)
             .then(
                 function () {
@@ -1040,7 +1041,8 @@ class Modelo3D {
                 "rutaArchivoDae": this.rutaArchivoDae,
                 "color": this.color,
                 "rutaTextura": this.rutaTextura,
-                "rutaMaterial": this.rutaMaterial
+                "rutaMaterial": this.rutaMaterial,
+                "nombre": this.nombre
             }
         };
         return jsonOBJ;
@@ -1054,7 +1056,7 @@ class Modelo3D {
 
             Modelo3D.crearModelo(parametros.posX, parametros.posY, parametros.posZ, parametros.anguloX, parametros.anguloY, parametros.anguloZ,
                 parametros.factorX, parametros.factorY, parametros.factorZ, parametros.modo, parametros.rutaArchivoDae,
-                color, parametros.rutaTextura, parametros.rutaMaterial)
+                color, parametros.rutaTextura, parametros.rutaMaterial, parametros.nombre)
             .then(
                 function (modelo) {
                     resolve(modelo);

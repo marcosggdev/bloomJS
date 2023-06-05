@@ -63,8 +63,6 @@ class MenuSeleccion extends MenuGeneral {
     }
 
     actualizarDatos (modelo) {
-
-        console.log("actualizando datos");
         
         let submenuObjeto = this.nodo.querySelector(".propiedades.objeto");
         let submenuAdicionales = this.nodo.querySelector(".propiedades.adicionales");

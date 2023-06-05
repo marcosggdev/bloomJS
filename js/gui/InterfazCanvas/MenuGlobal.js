@@ -30,9 +30,14 @@ class MenuGlobal extends MenuObjetos {
         if (this.objetos != null) {
 
             for (let i = 0; i < this.objetos.length; i++) {
+
                 let objeto = document.createElement("div");
                 objeto.className = "Objeto";
-                objeto.textContent = this.objetos[i].constructor.name;
+                let nombre = this.objetos[i].nombre;
+                if (typeof(nombre) === "undefined") {
+                    nombre = "Sin definir";
+                }
+                objeto.textContent = this.objetos[i].constructor.name + " - " + nombre;
                 contenedorObjetos.appendChild(objeto);
 
                 if (this.objetos[i].seleccionable) {
@@ -41,6 +46,47 @@ class MenuGlobal extends MenuObjetos {
 
                 if (this.objetos[i] == this.seleccionado) {
                     objeto.classList.add("seleccionado");
+
+                    //Boton para borrar objeto
+                    let botonBorrar = document.createElement("img");
+                    botonBorrar.src = "/bloomJS/img/iconos/borrar.png";
+                    botonBorrar.className = "BotonIcono";
+                    botonBorrar.addEventListener("click", () => {
+                        let dialog = document.createElement("dialog");
+                        let mensaje = document.createElement("p");
+                        mensaje.textContent = "¿Está seguro de que desea eliminar el modelo: " + this.objetos[i].nombre + "?";
+                        dialog.appendChild(mensaje);
+                        
+                        let botonera = document.createElement("div");
+                        botonera.className = "botonera";
+                        dialog.appendChild(botonera);
+
+                        let aceptar = document.createElement("button");
+                        aceptar.className = "boton-aceptar";
+                        aceptar.textContent = "Aceptar";
+                        aceptar.addEventListener("click", () => {
+                            RendererRefactor.escena.eliminarDibujable(ControlesCanvas.objetoSeleccionado);
+                            //la llamada anterior va a actualizar el nodo del menu global
+                            dialog.close();
+                            dialog.remove();
+                        });
+                        botonera.appendChild(aceptar);
+
+                        let cancelar = document.createElement("button");
+                        cancelar.className = "boton-cancelar";
+                        cancelar.textContent = "Cancelar";
+                        cancelar.addEventListener("click", () => {
+                            dialog.close();
+                            dialog.remove();
+                        });
+                        botonera.appendChild(cancelar);
+
+                        document.body.appendChild(dialog);
+                        dialog.showModal();
+                    });
+
+                    objeto.appendChild(botonBorrar);
+
                 }
             }
 

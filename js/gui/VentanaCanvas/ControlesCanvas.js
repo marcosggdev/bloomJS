@@ -124,12 +124,9 @@ class ControlesCanvas {
 
         canvas.addEventListener("keydown", (e) => {
 
-            console.dir(ControlesCanvas.objetoSeleccionado);
-
             if (ControlesCanvas.objetoSeleccionado != null) {
 
                 let tecla = ControlesCanvas.teclas[e.keyCode];
-                console.log("tecla con objeto seleccionado");
 
                 //MODELOS RST
                 if (ControlesCanvas.objetoSeleccionado.constructor.name == "Modelo3D") {

@@ -171,10 +171,28 @@ dialog::backdrop {
     margin: 0;
     transition: transform 0.3s;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.MenuObjetos .Objeto img {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: crimson;
+    border-radius: 5px;
+}
+.MenuObjetos .Objeto.seleccionable img:hover {
+    background-color: red;
 }
 .MenuObjetos .Objeto:not(.seleccionable) {
     background-color: #430043;
     color: grey;
+}
+.MenuObjetos .Objeto:not(.seleccionable) img {
+    background-color: rgb(146, 12, 39);
 }
 .MenuObjetos .Objeto:not(.seleccionado).seleccionable:hover {
     transform: scale(1.05);
