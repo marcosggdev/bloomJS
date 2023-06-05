@@ -40,14 +40,14 @@ class Vista {
         <?php
     }
 
-    public static function imprimirNav ($entradas, $indiceActual = 0) {
+    public static function imprimirNav ($entradas, $indiceActual) {
 ?>
         <nav>
             <ul>
                 <?php
                 $indice = 0;
                 foreach ($entradas as $nombre => $ruta) {
-                    if ($indice != $indiceActual) {
+                    if ($indice !== $indiceActual) {
                         echo "<li><a href='".$ruta."'>".$nombre."</a></li>";
                     } else {
                         echo "<li><a class='actual'>".$nombre."</a></li>";
@@ -133,15 +133,20 @@ class Vista {
 ?>
             <div class="usuarioGrande">
                 <div class="usuarioImgCaja ocultoDerecha">
-                    <img src="<?="/bloomJS/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
-                    <div class="contenido">
-                        <p><a href="/bloomJS/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
-                        <p><?=$usuario->correo?></p>
+                    <div class="infoUsuario">
+                        <img class="imagenPerfil" src="<?="/bloomJS/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
+                        <div class="contenido">
+                            <p><a href="/bloomJS/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
+                            <p><?=$usuario->correo?></p>
+                        </div>
+                        <form action="/bloomJS/php/paginas/Logout.php" method="POST">
+                            <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
+                            <input class="boton-neon" type="submit" value="Cerrar sesión">
+                        </form>
                     </div>
-                    <form action="/bloomJS/php/paginas/Logout.php" method="POST">
-                        <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
-                        <input class="boton-neon" type="submit" value="Cerrar sesión">
-                    </form>
+                    <div class="iconos">
+                        <a href="/bloomJS/php/paginas/PaginaPersonal.php"><img src="/bloomJS/img/iconos/ajustes.png" alt=""></a>
+                    </div>
                 </div>
             </div>
 <?php

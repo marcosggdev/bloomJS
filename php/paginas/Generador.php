@@ -20,7 +20,8 @@ session_start();
             RAIZ . "css/neon.css",
             RAIZ . "css/botones.css",
             RAIZ . "css/servidor.css",
-            RAIZ . "css/editor.css"
+            RAIZ . "css/editor.css",
+            RAIZ . "css/usuario.css"
         ]); ?>
 
 <?= Vista::importarRecursos([

@@ -29,7 +29,8 @@ $estilos = [
     RAIZ . "css/comentarios.css",
     RAIZ . "css/carruselHorizontal.css",
     RAIZ . "css/neon.css",
-    RAIZ . "css/cronologia.css"
+    RAIZ . "css/cronologia.css",
+    RAIZ . "css/usuario.css"
 ];
 foreach ($estilos as $estilo) {
     echo "<link rel='stylesheet' href='$estilo'/>";

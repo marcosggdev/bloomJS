@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+
     let editarPagina = document.getElementById("editarPaginaPersonal");
     editarPagina.addEventListener("click", () => {
         editarPagina.style.display = "none";
@@ -51,6 +52,7 @@ window.addEventListener("load", () => {
         botonera.appendChild(cancelar);
         textarea.after(botonera);
     });
+    
 });
 
 function sanearScripts (texto) {
