@@ -57,12 +57,10 @@ if (isset($_SESSION["usuario"]) && isset($_POST["id"])) {
 
         }
 
-        //devolvemos lista de ids de las escenas afectadas
-        echo json_encode($ids_escenas_afectadas);
-
-    } else {
-        echo "No hay escenas asociadas al usuario";
     }
+
+    //devolvemos lista de ids de las escenas afectadas
+    echo json_encode($ids_escenas_afectadas);
 
 } else {
     echo "<p class='servidor error'>Error: ¿Ha iniciado sesión?</p>";
