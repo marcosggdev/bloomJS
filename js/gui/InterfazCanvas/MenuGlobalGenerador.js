@@ -62,11 +62,18 @@ class MenuGlobalGenerador extends MenuObjetos {
                         aceptar.className = "boton-aceptar";
                         aceptar.textContent = "Aceptar";
                         aceptar.addEventListener("click", () => {
+
                             RendererRefactor.escena.eliminarDibujable(this.seleccionado);
                             //la llamada anterior va a actualizar el nodo del menu global
                             dialog.close();
                             dialog.remove();
+                            let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preforma");
+                            if (menuSeleccion != null) {
+                                VentanaCanvas.interfazCanvas.eliminarMenu(menuSeleccion.nodo);
+                            }
+                            this.seleccionado = null;
                             this.actualizarNodo();
+
                         });
                         botonera.appendChild(aceptar);
 
@@ -99,15 +106,21 @@ class MenuGlobalGenerador extends MenuObjetos {
     }
 
     seleccionarObjeto (objeto) {
+
         //seleccionar nuevo
         this.seleccionado = objeto;
-        objeto.funcionActualizar = objeto.constructor.seleccion;
+        objeto.funcionActualizar = objeto.seleccion;
         this.actualizarNodo();
+
         let menuSeleccion = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preforma");
         if (menuSeleccion != null) {
             menuSeleccion.objeto = objeto;
             menuSeleccion.actualizarDatos();
+        } else {
+            menuSeleccion = new MenuEdicion("Preforma", objeto);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuSeleccion);
         }
+
         canvas.focus();
     }
 

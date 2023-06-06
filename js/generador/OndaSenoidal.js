@@ -10,15 +10,13 @@ class OndaSenoidal extends Forma {
         this.desfaseY = 0;
         this.periodo = 9.89;
         this.rellenoInferior = true;
-        this.colorRelleno = Color.NARANJA;
-        this.colorBorde = Color.ROJO;
+        this.colorRelleno = new Color(255,130,0,255);
+        this.colorBorde = new Color(255, 0, 0, 255);
 
-        this.seleccionable = true;
+        this.seleccionable = true;   
 
+        //animacion seleccion
         this.colorRellenoInicial = null;
-        this.aumentandoBrillo = true;
-        this.aumentos = 0;
-        this.aumentosMax = 10;
 
         this.supervalores = [
             new Numerico("capa", "Capa", this.capa, true, -8, 8, 1),
@@ -33,38 +31,54 @@ class OndaSenoidal extends Forma {
 
     }
 
-    static seleccion () {
+    seleccion () {
+
         let colorRelleno = this.supervalores.filter((supervalor) => {return (supervalor.variable == "colorRelleno")})[0];
         let color = colorRelleno.valor;
 
         if (this.colorRellenoInicial == null) {
-            this.colorRellenoInicial = color;
-            this.aumentos = 0;
-            this.aumentandoBrillo = true;   
-        }
 
-        if (this.aumentos >= 0) {
+            this.colorRellenoInicial = JSON.parse(JSON.stringify(color));
+            this.aumentandoBrillo = true;  
+            this.aumentos = 0;
+            this.aumentosMax = 20;
+
+        } else {
+
             if (this.aumentandoBrillo) {
+
                 color.R += 0.1;
                 color.G += 0.1;
                 color.B += 0.1;
                 this.aumentos++;
-                if (this.aumentos >= this.aumentosMax) {
+
+                if (this.aumentos > this.aumentosMax / 2) {
                     this.aumentandoBrillo = false;
                 }
+
             } else {
+
                 color.R -= 0.1;
                 color.G -= 0.1;
                 color.B -= 0.1;
-                this.aumentos--;
+                this.aumentos++;
+
+                //condicion de parada
+                if (this.aumentos > this.aumentosMax) {
+                    colorRelleno.valor = this.colorRellenoInicial.valor;
+                    this.colorRellenoInicial = null;
+                    this.aumentos = null;
+                    this.aumentandoBrillo = null;
+                    this.aumentosMax = null;
+                    this.funcionActualizar = null;
+                }
+
             }
-        } else {
-            let colorRelleno = this.supervalores.filter((supervalor) => {return (supervalor.variable == "colorRelleno")})[0];
-            colorRelleno.setValor(this.colorRellenoInicial);
-            this.funcionActualizar = null;
+
+            colorRelleno.valor = color;
+
         }
 
-        colorRelleno.setValor(color);
     }
 
     static async crear (z) {

@@ -45,7 +45,7 @@ class EscenaGenerador {
     eliminarDibujable (dibujable) {
         for (let i = 0; i < this.dibujables.length; i++) {
             if (this.dibujables[i] == dibujable) {
-                this.dibujables = this.dibujables.splice(i, 1);
+                this.dibujables.splice(i, 1);
                 i = this.dibujables.length;
             }
         }
