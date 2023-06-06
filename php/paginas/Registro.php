@@ -61,15 +61,6 @@ if ($formulario) {
         <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/loginTablets.css">
         <link rel="stylesheet" href="/bloomJS/css/formulario.css">
     </head>
-<?php
-    Vista::imprimirHead("Bloom - JS", 
-    [
-        RAIZ . "css/general.css",
-        RAIZ . "css/login.css", 
-        RAIZ . "css/formulario.css"
-    ], 
-    []);
-?>
     <main>
         <form enctype="multipart/form-data" action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
             <h1>Registrarse...</h1>
