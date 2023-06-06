@@ -125,6 +125,7 @@ window.addEventListener("load", () => {
             formData.append("id", escena.querySelector("#id").value);
             req.open("POST", "/bloomJS/php/backend/scripts/eliminarEscenaPorId.php");
             req.send(formData);
+            botonBorrar.disabled = true;
         });
 
     });

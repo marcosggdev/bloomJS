@@ -55,7 +55,7 @@ botonSubir.addEventListener("click", () => {
         let req = new XMLHttpRequest();
         req.onreadystatechange = function () {
             if (req.readyState == 4 && req.status == 200) {
-                console.log(this.responseText);
+                Servidor.mensaje(this.responseText);
                 dialog.remove();
             }
         }

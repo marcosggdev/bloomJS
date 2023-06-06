@@ -9,13 +9,15 @@
     z-index: 999;
     padding: 2em;
     margin: 0;
-    transition: left 1s;
+    opacity: 1;
+    transition: left 1s, opacity 1s;
 }
-.servidor.info {
-    background-color: green;
+.servidor.informacion {
+    background-color: rgb(162, 255, 162);
+    color: black;
 }
 .servidor.error {
-    background-color: red;
+    background-color: crimson;
     color: white;
 }
 .malla.error {

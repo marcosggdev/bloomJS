@@ -1,4 +1,8 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once RAIZ_WEB . "php/DTO/Usuario.php";
+require_once RAIZ_WEB . "php/backend/modelos/ModeloEscenas.php";
+session_start();
 
 $error = false;
 
@@ -20,7 +24,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["id"])) {
     $error .= "El usuario no está autenticado en el sistema o el id de la escena no está definido";
 }
 
-$clase = "informacion";
+$clase = "servidor informacion";
 $texto = "Escena eliminada con éxito. Recargue la página cuando desee actualizar los cambios";
 if ($error !== false) {
     $clase = "servidor error";

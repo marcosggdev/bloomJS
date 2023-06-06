@@ -36,19 +36,24 @@ move_uploaded_file($previsualizacion['tmp_name'], "/var/www/html/bloomJS/" . $ru
 
 //$nombre, $descripcion, $rutaModelo, $rutaTextura
 session_start();
+
+$clase = "servidor informacion";
+$texto = "¡El modelo se ha subido correctamente!";
+$error = false;
+
 if (isset($_SESSION["usuario"])) {
+
     //iniciada sesion, insertar con id autor correspondiente
     $usuario = $_SESSION["usuario"];
     if (!ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, $usuario->id)) {
-        echo "<script>alert('Hubo un error en la base de datos al insertar el modelo')</script>";
-    } else {
-        echo "<script>alert('El modelo se ha subido de forma correcta')</script>";
+        $error .= "Hubo un error en la base de datos al insertar el modelo";
     }
+
 } else {
     //sin iniciar sesion => id_autor = 2 (anonimo)
     if (!ModeloModelos::insertarModelo($nombre, $descripcion, $rutaDae, $rutaTextura, $rutaPrevisualizacion, 2)) {
-        echo "<script>alert('Hubo un error en la base de datos al insertar el modelo')</script>";
-    } else {
-        echo "<script>alert('El modelo se ha subido de forma correcta')</script>";
+        $error .= "Hubo un error en la base de datos al insertar el modelo de forma anónima";
     }
 }
+
+echo json_encode(["clase" => $clase, "texto" => $texto]);

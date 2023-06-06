@@ -8,10 +8,15 @@ class Servidor {
         p.textContent = obj.texto;
         p.className = obj.clase;
         document.body.appendChild(p);
-        p.style.left = "0%";
-        /*setTimeout(() => {
-            p.remove();
-        }, 5000);*/
+        setTimeout(() => {
+            p.style.left = 0;
+            setTimeout(() => {
+                p.style.opacity = 0;
+                setTimeout(()=>{
+                    p.remove();
+                }, 1000);
+            }, 5000);
+        }, 1000);
     }
 
 }
