@@ -34,4 +34,10 @@ class MenuEdicion extends MenuGeneral {
         }
     }
 
+    //cambiar objeto => cambiar datos
+    actualizarDatos () {
+        this.nodo.querySelector(".contenedorEditables").remove();
+        this.ampliarNodo(this.objeto);
+    }
+
 }

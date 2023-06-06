@@ -12,6 +12,7 @@ Array.from(presets).forEach((p) => {
         Preformas.crearPreforma(p.id)
         .then(
             function (forma) {
+                
                 RendererRefactor.escena.anadirDibujable(forma);
 
                 //crear menu preformas (malla)
@@ -19,13 +20,19 @@ Array.from(presets).forEach((p) => {
                 VentanaCanvas.interfazCanvas.eliminarMenu(menu.nodo);
 
                 //crear menu edicion sin boton de cierre
-                menuImagen = new MenuEdicion("Preforma", forma);
-                let botonCierre = menuImagen.nodo.querySelector(".BarraCierre img");
-                botonCierre.remove();
-                VentanaCanvas.interfazCanvas.anadirMenu(menuImagen);
+                let menuImagen = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preforma");
+                if (menuImagen == null) {
+                    menuImagen = new MenuEdicion("Preforma", forma);
+                    let botonCierre = menuImagen.nodo.querySelector(".BarraCierre img");
+                    botonCierre.remove();
+                    VentanaCanvas.interfazCanvas.anadirMenu(menuImagen);
+                }
 
-                menuObjetos = new MenuObjetos("Selección", RendererRefactor.escena.dibujables);
-                VentanaCanvas.interfazCanvas.anadirMenu(menuObjetos);
+                let menuGlobal = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Global");
+                if (menuGlobal != null) {
+                    menuGlobal.seleccionarObjeto(forma);
+                    menuGlobal.actualizarNodo();
+                }
 
                 //limpiar scripts del DOM
                 scripts = document.querySelectorAll("script[src='/bloomJS/vistas/generador/presets/malla/MallaPresets.js']");

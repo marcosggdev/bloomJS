@@ -74,12 +74,14 @@ class Modelo2D {
         this.aPosBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(this.aPosLoc);
 
         //textura
         this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
         this.aTexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.coordsUV), gl.STATIC_DRAW);
+        gl.enableVertexAttribArray(this.aTexLoc);
 
         var textura = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, textura);
@@ -155,16 +157,12 @@ class Modelo2D {
         gl.uniformMatrix4fv(this.m, false, this.matrizM.obtenerArrayPorColumnas());
 
         //atributos
-        gl.enableVertexAttribArray(this.aPosLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
         gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
 
-        //textura
-        gl.enableVertexAttribArray(this.aTexLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
         gl.vertexAttribPointer(this.aTexLoc, 2, gl.FLOAT, false, 0, 0);
-        gl.bindTexture(gl.TEXTURE_2D, this.textura);
+        gl.bindTexture(gl.TEXTURE_2D, this.textura);    //para que cada objeto se dibuje con su textura
 
         //dibujado
         gl.drawArrays(gl.TRIANGLES, 0, this.vertices.length / 3);

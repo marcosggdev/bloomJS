@@ -173,43 +173,6 @@ class MenuInterfaz {
         }
     }
 
-    /*
-    static exportarGraficos3D () {
-        //necesitamos la informacion de los modelos, la camara y el renderer.
-        let objetos = [];
-        for (let i = 0; i < Renderer.dibujables.length; i++) {
-            if (Renderer.dibujables[i] instanceof Modelo3D) {
-                objetos.push(Renderer.dibujables[i].serializar());
-            }
-        }
-
-        let req = new XMLHttpRequest();
-        req.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-                let a = document.createElement("a");
-                let archivo = new Blob([this.responseText], {type: 'text/plain'});
-                a.href = URL.createObjectURL(archivo);
-                a.download = "bloomjs_main.js";
-                a.click();
-                URL.revokeObjectURL(a.href);
-            }
-        };
-        let formData = new FormData();
-        formData.append("objetos", objetos);
-        formData.append("camara", Renderer.camara.serializar());
-        let rendererParametros = {
-            "ancho": Renderer.ancho,
-            "alto": Renderer.alto,
-            "fondo": Renderer.fondo,
-            "dibujarGrid": Renderer.dibujarGrid
-        };
-        formData.append("rendererParametros", JSON.stringify(rendererParametros));
-        req.open("POST", "/bloomJS/php/backend/scripts/generarExportacionCanvas.php");
-        req.send(formData);
-    }
-    */ 
-
     //--------------------------------------------GENERADOR-------------------------------------------------------------
     /**
      * Crea un menu de tipo malla y lo añade a la interfaz de la ventana canvas. Esta malla contendra los diferentes tipos
@@ -219,6 +182,14 @@ class MenuInterfaz {
         if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preformas")) {
             let menu = new MenuMalla("Preformas", "/bloomJS/vistas/generador/presets/malla/MallaPresets.php", null, 0, null, 2);
             VentanaCanvas.interfazCanvas.anadirMenu(menu);
+        }
+    }
+
+    static ajustesGenerador () {
+        let menuAjustes = VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Ajustes");
+        if (menuAjustes == null) {
+            menuAjustes = new MenuEdicion("Ajustes", RendererRefactor);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuAjustes);
         }
     }
 

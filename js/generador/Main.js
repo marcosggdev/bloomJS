@@ -35,6 +35,9 @@ window.addEventListener('load', () => {
                 new BotonInterfaz("Cargar", MenuInterfaz.cargarImagen),
                 new BotonInterfaz("Guardar", MenuInterfaz.guardarImagen)
             ]),
+            new SubmenuInterfaz("Generador", [
+                new BotonInterfaz("Ajustes", MenuInterfaz.ajustesGenerador)
+            ]),
             new BotonInterfaz("Exportar", MenuInterfaz.exportarImagen)
         ]);
 
@@ -43,11 +46,13 @@ window.addEventListener('load', () => {
     let main = document.querySelector("main");
     main.appendChild(VentanaCanvas.nodo);
 
-    //escena del generador
+    //escena del generador: si se efine vacia (null) se cre un GridGenerador
     EscenaGenerador.crearEscenaGenerador(null)
     .then(
         function (escena) {
             RendererRefactor.escena = escena;
+            let menuGlobalGenerador = new MenuGlobalGenerador("Global", escena.dibujables);
+            VentanaCanvas.interfazCanvas.anadirMenu(menuGlobalGenerador);
         }
     );
 

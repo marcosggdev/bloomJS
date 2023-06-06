@@ -134,12 +134,9 @@ class Modelo3D {
         }
 
         //atributos
-        //gl.enableVertexAttribArray(this.aPosLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
-        //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
         gl.vertexAttribPointer(this.aPosLoc, 3, gl.FLOAT, false, 0, 0);
 
-        gl.enableVertexAttribArray(this.aTexLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
         gl.vertexAttribPointer(this.aTexLoc, 2, gl.FLOAT, false, 0, 0);
         gl.bindTexture(gl.TEXTURE_2D, this.textura);    //para que cada objeto se dibuje con su textura
@@ -255,13 +252,15 @@ class Modelo3D {
                     this.aPosBuffer = gl.createBuffer();
                     gl.bindBuffer(gl.ARRAY_BUFFER, this.aPosBuffer);
                     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+                    gl.enableVertexAttribArray(this.aPosLoc);
     
                     //textura
                     this.aTexLoc = gl.getAttribLocation(this.programa, "aTex");
                     this.aTexBuffer = gl.createBuffer();
                     gl.bindBuffer(gl.ARRAY_BUFFER, this.aTexBuffer);
                     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.texCoords), gl.STATIC_DRAW);
-    
+                    gl.enableVertexAttribArray(this.aTexLoc);
+                    
                     var textura = gl.createTexture();
                     gl.bindTexture(gl.TEXTURE_2D, textura);
                     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));

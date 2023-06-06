@@ -3,6 +3,7 @@ class GridGenerador extends Modelo2D {
     constructor () {
         //se crea un modelo2D de escala ancho y alto, en el plano XZ, con shaders de grid sin color
         super(0, 0, -9/10, 0, 0, 0, 1000, 1000, null, VERTEX_SHADER_GRID_GENERADOR, FRAGMENT_SHADER_GRID_GENERADOR, null);
+        this.seleccionable = false;
     }
 
     static async crearGridGenerador () {

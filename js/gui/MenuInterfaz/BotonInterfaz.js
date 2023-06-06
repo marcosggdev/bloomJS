@@ -20,7 +20,7 @@ class BotonInterfaz {
                 this.nodo.parentNode.classList.remove("activo");
             }
             //accion
-            funcion();
+            this.funcion();
         });
         return nodo;
     }

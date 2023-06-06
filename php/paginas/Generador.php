@@ -52,7 +52,8 @@ session_start();
             RAIZ . "js/gui/InterfazCanvas/MenuDisplay.js",
             RAIZ . "js/gui/InterfazCanvas/MenuMalla.js",
             RAIZ . "js/gui/InterfazCanvas/MenuSeleccion.js",
-            RAIZ . "js/gui/InterfazCanvas/MenuObjetos.js"
+            RAIZ . "js/gui/InterfazCanvas/MenuObjetos.js",
+            RAIZ . "js/gui/InterfazCanvas/MenuGlobalGenerador.js"
     ]) ?>
 
         <?= Vista::imprimirScripts([

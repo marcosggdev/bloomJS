@@ -85,8 +85,8 @@ var FRAGMENT_SHADER_ONDA_ESFERICA =
 "   }"+
 "}\n";
 
-//------------------------------------------ONDAS-SENOIDALES---------------------------------
-var VERTEX_SHADER_ONDAS_SENOIDALES = 
+//------------------------------------------ONDA-SENOIDAL---------------------------------
+var VERTEX_SHADER_ONDA_SENOIDAL = 
 
 "uniform mat4 m;\n" +
 "uniform mat4 v;\n" +
@@ -99,7 +99,7 @@ var VERTEX_SHADER_ONDAS_SENOIDALES =
 "   vPos = aPos;"+
 "}\n";
 
-var FRAGMENT_SHADER_ONDAS_SENOIDALES =
+var FRAGMENT_SHADER_ONDA_SENOIDAL =
 "precision mediump float;\n" +
 
 "uniform float amplitud;"+

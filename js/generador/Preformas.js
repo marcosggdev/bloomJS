@@ -13,7 +13,7 @@ class Preformas {
                     ); 
                     break;
                 case "OndaSenoidal": 
-                    OndaSenoidal.crear(0,0,0,1,1,VERTEX_SHADER_ONDAS_SENOIDALES, FRAGMENT_SHADER_ONDAS_SENOIDALES, Color.AZUL).then(
+                    OndaSenoidal.crear(0).then(
                         function (forma) {
                             resolve(forma);
                         }
