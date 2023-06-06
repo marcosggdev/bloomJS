@@ -154,8 +154,8 @@ class Vista {
 ?>
             <div class="usuarioGrande">
                 <div class="usuarioImgCaja ocultoDerecha">
-                    <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
-                    <div class="contenido">
+                    <div class="infoUsuario">
+                        <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
                         <form action="/bloomJS/php/paginas/Login.php" method="POST">
                             <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
                             <input class="boton-neon" id="iniciarSesion" type="submit" value="Iniciar sesión">

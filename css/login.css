@@ -19,7 +19,7 @@ form {
     width: 40%;
     background-color: white;
     border-radius: 15px;
-    box-shadow: 106px 5px 106px black;
+    box-shadow: 33px 5px 106px black;
 }
 main::before {
     position: absolute;
@@ -30,8 +30,8 @@ main::before {
     height: 100%;
     opacity: 0.8;
     z-index: -1;
-    background: url(../img/fondoHeader.png), black;
-    background-size: 150%;
+    background: url(../img/fondoHeader.png), #00000070;
+    background-size: cover;
     background-blend-mode: hard-light;
     background-repeat: no-repeat;
     animation-name: animFondo;

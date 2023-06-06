@@ -29,14 +29,20 @@ if (isset($_POST["nombre"]) && isset($_POST["clave"])) {
 
 //cuando formulario es true (inicio incorrecto o por defecto, se imprime)
 if ($formulario) {
-    Vista::imprimirHead("Bloom - JS", 
-    [
-        RAIZ . "css/general.css",
-        RAIZ . "css/login.css", 
-        RAIZ . "css/formulario.css"
-    ], 
-    []);
 ?>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="/bloomJS/css/general.css">
+        <link rel="stylesheet" href="/bloomJS/css/login.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/loginMoviles.css">
+        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/loginTablets.css">
+        <link rel="stylesheet" href="/bloomJS/css/formulario.css">
+    </head>
     <main>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
             <?php

@@ -19,7 +19,7 @@ session_start();
 
         <link rel="stylesheet" href="/bloomJS/css/general.css">
         <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/generalMovil.css">
-        <link rel="stylesheet" href="/bloomJS/css/generalTablet.css">
+        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/generalTablet.css">
         <link rel="stylesheet" href="/bloomJS/css/indexTablet.css">
 <?php
 $estilos = [
