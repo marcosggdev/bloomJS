@@ -28,13 +28,15 @@ if ($imprimir) {
         RAIZ . "css/carruselHorizontal.css",
         RAIZ . "css/neon.css",
         RAIZ . "css/paginaPersonal.css",
-        RAIZ . "css/usuario.css"
+        RAIZ . "css/usuario.css",
+        RAIZ . "css/servidor.css"
     ], 
     [
 		RAIZ . "js/general/AnimacionMostrarIzquierda.js",
         RAIZ . "js/general/AnimacionDinamicaOnScroll.js",
         RAIZ . "js/paginaPersonal/PaginaPersonal.js",
-        RAIZ . "js/paginaPersonal/Controles.js"
+        RAIZ . "js/paginaPersonal/Controles.js",
+        RAIZ . "js/Servidor.js"
     ]);
 ?>
     <div id="cabecera">
@@ -146,6 +148,7 @@ if ($imprimir) {
                         </div>
                         <img src="<?= $rutaImagen ?>" alt="">
                         <p>Autor: <?=$usuario->nombre?></p>
+                        <input type="hidden" id="id" value="<?= $datosEscena["id"] ?>">
                     </div>
 <?php
                 }

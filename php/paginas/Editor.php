@@ -82,6 +82,7 @@ session_start();
         RAIZ . "js/webgl/ArcballCamera.js",
         RAIZ . "js/webgl/Grupo.js",
         RAIZ . "js/webgl/Escena.js",
+        RAIZ . "js/Servidor.js",
         RAIZ . "js/editor/Main.js"
     ]) ?>
 

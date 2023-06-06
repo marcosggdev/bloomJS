@@ -15,7 +15,7 @@ Vista::imprimirHead("Bloom - JS",
         RAIZ . "css/logout.css"
     ], 
     [
-
+        RAIZ . "js/Servidor.js",
     ]);
 ?>
 

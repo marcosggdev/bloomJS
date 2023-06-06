@@ -42,6 +42,7 @@ if ($formulario) {
         <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/loginMoviles.css">
         <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/loginTablets.css">
         <link rel="stylesheet" href="/bloomJS/css/formulario.css">
+        <script src="/bloomJS/js/Servidor.js"></script>
     </head>
     <main>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">

@@ -2,14 +2,34 @@ class AsideDinamico {
 
     static iniciar (nodo) {
         AsideDinamico.nodo = nodo;
+        window.addEventListener("resize", () => {
+            let ancho = window.innerWidth;
+
+            if (ancho < 400) {
+                AsideDinamico.controlesMovil();
+            } else if (ancho < 900) {
+                AsideDinamico.controlesTablet();
+            } else {    
+                AsideDinamico.controlesPC();
+            }
+
+        });
     }
 
     static controlesMovil () {
+        let botonDespliegue = document.body.querySelector("#desplegarMenuLateral");
+        if (botonDespliegue != null) {
+            botonDespliegue.remove();
+        }
         AsideDinamico.crearBotonDespliegue();
     }
 
     //desplegable
     static controlesTablet () {
+        let botonDespliegue = document.body.querySelector("#desplegarMenuLateral");
+        if (botonDespliegue != null) {
+            botonDespliegue.remove();
+        }
         AsideDinamico.crearBotonDespliegue();
     }
 
@@ -31,12 +51,20 @@ class AsideDinamico {
                 aside.classList.add("desplegado");
             }
         });
-        document.body.appendChild(boton);
+
+        let barraUsuarioIconos = document.body.querySelector(".usuarioGrande .iconos");
+        barraUsuarioIconos.appendChild(boton);
         
     }
 
     //fixed o no segun scroll
     static controlesPC () {
+
+        let botonDespliegue = document.body.querySelector("#desplegarMenuLateral");
+        if (botonDespliegue != null) {
+            botonDespliegue.remove();
+        }
+
         let aside = this.nodo;
         aside.className = "arriba";
         var scrollTopPrevio = window.scrollY;

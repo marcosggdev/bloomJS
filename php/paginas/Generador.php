@@ -101,6 +101,7 @@ session_start();
             RAIZ . "js/generador/OndasSenoidales.js",
 
             RAIZ . "js/webgl/EscenaGenerador.js",
+            RAIZ . "js/Servidor.js",
             RAIZ . "js/generador/Main.js"
         ]) ?>
 

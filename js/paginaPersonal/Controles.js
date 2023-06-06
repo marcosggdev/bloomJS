@@ -4,7 +4,7 @@ window.addEventListener("load", () => {
     let assets = document.querySelectorAll("#assets .grid .plantilla");
     Array.from(assets).forEach((asset) => {
 
-        //boton de borrar
+        //boton de borrar asset
         let botonBorrar = asset.querySelector(".borrar");
         botonBorrar.addEventListener("click", () => {
 
@@ -107,6 +107,26 @@ window.addEventListener("load", () => {
             req.send(formData);
 
         });
+    });
+
+    //Controles borrar escena
+    let escenas = document.body.querySelectorAll("#escenas .grid .plantilla");
+    Array.from(escenas).forEach((escena) => {
+
+        let botonBorrar = escena.querySelector(".borrar");
+        botonBorrar.addEventListener("click", () => {
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    Servidor.mensaje(this.responseText);
+                }
+            };
+            let formData = new FormData();
+            formData.append("id", escena.querySelector("#id").value);
+            req.open("POST", "/bloomJS/php/backend/scripts/eliminarEscenaPorId.php");
+            req.send(formData);
+        });
+
     });
 
 });

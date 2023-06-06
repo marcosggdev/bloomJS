@@ -12,6 +12,12 @@
     background: repeating-linear-gradient(45deg, #5b0062, #760090 72px);
 }
 
+.usuarioGrande .iconos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 div.usuarioGrande div.usuarioImgCaja {
     display: flex;
     box-sizing: border-box;

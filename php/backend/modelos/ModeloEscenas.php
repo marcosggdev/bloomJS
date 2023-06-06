@@ -79,4 +79,20 @@ class ModeloEscenas {
         }
     }
 
+    public static function comprobarPropiedadEscena ($id_usuario, $id_escena) {
+        try {
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $sql = "SELECT * FROM escenas WHERE id=:id AND id_autor=:id_autor";
+            $preparada = $pdo->prepare($sql);
+            $preparada->execute([":id" => $id_escena, ":id_autor" => $id_usuario]);
+            if ($preparada->rowCount() > 0) {
+                return true;
+            }
+            return false;
+        } catch (PDOException $e) {
+            print_r($e->getMessage());
+            return false;
+        }
+    }
+
 }

@@ -39,7 +39,8 @@ $scripts = [
     RAIZ . "js/general/NavDinamico.js",
     RAIZ . "js/general/AnimacionMostrarIzquierda.js",
     RAIZ . "js/blog/ControladorComentar.js",
-    RAIZ . "js/general/AnimacionDinamicaOnScroll.js"
+    RAIZ . "js/general/AnimacionDinamicaOnScroll.js",
+    RAIZ . "js/Servidor.js"
 ];
 foreach ($scripts as $script) {
     echo "<script src='$script'></script>";
