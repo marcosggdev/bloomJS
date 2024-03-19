@@ -15,8 +15,8 @@ class UI {
             menu, 
             UI.contraerMenuDesplegableIzquierda,
             menu,
-            "/bloomJS/img/iconos/izquierda.png", 
-            "/bloomJS/img/iconos/derecha.png");
+            "/img/iconos/izquierda.png", 
+            "/img/iconos/derecha.png");
         
         menu.appendChild(botonBooleano.nodo);
         contenedor.appendChild(menu);

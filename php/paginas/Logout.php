@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 
 session_start();
@@ -30,10 +30,10 @@ Vista::imprimirHead("Bloom - JS",
                 echo "<a href='".$_POST["paginaVolver"]."'>Volver</a>";
             }
         ?>
-        <a href="/bloomJS/index.php">Volver a Inicio</a>
-        <a href="/bloomJS/php/paginas/Blog.php">Blog sobre el desarrollo del proyecto</a>
+        <a href="/index.php">Volver a Inicio</a>
+        <a href="/php/paginas/Blog.php">Blog sobre el desarrollo del proyecto</a>
     </div>
     <hr>
-    <img src="/bloomJS/img/fondoLogout.png" alt="">
+    <img src="/img/fondoLogout.png" alt="">
 </main>
 <?=Vista::imprimirFooter();?>

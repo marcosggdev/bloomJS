@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
 
     //crear contenedor DOM. Canvas tendra asociado el renderer y creamos interfaz de usuario. Pasamos el renderer y el canvas asociados
     //ancho y alto de resolucion definidos en Renderer. Despues escalado por js a width 100% height auto.
-    let barraVentana = new BarraVentana("BloomJS - Editor", ["/bloomJS/img/iconos/minimizar.png", "/bloomJS/img/iconos/maximizar.png"],
+    let barraVentana = new BarraVentana("BloomJS - Editor", ["/img/iconos/minimizar.png", "/img/iconos/maximizar.png"],
     [BarraVentana.minimizar, BarraVentana.maximizar]);
 
     let interfazCanvas = new InterfazCanvas();

@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "php/Utilidades.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
@@ -19,17 +19,17 @@ $previsualizacion = $_FILES["previsualizacion"];
 $extensionDae = "." . convertirMimeAExtension($archivoDae['type']);
 $nombreDaeConExtension = generarNombreArchivoUnico($extensionDae, RAIZ_WEB . "assets/subidos/modelos");
 $rutaDae = "assets/subidos/modelos/" . $nombreDaeConExtension;
-move_uploaded_file($archivoDae['tmp_name'], "/var/www/html/bloomJS/" . $rutaDae);
+move_uploaded_file($archivoDae['tmp_name'], "/var/www/html/" . $rutaDae);
 
 $extensionTextura = "." . convertirMimeAExtension($textura['type']);
 $nombreTexturaConExtension = generarNombreArchivoUnico($extensionTextura, RAIZ_WEB . "assets/subidos/texturas");
 $rutaTextura = "assets/subidos/texturas/" . $nombreTexturaConExtension;
-move_uploaded_file($textura['tmp_name'], "/var/www/html/bloomJS/" . $rutaTextura);
+move_uploaded_file($textura['tmp_name'], "/var/www/html/" . $rutaTextura);
 
 $extensionPrevisualizacion = "." . convertirMimeAExtension($previsualizacion['type']);
 $nombrePrevisualizacionConExtension = generarNombreArchivoUnico($extensionTextura, RAIZ_WEB . "assets/subidos/previsualizacion");
 $rutaPrevisualizacion = "assets/subidos/previsualizacion/" . $nombrePrevisualizacionConExtension;
-move_uploaded_file($previsualizacion['tmp_name'], "/var/www/html/bloomJS/" . $rutaPrevisualizacion);
+move_uploaded_file($previsualizacion['tmp_name'], "/var/www/html/" . $rutaPrevisualizacion);
 
 
 //añadimos las referencias a la base de datos

@@ -4,7 +4,7 @@ class ModeloUsuarios {
 
     public static function getUsuario ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM usuarios WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -29,7 +29,7 @@ class ModeloUsuarios {
 
     public static function getUsuarioPorNombreYClave ($nombre, $clave) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM usuarios WHERE nombre=:nombre AND clave=:clave";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -53,7 +53,7 @@ class ModeloUsuarios {
 
     public static function crearUsuario ($correo, $nombre, $clave, $imagenPerfil, $rutaCarpeta) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "INSERT INTO usuarios(correo, nombre, clave, imagenPerfil, rutaCarpeta) VALUES (".
             ":correo, :nombre, :clave, :imagenPerfil, :rutaCarpeta)";
             $preparada = $pdo->prepare($sql);

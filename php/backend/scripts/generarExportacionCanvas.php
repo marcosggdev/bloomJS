@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/DTO/Modelo3D.php";
 require_once RAIZ_WEB . "php/DTO/Camara.php";
 

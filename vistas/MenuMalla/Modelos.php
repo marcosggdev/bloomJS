@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
@@ -34,7 +34,7 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
 
     }
 
-    echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/Modelos.css'/>";
+    echo "<link rel='stylesheet' href='/vistas/MenuMalla/Modelos.css'/>";
 ?>
 
     <div id="<?= $_POST["titulo"] ?>" class='mallaModelos'>
@@ -48,7 +48,7 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
     ?>    
         <div id="<?= $_POST["tipo"] . $i ?>" class="plantilla modelo" style="display:flex;flex-direction:column">
             <h4><?=$modelosRegistros[$i]["nombre"]?></h4>
-            <img src="/bloomJS/<?=$modelosRegistros[$i]["previsualizacion"]?>" alt="">
+            <img src="/<?=$modelosRegistros[$i]["previsualizacion"]?>" alt="">
             <p>Autor: <?=$nombreAutor?></p>
             <input type="hidden" id="rutaModelo" value="<?=$modelosRegistros[$i]["rutaModelo"]?>">
             <input type="hidden" id="rutaTextura" value="<?=$modelosRegistros[$i]["rutaTextura"]?>">
@@ -68,8 +68,8 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
                         //click en una plantilla
                         if (RendererRefactor.escena != null) {
                             Modelo3D.crearModelo(0,0,0,0,0,0,1,1,1,"T",
-                            "/bloomJS/"+plantilla.querySelector("#rutaModelo").value,null,
-                            "/bloomJS/"+plantilla.querySelector("#rutaTextura").value, null, plantilla.querySelector("#nombre").value,
+                            "/"+plantilla.querySelector("#rutaModelo").value,null,
+                            "/"+plantilla.querySelector("#rutaTextura").value, null, plantilla.querySelector("#nombre").value,
                             plantilla.querySelector("#id").value)
                             .then(
                                 function (modelo) {
@@ -82,7 +82,7 @@ if (isset($_POST["titulo"]) && isset($_POST["tipo"]) && isset($_POST["numero"]))
                                     if (menu != null) {
                                         VentanaCanvas.interfazCanvas.eliminarMenu(menu.nodo);
                                     }
-                                    links = document.querySelectorAll("link[href='/bloomJS/vistas/MenuMalla/Modelos.css']");
+                                    links = document.querySelectorAll("link[href='/vistas/MenuMalla/Modelos.css']");
                                     Array.from(links).forEach((l) => {l.remove()});
                                     scripts = document.querySelectorAll("script.Modelos\.js");
                                     Array.from(scripts).forEach((s) => {s.remove()});

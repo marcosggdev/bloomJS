@@ -69,7 +69,7 @@ class Numerico extends Supervalor {
 
             case "Shader": 
                 let img = document.createElement("img");
-                img.src = "/bloomJS/img/iconos/shader.png";
+                img.src = "/img/iconos/shader.png";
                 contenedorValorInput.appendChild(img);
                 valorInput.type = "text";
                 valorInput.value = this.valor;
@@ -77,7 +77,7 @@ class Numerico extends Supervalor {
 
             case "Textura": 
                 let img2 = document.createElement("img");
-                img2.src = "/bloomJS/img/iconos/textura.png";
+                img2.src = "/img/iconos/textura.png";
                 contenedorValorInput.appendChild(img2);
                 valorInput.type = "text";
                 valorInput.value = this.valor;
@@ -88,7 +88,7 @@ class Numerico extends Supervalor {
 
             case "Material": 
                 let img3 = document.createElement("img");
-                img3.src = "/bloomJS/img/iconos/material.png";
+                img3.src = "/img/iconos/material.png";
                 contenedorValorInput.appendChild(img3);
                 valorInput.type = "text";
                 valorInput.value = this.valor;

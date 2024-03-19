@@ -4,7 +4,7 @@ class ModeloEntradas {
 
     public static function getEntrada   ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM entradas WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -25,7 +25,7 @@ class ModeloEntradas {
 
     public static function getEntradaPorRuta ($ruta) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM entradas WHERE ruta=:ruta";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -46,7 +46,7 @@ class ModeloEntradas {
 
     public static function getEntradas () {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM entradas";
             
             $preparada = $pdo->prepare($sql);

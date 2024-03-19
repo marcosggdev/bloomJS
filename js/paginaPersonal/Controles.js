@@ -70,7 +70,7 @@ window.addEventListener("load", () => {
                                 let formData = new FormData();
                                 formData.append("id", asset.querySelector("#id").value);
                                 formData.append("ids_escenas_afectadas", JSON.stringify(idsEscenasAfectadas));
-                                req.open("POST", "/bloomJS/php/backend/scripts/eliminarModeloPorId.php");
+                                req.open("POST", "/php/backend/scripts/eliminarModeloPorId.php");
                                 req.send(formData);
                             });
                             botonera.appendChild(aceptar);
@@ -93,7 +93,7 @@ window.addEventListener("load", () => {
                     };
                     let formData = new FormData();
                     formData.append("id", asset.querySelector("#id").value);
-                    req.open("POST", "/bloomJS/php/backend/scripts/obtenerEscenasAfectadas.php");
+                    req.open("POST", "/php/backend/scripts/obtenerEscenasAfectadas.php");
                     req.send(formData);
 
 
@@ -103,7 +103,7 @@ window.addEventListener("load", () => {
 
             let formData = new FormData();
             formData.append("id", asset.querySelector("#id").value);
-            req.open("POST", "/bloomJS/php/backend/scripts/obtenerModeloPorId.php");
+            req.open("POST", "/php/backend/scripts/obtenerModeloPorId.php");
             req.send(formData);
 
         });
@@ -123,7 +123,7 @@ window.addEventListener("load", () => {
             };
             let formData = new FormData();
             formData.append("id", escena.querySelector("#id").value);
-            req.open("POST", "/bloomJS/php/backend/scripts/eliminarEscenaPorId.php");
+            req.open("POST", "/php/backend/scripts/eliminarEscenaPorId.php");
             req.send(formData);
             botonBorrar.disabled = true;
         });

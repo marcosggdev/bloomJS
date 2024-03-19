@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "php/backend/servicios/ServicioUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
@@ -20,7 +20,7 @@ if (isset($_POST["nombre"]) && isset($_POST["clave"])) {
         if (isset($_POST["paginaVolver"])) {
             header("Location:" . $_POST["paginaVolver"]);
         } else {
-            header("Location:/bloomJS/index.php");
+            header("Location:/index.php");
         }
     } else {
         $incorrecto = true;
@@ -37,12 +37,12 @@ if ($formulario) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
-        <link rel="stylesheet" href="/bloomJS/css/general.css">
-        <link rel="stylesheet" href="/bloomJS/css/login.css">
-        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/loginMoviles.css">
-        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/loginTablets.css">
-        <link rel="stylesheet" href="/bloomJS/css/formulario.css">
-        <script src="/bloomJS/js/Servidor.js"></script>
+        <link rel="stylesheet" href="/css/general.css">
+        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/css/loginMoviles.css">
+        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/css/loginTablets.css">
+        <link rel="stylesheet" href="/css/formulario.css">
+        <script src="/js/Servidor.js"></script>
     </head>
     <main>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
@@ -69,7 +69,7 @@ if ($formulario) {
                     </div>
                 </div>
                 <div class="info">
-                    <label>¿No tienes cuenta? <a href="/bloomJS/php/paginas/Registro.php">Regístrate</a></label>
+                    <label>¿No tienes cuenta? <a href="/php/paginas/Registro.php">Regístrate</a></label>
                 </div>
                 <div class="botonera">
                     <button>Iniciar Sesión</button>

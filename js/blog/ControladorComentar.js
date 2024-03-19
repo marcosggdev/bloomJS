@@ -54,7 +54,7 @@ window.addEventListener("load", () => {
             let formData = new FormData();
             formData.append("id_target", id_target);
             formData.append("texto", texto);
-            req.open("POST", "/bloomJS/php/backend/scripts/ProcesarComentario.php");
+            req.open("POST", "/php/backend/scripts/ProcesarComentario.php");
             req.send(formData);
         });
     }
@@ -75,6 +75,6 @@ function anadirComentarioNuevo (contenedor, texto, id_target, nuevoId) {
         nuevoId: ""+nuevoId
     };
     formData.append("comentario", JSON.stringify(comentario));
-    req.open("POST", "/bloomJS/vistas/blog/Comentario.php");
+    req.open("POST", "/vistas/blog/Comentario.php");
     req.send(formData);
 }

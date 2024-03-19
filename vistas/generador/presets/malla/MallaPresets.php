@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 
 if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
     $estilo = "display:grid;";
@@ -11,7 +11,7 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
     }    
 }
 ?>
-<link rel="stylesheet" href="/bloomJS/vistas/generador/presets/malla/MallaPresets.css">
+<link rel="stylesheet" href="/vistas/generador/presets/malla/MallaPresets.css">
 <div class="mallaPresets" style="<?= $estilo ?>">
 
 <?php
@@ -24,5 +24,5 @@ if (isset($_POST["filas"]) && isset($_POST["columnas"])) {
         }
     }
 ?>
-<input type="hidden" id="script" value="/bloomJS/vistas/generador/presets/malla/MallaPresets.js">
+<input type="hidden" id="script" value="/vistas/generador/presets/malla/MallaPresets.js">
 </div>

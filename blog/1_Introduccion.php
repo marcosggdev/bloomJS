@@ -1,4 +1,4 @@
-<img src="/bloomJS/img/editor.jpg" alt="Imagen del editor de la aplicación. Se puede ver una escena con un modelo3D en el centro desde una cámara de tipo Arcball">
+<img src="/img/editor.jpg" alt="Imagen del editor de la aplicación. Se puede ver una escena con un modelo3D en el centro desde una cámara de tipo Arcball">
 <h1>Introducción</h1>
 <p>En este blog podrás leer acerca del origen y el proceso de desarrollo de este proyecto</p>
 <hr>

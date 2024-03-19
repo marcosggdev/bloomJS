@@ -6,7 +6,7 @@ class PuntoLuz extends Modelo3D {
     static colorA = 1.0;
 
     constructor (posX, posY, posZ) {
-        super(posX, posY, posZ, 0, 0, 0, 0.5, 0.5, 0.5, "/bloomJS/assets/preformas/esfera.dae",
+        super(posX, posY, posZ, 0, 0, 0, 0.5, 0.5, 0.5, "/assets/preformas/esfera.dae",
             VERTEX_SHADER_SIMPLE_COLOR, FRAGMENT_SHADER_SIMPLE_COLOR);
     }
 

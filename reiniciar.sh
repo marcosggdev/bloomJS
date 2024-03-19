@@ -2,7 +2,7 @@
 
 #Eliminar archivos de la carpeta subidos: solo quedan los por defecto
 
-ruta="/home/alumnado/lamp_alumnado/www/bloomJS";
+ruta="/home/alumnado/lamp_alumnado/www";
 find "${ruta}/assets/subidos/materiales" -type f -name "*"  -exec rm {} +;
 find "${ruta}/assets/subidos/modelos" -type f -name "*"  -exec rm {} +;
 find "${ruta}/assets/subidos/previsualizacion" -type f -name "*"  -exec rm {} +;

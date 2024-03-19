@@ -24,10 +24,10 @@ class SubmenuEscena extends SubmenuInterfaz {
         //crear escena porque no hay
         if (RendererRefactor.escena == null) {
             //formulario para pedir nombre y descripcion para crear la escena
-            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": false});
+            Utilidades.cargarPlantilla(document.body, "/vistas/editor/crearEscena/crearEscena.php", {"sustituir": false});
         } else {
             //crear otra escena y sustituir la previa. Guardar cambios?
-            Utilidades.cargarPlantilla(document.body, "/bloomJS/vistas/editor/crearEscena/crearEscena.php", {"sustituir": true});   
+            Utilidades.cargarPlantilla(document.body, "/vistas/editor/crearEscena/crearEscena.php", {"sustituir": true});   
         }
         
     }
@@ -74,7 +74,7 @@ class SubmenuEscena extends SubmenuInterfaz {
         formData.append("escena", JSON.stringify(serializacionOBJ));
         formData.append("imagen", JSON.stringify(datosImagen));
 
-        req.open("POST", "/bloomJS/php/backend/scripts/procesarEscenaGuardada.php");
+        req.open("POST", "/php/backend/scripts/procesarEscenaGuardada.php");
         req.send(formData);
 
     }
@@ -85,12 +85,12 @@ class SubmenuEscena extends SubmenuInterfaz {
     static cargarEscena () {
         if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Escenas")) {
 
-            let menu = new MenuMalla("Escenas", "/bloomJS/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
+            let menu = new MenuMalla("Escenas", "/vistas/MenuMalla/escenas/Escenas.php", "", 0, null, 3);
             let botonCerrar = menu.nodo.querySelector(".BarraCierre img");
     
             //añadir que al cerrar el menu se borren los scripts descargados
             botonCerrar.addEventListener("click", () => {
-                let scripts = document.querySelectorAll("script[src='/bloomJS/vistas/MenuMalla/escenas/Escenas.js']");
+                let scripts = document.querySelectorAll("script[src='/vistas/MenuMalla/escenas/Escenas.js']");
                 Array.from(scripts).forEach((s) => {s.remove()});
             });
             VentanaCanvas.interfazCanvas.anadirMenu(menu);
@@ -107,11 +107,11 @@ class SubmenuEscena extends SubmenuInterfaz {
                 let menuAnadirModelo = new MenuAlternar("Añadir modelo", 
                 ["Defecto", "Personal", "Comunidad"], 
                 [
-                    new MenuMalla("Defecto", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    new MenuMalla("Defecto", "/vistas/MenuMalla/Modelos.php", 
                     "defecto", 0, null, 3),
-                    new MenuMalla("Personal", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    new MenuMalla("Personal", "/vistas/MenuMalla/Modelos.php", 
                     "usuario", 0, null, 3),
-                    new MenuMalla("Comunidad", "/bloomJS/vistas/MenuMalla/Modelos.php", 
+                    new MenuMalla("Comunidad", "/vistas/MenuMalla/Modelos.php", 
                     "comunidad", 0, null, 3)
                 ]);
 
@@ -120,8 +120,8 @@ class SubmenuEscena extends SubmenuInterfaz {
                 subirModelo.textContent = "Subir";
 
                 subirModelo.addEventListener("click", () => {
-                    let parametros = { "paginaVolver": "/bloomJS/pruebas.php" };
-                    Utilidades.cargarPlantilla(VentanaCanvas.interfazCanvas.nodo, "/bloomJS/vistas/editor/subirModelo.php", parametros);
+                    let parametros = { "paginaVolver": "/pruebas.php" };
+                    Utilidades.cargarPlantilla(VentanaCanvas.interfazCanvas.nodo, "/vistas/editor/subirModelo.php", parametros);
                 });
 
                 menuAnadirModelo.nodo.querySelector(".submenu#Personal .BarraCierre").appendChild(subirModelo);

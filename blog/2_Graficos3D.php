@@ -1,4 +1,4 @@
-<img src="/bloomJS/img/barril_blender.jpg" alt="Imagen del programa Blender, donde se ve un modelo3D dividido en los vértices que lo conforman">
+<img src="/img/barril_blender.jpg" alt="Imagen del programa Blender, donde se ve un modelo3D dividido en los vértices que lo conforman">
     <h1>Gráficos en 3D</h1>
     <p>Aquí podrás aprender sobre desarrollo de gráficos en 3D con OpenGL en general, puesto que las implementaciones con WebGL (web), 
         OpenGL ES (moviles) o OpenGL (escritorio) siguen conceptos similares.
@@ -10,7 +10,7 @@
         comentaremos de forma más particular los algoritmos en los que se basa la aplicación web BloomJS. De momento esta entrada 
         tendrá carácter introductorio, por lo que hablaremos de conceptos más que de la propia implementación. Si buscas más
         información sobre la implementación, te recomiendo leer las referencias de la entrada de introducción y visitar el proyecto 
-        en Github, teniendo conocimientos en JavaScript. <a href="https://github.com/marcosggdev/bloomJS" target="_blank">
+        en Github, teniendo conocimientos en JavaScript. <a href="https://github.com/marcosggdev" target="_blank">
             Repositorio en Github</a>
     </p>
     <h3>Cómo se computa un modelo 3D?</h3>
@@ -21,12 +21,12 @@
         triángulo, pero, ¿Cómo funciona ese proceso?
     </p>
     <p>Supongamos que creamos un cubo, en Blender. Este modelo viene de hecho por defecto en el programa.
-        <img src="/bloomJS/img/blog/2_graficos3D/cubo.jpg" alt="Imagen de un cubo en Blender"> 
+        <img src="/img/blog/2_graficos3D/cubo.jpg" alt="Imagen de un cubo en Blender"> 
         Si exportamos el modelo 
         en formato .obj, obtendremos un archivo, que si se abre con el bloc de notas tendrá este aspecto:<br>
     </p>
     <div class="imgIzquierda">
-        <img class="lateral" src="/bloomJS/img/blog/2_graficos3D/cubo_obj.png" alt="Captura del archivo en formato .obj del cubo. Se puede ver una lista larga de líneas con números. El inicio de cada línea tiene un símbolo o carácter indicando el significado de los datos de esa línea.">
+        <img class="lateral" src="/img/blog/2_graficos3D/cubo_obj.png" alt="Captura del archivo en formato .obj del cubo. Se puede ver una lista larga de líneas con números. El inicio de cada línea tiene un símbolo o carácter indicando el significado de los datos de esa línea.">
         <div class="imgIzquierdaContenido">
             <p>Pues la clave está en los datos. Para entender al 100% lo que significan los datos de un archivo .obj recomiendo visitar la 
             <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank">página</a> del formato .obj en wikipedia, donde se explica bien cómo funciona el formato. Nosotros vamos a hacer un resumen de 
@@ -77,7 +77,7 @@
             </ul>
         </div>
     </div>
-    <img src="/bloomJS/img/blog/2_graficos3D/triangulo_vertices.png" alt="Imagen de un triángulo donde se muestra el sentido antihorario que define qué cara se dibuja y cual no, además de ver el sentido del vector normal (hacia 'fuera' de la pantalla)">
+    <img src="/img/blog/2_graficos3D/triangulo_vertices.png" alt="Imagen de un triángulo donde se muestra el sentido antihorario que define qué cara se dibuja y cual no, además de ver el sentido del vector normal (hacia 'fuera' de la pantalla)">
     <p>Y con esto ya podemos entender cómo extraer los datos de un archivo .obj para dibujar con ellos, mediante OpenGL, el modelo de nuevo.
         Esencialmente, tendremos que construir un array (conjunto o lista) con los vértices ordenados de forma correcta, otro array con 
         las coordenadas UV ordenadas de forma correcta y un array con los vectores normales a cada triángulo ordenados de forma correcta.

@@ -459,7 +459,7 @@ class Modelo3D {
             /* let library_images = archivoXML.getElementsByTagName("library_images")[0];
             if (typeof library_images.getElementsByTagName("init_from")[0] !== "undefined") {
                 let nombreTextura = library_images.getElementsByTagName("init_from")[0].textContent;
-                this.rutaTextura = "/bloomJS/assets/texturas/" + nombreTextura;
+                this.rutaTextura = "/assets/texturas/" + nombreTextura;
                 this.texturizado = 1.0;
             }*/
 
@@ -1041,7 +1041,7 @@ class Modelo3D {
             //al guardar se guarda la ruta segun servidor, pero al importar se importan rutas desde la carpeta de cliente_bloomjs,
             //donde se habran guardado los archivos en la ruta:
             //cliente_bloomjs/Escena/Texturas y clinte_bloomjs/Escena/Dae
-            //antes ruta: /bloomJS/assets/subidos/texturas/...
+            //antes ruta: /assets/subidos/texturas/...
             //ahora: RUTA_BLOOM + Escena/texturas/...
 
             let nuevaRutaTextura = null;

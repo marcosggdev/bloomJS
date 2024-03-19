@@ -17,7 +17,7 @@ class MenuGeneral {
         barraCierre.appendChild(h1);
 
         let img = document.createElement("img");
-        img.src = "/bloomJS/img/iconos/cerrar.png";
+        img.src = "/img/iconos/cerrar.png";
         img.addEventListener("click", () => {
             VentanaCanvas.interfazCanvas.eliminarMenu(this.nodo);
         });

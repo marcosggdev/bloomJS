@@ -1,4 +1,4 @@
-<img src="/bloomJS/img/blog/0_NotasDesarrollo/fondoNotasDesarrollo.png" alt="">
+<img src="/img/blog/0_NotasDesarrollo/fondoNotasDesarrollo.png" alt="">
 <h1>Notas del desarrollo</h1>
 <p>Esta entrada contendrá un pequeño resumen cronológico del proceso de desarrollo del sitio web. Quizá falte un poco de precisión, 
     puesto que se ha empezado a recopilar información en un estado avanzado del proyecto, pero será útil igualmente para recordar

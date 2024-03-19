@@ -5,7 +5,7 @@ class ModeloEscenas {
     public static function getEscena ($id) {
 
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM escenas WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -30,7 +30,7 @@ class ModeloEscenas {
 
     public static function getEscenasPorIdUsuario ($id_autor) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM escenas WHERE id_autor=:id_autor";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_autor" => $id_autor]);
@@ -54,7 +54,7 @@ class ModeloEscenas {
 
     public static function crearEscena ($titulo, $descripcion, $ruta, $id_autor) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "INSERT INTO escenas(titulo, descripcion, ruta, id_autor) VALUES (".
             ":titulo, :descripcion, :ruta, :id_autor)";
             $preparada = $pdo->prepare($sql);
@@ -68,7 +68,7 @@ class ModeloEscenas {
 
     public static function eliminarEscena ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "DELETE FROM escenas WHERE id=:id";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id" => $id]);
@@ -81,7 +81,7 @@ class ModeloEscenas {
 
     public static function comprobarPropiedadEscena ($id_usuario, $id_escena) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM escenas WHERE id=:id AND id_autor=:id_autor";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id" => $id_escena, ":id_autor" => $id_usuario]);

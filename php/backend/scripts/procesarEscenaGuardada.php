@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
 require_once RAIZ_WEB . "php/Utilidades.php";

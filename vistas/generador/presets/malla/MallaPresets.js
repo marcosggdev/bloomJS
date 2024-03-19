@@ -2,7 +2,7 @@ presets = document.querySelectorAll(".mallaPresets .preset");
 Array.from(presets).forEach((p) => {
 
     //limpiar scripts del DOM
-    scripts = document.querySelectorAll("script[src='/bloomJS/vistas/generador/presets/malla/MallaPresets.js']");
+    scripts = document.querySelectorAll("script[src='/vistas/generador/presets/malla/MallaPresets.js']");
     Array.from(scripts).forEach((s) => {
         s.remove();
     });
@@ -35,7 +35,7 @@ Array.from(presets).forEach((p) => {
                 }
 
                 //limpiar scripts del DOM
-                scripts = document.querySelectorAll("script[src='/bloomJS/vistas/generador/presets/malla/MallaPresets.js']");
+                scripts = document.querySelectorAll("script[src='/vistas/generador/presets/malla/MallaPresets.js']");
                 Array.from(scripts).forEach((s) => {
                     s.remove();
                 });

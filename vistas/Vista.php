@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php/Config.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
 
 class Vista {
@@ -27,7 +27,7 @@ class Vista {
             <head>
                 <meta charset="UTF-8">
                 <title><?=$titulo?></title>
-                <link rel="icon" href="/bloomJS/img/favicon/logo.ico" type="image/x-icon">
+                <link rel="icon" href="/img/favicon/logo.ico" type="image/x-icon">
                 <?php
                 foreach ($css as $link) {
                     echo "<link rel='stylesheet' href='". $link ."'>";
@@ -88,7 +88,7 @@ class Vista {
                         <div id="contactos">
                             <h1>Contacto</h1>
                             <a href="https://github.com/marcosggdev" class="contacto">
-                                <img src="/bloomJS/img/iconos/github.png" alt="Logo de Github">
+                                <img src="/img/iconos/github.png" alt="Logo de Github">
                                 <small>Github</small>
                             </a>
                         </div>
@@ -111,7 +111,7 @@ class Vista {
                         <div id="logos">
                             <h1>Instituciones</h1>
                             <div class="logo">
-                                <img src="/bloomJS/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
+                                <img src="/img/iconos/ibq.png" alt="Logo IES Bernaldo de Quirós">
                                 <small>IES Bernaldo de Quirós</small>
                             </div>
                         </div>
@@ -134,18 +134,18 @@ class Vista {
             <div class="usuarioGrande">
                 <div class="usuarioImgCaja ocultoDerecha">
                     <div class="infoUsuario">
-                        <img class="imagenPerfil" src="<?="/bloomJS/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
+                        <img class="imagenPerfil" src="<?="/".$usuario->imagenPerfil?>" alt="Imagen de perfil">
                         <div class="contenido">
-                            <p><a href="/bloomJS/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
+                            <p><a href="/php/paginas/PaginaPersonal.php"><?=$usuario->nombre?></a></p>
                             <p><?=$usuario->correo?></p>
                         </div>
-                        <form action="/bloomJS/php/paginas/Logout.php" method="POST">
+                        <form action="/php/paginas/Logout.php" method="POST">
                             <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
                             <input class="boton-neon" type="submit" value="Cerrar sesión">
                         </form>
                     </div>
                     <div class="iconos">
-                        <a href="/bloomJS/php/paginas/PaginaPersonal.php"><img src="/bloomJS/img/iconos/ajustes.png" alt=""></a>
+                        <a href="/php/paginas/PaginaPersonal.php"><img src="/img/iconos/ajustes.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -155,8 +155,8 @@ class Vista {
             <div class="usuarioGrande">
                 <div class="usuarioImgCaja ocultoDerecha">
                     <div class="infoUsuario">
-                        <img src="/bloomJS/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
-                        <form action="/bloomJS/php/paginas/Login.php" method="POST">
+                        <img src="/assets/defecto/imagenesPerfil/defecto.png" alt="Imagen de perfil">
+                        <form action="/php/paginas/Login.php" method="POST">
                             <input type="hidden" name="paginaVolver" value="<?= $_SERVER["PHP_SELF"] ?>">
                             <input class="boton-neon" id="iniciarSesion" type="submit" value="Iniciar sesión">
                         </form>
@@ -169,7 +169,7 @@ class Vista {
 <?php
     }
 
-    //ruta componentes desde raiz de server /bloomJS/js/...
+    //ruta componentes desde raiz de server /js/...
     public static function cargarComponentes ($rutaComponentes, $componentes) {
         //ej: $componentes = ["BarraVentana", "InterfazCanvas", "MenuInterfaz", "VentanaCanvas"];
         foreach($componentes as $componente) {

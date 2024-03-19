@@ -75,7 +75,7 @@ class MenuInterfaz {
             dialog.appendChild(titulo);
 
             let iconoCargando = document.createElement("img");
-            iconoCargando.src = "/bloomJS/img/gif/cargando.gif";
+            iconoCargando.src = "/img/gif/cargando.gif";
             iconoCargando.className = "gif";
             dialog.appendChild(iconoCargando);
 
@@ -180,7 +180,7 @@ class MenuInterfaz {
      */
     static crearImagen () {
         if (!VentanaCanvas.interfazCanvas.buscarMenuPorTitulo("Preformas")) {
-            let menu = new MenuMalla("Preformas", "/bloomJS/vistas/generador/presets/malla/MallaPresets.php", null, 0, null, 2);
+            let menu = new MenuMalla("Preformas", "/vistas/generador/presets/malla/MallaPresets.php", null, 0, null, 2);
             VentanaCanvas.interfazCanvas.anadirMenu(menu);
         }
     }

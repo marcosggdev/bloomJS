@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
             let formData = new FormData();
             let texto = sanearScripts(textarea.value);
             formData.append("texto", texto);
-            req.open("POST", "/bloomJS/php/backend/scripts/editarPaginaPersonal.php");
+            req.open("POST", "/php/backend/scripts/editarPaginaPersonal.php");
             req.send(formData);
         });
 

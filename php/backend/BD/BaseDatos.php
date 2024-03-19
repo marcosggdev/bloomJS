@@ -71,14 +71,14 @@ class BaseDatos {
     public static function crearBaseDatos ($nombreBase) {
         try {
             //crear la base nombreBase
-            $con = new PDO("mysql:host=db", "root", "alumnado");
+            $con = new PDO("mysql:host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $consulta = "CREATE DATABASE IF NOT EXISTS " . $nombreBase . " CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
 
             //ejecutar e imprimir errores
             $con->query($consulta);
 
             //una vez existe nos conectamos a ella para ejecutar el DDL e insertar datos por defecto
-            $con = new PDO("mysql:dbname=".$nombreBase.";host=db", "root", "alumnado");
+            $con = new PDO("mysql:dbname=".$nombreBase.";host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
 
             //lista de consultas a ejecutar
             $consultas = [
@@ -161,7 +161,7 @@ class BaseDatos {
     public static function borrarBaseDatos ($nombreBase) {
         try {
             //conexion a la base a borrar
-            $con = new PDO("mysql:dbname=".$nombreBase.";host=db", "alumnado", "alumnado");
+            $con = new PDO("mysql:dbname=".$nombreBase.";host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $consulta = "DROP DATABASE IF EXISTS " . $nombreBase;
             //ejecutar consulta y tratam. errores
             $con->query($consulta);

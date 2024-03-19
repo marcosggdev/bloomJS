@@ -64,7 +64,7 @@ class InterfazCanvas {
                     resolve(this.responseText);
                 }
             };
-            req.open("GET", "/bloomJS/vistas/editor/subirModelo.php");
+            req.open("GET", "/vistas/editor/subirModelo.php");
             req.send();
         });
     }

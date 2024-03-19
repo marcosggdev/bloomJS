@@ -49,7 +49,7 @@ class MenuGlobal extends MenuObjetos {
 
                     //Boton para borrar objeto
                     let botonBorrar = document.createElement("img");
-                    botonBorrar.src = "/bloomJS/img/iconos/borrar.png";
+                    botonBorrar.src = "/img/iconos/borrar.png";
                     botonBorrar.className = "BotonIcono";
                     botonBorrar.addEventListener("click", () => {
                         let dialog = document.createElement("dialog");

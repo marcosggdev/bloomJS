@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 session_start();
@@ -17,10 +17,10 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Inicio</title>
 
-        <link rel="stylesheet" href="/bloomJS/css/general.css">
-        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/generalMovil.css">
-        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/generalTablet.css">
-        <link rel="stylesheet" href="/bloomJS/css/indexTablet.css">
+        <link rel="stylesheet" href="/css/general.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/css/generalMovil.css">
+        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/css/generalTablet.css">
+        <link rel="stylesheet" href="/css/indexTablet.css">
 <?php
 $estilos = [
     RAIZ . "css/index.css",
@@ -72,7 +72,7 @@ foreach ($scripts as $script) {
                 JavaScript y PHP. Además, para lograr la generación de gráficos avanzados con la aplicación, se ha utilizado WebGL como 
                 API de gráficos en entorno web.
             </p>
-            <img src="/bloomJS/img/tecnologias_web.png" alt="Listado de las tecnologías web utilizadas en la aplicación: HTML, Javascript, CSS, PHP y OpenGL">
+            <img src="/img/tecnologias_web.png" alt="Listado de las tecnologías web utilizadas en la aplicación: HTML, Javascript, CSS, PHP y OpenGL">
             <p>Te invitamos a pasarte por la zona del editor o por el blog, donde podrás aprender sobre la programación de gráficos en 
                 JavaScript</p>
             <img id="welcome" src="img/welcome.png" alt="">
@@ -83,7 +83,7 @@ foreach ($scripts as $script) {
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Editor</h1>
-                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Editor.php">Ir al Editor<img src="img/iconos/derecha.png" alt=""/></a>
+                        <a class="boton-neon-purple" href="/php/paginas/Editor.php">Ir al Editor<img src="img/iconos/derecha.png" alt=""/></a>
                     </div>
                 </div>
                 <!--insertar aqui modelo 3d cuando funcione la exportacion-->
@@ -93,20 +93,20 @@ foreach ($scripts as $script) {
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Generador</h1>
-                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
+                        <a class="boton-neon-purple" href="/php/paginas/Generador.php">Ir al Generador<img src="img/iconos/derecha.png" alt=""/></a>
                     </div> 
                 </div>
                 <!--insertar aqui imagenes generadas en el generador-->
             </section>
-            <?=VistaBlog::imprimirEntrada("1", "/bloomJS/blog/0_Notas de desarrollo.php")?>
-            <?=VistaBlog::imprimirEntrada("2", "/bloomJS/blog/1_Introduccion.php")?>
+            <?=VistaBlog::imprimirEntrada("1", "/blog/0_Notas de desarrollo.php")?>
+            <?=VistaBlog::imprimirEntrada("2", "/blog/1_Introduccion.php")?>
             <p class="breve">¡Lee nuestro blog y aprende! Tenemos entradas sobre el desarrollo de BloomJS y sobre WebGL
             </p>
             <section id="blog">
                 <div class="titulo animDinamica-onscroll">
                     <div class="contenido">
                         <h1 class="texto-neon">Blog</h1>
-                        <a class="boton-neon-purple" href="/bloomJS/php/paginas/Blog.php">Ir al Blog</a>
+                        <a class="boton-neon-purple" href="/php/paginas/Blog.php">Ir al Blog</a>
                     </div>
                 </div>
                 <?=VistaBlog::imprimirCarruselEntradas();?>

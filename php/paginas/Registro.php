@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "php/backend/servicios/ServicioUsuarios.php";
 require_once RAIZ_WEB . "php/Utilidades.php";
@@ -37,7 +37,7 @@ if (isset($_POST["correo"]) && isset($_POST["nombre"]) && isset($_POST["clave"])
         //usuario creado
         $formulario = false;
         $_SESSION["usuario"] = $usuario;
-        header("Location:/bloomJS/index.php");
+        header("Location:/index.php");
     } else {
         //no se ha podido crear
         $incorrecto = true;
@@ -55,11 +55,11 @@ if ($formulario) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registro</title>
-        <link rel="stylesheet" href="/bloomJS/css/general.css">
-        <link rel="stylesheet" href="/bloomJS/css/login.css">
-        <link rel="stylesheet" media="(max-width: 400px)" href="/bloomJS/css/loginMoviles.css">
-        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/bloomJS/css/loginTablets.css">
-        <link rel="stylesheet" href="/bloomJS/css/formulario.css">
+        <link rel="stylesheet" href="/css/general.css">
+        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" media="(max-width: 400px)" href="/css/loginMoviles.css">
+        <link rel="stylesheet" media="(min-width: 401px) and (max-width: 900px)" href="/css/loginTablets.css">
+        <link rel="stylesheet" href="/css/formulario.css">
     </head>
     <main>
         <form enctype="multipart/form-data" action="<?=$_SERVER["PHP_SELF"]?>" method="POST">

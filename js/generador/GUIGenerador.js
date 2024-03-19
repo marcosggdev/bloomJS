@@ -18,8 +18,8 @@ class GUIGenerador  extends GUI {
         let iconos = document.createElement("div");
         iconos.id = "iconos";
 
-        let botonMinimizar = new BotonIcono("/bloomJS/img/iconos/minimizar.png", minimizar, false, "minimizar");
-        let botonMaximizar = new BotonIcono("/bloomJS/img/iconos/maximizar.png", maximizar, true, "maximizar");
+        let botonMinimizar = new BotonIcono("/img/iconos/minimizar.png", minimizar, false, "minimizar");
+        let botonMaximizar = new BotonIcono("/img/iconos/maximizar.png", maximizar, true, "maximizar");
     
         VentanaCanvas.botones.push(botonMinimizar);
         VentanaCanvas.botones.push(botonMaximizar);
@@ -143,7 +143,7 @@ class GUIGenerador  extends GUI {
                 }
             }
         };
-        req.open("GET", "/bloomJS/vistas/generador/MallaPresets.php");
+        req.open("GET", "/vistas/generador/MallaPresets.php");
         req.send();
 
         return menu;

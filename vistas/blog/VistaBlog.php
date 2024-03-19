@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloEntradas.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloComentarios.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
@@ -32,10 +32,10 @@ class VistaBlog {
                             if ("blog/" . $nombreEntrada == $datosEntrada["ruta"]) {
                                 echo "<a id='actual'>$nombre</a>";
                             } else {
-                                echo "<a href='"."/bloomJS/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                                echo "<a href='"."/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
                             }
                         } else {
-                            echo "<a href='"."/bloomJS/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
+                            echo "<a href='"."/php/paginas/Blog.php?entrada=".$nombreArchivo."'>$nombre</a>";
                         }
                     }
                 ?>
@@ -43,7 +43,7 @@ class VistaBlog {
             <h2>Sobre mí</h2>
             <div class="contenidoAside">
                 <a href="https://github.com/marcosggdev">Github</a>
-                <a href="http://localhost:30080/bloomJS/php/Blog.php?entrada=1_Introduccion.php">BloomJS</a>
+                <a href="http://localhost:30080/php/Blog.php?entrada=1_Introduccion.php">BloomJS</a>
             </div>
             <h2>Instituciones</h2>
             <div class="contenidoAside">
@@ -59,7 +59,7 @@ class VistaBlog {
         $datosEntradas = ModeloEntradas::getEntradas();
 
         foreach ($datosEntradas as $datosEntrada) {
-            self::imprimirEntrada($datosEntrada["id"], "/bloomJS/".$datosEntrada["ruta"]);
+            self::imprimirEntrada($datosEntrada["id"], "/".$datosEntrada["ruta"]);
         }
     }
 
@@ -93,7 +93,7 @@ class VistaBlog {
                     echo "<h2>Publicar un comentario</h2>";
                 } else {
                     echo "<h2>Publicar un comentario anónimo</h2>";
-                    echo "<a class='boton-neon-verde' href='/bloomJS/php/paginas/Login.php'>Iniciar sesión</a>";
+                    echo "<a class='boton-neon-verde' href='/php/paginas/Login.php'>Iniciar sesión</a>";
                 }
                 ?>
             </div>
@@ -103,7 +103,7 @@ class VistaBlog {
             <input type="hidden" class="id_entrada" value="<?=$id_entrada?>">
             <div class="cajaControles">
                 <button class="botonComentarEntrada">Comentar</button>
-                <img src="/bloomJS/img/gif/completado.gif" alt="">
+                <img src="/img/gif/completado.gif" alt="">
             </div>
             <hr>
         </div>
@@ -132,7 +132,7 @@ class VistaBlog {
 ?>
         <div id="<?=$datosComentario["id"]?>" class="comentario">
             <div class="usuarioMediano">
-                <img src="<?="/bloomJS/".$datosAutor["imagenPerfil"]?>" alt="Imagen de perfil">
+                <img src="<?="/".$datosAutor["imagenPerfil"]?>" alt="Imagen de perfil">
                 <div class="datos">
                     <p><?=$datosAutor["nombre"]?></p>
                 </div>
@@ -157,7 +157,7 @@ class VistaBlog {
                 echo "" . 
                 "       </div>\n" . 
                 "       <div class='control'>\n" . 
-                "           <button class='caja-neon' onclick=\"window.location.assign('/bloomJS/php/paginas/Blog.php?entrada=$nombreEntrada')\">Leer más</button>\n" . 
+                "           <button class='caja-neon' onclick=\"window.location.assign('/php/paginas/Blog.php?entrada=$nombreEntrada')\">Leer más</button>\n" . 
                 "       </div>\n" . 
                 "   </div>\n";
             }   

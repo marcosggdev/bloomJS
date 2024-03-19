@@ -41,7 +41,7 @@ class AsideDinamico {
         let boton = document.createElement("img");
         boton.id = "desplegarMenuLateral";
         
-        boton.src = "/bloomJS/img/iconos/desplegar.png";
+        boton.src = "/img/iconos/desplegar.png";
         boton.addEventListener("click", () => {
             if (boton.classList.contains("desplegado")) {
                 boton.classList.remove("desplegado");

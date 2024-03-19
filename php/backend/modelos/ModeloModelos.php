@@ -4,7 +4,7 @@ class ModeloModelos {
 
     public static function getModelo ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM modelos WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -29,7 +29,7 @@ class ModeloModelos {
 
     public static function getModelosPorTipoYNumero ($tipo, $numero) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             if ($numero == 0) {
                 $sql = "SELECT * FROM modelos WHERE tipo=:tipo";
                 $preparada = $pdo->prepare($sql);
@@ -64,7 +64,7 @@ class ModeloModelos {
 
     public static function insertarModelo ($nombre, $descripcion, $rutaModelo, $rutaTextura, $previsualizacion, $id_autor) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "INSERT INTO modelos(nombre, descripcion, rutaModelo, rutaTextura, previsualizacion, tipo, id_autor) VALUES (".
             ":nombre, :descripcion, :rutaModelo, :rutaTextura, :previsualizacion, :tipo, :id_autor)";
             $preparada = $pdo->prepare($sql);
@@ -79,7 +79,7 @@ class ModeloModelos {
 
     public static function getModelosPorDefecto () {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM modelos WHERE tipo=:tipo";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":tipo" => "defecto"]);
@@ -107,7 +107,7 @@ class ModeloModelos {
     //id_autor = 1 => autor = admin
     public static function getModelosPorIdAutor ($id_autor) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_autor" => $id_autor]);
@@ -135,7 +135,7 @@ class ModeloModelos {
     //id_autor = 2 =_ autor = comunidad
     public static function getModelosComunidad () {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_autor" => 2]);
@@ -166,7 +166,7 @@ class ModeloModelos {
      */
     public static function comprobarPertenenciaModelo ($id_autor, $id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM modelos WHERE id_autor=:id_autor AND id=:id";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_autor" => $id_autor, "id" => $id]);
@@ -192,7 +192,7 @@ class ModeloModelos {
 
     public static function eliminarModeloPorId ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "DELETE FROM modelos WHERE id=:id";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id" => $id]);

@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloModelos.php";
 require_once RAIZ_WEB . "php/backend/modelos/ModeloUsuarios.php";
 require_once RAIZ_WEB . "php/DTO/Usuario.php";
@@ -25,7 +25,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) &&
     $datosUsuario = ModeloUsuarios::getUsuario($usuario->id);
     $datosEscenas = ModeloEscenas::getEscenasPorIdUsuario($usuario->id);
 
-    echo "<link rel='stylesheet' href='/bloomJS/vistas/MenuMalla/escenas/Escenas.css'/>";
+    echo "<link rel='stylesheet' href='/vistas/MenuMalla/escenas/Escenas.css'/>";
     $estilo = "display: grid;";
     if ($_POST["columnas"] != "null") {
         $estilo .= "grid-template-columns: repeat(".$_POST["columnas"].", 1fr);";
@@ -58,7 +58,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) &&
 
                 $rutaImagen = $rutaCarpeta . "/" . $archivos[$i];
                 $rutaImagen = explode(RAIZ_WEB, $rutaImagen)[1];
-                $rutaImagen = "/bloomJS/" . $rutaImagen;
+                $rutaImagen = "/" . $rutaImagen;
 
             } elseif (preg_match("/.json$/", $archivos[$i])) {
                 $rutaJSON = $rutaCarpeta . "/" . $archivos[$i];
@@ -93,7 +93,7 @@ if (isset($_SESSION["usuario"]) && isset($_POST["tipo"]) &&
     }
 
     echo "</div>";
-    echo "<input id='script' type='hidden' value='/bloomJS/vistas/MenuMalla/escenas/Escenas.js'/>";
+    echo "<input id='script' type='hidden' value='/vistas/MenuMalla/escenas/Escenas.js'/>";
 
 } else {
     echo "<p class='servidor error'>Error: algún parámetro necesario para cargar el menú de escenas no está definido</p>";

@@ -8,7 +8,7 @@ botonCerrar.addEventListener("click", () => {
     //por ahora eliminamos nodo. Podria dar problemas en el futuro. Lo ideal seria que el script estuviera dentro del nodo
     //que eliminamos, pero esta es otra manera de hacer eso debido a que parece que no sse pueden insertar nodos script dentro de
     //elementos dialog, por ejemplo
-    document.querySelectorAll("script[href='/bloomJS/vistas/editor/subirModelo.js']").forEach((s) => {
+    document.querySelectorAll("script[href='/vistas/editor/subirModelo.js']").forEach((s) => {
         s.remove();
     });
 });
@@ -59,7 +59,7 @@ botonSubir.addEventListener("click", () => {
                 dialog.remove();
             }
         }
-        req.open("POST", "/bloomJS/php/backend/scripts/ProcesarArchivoSubido.php");
+        req.open("POST", "/php/backend/scripts/ProcesarArchivoSubido.php");
         req.send(formData);
     } else {
         alert("No puede dejar el archivo .dae o la textura sin incluir, vuelva a intentarlo");

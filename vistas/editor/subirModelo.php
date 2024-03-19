@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/DTO/Usuario.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/DTO/Usuario.php";
 session_start();
 
 $imprimirPlantilla = false;
@@ -14,7 +14,7 @@ if ($imprimirPlantilla) {
         <div id="encabezado">
                 <div id="barraVentana">
                     <h1>Subir Modelo3D</h1>
-                    <img id="cerrarSubirModelo" src="/bloomJS/img/iconos/cerrar.png" alt="">
+                    <img id="cerrarSubirModelo" src="/img/iconos/cerrar.png" alt="">
                 </div>
                 <p>Para dibujar tu modelo en la escena, la aplicación necesita que subas al servidor tu modelo en formato .dae y la imagen con la 
                         textura</p>
@@ -48,8 +48,8 @@ if ($imprimirPlantilla) {
     </dialog>
 </div>
 <div id="adicional">
-    <link id="estilo" rel="stylesheet" href="/bloomJS/vistas/editor/subirModelo.css">
-    <input id="script" type="hidden" value="/bloomJS/vistas/editor/subirModelo.js">
+    <link id="estilo" rel="stylesheet" href="/vistas/editor/subirModelo.css">
+    <input id="script" type="hidden" value="/vistas/editor/subirModelo.js">
 </div>
 
 <?php
@@ -60,12 +60,12 @@ if ($imprimirPlantilla) {
             <div id="encabezado">
                     <div id="barraVentana">
                         <h1>Subir Modelo3D</h1>
-                        <img id="cerrarSubirModelo" src="/bloomJS/img/iconos/cerrar.png" alt="">
+                        <img id="cerrarSubirModelo" src="/img/iconos/cerrar.png" alt="">
                     </div>
                     <p>Para subir un modelo necesitas iniciar sesión, de esta forma guardaremos tu modelo en tu cuenta de usuario</p>
             </div>
             <div id="contenido">
-                    <form action="/bloomJS/php/paginas/Login.php" method="POST">
+                    <form action="/php/paginas/Login.php" method="POST">
                         <?php
                             if (isset($_POST["paginaVolver"])) {
                                 echo "<input type='hidden' name='paginaVolver' value='".$_POST["paginaVolver"]."'>";

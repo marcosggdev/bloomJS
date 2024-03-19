@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/bloomJS/php/Config.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 session_start();
@@ -12,7 +12,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Generador</title>
 
-        <?= Vista::cargarComponentes("/bloomJS/js/gui", ["BarraVentana"]); ?>
+        <?= Vista::cargarComponentes("/js/gui", ["BarraVentana"]); ?>
 
         <?= Vista::imprimirEstilos([
             RAIZ . "css/general.css", 

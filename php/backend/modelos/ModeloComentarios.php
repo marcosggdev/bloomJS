@@ -4,7 +4,7 @@ class ModeloComentarios {
 
     public static function getComentario ($id) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM comentarios WHERE id=:id";
            // $res = $pdo->query($sql);
             $preparada = $pdo->prepare($sql);
@@ -27,7 +27,7 @@ class ModeloComentarios {
 
     public static function getComentariosPorIdEntrada ($id_entrada) {
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "SELECT * FROM comentarios WHERE id_target=:id_target";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":id_target" => $id_entrada]);
@@ -50,7 +50,7 @@ class ModeloComentarios {
     public static function insertarComentario ($texto, $id_entrada, $id_autor) {
 
         try {
-            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "root", "alumnado");
+            $pdo = new PDO("mysql:dbname=bloomjs;host=db", "bloomjs", "l52ejAvtOAqZ8OQ");
             $sql = "INSERT INTO comentarios(texto, id_target, id_autor) VALUES (:texto, :id_target, :id_autor)";
             $preparada = $pdo->prepare($sql);
             $preparada->execute([":texto" => $texto, ":id_target" => $id_entrada, ":id_autor" => $id_autor]);

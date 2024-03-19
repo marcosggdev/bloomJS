@@ -22,9 +22,9 @@ if (sustituir == "true") {
         SubmenuEscena.crearEscena();
 
         //borrar nodos
-        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        scripts = document.querySelectorAll("script[src='/vistas/editor/crearEscena/crearEscena.js']");
         Array.from(scripts).forEach((s) => {s.remove()});
-        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        links = document.querySelectorAll("link[href='/vistas/editor/crearEscena/crearEscena.css']");
         Array.from(links).forEach((l) => {l.remove()});
 
         dialog.close();
@@ -44,9 +44,9 @@ if (sustituir == "true") {
         RendererRefactor.escena = escena;
 
         //borrar nodos
-        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        scripts = document.querySelectorAll("script[src='/vistas/editor/crearEscena/crearEscena.js']");
         Array.from(scripts).forEach((s) => {s.remove()});
-        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        links = document.querySelectorAll("link[href='/vistas/editor/crearEscena/crearEscena.css']");
         Array.from(links).forEach((l) => {l.remove()});
 
         dialog.close();
@@ -66,9 +66,9 @@ if (sustituir == "true") {
         RendererRefactor.escena = escena;
 
         //borrar nodos
-        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        scripts = document.querySelectorAll("script[src='/vistas/editor/crearEscena/crearEscena.js']");
         Array.from(scripts).forEach((s) => { s.remove() });
-        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        links = document.querySelectorAll("link[href='/vistas/editor/crearEscena/crearEscena.css']");
         Array.from(links).forEach((l) => { l.remove() });
 
         dialog.close();
@@ -80,9 +80,9 @@ if (sustituir == "true") {
     cancelar.addEventListener("click", () => {
 
         //borrar nodos
-        scripts = document.querySelectorAll("script[src='/bloomJS/vistas/editor/crearEscena/crearEscena.js']");
+        scripts = document.querySelectorAll("script[src='/vistas/editor/crearEscena/crearEscena.js']");
         Array.from(scripts).forEach((s) => { s.remove() });
-        links = document.querySelectorAll("link[href='/bloomJS/vistas/editor/crearEscena/crearEscena.css']");
+        links = document.querySelectorAll("link[href='/vistas/editor/crearEscena/crearEscena.css']");
         Array.from(links).forEach((l) => { l.remove() });
 
         dialog.close();

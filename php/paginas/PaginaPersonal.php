@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/bloomJS/php/Config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/php/Config.php";
 require_once RAIZ_WEB . "vistas/Vista.php";
 require_once RAIZ_WEB . "vistas/blog/VistaBlog.php";
 require_once RAIZ_WEB . "php/backend/servicios/ServicioUsuarios.php";
@@ -58,7 +58,7 @@ if ($imprimir) {
                     if (filesize($ruta) > 0) {
                         $texto = fread($archivo, filesize($ruta));
                     } else {
-                        $texto = "<p>¡Ups!<img style='width:15px;display:inline' src='/bloomJS/img/iconos/advertencia.png'/></p> <br>¡Aún no has editado tu página personal! :(";
+                        $texto = "<p>¡Ups!<img style='width:15px;display:inline' src='/img/iconos/advertencia.png'/></p> <br>¡Aún no has editado tu página personal! :(";
                     }
                     echo "<div class='paginaPersonal'>";
                     echo $texto;
@@ -75,21 +75,21 @@ if ($imprimir) {
                     <p class="nombre">Nombre: </p>
                     <div class="valor">
                         <input type="text" value="<?=$usuario->nombre?>" disabled>
-                        <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                        <button><img src="/img/iconos/editar.png" alt=""></button>
                     </div>
                 </div>
                 <div class="campo">
                     <p class="nombre">Correo: </p>
                     <div class="valor">
                         <input type="text" value="<?=$usuario->correo?>" disabled>
-                        <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                        <button><img src="/img/iconos/editar.png" alt=""></button>
                     </div>
                 </div>
                 <div class="campo">
                     <p class="nombre">Contraseña: </p>
                     <div class="valor">
                         <input type="password" placeholder="Contraseña" disabled>
-                        <button><img src="/bloomJS/img/iconos/editar.png" alt=""></button>
+                        <button><img src="/img/iconos/editar.png" alt=""></button>
                     </div>
                 </div>
             </div>
@@ -106,9 +106,9 @@ if ($imprimir) {
                         <div class="plantilla">
                             <div class="cabeceraPlantilla">
                                 <h4><?=$datosModelo["nombre"]?></h4>
-                                <img class="borrar" src="/bloomJS/img/iconos/borrar.png" alt="">
+                                <img class="borrar" src="/img/iconos/borrar.png" alt="">
                             </div>
-                            <img src="/bloomJS/<?=$datosModelo["previsualizacion"]?>" alt="">
+                            <img src="/<?=$datosModelo["previsualizacion"]?>" alt="">
                             <p>Autor: <?=$usuario->nombre?></p>
                             <input id="id" type="hidden" value="<?= $datosModelo["id"] ?>">
                         </div>
@@ -144,7 +144,7 @@ if ($imprimir) {
                     <div class="plantilla">
                         <div class="cabeceraPlantilla">
                             <h4><?=$datosEscena["titulo"]?></h4>
-                            <img class="borrar" src="/bloomJS/img/iconos/borrar.png" alt="">
+                            <img class="borrar" src="/img/iconos/borrar.png" alt="">
                         </div>
                         <img src="<?= $rutaImagen ?>" alt="">
                         <p>Autor: <?=$usuario->nombre?></p>

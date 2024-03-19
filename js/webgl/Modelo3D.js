@@ -474,7 +474,7 @@ class Modelo3D {
             /* let library_images = archivoXML.getElementsByTagName("library_images")[0];
             if (typeof library_images.getElementsByTagName("init_from")[0] !== "undefined") {
                 let nombreTextura = library_images.getElementsByTagName("init_from")[0].textContent;
-                this.rutaTextura = "/bloomJS/assets/texturas/" + nombreTextura;
+                this.rutaTextura = "/assets/texturas/" + nombreTextura;
                 this.texturizado = 1.0;
             }*/
 
