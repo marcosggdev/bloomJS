@@ -1,0 +1,88 @@
+@keyframes background-animation {
+    from {
+        background-size: 130%;
+        background-position: 50%;
+    }
+    25% {
+        background-size: 135%;
+        background-position: 55% 45%
+    }
+    50% {
+        background-size: 140%;
+        background-position: 45% 45%
+    }
+    75% {
+        background-size: 135%;
+        background-position: 55% 55%
+    }
+    to {
+        background-size: 130%;
+        background-position: 50%;
+    }
+}
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+.slide-down {
+    animation-name: slide-down;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function:cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+@keyframes slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+.slide-left {
+    animation-name: slide-left;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+.slide-up {
+    animation-name: slide-up;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes mid-emerge {
+    from {
+        width: 0;
+        transform: translateX(50%);
+    }
+    to {
+        width: 150px;
+        transform: translateX(0);
+    }
+}
+.mid-emerge {
+    animation-name: mid-emerge;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function:cubic-bezier(0.215, 0.610, 0.355, 1);
+}

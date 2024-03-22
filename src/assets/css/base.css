@@ -36,6 +36,13 @@
   --section-gap: 160px;
 }
 
+/*custom color palette for bloomjs*/
+:root {
+  --dark: rgb(47, 47, 47);
+  --light: rgb(222, 222, 222);
+  --light-darker: rgb(194, 194, 194);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
