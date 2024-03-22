@@ -25,6 +25,7 @@ onMounted(() => {
             <nav ref="slide_3" class="animated-opacity">
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/scene">Scene</RouterLink>
+                <RouterLink to="/test">Test</RouterLink>
             </nav>
         </div>
     </header>
