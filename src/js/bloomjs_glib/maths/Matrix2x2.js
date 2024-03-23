@@ -1,4 +1,4 @@
-class Matrix2X2 {
+export default class Matrix2x2 {
 
     constructor (array) {
         //array 2d con los datos, por filas
@@ -12,7 +12,7 @@ class Matrix2X2 {
         }
     }
 
-    static obtenerDeterminante (Matrix) {
+    static getDeterminant (Matrix) {
         let determinante = Matrix.datos[0][0] * Matrix.datos[1][1] - Matrix.datos[0][1] * Matrix.datos[1][0];
         return determinante;
     }
@@ -28,14 +28,14 @@ class Matrix2X2 {
         return cadena;
     }
 
-    static formatearArray (array) {
+    static formatArray (array) {
         let datos = [[],[]];
         for (let i = 0; i< 2; i++) {
             for (let j = 0; j < 2; j++) {
                 datos[i][j] = array[2*i + j];
             }   
         }
-        let Matrix = new Matrix2X2(datos);
+        let Matrix = new Matrix2x2(datos);
         return Matrix;
     }
 

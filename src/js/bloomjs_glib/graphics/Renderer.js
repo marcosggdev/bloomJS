@@ -5,11 +5,11 @@ export default class Renderer {
 
     constructor (canvas, gl, camera, background = Color.BLACK, scene = null) {
 
-        this.canvas = canvas;
-        this.gl = gl;
+        Renderer.canvas = canvas;
+        Renderer.gl = gl;
         this.width = canvas.width;
         this.height = canvas.height;
-        this.camera = camera;
+        Renderer.camera = camera;
         this.background = background;
         this.scene = scene;
 
@@ -18,38 +18,38 @@ export default class Renderer {
 
     config () {
 
-        this.gl.viewport(0, 0, this.width, this.height);   //redimensionar canvas
+        Renderer.gl.viewport(0, 0, this.width, this.height);   //redimensionar canvas
         this.clearBackground();
         this.setProperties();
         this.initMatrices();
     }
 
     clearBackground () {
-        this.gl.clearColor(this.background.R, this.background.G, this.background.B, this.background.A);
-        this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+        Renderer.gl.clearColor(this.background.R, this.background.G, this.background.B, this.background.A);
+        Renderer.gl.clear(Renderer.gl.COLOR_BUFFER_BIT | Renderer.gl.DEPTH_BUFFER_BIT);
     }
 
     setProperties () {
-        this.gl.enable(this.gl.CULL_FACE);    //cull face
-        this.gl.enable(this.gl.DEPTH_TEST);
-        this.gl.depthFunc(this.gl.LESS);
-        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
+        Renderer.gl.enable(Renderer.gl.CULL_FACE);    //cull face
+        Renderer.gl.enable(Renderer.gl.DEPTH_TEST);
+        Renderer.gl.depthFunc(Renderer.gl.LESS);
+        Renderer.gl.pixelStorei(Renderer.gl.UNPACK_FLIP_Y_WEBGL, true); //invertir verticalmente las texturas
     }
 
     initMatrices () {
-        this.aspectRatio = this.gl.canvas.width / this.gl.canvas.height;
-        this.pMat = Utility.createPerspectiveMatrix(60.0, this.aspectRatio, 0.1, 1000.0);
-        this.vMat = this.camera.vMat;
+        this.aspectRatio = Renderer.gl.canvas.width / Renderer.gl.canvas.height;
+        Renderer.pMat = Utility.createPerspectiveMatrix(60.0, this.aspectRatio, 0.1, 1000.0);
+        this.vMat = Renderer.camera.vMat;
     }
 
     cycle () {
         this.update();
         this.draw();
-        window.requestAnimationFrame(this.cycle);
+        requestAnimationFrame(() => {this.cycle()});
     }
 
     update () {
-        this.camera.update();
+        Renderer.camera.update();
 
         if (this.scene !== null) {
             this.scene.update();

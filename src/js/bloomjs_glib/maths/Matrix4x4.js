@@ -1,4 +1,5 @@
 import Utility from '@/js/bloomjs_glib/Utility'
+import Matrix3x3 from '@/js/bloomjs_glib/maths/Matrix3x3'
 
 export default class Matrix4x4 {
 
@@ -228,7 +229,7 @@ export default class Matrix4x4 {
         return array;
     }
 
-    getArrayByCols () {
+    getArrayByColumns () {
         let array = [];
         for (let i = 0; i < this.data.length; i++) {
             for (let j = 0; j < this.data[0].length; j++) {
@@ -270,7 +271,7 @@ export default class Matrix4x4 {
             for (let j = 0; j < Matrix.data[0].length; j++) {
                 let adjunto = this.getAttached(Matrix, i, j);
                 let signo = Math.pow(-1, i+j);
-                data[j][i] = signo * Matrix3X3.getDeterminant(adjunto);
+                data[j][i] = signo * Matrix3x3.getDeterminant(adjunto);
             }
         }
         let attachedMatrix = new Matrix4x4(data);
@@ -284,7 +285,7 @@ export default class Matrix4x4 {
         for (let j = 0; j < Matrix.data.length; j++) {
             let m1i = Matrix.data[0][j];
             let adjunto = this.getAttached(Matrix, 0, j);
-            let termino = Math.pow(-1, 1 + (j+1)) * m1i * Matrix3X3.getDeterminant(adjunto);
+            let termino = Math.pow(-1, 1 + (j+1)) * m1i * Matrix3x3.getDeterminant(adjunto);
             determinante += termino;
         }
 
@@ -307,7 +308,7 @@ export default class Matrix4x4 {
         }
 
         //convertir array 1D en array 3x3
-        let adjunto = Matrix3X3.formatearArray(extraidos);
+        let adjunto = Matrix3x3.formatArray(extraidos);
         return adjunto;
 
     }

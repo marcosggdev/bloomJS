@@ -4,9 +4,10 @@ import Toolbar from '@/components/Toolbar.vue';
 import Navbar from '@/components/Navbar.vue';
 import WindowBar from '@/components/Windowbar.vue';
 
-import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera.js'
-import Renderer from '@/js/bloomjs_glib/graphics/Renderer.js'
-import Color from '@/js/bloomjs_glib/graphics/Color.js'
+import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'  
+import Renderer from '@/js/bloomjs_glib/graphics/Renderer'
+import Color from '@/js/bloomjs_glib/graphics/Color'
+import Scene from '@/js/bloomjs_glib/graphics/Scene'
 
 //save temp css configs...
 let temp = [];
@@ -74,9 +75,11 @@ onMounted(() => {
 
     canvas.value.tabIndex = 0;
 
-    camera.value = new ArcballCamera(0, 0, 0, 30, 0, 30);
-    renderer.value = new Renderer(canvas.value, gl.value, camera);
-    window.requestAnimationFrame(renderer.value.cycle);
+    let camera = new ArcballCamera(0, 0, 0, 30, 0, 30);
+    let renderer = new Renderer(canvas.value, gl.value, camera, Color.BLACK);
+    let scene = new Scene();
+    renderer.scene = scene;
+    requestAnimationFrame(() => {renderer.cycle()});
 
 });
 </script>
@@ -88,7 +91,7 @@ onMounted(() => {
             <Navbar />
             <WindowBar @handle-state-change="handleStateChange" />
         </div>
-        <canvas ref="canvas"></canvas>
+        <div class="canvas-container"><canvas ref="canvas" width="1920" height="1080"></canvas></div>
     </div>
 </template>
 
@@ -110,8 +113,15 @@ onMounted(() => {
     box-sizing: border-box;
     height: 5vh;
 }
-
+.canvas-container {
+    position: relative;
+}
 canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: black;
     width: 100vw;
     height: 95vh;
