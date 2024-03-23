@@ -10,14 +10,21 @@ const router = createRouter({
     },
     {
       path: '/scene',
-      name: 'Scene',
+      name: 'scene',
       component: () => import('@/views/Scene.vue')
     },
     {
       path: '/blog',
-      name: 'Blog',
-      component: () => import('@/views/Blog.vue')
-    }
+      name: 'blog',
+      component: () => import('@/views/blog/Page.vue'),
+      redirect: '/blog/welcome'
+    },
+    {
+      path: '/blog/:slug',
+      name: 'page',
+      component: () => import(`@/views/blog/Page.vue`),
+      props: true
+    },
   ]
 })
 

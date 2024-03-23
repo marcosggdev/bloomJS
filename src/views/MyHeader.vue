@@ -21,7 +21,7 @@ onMounted(() => {
         <Logo />
         <div class="wrapper">
             <h1 ref="slide_1" class="animated-opacity">BloomJS</h1>
-            <h2 ref="slide_2" class="animated-opacity">Project migrated from simple PHP to Vite + Vue 3</h2>
+            <p ref="slide_2" class="animated-opacity">Project migrated from simple PHP to Vite + Vue 3</p>
             <nav ref="slide_3" class="animated-opacity">
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/scene">Scene</RouterLink>

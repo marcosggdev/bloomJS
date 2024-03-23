@@ -1,12 +1,14 @@
 <script setup>
 import MyHeader from '@/views/MyHeader.vue';
 import { RouterView } from 'vue-router'
+import MyFooter from '@/views/MyFooter.vue'
 </script>
     
 <template>
 <div class="index">
     <MyHeader />
     <RouterView />
+    <MyFooter />
 </div>
 </template>
 
