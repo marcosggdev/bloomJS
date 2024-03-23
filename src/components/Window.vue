@@ -8,6 +8,7 @@ import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'
 import Renderer from '@/js/bloomjs_glib/graphics/Renderer'
 import Color from '@/js/bloomjs_glib/graphics/Color'
 import Scene from '@/js/bloomjs_glib/graphics/Scene'
+import { resolveTypeElements } from 'vue/compiler-sfc';
 
 //save temp css configs...
 let temp = [];
@@ -15,40 +16,93 @@ let temp = [];
 const emits = defineEmits(['handleStateChange']);
 const canvas = ref(null);
 const gl = ref(null);
-const camera = ref(null);
-const renderer = ref(null);
 
 const maximize = () => {
-    tempPush(temp, {
-        id: 'header',
-        values: {
-            'display': document.querySelector('header').style.display
-        }
-    });
-    document.querySelector('header').style.display = "none";
+    const elements = document.querySelectorAll('header, footer');
+    hideElements(elements, temp);
 };
 
 const minimize = () => {
-    document.querySelector('header').style.display = loadValue(temp, 'header', 'display');
+    const elements = document.querySelectorAll('header, footer');
+    resetElements(elements, temp);
 };
 
-function tempPush (array, obj) {
-    if (array.length >= 20) {
-        array.shift();
-    }
-    array.push(obj);
+function hideElements (elements, temp) {
+    Array.from(elements).forEach((e) => {
+        changeProp(e, temp, 'style.display', 'none');
+    });
 }
 
-function loadValue(array, id, name) {
+function resetElements (elements, temp) {
+    Array.from(elements).forEach((e) => {
+        changeProp(e, temp, 'style.display', loadValue(e, temp, 'style.display'));
+    });
+}
 
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].id === id) {
-            return array[i].values[name];
+function loadValue (element, temp, composedProp) {
+
+    for (let i = 0; i < temp.length; i++) {
+        if (temp[i].element === element) {
+            const result = temp[i].savedProps[composedProp];
+            return result;
         }
     }
 
     return null;
 
+}
+
+function saveElementProp (element, temp, composedProp) {
+
+    let contained = false;
+    let index = -1;
+    for (let i = 0; i < temp.length; i++) {
+        if (temp[i].element === element) {
+            contained = true;
+            index = i;
+            i = temp.length;
+        }
+    }
+
+    //eg: style.display => obj[style][display]
+    const props = composedProp.split('.');
+    let propsString = "";
+    for (let i = 0; i < props.length; i++) {
+        propsString += `.${props[i]}`;
+    }
+
+    if (contained) {
+
+        //override
+        temp[index].savedProps[composedProp] = eval(`element${propsString}`);
+
+    } else {
+
+        //create
+        const tempObj = {
+            element: element,
+            savedProps: {}
+        }
+
+        tempObj.savedProps[composedProp] = eval(`element${propsString}`);
+        temp.push(tempObj);
+
+    }
+
+}
+
+function changeProp (element, temp, composedProp, value) {
+    saveElementProp(element, temp, composedProp);
+    let props = composedProp.split('.');
+    let propsString = "";
+    for (let i = 0; i < props.length; i++) {
+        propsString += `.${props[i]}`;
+    }
+
+    //supports using composeProps like style.display
+    eval(`element${propsString} = '${value}'`);
+
+    console.log(temp);
 }
 
 const handleStateChange = (maximized) => {
@@ -81,17 +135,25 @@ onMounted(() => {
     renderer.scene = scene;
     requestAnimationFrame(() => {renderer.cycle()});
 
+    window.addEventListener('resize', () => {
+        canvas.value.width = canvas.value.getBoundingClientRect().width;
+        canvas.value.height = canvas.value.getBoundingClientRect().height;
+        renderer.width = canvas.value.width;
+        renderer.height = canvas.value.height;
+        console.log('resize');
+    });
+
 });
 </script>
 
 <template>
-    <div class="window slide-up">
+    <div id="window" class="window slide-up">
         <div class="upper-bar">
             <Toolbar />
             <Navbar />
             <WindowBar @handle-state-change="handleStateChange" />
         </div>
-        <div class="canvas-container"><canvas ref="canvas" width="1920" height="1080"></canvas></div>
+        <canvas ref="canvas" width="1920" height="1080"></canvas>
     </div>
 </template>
 
@@ -99,10 +161,8 @@ onMounted(() => {
 .window {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    justify-content: stretch;
 }
-
 .upper-bar {
     display: flex;
     align-items: center;
@@ -113,17 +173,8 @@ onMounted(() => {
     box-sizing: border-box;
     height: 5vh;
 }
-.canvas-container {
-    position: relative;
-}
 canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-color: black;
-    width: 100vw;
     height: 95vh;
 }
 </style>

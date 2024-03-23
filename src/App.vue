@@ -32,7 +32,6 @@ import MyFooter from '@/views/MyFooter.vue'
 }
 
 .index {
-  min-width: 100vw;
   min-height: 100vh;
   position: relative;
   display: flex;
