@@ -26,12 +26,12 @@ import { RouterView } from 'vue-router'
   animation-duration: 20s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in;
+  background-attachment: fixed;
 }
 
 .index {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-width: 100vw;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
