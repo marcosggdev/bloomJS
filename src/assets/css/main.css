@@ -1,5 +1,7 @@
 @import './base.css';
 @import './animation.css';
+@import './fonts.css';
+
 #app {
   width: 100%;
   height: 100%;

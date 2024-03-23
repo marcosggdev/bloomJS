@@ -65,9 +65,11 @@ import TextCarousel from '@/components/TextCarousel.vue';
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 #pages .header h2 {
   z-index: 1;
+  pointer-events: none;
 }
 #pages .image {
   position: absolute;
