@@ -1,13 +1,20 @@
 <script setup>
-import { ref, reactive, computed, onMounted, watch, watchEffect } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+//components
 import Toolbar from '@/components/Toolbar.vue';
 import Navbar from '@/components/Navbar.vue';
 import WindowBar from '@/components/Windowbar.vue';
 
+//bloomjs_glib
 import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'
 import Renderer from '@/js/bloomjs_glib/graphics/Renderer'
 import Color from '@/js/bloomjs_glib/graphics/Color'
 import Scene from '@/js/bloomjs_glib/graphics/Scene'
+
+//controllers
+import Keyboard from '@/js/bloomjs_glib/controllers/Keyboard'
+import Mouse from '@/js/bloomjs_glib/controllers/Mouse'
 
 //save temp css configs...
 let temp = [];
@@ -15,6 +22,7 @@ let temp = [];
 const emits = defineEmits(['handleStateChange']);
 const canvas = ref(null);
 const gl = ref(null);
+const animationId = ref(null);
 
 const maximize = () => {
     const elements = document.querySelectorAll('header, footer');
@@ -122,8 +130,8 @@ onMounted(() => {
         return;
     }
 
-    gl.value = canvas.value.getContext("webgl", { 
-        preserveDrawingBuffer: true, 
+    gl.value = canvas.value.getContext("webgl", {
+        preserveDrawingBuffer: true,
         premultipliedAlpha: false,
     });
     if (!gl.value) {
@@ -133,11 +141,14 @@ onMounted(() => {
 
     canvas.value.tabIndex = 0;
 
+    const mouse = new Mouse(canvas.value);
+    const keyboard = new Keyboard(canvas.value);
+
     let camera = new ArcballCamera(0, 0, 0, 30, 0, 30);
     let renderer = new Renderer(canvas.value, gl.value, camera, Color.GREY);
     let scene = new Scene();
     renderer.scene = scene;
-    requestAnimationFrame(() => { renderer.cycle() });
+    animationId.value = requestAnimationFrame(() => { renderer.cycle() });
 
     window.addEventListener('resize', () => {
         canvas.value.width = canvas.value.getBoundingClientRect().width;
@@ -145,6 +156,11 @@ onMounted(() => {
         renderer.updateDimensions(canvas.value);
     });
 
+});
+
+onBeforeUnmount(() => {
+    //clean up canvas resources until component is mounted again
+    
 });
 </script>
 
@@ -180,5 +196,6 @@ onMounted(() => {
 canvas {
     background-color: black;
     height: 95vh;
+    user-select: none;
 }
 </style>
