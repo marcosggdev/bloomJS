@@ -7,8 +7,7 @@ export default class Renderer {
 
         Renderer.canvas = canvas;
         Renderer.gl = gl;
-        this.width = canvas.width;
-        this.height = canvas.height;
+        this.updateDimensions(canvas);
         Renderer.camera = camera;
         this.background = background;
         this.scene = scene;
@@ -61,6 +60,12 @@ export default class Renderer {
         if (this.scene !== null) {
             this.scene.draw();
         }
+    }
+
+    updateDimensions (canvas) {
+        this.width = canvas.width;
+        this.height = canvas.height;
+        Renderer.gl.viewport(0, 0, this.width, this.height);
     }
 
 }

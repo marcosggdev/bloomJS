@@ -1,14 +1,13 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, watch, watchEffect } from 'vue'
 import Toolbar from '@/components/Toolbar.vue';
 import Navbar from '@/components/Navbar.vue';
 import WindowBar from '@/components/Windowbar.vue';
 
-import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'  
+import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'
 import Renderer from '@/js/bloomjs_glib/graphics/Renderer'
 import Color from '@/js/bloomjs_glib/graphics/Color'
 import Scene from '@/js/bloomjs_glib/graphics/Scene'
-import { resolveTypeElements } from 'vue/compiler-sfc';
 
 //save temp css configs...
 let temp = [];
@@ -27,19 +26,19 @@ const minimize = () => {
     resetElements(elements, temp);
 };
 
-function hideElements (elements, temp) {
+function hideElements(elements, temp) {
     Array.from(elements).forEach((e) => {
         changeProp(e, temp, 'style.display', 'none');
     });
 }
 
-function resetElements (elements, temp) {
+function resetElements(elements, temp) {
     Array.from(elements).forEach((e) => {
         changeProp(e, temp, 'style.display', loadValue(e, temp, 'style.display'));
     });
 }
 
-function loadValue (element, temp, composedProp) {
+function loadValue(element, temp, composedProp) {
 
     for (let i = 0; i < temp.length; i++) {
         if (temp[i].element === element) {
@@ -52,7 +51,7 @@ function loadValue (element, temp, composedProp) {
 
 }
 
-function saveElementProp (element, temp, composedProp) {
+function saveElementProp(element, temp, composedProp) {
 
     let contained = false;
     let index = -1;
@@ -87,11 +86,15 @@ function saveElementProp (element, temp, composedProp) {
         tempObj.savedProps[composedProp] = eval(`element${propsString}`);
         temp.push(tempObj);
 
+        if (temp.length > 200) {
+            temp.shift();
+        }
+
     }
 
 }
 
-function changeProp (element, temp, composedProp, value) {
+function changeProp(element, temp, composedProp, value) {
     saveElementProp(element, temp, composedProp);
     let props = composedProp.split('.');
     let propsString = "";
@@ -101,8 +104,6 @@ function changeProp (element, temp, composedProp, value) {
 
     //supports using composeProps like style.display
     eval(`element${propsString} = '${value}'`);
-
-    console.log(temp);
 }
 
 const handleStateChange = (maximized) => {
@@ -133,14 +134,12 @@ onMounted(() => {
     let renderer = new Renderer(canvas.value, gl.value, camera, Color.BLACK);
     let scene = new Scene();
     renderer.scene = scene;
-    requestAnimationFrame(() => {renderer.cycle()});
+    requestAnimationFrame(() => { renderer.cycle() });
 
     window.addEventListener('resize', () => {
         canvas.value.width = canvas.value.getBoundingClientRect().width;
         canvas.value.height = canvas.value.getBoundingClientRect().height;
-        renderer.width = canvas.value.width;
-        renderer.height = canvas.value.height;
-        console.log('resize');
+        renderer.updateDimensions(canvas.value);
     });
 
 });
@@ -153,7 +152,7 @@ onMounted(() => {
             <Navbar />
             <WindowBar @handle-state-change="handleStateChange" />
         </div>
-        <canvas ref="canvas" width="1920" height="1080"></canvas>
+        <canvas ref="canvas" :width="1920" :height="1080"></canvas>
     </div>
 </template>
 
@@ -163,6 +162,7 @@ onMounted(() => {
     flex-direction: column;
     justify-content: stretch;
 }
+
 .upper-bar {
     display: flex;
     align-items: center;
@@ -173,6 +173,7 @@ onMounted(() => {
     box-sizing: border-box;
     height: 5vh;
 }
+
 canvas {
     background-color: black;
     height: 95vh;
