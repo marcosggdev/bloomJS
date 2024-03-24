@@ -468,6 +468,7 @@ export var VERTEX_SHADER_GRID =
 "uniform mat4 pInversa;\n"+
 
 "attribute vec3 aPos;\n" +
+"attribute vec3 cameraPos;" +
 "varying vec3 vPos;\n"+
 "varying vec3 nearPoint;\n"+
 "varying vec3 farPoint;\n"+
@@ -501,10 +502,9 @@ export var FRAGMENT_SHADER_GRID =
 //usamos coords attribute pero aplicamos m porque el plano esta rotado. No se aplican v ni p para estar en world space
 "    vec4 unprojectedVector =  m * vec4(vPos.xyz, 1.0);\n"+
 //fade con la lejania
-"    float distanciaRenderizado = 30.0;"+
-"    float distanciaVisionMinima = 10.0;"+
+"    float distanciaRenderizado = 500.0;"+
 "    float distanciaCentro = pow(pow(unprojectedVector.x, 2.0) + pow(unprojectedVector.z, 2.0), 0.5);" +
-"    float factorProfundidad = 1.0;" +
+"    float factorProfundidad = 0.0;" +
 //grid
 "    if (distanciaCentro > distanciaRenderizado) { discard;}"+
 "    if (mod(unprojectedVector.x, 10.0) < 0.2 || mod(unprojectedVector.z, 10.0) < 0.2) {" +

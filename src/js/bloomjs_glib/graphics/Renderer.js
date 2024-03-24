@@ -3,7 +3,7 @@ import Color from '@/js/bloomjs_glib/graphics/Color'
 
 export default class Renderer {
 
-    constructor (canvas, gl, camera, background = Color.BLACK, scene = null) {
+    constructor (canvas, gl, camera, background = Color.GREY_LIGHTER, scene = null) {
 
         Renderer.canvas = canvas;
         Renderer.gl = gl;

@@ -131,7 +131,7 @@ onMounted(() => {
     canvas.value.tabIndex = 0;
 
     let camera = new ArcballCamera(0, 0, 0, 30, 0, 30);
-    let renderer = new Renderer(canvas.value, gl.value, camera, Color.BLACK);
+    let renderer = new Renderer(canvas.value, gl.value, camera, Color.GREY);
     let scene = new Scene();
     renderer.scene = scene;
     requestAnimationFrame(() => { renderer.cycle() });

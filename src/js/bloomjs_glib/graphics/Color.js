@@ -9,6 +9,8 @@ export default class Color {
     static NARANJA = new Color(255,130,0,255);
     static TRANSPARENTE = new Color(0,0,0,0);
     static BLACK = new Color(0, 0, 0, 255);
+    static GREY_LIGHTER = new Color(181, 181, 181, 255);
+    static GREY = new Color(123, 123, 123, 255);
 
     //se guarda en valores gl
     constructor (R,G,B,A) {
