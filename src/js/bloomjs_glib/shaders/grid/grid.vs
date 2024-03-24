@@ -1,4 +1,4 @@
-precision mediump float; 
+precision highp float; 
 
 uniform mat4 m; 
 uniform mat4 v; 

@@ -122,7 +122,10 @@ onMounted(() => {
         return;
     }
 
-    gl.value = canvas.value.getContext("webgl", { preserveDrawingBuffer: true });
+    gl.value = canvas.value.getContext("webgl", { 
+        preserveDrawingBuffer: true, 
+        premultipliedAlpha: false,
+    });
     if (!gl.value) {
         console.log("Error: Error when attempting to get canvas context");
         return;
