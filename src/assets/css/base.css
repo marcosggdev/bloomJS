@@ -40,6 +40,7 @@
 :root {
   --dark: rgb(47, 47, 47);
   --dark-lighter: rgb(82, 82, 82);
+  --dark-darker: rgb(26, 26, 26);
   --light: rgb(222, 222, 222);
   --light-darker: rgb(194, 194, 194);
   --primary: rgb(41 30 41);

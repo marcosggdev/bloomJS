@@ -58,13 +58,13 @@ import SocialsCarousel from '@/components/SocialsCarousel.vue'
                             href: 'https://ciencias.uniovi.es/'
                         },
                     ]" />
+            <p>Have a look at this resources. Its a very good approach to start programming graphic applications</p>
             <ul>
                 <li><a class="social-link" href="https://webglfundamentals.org/"><img class="md-icon"
                             src="@/assets/img/icons/website.png" alt="">WebGL Fundamentals</a></li>
                 <li><a class="social-link"
                         href="https://www.amazon.com/Computer-Graphics-Programming-OpenGL-Second-ebook/dp/B07HNF4YSN"><img
-                            class="md-icon" src="@/assets/img/icons/book.png" alt="">John Clevenger & V. Scott Gordon ~
-                        Computer Graphics Programming in OpenGL with Java</a></li>
+                            class="md-icon" src="@/assets/img/icons/book.png" alt="">Computer Graphics Programming in OpenGL with Java</a></li>
             </ul>
         </div>
         <div id="credits">
@@ -102,6 +102,7 @@ footer .copy {
     justify-content: center;
     padding: 1em;
     box-sizing: border-box;
+    background-color: var(--dark-darker);
 }
 
 footer a {
@@ -130,7 +131,6 @@ footer #credits .image-container img:last-child {
 
 #socials {
     grid-row: 1 / 3;
-    background-color: var(--light);
     height: 100%;
     border-radius: 20px;
     transform: scale(1.1) rotateZ(357deg);
@@ -157,7 +157,14 @@ footer #credits .image-container img:last-child {
     align-items: center;
     overflow: hidden;
 }
-
+#contact, #poweredBy {
+    color: white;
+    background: linear-gradient(40deg, #9280c2, #2d2d2d);
+}
+#contact {
+    border-radius: 0px 20px 20px 0px;
+    filter: drop-shadow(2px 2px 5px black);
+}
 #contact ul {
     list-style: none;
     padding: 0;
@@ -180,27 +187,35 @@ footer #credits .image-container img:last-child {
 
 #poweredBy {
     height: 100%;
-    height: 100%;
-    background-color: #ececec;
     filter: drop-shadow(0px 4px 4px black);
     border-radius: 20px;
-    transform: translateX(10px) rotateZ(2deg);
+    transform: scale(1.05) rotateZ(4deg);
 }
 #poweredBy ul li img {
     transition: all 0.25s;
     padding: 10px;
 }
 #poweredBy ul li img:hover {
-    transform: scale(1.05) rotateZ(5deg);
+    transform: scale(1.1) rotateZ(5deg);
     border-radius: 10px;
-    background-color: grey;
+    background-color: var(--light);
 }
-
+#mentions {
+    border-radius: 0px 0px 20px 0px;
+    background-color: rebeccapurple;
+}
 #mentions ul:last-child {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+}
+#credits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: var(--dark-darker);
 }
 </style>
