@@ -44,7 +44,7 @@ import SocialsCarousel from '@/components/SocialsCarousel.vue'
                 </div>
             </section>
         </div>
-        <div id="mentions">
+        <div id="mentions" class="scroll-control-slide-down">
             <h3>Mentions</h3>
             <SocialsCarousel :socials="[
                         {
@@ -136,6 +136,7 @@ footer #credits .image-container img:last-child {
     transform: scale(1.1) rotateZ(357deg);
     color: var(--dark);
     padding: 0;
+    max-width: 333px;
 }
 
 #socials>section {
@@ -201,7 +202,7 @@ footer #credits .image-container img:last-child {
     background-color: var(--light);
 }
 #mentions {
-    border-radius: 0px 0px 20px 0px;
+    border-radius: 0px 0px 20px 20px;
     background-color: rebeccapurple;
 }
 #mentions ul:last-child {

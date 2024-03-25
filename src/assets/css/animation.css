@@ -102,3 +102,20 @@
     animation-fill-mode: forwards;
     animation-timing-function:cubic-bezier(0.215, 0.610, 0.355, 1);
 }
+@keyframes bounce-rotate {
+    from {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-5px); 
+    }
+}
+.bounce-rotate {
+    animation-name: bounce-rotate;
+    animation-duration: 0.75s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}

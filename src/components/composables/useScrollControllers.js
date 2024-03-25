@@ -39,6 +39,8 @@ export function useScrollControllerOnce (element, animationClass) {
 
     };
 
+    //call once in case page was reloaded
+    callback();
     window.addEventListener('scroll', callback);
 
 }

@@ -52,6 +52,7 @@ const setCurrent = (index) => {
     align-items: center;
     justify-content: center;
     margin-bottom: 2em;
+    top: 150%;
 }
 
 button {
