@@ -20,7 +20,7 @@ onMounted(() => {
 <template>
     <ul ref="linksContainer">
         <li v-for="social in props.socials">
-            <a class="social-link" :href="social.href"><img :src="social.src" :alt="`Link that redirects to author's ${social.name}`" target="_blank"><span>{{ social.name }}</span></a>
+            <a class="social-link" :href="social.href" target="_blank"><img :src="social.src" :alt="`Link that redirects to author's ${social.name}`"><span>{{ social.name }}</span></a>
         </li>
     </ul>
 </template>
@@ -36,7 +36,6 @@ ul {
 ul li a {
     gap: 0;
     text-decoration: none;
-    color: var(--light);
 }
 ul li a span {
     width: 0;

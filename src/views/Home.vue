@@ -4,35 +4,37 @@ import TextCarousel from '@/components/TextCarousel.vue';
 </script>
 
 <template>
-  <div id="pages" class="slide-up">
-    <div class="page">
-      <div class="header">
-        <div class="image" style="background-image: url('/src/assets/img/model.jpg')"></div>
-        <h2>Scene</h2>
+  <div class="home">
+    <div id="pages" class="slide-up">
+      <div class="page">
+        <div class="header">
+          <div class="image" style="background-image: url('/src/assets/img/model.jpg')"></div>
+          <h2>Scene</h2>
+        </div>
+        <TextCarousel :texts="[
+          'Use the generator to load or create a 3D scene with the free models we offer or the ones you upload',
+          'Export your scene and use it in whatever website you are building!',
+          'Save your scene and load it again later if you have to go',
+          'If you are humble, share your models or your scene with other users! Therefor, get models from other users to build your own scene!',
+          'Compatibility with .obj and .dae model formats'
+        ]" />
       </div>
-      <TextCarousel :texts="[
-        'Use the generator to load or create a 3D scene with the free models we offer or the ones you upload',
-        'Export your scene and use it in whatever website you are building!',
-        'Save your scene and load it again later if you have to go',
-        'If you are humble, share your models or your scene with other users! Therefor, get models from other users to build your own scene!',
-        'Compatibility with .obj and .dae model formats'
-      ]" />
-    </div>
-    <div class="page">
-      <div class="header">
-        <div class="image" style="background-image: url('/src/assets/img/blog_welcome.jpg')"></div>
-        <h2>Blog</h2>
+      <div class="page">
+        <div class="header">
+          <div class="image" style="background-image: url('/src/assets/img/blog_welcome.jpg')"></div>
+          <h2>Blog</h2>
+        </div>
+        <TextCarousel :texts="[
+          'We have a blog!',
+          'It\'s a blog for curious people that have interest in web development',
+          'If you are interested in reading BloomJS doc or learning about WebGL, have a look!'
+        ]" />
       </div>
-      <TextCarousel :texts="[
-        'We have a blog!',
-        'It\'s a blog for curious people that have interest in web development',
-        'If you are interested in reading BloomJS doc or learning about WebGL, have a look!'
-      ]" />
     </div>
   </div>
 </template>
 <style scoped>
-#pages::before {
+.home::before {
   position: absolute;
   content: " ";
   top: 0;
@@ -42,7 +44,16 @@ import TextCarousel from '@/components/TextCarousel.vue';
   z-index: -1;
   background-color: black;
   opacity: 0.7;
-  filter: blur(30px);
+  filter: blur(100px);
+}
+
+.home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--light);
+  height: 60vh;
 }
 
 #pages {
@@ -76,10 +87,12 @@ import TextCarousel from '@/components/TextCarousel.vue';
   justify-content: center;
   user-select: none;
 }
+
 #pages .header h2 {
   z-index: 1;
   pointer-events: none;
 }
+
 #pages .image {
   position: absolute;
   top: 0;
