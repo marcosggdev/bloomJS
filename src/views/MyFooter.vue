@@ -82,8 +82,8 @@ import SocialsCarousel from '@/components/SocialsCarousel.vue'
 
 <style scoped>
 footer {
-    background-color: var(--primary);
-    min-height: 50vh;
+    background-color: var(--dark-darker);
+    min-height: 100vh;
     color: var(--light);
     display: grid;
     grid-template-columns: repeat(3, 1fr);

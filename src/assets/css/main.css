@@ -4,6 +4,10 @@
 
 @import './responsive/desktop.css';
 
+body {
+  text-align: justify;
+}
+
 #app {
   width: 100%;
   height: 100%;

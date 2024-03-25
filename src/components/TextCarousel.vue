@@ -36,6 +36,7 @@ const setCurrent = (index) => {
 <style scoped>
 .text-carousel {
     display: flex;
+    position: relative;
     flex-direction: column;
     gap: 1em;
     text-align: justify;

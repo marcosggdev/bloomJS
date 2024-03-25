@@ -1,10 +1,16 @@
 <script setup>
-import MyHeader from '@/views/MyHeader.vue'
+import { onMounted } from 'vue'
 import TextCarousel from '@/components/TextCarousel.vue';
+
+import { useScrollControllers } from '@/components/composables/useScrollControllers'
+
+onMounted(() => {
+  useScrollControllers();
+});
 </script>
 
 <template>
-  <div class="home">
+  <section class="home">
     <div id="pages" class="slide-up">
       <div class="page">
         <div class="header">
@@ -12,12 +18,12 @@ import TextCarousel from '@/components/TextCarousel.vue';
           <h2>Scene</h2>
         </div>
         <TextCarousel :texts="[
-          'Use the generator to load or create a 3D scene with the free models we offer or the ones you upload',
-          'Export your scene and use it in whatever website you are building!',
-          'Save your scene and load it again later if you have to go',
-          'If you are humble, share your models or your scene with other users! Therefor, get models from other users to build your own scene!',
-          'Compatibility with .obj and .dae model formats'
-        ]" />
+            'Use the generator to load or create a 3D scene with the free models we offer or the ones you upload',
+            'Export your scene and use it in whatever website you are building!',
+            'Save your scene and load it again later if you have to go',
+            'If you are humble, share your models or your scene with other users! Therefor, get models from other users to build your own scene!',
+            'Compatibility with .obj and .dae model formats'
+          ]" />
       </div>
       <div class="page">
         <div class="header">
@@ -25,15 +31,119 @@ import TextCarousel from '@/components/TextCarousel.vue';
           <h2>Blog</h2>
         </div>
         <TextCarousel :texts="[
-          'We have a blog!',
-          'It\'s a blog for curious people that have interest in web development',
-          'If you are interested in reading BloomJS doc or learning about WebGL, have a look!'
-        ]" />
+            'We have a blog!',
+            'It\'s a blog for curious people that have interest in web development',
+            'If you are interested in reading BloomJS doc or learning about WebGL, have a look!'
+          ]" />
       </div>
     </div>
-  </div>
+  </section>
+  <section id="functionalities">
+    <div class="content">
+      <h2>What's it for?</h2>
+      <p>Welcome to the BloomJS project official page. Here you will be able to use our application to generate assets
+        for
+        your website and learn about the project and its documentation
+      </p>
+      <p>Enjoy your visit!</p>
+      <div class="functionality scroll-control-slide-up">
+        <div class="header">
+          <h4>3D Scene Editor</h4>
+          <TextCarousel :texts="[
+            'Scene Editor',
+            'Create custom 3D Scenes',
+            'Export your scenes with our bloomjs lib client'
+          ]" />
+        </div>
+        <div class="content scroll-control-slide-right">
+          <p>Use the scene editor to create your own custom 3D background using WebGL and models that you can upload
+            to
+            the app, or
+            just use models that we offer you for free.</p>
+        </div>
+      </div>
+      <h2>Welcome!!</h2>
+      <p>Welcome to the BloomJS project official page. Here you will be able to use our application to generate assets
+        for
+        your website and learn about the project and its documentation
+      </p>
+      <p>Enjoy your visit!</p>
+    </div>
+  </section>
 </template>
 <style scoped>
+*[class*='scroll-animation'] {
+  opacity: 0;  
+}
+.index>section>.content::before {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: white;
+  opacity: 0.9;
+  border-radius: 20px;
+}
+
+.index>section {
+  padding: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.index>section>.content {
+  border-radius: 20px;
+  position: relative;
+  max-width: 1040px;
+  padding: 4em;
+}
+
+#functionalities {
+  color: var(--light);
+  background-color: var(--dark-darker);
+}
+#functionalities .functionality::before {
+  background: none;
+}
+#functionalities .functionality {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 2em;
+  background-color: rebeccapurple;
+  width: 300px;
+  height: 300px;
+  position: relative;
+}
+
+#functionalities .functionality .header {
+  position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#functionalities .functionality .content {
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+}
+
 .home::before {
   position: absolute;
   content: " ";
@@ -53,7 +163,9 @@ import TextCarousel from '@/components/TextCarousel.vue';
   flex-direction: column;
   align-items: center;
   color: var(--light);
-  height: 60vh;
+  padding-top: 12em;
+  padding-bottom: 12em;
+  box-sizing: border-box;
 }
 
 #pages {
