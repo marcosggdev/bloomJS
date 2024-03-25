@@ -41,6 +41,7 @@ const setCurrent = (index) => {
     text-align: justify;
     align-items: center;
     margin-bottom: 2em;
+    flex-grow: 1;
 }
 
 .button-container {

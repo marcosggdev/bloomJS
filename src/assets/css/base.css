@@ -42,6 +42,7 @@
   --dark-lighter: rgb(82, 82, 82);
   --light: rgb(222, 222, 222);
   --light-darker: rgb(194, 194, 194);
+  --primary: rgb(41 30 41);
 }
 
 @media (prefers-color-scheme: dark) {

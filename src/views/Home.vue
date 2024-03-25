@@ -7,7 +7,7 @@ import TextCarousel from '@/components/TextCarousel.vue';
   <div id="pages" class="slide-up">
     <div class="page">
       <div class="header">
-        <div class="image"></div>
+        <div class="image" style="background-image: url('/src/assets/img/model.jpg')"></div>
         <h2>Scene</h2>
       </div>
       <TextCarousel :texts="[
@@ -16,6 +16,17 @@ import TextCarousel from '@/components/TextCarousel.vue';
         'Save your scene and load it again later if you have to go',
         'If you are humble, share your models or your scene with other users! Therefor, get models from other users to build your own scene!',
         'Compatibility with .obj and .dae model formats'
+      ]" />
+    </div>
+    <div class="page">
+      <div class="header">
+        <div class="image" style="background-image: url('/src/assets/img/blog_welcome.jpg')"></div>
+        <h2>Blog</h2>
+      </div>
+      <TextCarousel :texts="[
+        'We have a blog!',
+        'It\'s a blog for curious people that have interest in web development',
+        'If you are interested in reading BloomJS doc or learning about WebGL, have a look!'
       ]" />
     </div>
   </div>
@@ -35,13 +46,11 @@ import TextCarousel from '@/components/TextCarousel.vue';
 }
 
 #pages {
-  position: absolute;
-  bottom: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
   color: var(--light);
-  height: 50vh;
+  height: 60vh;
 }
 
 #pages>div {
@@ -78,7 +87,6 @@ import TextCarousel from '@/components/TextCarousel.vue';
   width: 100%;
   height: 100%;
   min-height: 200px;
-  background-image: url('@/assets/img/model.jpg');
   background-size: cover;
   background-position: 50%;
   transition: all 0.25s;

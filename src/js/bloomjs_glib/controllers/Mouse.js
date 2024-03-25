@@ -90,34 +90,26 @@ export default class Mouse {
             e.preventDefault();
         });
     }
-/*
-    addListenerMousewheel() {
 
+    addListenerMousewheel() {
         this.controlledNode.addEventListener("mousewheel", (e) => {
             if (e.ctrlKey) {
-                //evitar hacer zoom en la pagina
                 e.preventDefault();
-                //zoom de la camara
                 if (e.deltaY < 0) {
-                    RendererRefactor.camara.radio -= 0.5;
-                    //zoom out de la camara
+                    Renderer.camera.radius -= 0.5;
                 } else if (e.deltaY > 0) {
-                    RendererRefactor.camara.radio += 0.5;
+                    Renderer.camera.radius += 0.5;
                 }
             }
         });
     }
-
-    */
 
     loadListeners() {
         this.addListenerMove();
         this.addListenerMousedown();
         this.addListenerContextmenu();
         this.addListenerMouseup();
-        /*
         this.addListenerMousewheel();
-        */
     }
 
 }

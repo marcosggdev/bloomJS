@@ -49,7 +49,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: var(--dark);
+    background-color: var(--primary);
     padding: 10px;
 }
 
