@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-const props = defineProps(['anchors']);
+import { RouterLink } from 'vue-router'
+const props = defineProps(['routes']);
 
 const scrollTo = (path) => {
     window.scrollTo(0, document.querySelector(path).getBoundingClientRect().top + window.scrollY);
@@ -22,13 +23,38 @@ onMounted(() => {
     });
 });
 
+const isAnchor = (path) => {
+    const exp = new RegExp(/#[a-z0-9]+(-[a-z0-9]+)*$/, 'i');
+    return exp.test(path);
+}
+
 </script>
 
 <template>
     <div class="navbar">
-        <h4>Navigation</h4>
+        <h3>Navigation</h3>
         <ul ref="ul">
-            <li v-for="anchor in props.anchors"><button @click="scrollTo(anchor.href)"><span>{{ anchor.name }}</span><img :src="anchor.src" alt=""></button></li>
+            <li v-for="anchor in props.routes">
+                <button v-if="isAnchor(anchor.href)" @click="scrollTo(anchor.href)">
+                    <template v-if="anchor.src">
+                        <span>{{ anchor.name }}</span>
+                        <div class="image" :style="`background-image: url(${anchor.src})`"></div>
+                    </template>
+                    <template v-else>
+                        {{ anchor.name }}
+                    </template>
+                </button>
+                <RouterLink v-else :to="anchor.href">
+                    <span class="route">{{ anchor.name }}</span>
+                    <div class="route-anchors">
+                        <button v-for="subroute in anchor.subroutes" @click="scrollTo(subroute.href)">
+                            <span>{{ subroute.name }}</span>
+                            <div v-if="subroute.src" class="image-container"><div class="image" :style="`background-image: url(${subroute.src})`"></div></div>
+                            <div v-else class="image-container"><div class="image" :style="'background-image: url(/src/assets/img/icons/book.png)'"></div></div>
+                        </button>
+                    </div>
+                </RouterLink>
+            </li>
         </ul>
     </div>
 </template>
@@ -50,6 +76,38 @@ onMounted(() => {
     align-items: center;
     gap: 10px;
     color: var(--light);
+}
+a[class*='router-link-active'] > .route {
+    text-decoration: none;
+    background-color: rgb(53, 42, 49);
+}
+a[class*='router-link-active']:hover > .route {
+    background-color: rgb(53, 42, 49);
+    cursor: default;
+    transform: scale(1.05) rotateZ(-3deg);
+    border-radius: 0px;
+}
+a[class*='router-link-active']:active {
+    text-decoration: none;
+}
+a > .route {
+    display: flex;
+    transform: scale(1.05) rotateZ(-3deg);
+    text-decoration: none;
+    color: var(--light);
+    transition: all 0.25s;
+    padding: 10px;
+    width: 100%;
+    background-color: rebeccapurple;
+}
+a > .route:hover {
+    background-color:#6e5f7e;
+    border-radius: 10px;
+    transform: scale(1.2) rotateZ(3deg);
+}
+.route-anchors {
+    display: flex;
+    align-items: center;
 }
 ul {
     list-style: none;
@@ -83,23 +141,35 @@ button {
     background: none;
     border-radius: 50px;
     border: none;
-    background-color: white;
     width: 50px;
     height: 50px;
     position: relative;
     padding: 10px;
     transition: all 0.25s;
+    cursor: pointer;
 }
 button:hover {
     border-radius: 10px;
     transform: scale(1.05) rotateZ(5deg);
 }
-button img {
+button .image-container {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+button div.image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border-radius: 50px;
+    background-size: cover;
+    background-position: 50%;
+    padding: 10px;
+}
+button > span {
+    position: absolute;
 }
 </style>

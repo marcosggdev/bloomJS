@@ -11,7 +11,7 @@ onMounted(() => {
 
 <template>
   <aside id="navbar">
-    <Navbar :anchors="[
+    <Navbar :routes="[
       {
         name: 'Home',
         href: '#home',

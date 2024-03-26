@@ -2,6 +2,7 @@
 import { defineAsyncComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import { convertToComponentName } from '@/js/Utility'
+import Navbar from '@/components/Navbar.vue'
 
 const props = defineProps(['slug']);
 const name = convertToComponentName(props.slug);
@@ -18,61 +19,67 @@ const AsyncComp = defineAsyncComponent(() => {
 
 <template>
     <div class="blog">
-        <main>
-            <aside id="navbar">
-                <h3>Index</h3>
-                <ul>
-                    <li>
-                        <RouterLink to="/blog/welcome">Welcome</RouterLink>
-                    </li>
-                </ul>
-            </aside>
-            <div id="content">
-                <AsyncComp />
-            </div>
-        </main>
+        <AsyncComp />
+        <Navbar :routes="[
+            {
+                name: 'Welcome',
+                href: '/blog/welcome',
+                src: '/src/assets/img/model.jpg',
+                subroutes: [
+                    {
+                        name: 'How it started',
+                        href: '#howitstarted',
+                        src: '/src/assets/img/icons/book.png'
+                    },
+                ]
+            },
+        ]" />
     </div>
 </template>
-
-<style>
-h1,
-h2,
-h3 {
-    font-family: "Black Ops One";
-}
-</style>
 
 <style scoped>
 .blog {
     min-width: 100vw;
     min-height: 100vh;
-}
-
-main {
     display: flex;
-    gap: 2em;
-    padding: 2em;
-    min-height: 100vh;
-    align-items: stretch;
-    justify-content: space-between;
-    box-sizing: border-box;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 4em;
+    gap: 4em;
 }
-
-aside {
+.blog-content {
+    min-height: 50vh;
+}
+.navbar {
+    position: relative;
     padding: 1em;
     box-sizing: border-box;
     border-radius: 20px;
-    background-color: grey;
-    width: 300px;
-}
-
-aside ul {
+    background-color: var(--dark-darker);
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
     color: var(--light);
+    margin: 0;
+    width: 20%;
+    flex-grow: 1;
+    padding: 4em;
+    box-sizing: border-box;
+    gap: 2em;
+}
+/*reset attributes*/
+.blog .navbar {
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+}
+.navbar ul li button span.unfolded {
+    left: 100%;
+    right: auto;
+    margin-right: 0;
+    margin-left: 150%;
 }
 
 #content>section {
@@ -94,32 +101,10 @@ aside ul {
     grid-column: 2;
     flex-grow: 1;
 }
-
-#navbar {
-    background-color: var(--dark);
-    color: var(--light);
-}
-
-#navbar ul li {
-    background-color: white;
-    border-radius: 10px;
-}
-
-#navbar ul li a {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: var(--dark);
-}
-
-#navbar ul li a.router-link-active {
-    background-color: var(--light-darker);
-    cursor: default;
-}
-#navbar ul li a:active {
-    color: var(--dark);
+section {
+    border-radius: 20px;
+    width: 70%;
+    max-width: 1040px;
+    box-sizing: border-box;
 }
 </style>

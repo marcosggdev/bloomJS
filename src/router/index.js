@@ -16,7 +16,6 @@ const router = createRouter({
     {
       path: '/blog',
       name: 'blog',
-      component: () => import('@/views/blog/Page.vue'),
       redirect: '/blog/welcome'
     },
     {
@@ -25,6 +24,11 @@ const router = createRouter({
       component: () => import(`@/views/blog/Page.vue`),
       props: true
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: () => import(`@/views/blog/NotFound.vue`),
+    }
   ]
 })
 
