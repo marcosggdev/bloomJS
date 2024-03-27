@@ -44,6 +44,7 @@ ul li span {
     position: absolute;
     top: 0;
     left: 0;
+    right: auto;
     height: auto;
     width: 0;
     transition: all 0.25s;

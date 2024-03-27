@@ -1,40 +1,74 @@
+/**
+ * Adjusts the css right and left properties of a box to avoid overflow into his parent node
+ * @param {*} box 
+ * @param {*} parent 
+ */
 export function useAdjustBoxToParent(box, parent) {
-    boxIsContained(box, parent);
+    if (!boxIsContained(box, parent)) {
+        adjustRight(box, parent);
+    }
 }
 
-function boxIsContained(child, parent) {
+/**
+ * Checks wether the a html element is contained or not into the b html element
+ * @param {*} a HTML element
+ * @param {*} b HTML element
+ * @returns 
+ */
+function boxIsContained(a, b) {
 
     const innerBox = {
-        top: child.getBoundingClientRect().top,
-        bottom: child.getBoundingClientRect().bottom,
-        left: child.getBoundingClientRect().left,
-        right: child.getBoundingClientRect().right
+        top: a.getBoundingClientRect().top,
+        bottom: a.getBoundingClientRect().bottom,
+        left: a.getBoundingClientRect().left,
+        right: a.getBoundingClientRect().right
     }
 
     const boundingBox = {
-        top: parent.getBoundingClientRect().top,
-        bottom: parent.getBoundingClientRect().bottom,
-        left: parent.getBoundingClientRect().left,
-        right: parent.getBoundingClientRect().right
+        top: b.getBoundingClientRect().top,
+        bottom: b.getBoundingClientRect().bottom,
+        left: b.getBoundingClientRect().left,
+        right: b.getBoundingClientRect().right
     }
-
-    console.log(innerBox);
-    console.log(boundingBox);
 
     if (innerBox.left > boundingBox.left && innerBox.right < boundingBox.right && innerBox.top > boundingBox.top 
         && innerBox.bottom < boundingBox.bottom) {
-        console.log('fully contained');
-    } else {
-        console.log('not fully contained');
+        return true;
     }
+
+    return false;
 
 }
 
+/**
+ * Checks intersection between 2 html elements
+ * @param {*} a HTML element
+ * @param {*} b Html element
+ * @returns 
+ */
 function boxIntersection(a, b) {
     return (Math.abs((a.getBoundingClientRect().left + a.getBoundingClientRect().width / 2) - (b.getBoundingClientRect().left + b.getBoundingClientRect().width / 2)) * 2 < (a.getBoundingClientRect().width + b.getBoundingClientRect().width)) &&
         (Math.abs((a.getBoundingClientRect().top + a.getBoundingClientRect().height / 2) - (b.getBoundingClientRect().top + b.getBoundingClientRect().height / 2)) * 2 < (a.getBoundingClientRect().height + b.getBoundingClientRect().height));
 }
 
+/**
+ * Adjusts the left and right css values of the inner box to avoid a bounding box overflow
+ * @param {*} box Inner box 
+ * @param {*} parent Bounding box
+ */
+function adjustRight (box, parent) {
+    let diff = Math.abs(box.getBoundingClientRect().right - parent.getBoundingClientRect().right);
+    if (diff < parent.getBoundingClientRect().width) {
+        box.style.right = "auto";
+        box.style.left = `-${diff}px`;
+    }
+}
+
+/**
+ * Unfolds a node and manages the adjustment neccesary to make sure the innerbox doesnt overflow the bounding one
+ * @param {*} node Inner box 
+ * @param {*} parent Bounding box
+ */
 export function unfold(node, parent) {
     console.log(node.getBoundingClientRect().width);
     node.classList.add('unfolded');
