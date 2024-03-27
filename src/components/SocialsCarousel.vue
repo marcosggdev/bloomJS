@@ -9,43 +9,66 @@ onMounted(() => {
         const span = link.querySelector('span');
         link.addEventListener('mouseenter', () => {
             span.classList.add('unfolded');
+            span.classList.add('bounce-translate');
         });
         link.addEventListener('mouseleave', () => {
             span.classList.remove('unfolded');
+            span.classList.add('bounce-translate');
         });
     });
 });
 </script>
 
 <template>
-    <ul ref="linksContainer">
+    <ul class="socials-carousel" ref="linksContainer">
         <li v-for="social in props.socials">
-            <a class="social-link" :href="social.href" target="_blank"><img :src="social.src" :alt="`Link that redirects to author's ${social.name}`"><span>{{ social.name }}</span></a>
+            <a :href="social.href" target="_blank"><img class="sm-icon" :src="social.src" :alt="`Link that redirects to author's ${social.name}`"><span>{{ social.name }}</span></a>
         </li>
     </ul>
 </template>
 
 <style scoped>
-ul {
+ul.socials-carousel {
     display: flex;
-    align-items: center;
+    grid-template-rows: 1fr;
     list-style: none;
     padding: 0;
     margin: 0;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 ul li a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    position: relative;
     gap: 0;
     text-decoration: none;
+    color: var(--dark-darker);
 }
 ul li a span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 0;
     overflow: hidden;
     margin-left: 0;
     transition: all 0.25s;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
 }
 
 ul li a span.unfolded {
-    width: 100%;
-    margin-left: 10px;
+    top: -150%;
+    left: 150%;
+    width: auto;
+    background-color: var(--light);
+    border-radius: 20px;
+    padding: 20px;
 }
 </style>

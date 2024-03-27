@@ -102,7 +102,7 @@
     animation-fill-mode: forwards;
     animation-timing-function:cubic-bezier(0.215, 0.610, 0.355, 1);
 }
-@keyframes bounce-rotate {
+@keyframes bounce-translate {
     from {
         transform: translateY(-5px);
     }
@@ -113,8 +113,8 @@
         transform: translateY(-5px); 
     }
 }
-.bounce-rotate {
-    animation-name: bounce-rotate;
+.bounce-translate {
+    animation-name: bounce-translate;
     animation-duration: 0.75s;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;

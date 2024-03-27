@@ -14,11 +14,11 @@ onMounted(() => {
     Array.from(buttons).forEach(button => {
         button.addEventListener('mouseenter', () => {
             button.querySelector('span').classList.add('unfolded');
-            button.querySelector('span').classList.add('bounce-rotate');
+            button.querySelector('span').classList.add('bounce-translate');
         });
         button.addEventListener('mouseleave', () => {
             button.querySelector('span').classList.remove('unfolded');
-            button.querySelector('span').classList.remove('bounce-rotate');
+            button.querySelector('span').classList.remove('bounce-translate');
         });
     });
 });

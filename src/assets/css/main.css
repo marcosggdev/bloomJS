@@ -53,6 +53,11 @@ ul {
   padding: 10px;
 }
 
+.sm-icon {
+  width: 25px;
+  height: auto;
+}
+
 .md-icon {
   width: 50px;
   height: auto;
