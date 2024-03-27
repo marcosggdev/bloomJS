@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import SocialsCarousel from '@/components/SocialsCarousel.vue'
+import UnfoldCarousel from '@/components/UnfoldCarousel.vue'
 
 const emits = defineEmits(['load']);
 
@@ -39,13 +40,28 @@ onMounted(() => { emits('load') });
                     <h3>Powered by</h3>
                 </div>
                 <div class="content">
-                    <ul>
-                        <li><img class="md-icon" src="@/assets/img/icons/html.png" alt=""></li>
-                        <li><img class="md-icon" src="@/assets/img/icons/css.png" alt=""></li>
-                        <li><img class="md-icon" src="@/assets/img/icons/js.png" alt=""></li>
-                        <li><img class="md-icon" src="@/assets/img/icons/vuejs.png" alt=""></li>
-                        <li><img class="md-icon" src="@/assets/img/icons/nodejs.png" alt=""></li>
-                    </ul>
+                    <UnfoldCarousel :data="[
+                        {
+                            src: '/src/assets/img/icons/html.png',
+                            description: 'HTML: Lenguaje de etiquetas de hipertexto - MDN Web Docs',
+                        },
+                        {
+                            src: '/src/assets/img/icons/css.png',
+                            description: 'asd',
+                        },
+                        {
+                            src: '/src/assets/img/icons/js.png',
+                            description: 'asd',
+                        },
+                        {
+                            src: '/src/assets/img/icons/vuejs.png',
+                            description: 'asd',
+                        },
+                        {
+                            src: '/src/assets/img/icons/nodejs.png',
+                            description: 'asd',
+                        },
+                    ]" />
                 </div>
             </section>
         </div>
