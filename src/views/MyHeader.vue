@@ -1,11 +1,12 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted, defineExpose } from 'vue'
 import { RouterLink } from 'vue-router'
 import Logo from '@/components/graphics/Logo.vue'
 
 const slide_1 = ref(null);
 const slide_2 = ref(null);
 const slide_3 = ref(null);
+const loaded = ref(false);
 
 onMounted(() => {
   const slides = [slide_1, slide_2, slide_3];
@@ -14,8 +15,17 @@ onMounted(() => {
       slides[i].value.classList.add('slide-down');
     }, i * 500);
   }
+  loaded.value = true;
+});
+
+const emits = defineEmits(['load']);
+watch(loaded, () => {
+    if (loaded.value) {
+        emits('load');
+    }
 });
 </script>
+
 <template>
     <header>
         <Logo />

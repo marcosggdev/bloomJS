@@ -1,5 +1,10 @@
 <script setup>
+import { onMounted } from 'vue'
 import SocialsCarousel from '@/components/SocialsCarousel.vue'
+
+const emits = defineEmits(['load']);
+
+onMounted(() => { emits('load') });
 </script>
 
 <template>
@@ -76,7 +81,7 @@ import SocialsCarousel from '@/components/SocialsCarousel.vue'
                     <li><a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by Smashicons - Flaticon</a></li>
                 </ul>
             </small>
-            <div class="image-container">
+            <div class="image-container scroll-control-slide-left">
                 <img src="@/assets/img/microsoft_designer_1.jpg" alt="">
                 <img src="@/assets/img/microsoft_designer_2.jpg" alt="">
             </div>

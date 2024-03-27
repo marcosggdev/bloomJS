@@ -29,7 +29,7 @@ const router = createRouter({
       name: 'notFound',
       component: () => import(`@/views/blog/NotFound.vue`),
     }
-  ]
+  ],
 })
 
 export default router

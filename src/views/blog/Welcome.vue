@@ -1,5 +1,7 @@
 <script setup>
+import ImgWithHorizontalText from '@/components/blog/ImgWithHorizontalText.vue';
 import BlogHeader from '@/views/BlogHeader.vue';
+import Card from '@/components/blog/Card.vue'
 </script>
 
 <template>
@@ -23,40 +25,75 @@ import BlogHeader from '@/views/BlogHeader.vue';
         <div class="blog-content">
             <article id="howitstarted">
                 <h1 class="big-title">Hello World!!</h1>
-                <p>Welcome to the BloomJS blog. If you are interested in just reading for fun, stay here and enjoy. However,
+                <p>Welcome to the BloomJS blog. If you are interested in just reading for fun, stay here and enjoy.
+                    However,
                     if you
-                    are seeking help with some dev information, better go directly to the <RouterLink to="/documentation">
+                    are seeking help with some dev information, better go directly to the <RouterLink
+                        to="/documentation">
                         Documentation</RouterLink>
                 </p>
                 <h2>How it started</h2>
-                <p>BloomJS was thought to be an online tool for web developers with interest in graphic applications.
-                    The first
-                    thoughts about
-                    the app, were about possible shading programs that could be nice to show in a website. A simple
-                    example,
-                    which was by the way really
-                    one of the first thoughts i had about the app, was a shader that simulated the deformations that the
-                    gasoline makes in the hot air
-                    over an asphalt road.
-                </p>
-                <img src="/src/assets/img/blog/gasoline_asphalt.png" alt="">
+                <ImgWithHorizontalText>
+                    <template #image>
+                        <img src="/src/assets/img/blog/gasoline_asphalt.png" alt="">
+                    </template>
+                    <template #content>
+                        <p>BloomJS was thought to be an online tool for web developers with interest in graphic
+                            applications.
+                            The first
+                            thoughts about
+                            the app, were about possible shading programs that could be nice to show in a website. A
+                            simple
+                            example,
+                            which was by the way really
+                            one of the first thoughts i had about the app, was a shader that simulated the deformations
+                            that the
+                            gasoline makes in the hot air
+                            over an asphalt road.
+                        </p>
+                    </template>
+                </ImgWithHorizontalText>
                 <p>The idea was that a developer could just put a good resolution image of a car running on an asphalt
                     road
                     into the app, and he could use
-                    BloomJS to distort the image based on the GPU ability to modify pixel colors  and the use of a shader program that 
+                    BloomJS to distort the image based on the GPU ability to modify pixel colors and the use of a shader
+                    program
+                    that
                     managed those pixel transformations in order to get the desired image.
                 </p>
-                <p>Another simple example would be to simulate rain over a background of a page, making the developer able to make 
-                    custom, very good detailed graphics for their websites.
-                </p>
-                <p>I knew this could have interesting uses, since i love playing videogames and so many ideas came to my mind when 
-                    thinking about the game user interfaces, but applied to a website. Just imagine a website in which u can literally
-                    move the camera around and see information about the page, easter eggs, interactive elements through the use of 
-                    virtual objects in that scene... Or imagine a custom dark background with some 3D models of some type of monster, 
+                <Card src="/src/assets/img/model.jpg">
+                    <template #header>
+                        <h3>Rain</h3>
+                    </template>
+                    <template #content>
+                        <p>Another simple example would be to simulate rain over a background of a page, making the
+                            developer
+                            able to
+                            make
+                            custom, very good detailed graphics for their websites.
+                        </p>
+                    </template>
+                </Card>
+                <p>I knew this could have interesting uses, since i love playing videogames and so many ideas came to my
+                    mind
+                    when
+                    thinking about the game user interfaces, but applied to a website. Just imagine a website in which u
+                    can
+                    literally
+                    move the camera around and see information about the page, easter eggs, interactive elements through
+                    the use
+                    of
+                    virtual objects in that scene... Or imagine a custom dark background with some 3D models of some
+                    type of
+                    monster,
                     weird shadows, dark fog all over the place...
                 </p>
-                <p>This ideas were so intereseting to me that i decided to do this project as my final project for my advanced vocational training
-                    in web development. And that was the moment that i started to think about functionalities. <small>Every day i would end up 
+                <p>This ideas were so intereseting to me that i decided to do this project as my final project for my
+                    advanced
+                    vocational training
+                    in web development. And that was the moment that i started to think about functionalities.
+                    <small>Every day
+                        i would end up
                         completing 10 things, and thinkin about 20 more new ones...
                     </small>
                 </p>
@@ -78,12 +115,14 @@ import BlogHeader from '@/views/BlogHeader.vue';
     opacity: 0.9;
     border-radius: 0px 0px 20px 20px;
 }
+
 article {
     margin: 4em;
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
+
 .blog-content {
     position: relative;
     z-index: 0;

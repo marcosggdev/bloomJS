@@ -6,7 +6,7 @@
  */
 export function useScrollControllers () {
 
-    const nodes = document.querySelectorAll("[class*='scroll-control']");
+    const nodes = document.querySelectorAll("*[class*='scroll-control']");
 
     Array.from(nodes).forEach(node => {
 
