@@ -54,39 +54,17 @@ watch([() => components[0].loaded, () => components[1].loaded, () => components[
 </script>
 
 <template>
+  <!--
   <div class="index">
     <template v-for="comp in components">
       <component v-if="previousLoaded(comp.name, components)" @load="components[getIndex(comp.name, components)].loaded = true" :is="comp.component"></component>
     </template>
   </div>
+  -->
+  <RouterView />
 </template>
 
 <style scoped>
-.index::before {
-  position: absolute;
-  content: " ";
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  background-image: url('@/assets/img/background/night_street.jpg');
-  background-position: 50%;
-  background-size: cover;
-  animation-name: background-animation;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in;
-  background-attachment: fixed;
-}
-
-.index {
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
 :deep(*[class*='scroll-control']) {
   opacity: 0;
 }

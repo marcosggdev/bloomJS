@@ -70,7 +70,6 @@ function adjustRight (box, parent) {
  * @param {*} parent Bounding box
  */
 export function useUnfold(node, parent) {
-    console.log(node.getBoundingClientRect().width);
     node.classList.add('unfolded');
     setTimeout(() => { useAdjustBoxToParent(node, parent) }, 250 + 50); //50ms more than animation duration
 }
