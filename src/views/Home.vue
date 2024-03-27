@@ -34,11 +34,11 @@ onMounted(() => {
   </aside>
   <section id="home" class="home">
     <h2>Welcome!!</h2>
-      <p>Welcome to the BloomJS project official page. Here you will be able to use our application to generate assets
-        for
-        your website and learn about the project and its documentation
-      </p>
-    <div class="content pages scroll-control-slide-up">
+    <p>Welcome to the BloomJS project official page. Here you will be able to use our application to generate assets
+      for
+      your website and learn about the project and its documentation
+    </p>
+    <HorizontalCards class="scroll-control-slide-up">
       <Card src="/src/assets/img/model.jpg">
         <template #header>
           <h2>Scene</h2>
@@ -65,7 +65,7 @@ onMounted(() => {
     ]" />
         </template>
       </Card>
-    </div>
+    </HorizontalCards>
   </section>
   <section id="whatsitfor">
     <div class="content">
@@ -80,10 +80,10 @@ onMounted(() => {
           </template>
           <template #content>
             <TextCarousel :texts="[
-            'Scene Editor',
-            'Create custom 3D Scenes',
-            'Export your scenes with our bloomjs lib client'
-          ]" />
+      'Scene Editor',
+      'Create custom 3D Scenes',
+      'Export your scenes with our bloomjs lib client'
+    ]" />
           </template>
         </Card>
         <Card src="/src/assets/img/blog_welcome.jpg">
@@ -92,10 +92,10 @@ onMounted(() => {
           </template>
           <template #content>
             <TextCarousel :texts="[
-            'Have a look at the documentation',
-            'Share scenes and models with other users',
-            'Read interesting information about the project'
-          ]" />
+      'Have a look at the documentation',
+      'Share scenes and models with other users',
+      'Read interesting information about the project'
+    ]" />
           </template>
         </Card>
       </HorizontalCards>
