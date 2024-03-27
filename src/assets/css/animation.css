@@ -119,3 +119,18 @@
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
 }
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.show {
+    animation-name: show;
+    animation-duration: 0.75s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}

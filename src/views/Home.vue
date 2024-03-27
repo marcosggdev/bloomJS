@@ -7,11 +7,13 @@ import Card from '@/components/blog/Card.vue'
 import ImgWithHorizontalText from '@/components/blog/ImgWithHorizontalText.vue';
 import MyHeader from '@/views/MyHeader.vue'
 import MyFooter from '@/views/MyFooter.vue'
+import { useScrollControllers } from '@/components/composables/useScrollControllers'
 
 const emits = defineEmits(['load']);
 
 onMounted(() => {
   emits('load');
+  useScrollControllers();
 });
 </script>
 
@@ -194,5 +196,9 @@ div.page-background-fixed {
   background-size: cover;
   background-attachment: fixed;
   z-index: -10;
+}
+
+*[class*='scroll-control'] {
+  opacity: 0;
 }
 </style>
