@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { unfold } from '@/components/composables/useAdjustBoxToParent'
+import { useUnfold } from '@/components/composables/useAdjustBoxToParent'
 const props = defineProps(['data']);
 
 const dataContainer = ref(null);
@@ -11,7 +11,7 @@ onMounted(() => {
     Array.from(lis).forEach(li => {
 
         const span = li.querySelector('span');
-        li.addEventListener('mouseenter', () => { unfold(span, dataContainer.value.parentNode.parentNode) });
+        li.addEventListener('mouseenter', () => { useUnfold(span, dataContainer.value.parentNode.parentNode) });
         li.addEventListener('mouseleave', () => { span.classList.remove('unfolded') });
         
     });
@@ -64,5 +64,6 @@ ul li span.unfolded {
     z-index: 10;
     text-align: left;
     opacity: 1;
+    margin: 20px;
 }
 </style>

@@ -10,7 +10,7 @@ onMounted(() => { emits('load') });
 
 <template>
     <footer>
-        <div id="socials">
+        <div id="socials" class="scroll-control-slide-right">
             <section id="contact">
                 <div class="title">
                     <h3>Contact</h3>
@@ -32,7 +32,7 @@ onMounted(() => { emits('load') });
                             src: '/src/assets/img/socials/gmail.png',
                             href: 'mailto:marcosggdev@gmail.com'
                         },
-                    ]" />
+                    ]" :parentId="'contact'" />
                 </div>
             </section>
             <section id="poweredBy">
@@ -43,31 +43,34 @@ onMounted(() => { emits('load') });
                     <UnfoldCarousel :data="[
                         {
                             src: '/src/assets/img/icons/html.png',
-                            description: 'HTML: Lenguaje de etiquetas de hipertexto - MDN Web Docs',
+                            description: 'HTML ~ Universal markup language for the Web. Lets the developer format text, add graphics, create links, input forms, etc',
                         },
                         {
                             src: '/src/assets/img/icons/css.png',
-                            description: 'asd',
+                            description: 'CSS ~ Cascading Style Sheets are used to style and layout web pages. It lets the developer alter the font, colors, size, layouts, etc',
                         },
                         {
                             src: '/src/assets/img/icons/js.png',
-                            description: 'asd',
+                            description: 'JavaScript ~ Scripting language used to create and control dynamic website content, anything that moves, refreshes, etc',
                         },
                         {
                             src: '/src/assets/img/icons/vuejs.png',
-                            description: 'asd',
+                            description: 'VueJS ~ Versatile and efficient JavaScript framework for building web user interfaces. It extends HTML, CSS, and JavaScript',
                         },
                         {
                             src: '/src/assets/img/icons/nodejs.png',
-                            description: 'asd',
+                            description: 'NodeJS ~ Open-source and cross-platform JavaScript runtime environment. It runs the V8 JavaScript engine, the core of Google Chrome, outside of the browser.',
                         },
                     ]" />
                 </div>
             </section>
         </div>
         <div id="mentions" class="scroll-control-slide-down">
-            <h3>Mentions</h3>
-            <SocialsCarousel :socials="[
+            <div class="title">
+                <h3>Mentions</h3>
+            </div>
+            <div class="content">
+                <SocialsCarousel :socials="[
                         {
                             name: 'IBQ',
                             src: '/src/assets/img/socials/ibq.jpg',
@@ -78,23 +81,31 @@ onMounted(() => { emits('load') });
                             src: '/src/assets/img/socials/uniovi.jpg',
                             href: 'https://ciencias.uniovi.es/'
                         },
-                    ]" />
-            <p>Have a look at this resources. Its a very good approach to start programming graphic applications</p>
-            <ul>
-                <li><a class="social-link" href="https://webglfundamentals.org/"><img class="md-icon"
-                            src="@/assets/img/icons/website.png" alt="">WebGL Fundamentals</a></li>
-                <li><a class="social-link"
-                        href="https://www.amazon.com/Computer-Graphics-Programming-OpenGL-Second-ebook/dp/B07HNF4YSN"><img
-                            class="md-icon" src="@/assets/img/icons/book.png" alt="">Computer Graphics Programming in OpenGL with Java</a></li>
-            </ul>
+                    ]" :parentId="'mentions'" />
+                <p>Have a look at this resources. Its a very good approach to start programming graphic applications</p>
+                <SocialsCarousel :socials="[
+                        {
+                            href: 'https://webglfundamentals.org/',
+                            src: '/src/assets/img/icons/website.png',
+                            name: 'WebGL Fundamentals'
+                        },
+                        {
+                            name: 'Computer Graphics Programming in OpenGL with Java',
+                            src: '/src/assets/img/icons/book.png',
+                            href: 'https://www.amazon.com/Computer-Graphics-Programming-OpenGL-Second-ebook/dp/B07HNF4YSN'
+                        },
+                    ]" :parentId="'mentions'" />
+            </div>
         </div>
         <div id="credits" class="scroll-control-slide-left">
             <h3>Credits</h3>
             <small>Almost all the images used in this page are of free use or have been generated by Microsoft Designer
                 AI</small>
-            <small>Some of the icons where obtained from pages where the author requires attribution. Here is a list of authors
+            <small>Some of the icons where obtained from pages where the author requires attribution. Here is a list of
+                authors
                 <ul>
-                    <li><a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by Smashicons - Flaticon</a></li>
+                    <li><a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by
+                            Smashicons - Flaticon</a></li>
                 </ul>
             </small>
             <div class="image-container scroll-control-slide-up">
@@ -120,7 +131,11 @@ footer {
 }
 
 footer>div {
-    padding: 4em;
+    padding: 2em;
+}
+
+footer>div>.title, footer>div>.content {
+    padding: 2em;
 }
 
 footer .copy {
@@ -162,7 +177,6 @@ footer #credits .image-container img:last-child {
     border-radius: 20px;
     transform: scale(1.1) rotateZ(357deg);
     color: var(--dark);
-    padding: 0;
     max-width: 333px;
 }
 
@@ -184,12 +198,15 @@ footer #credits .image-container img:last-child {
     flex-direction: column;
     align-items: center;
 }
-#contact, #poweredBy {
+
+#contact,
+#poweredBy {
     color: white;
     background: linear-gradient(40deg, #9280c2, #2d2d2d);
 }
+
 #contact {
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 20px;
     filter: drop-shadow(2px 2px 5px black);
 }
 
@@ -209,26 +226,28 @@ footer #credits .image-container img:last-child {
     border-radius: 20px;
     transform: scale(1.05) rotateZ(4deg);
 }
+
 #poweredBy ul li img {
     transition: all 0.25s;
     padding: 10px;
 }
+
 #poweredBy ul li img:hover {
     transform: scale(1.1) rotateZ(5deg);
     border-radius: 10px;
     background-color: var(--light);
 }
+
 #mentions {
     border-radius: 0px 0px 20px 20px;
     background-color: rebeccapurple;
+    min-height: 50vh;
 }
-#mentions ul:last-child {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+
+#mentions div.title {
+    padding: 2em;
 }
+
 #credits {
     display: flex;
     flex-direction: column;

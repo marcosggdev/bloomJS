@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-const props = defineProps(['socials']);
+import SocialLink from '@/components/SocialLink.vue'
+import { useUnfold } from '@/components/composables/useAdjustBoxToParent'
+const props = defineProps(['socials', 'parentId']);
 const linksContainer = ref(null);
 
 onMounted(() => {
@@ -8,12 +10,13 @@ onMounted(() => {
     Array.from(links).forEach(link => {
         const span = link.querySelector('span');
         link.addEventListener('mouseenter', () => {
-            span.classList.add('unfolded');
+            const parent = document.getElementById(props.parentId);
+            useUnfold(span, parent);
             span.classList.add('bounce-translate');
         });
         link.addEventListener('mouseleave', () => {
             span.classList.remove('unfolded');
-            span.classList.add('bounce-translate');
+            span.classList.remove('bounce-translate');
         });
     });
 });
@@ -22,13 +25,14 @@ onMounted(() => {
 <template>
     <ul class="socials-carousel" ref="linksContainer">
         <li v-for="social in props.socials">
-            <a :href="social.href" target="_blank"><img class="sm-icon" :src="social.src" :alt="`Link that redirects to author's ${social.name}`"><span>{{ social.name }}</span></a>
+            <SocialLink :social="social" />
         </li>
     </ul>
 </template>
 
 <style scoped>
 ul.socials-carousel {
+    position: relative;
     display: flex;
     grid-template-rows: 1fr;
     list-style: none;

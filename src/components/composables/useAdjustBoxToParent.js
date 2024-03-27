@@ -69,8 +69,8 @@ function adjustRight (box, parent) {
  * @param {*} node Inner box 
  * @param {*} parent Bounding box
  */
-export function unfold(node, parent) {
+export function useUnfold(node, parent) {
     console.log(node.getBoundingClientRect().width);
     node.classList.add('unfolded');
-    setTimeout(() => { useAdjustBoxToParent(node, parent) }, 260); //10ms more than animation duration
+    setTimeout(() => { useAdjustBoxToParent(node, parent) }, 250 + 50); //50ms more than animation duration
 }

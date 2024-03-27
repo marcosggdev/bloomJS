@@ -38,6 +38,7 @@ const props = defineProps(['src']);
     align-items: center;
     justify-content: center;
     padding: 2em;
+    overflow: hidden;
 }
 
 .card :deep(h3) {
@@ -58,5 +59,10 @@ const props = defineProps(['src']);
     z-index: -2;
     background-size: cover;
     background-position: 50%;
+    transition: transform 0.25s;
+}
+
+.card:hover .background {
+    transform: scale(1.5);
 }
 </style>
