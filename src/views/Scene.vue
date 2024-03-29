@@ -58,6 +58,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Toolbar from '@/components/Toolbar.vue';
 import HorizontalNavbar from '@/components/HorizontalNavbar.vue'
 import WindowBar from '@/components/Windowbar.vue';
+import { navbar } from '@/data/scene/navbar' 
 
 //bloomjs_glib
 import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'
@@ -213,26 +214,30 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     //clean up canvas resources until component is mounted again
-    
+
 });
+
+//HorizontalNavbar functions----------------------------------------------------------------------------
+const newFile = () => {
+    console.log('newFile');
+};
+const openFile = () => {
+    console.log('openFile');
+};
+const saveFile = () => {
+    console.log('saveFile');
+};
+const saveFileAs = () => {
+    console.log('saveFileAs');
+};
+//-----------------------------------------------END----------------------------------------------------
 </script>
 
 <template>
     <div id="window" class="window show">
         <div class="upper-bar">
             <Toolbar />
-            <HorizontalNavbar :links="[
-                {
-                    name: 'File',
-                    dropdown: true,
-                    subLinks: [
-                        {
-                            name: 'Open',
-                            callback: fileOpen
-                        }
-                    ]
-                }
-            ]" />
+            <HorizontalNavbar :links="navbar" />
             <WindowBar @handle-state-change="handleStateChange" />
         </div>
         <canvas ref="canvas" :width="1920" :height="1080"></canvas>

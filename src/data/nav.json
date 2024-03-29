@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Home",
+        "href": "/",
+        "description": "Introduction to the page and its functionalities. General Summary"
+    },
+    {
+        "name": "Scene",
+        "href": "/scene",
+        "description": "3D Scene editor. The user can edit here his own scene, add 3D Models on the fly and manipulate position, illumination, shading code, animations..."
+    },
+    {
+        "name": "blog",
+        "href": "/blog",
+        "description": "Information about the project. Documentation. Forum in which users can share ideas, assets, scenes..."
+    }
+]

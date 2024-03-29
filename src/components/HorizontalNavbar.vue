@@ -1,20 +1,24 @@
 <script setup>
-const props = defineProps(['links']);
+import Dropdown from '@/components/Dropdown.vue'
 
-const fileOpen = () => {
-    console.log('file open');
-};
+const props = defineProps(['links']);
 </script>
 
 <template>
     <ul class="horizontal-navbar">
         <li v-for="linkObj in links">
             <template v-if="linkObj.dropdown">
-                <p>{{ linkObj.name }}</p>
-                <div class="dropdown">
-                    <li v-for="link in linkObj.subLinks"><button class="navbar-button" @click="link.callback">{{
-            link.name }}</button></li>
-                </div>
+                <Dropdown>
+                    <template #triggerText>
+                        {{ linkObj.name }}
+                    </template>
+                    <template #content>
+                        <ul>
+                            <li v-for="link in linkObj.subLinks"><button class="navbar-button" @click="link.callback">{{
+                            link.name }}</button></li>
+                        </ul>
+                    </template>
+                </Dropdown>
             </template>
             <template v-else>
                 <button class="navbar-button" @click="linkObj.callback">{{ linkObj.name }}</button>
@@ -25,36 +29,15 @@ const fileOpen = () => {
 
 <style scoped>
 .horizontal-navbar {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    height: 100%;
     min-width: 300px;
-}
-
-.horizontal-navbar li {
-    position: relative;
-    display: flex;
     height: 100%;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-}
-
-.dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: auto;
-    height: auto;
-    max-width: 200%;
     display: flex;
-    flex-direction: column;
-    background-color: var(--dark-darker);
-    padding: 2em;
-    border-radius: 20px;
+    align-items: center;
+}
+.horizontal-navbar li {
+    min-width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 </style>
