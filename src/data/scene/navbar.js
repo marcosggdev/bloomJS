@@ -1,47 +1,71 @@
 import nav from '@/data/nav.json'
 
-function generateNavbar () {
-    const navbar = [];
-    navbar.push(
-    {
-        "name": "File",
-        "dropdown": "true",
-        "subLinks": [
+function generateNavbar() {
+
+    const windowTools =         {
+        name: "File",
+        dropdown: "true",
+        subLinks: [
             {
-                "name": "New",
-                "callback": "newFile"
+                name: "New",
+                callback: {
+                    identifier: "newFile",
+                    args: {
+
+                    }
+                }
             },
             {
-                "name": "Open",
-                "callback": "openFile"
+                name: "Open",
+                callback: {
+                    identifier: "openFile",
+                    args: {
+
+                    }
+                }
             },
             {
-                "name": "Save",
-                "callback": "saveFile"
+                name: "Save",
+                callback: {
+                    identifier: "saveFile",
+                    args: {
+
+                    }
+                }
             },
             {
-                "name": "Save As",
-                "callback": "saveFileAs"
+                name: "Save As",
+                callback: {
+                    identifier: "saveFileAs",
+                    args: {
+
+                    }
+                }
             }
         ]
-    }
-    );
+    };
 
-    const navigate = {
+    const navigation = {
         name: 'Navigate',
         dropdown: true,
         subLinks: []
     };
 
     Array.from(nav).forEach(navObj => {
-        navigate.subLinks.push({
+        navigation.subLinks.push({
             name: navObj.name,
-            callback: () => { $router.push(navObj.href) }
+            callback: {
+                identifier: 'nav',
+                args: {
+                    path: navObj.href
+                }
+            }
         });
     });
 
-    navbar.push(navigate);
-
+    const navbar = [];
+    navbar.push(windowTools);
+    navbar.push(navigation);
     return navbar;
 
 }

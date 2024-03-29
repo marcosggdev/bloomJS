@@ -59,6 +59,8 @@ import Toolbar from '@/components/Toolbar.vue';
 import HorizontalNavbar from '@/components/HorizontalNavbar.vue'
 import WindowBar from '@/components/Windowbar.vue';
 import { navbar } from '@/data/scene/navbar' 
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 //bloomjs_glib
 import ArcballCamera from '@/js/bloomjs_glib/camera/ArcballCamera'
@@ -230,6 +232,10 @@ const saveFile = () => {
 const saveFileAs = () => {
     console.log('saveFileAs');
 };
+
+const nav = (path) => {
+    router.push(path);
+};
 //-----------------------------------------------END----------------------------------------------------
 </script>
 
@@ -237,7 +243,10 @@ const saveFileAs = () => {
     <div id="window" class="window show">
         <div class="upper-bar">
             <Toolbar />
-            <HorizontalNavbar :links="navbar" />
+            <HorizontalNavbar :links="navbar" 
+                @new-file="newFile" @open-file="openFile" @save-file="saveFile" 
+                @save-file-as="saveFileAs" @nav="nav" 
+            />
             <WindowBar @handle-state-change="handleStateChange" />
         </div>
         <canvas ref="canvas" :width="1920" :height="1080"></canvas>

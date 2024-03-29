@@ -2,6 +2,18 @@
 import Dropdown from '@/components/Dropdown.vue'
 
 const props = defineProps(['links']);
+const emits = defineEmits(['newFile', 'openFile', 'saveFile', 'saveFileAs', 'nav']);
+
+const executeCallback = (callback, args) => {
+    switch (callback) {
+        case 'newFile': emits('newFile'); break;
+        case 'openFile': emits('openFile'); break;
+        case 'saveFile': emits('saveFile'); break;
+        case 'saveFileAs': emits('saveFileAs'); break;
+        case 'nav': emits('nav', args.path); break;
+    }
+};
+
 </script>
 
 <template>
@@ -14,7 +26,7 @@ const props = defineProps(['links']);
                     </template>
                     <template #content>
                         <ul>
-                            <li v-for="link in linkObj.subLinks"><button class="navbar-button" @click="link.callback">{{
+                            <li v-for="link in linkObj.subLinks"><button class="navbar-button" @click="executeCallback(link.callback.identifier, link.callback.args)">{{
                             link.name }}</button></li>
                         </ul>
                     </template>
