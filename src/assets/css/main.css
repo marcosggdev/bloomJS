@@ -68,3 +68,7 @@ ul {
   flex-direction: column;
   justify-content: center;
 }
+
+.row {
+  display: flex;
+}

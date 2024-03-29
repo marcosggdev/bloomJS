@@ -2,16 +2,12 @@
 import Dropdown from '@/components/Dropdown.vue'
 
 const props = defineProps(['links']);
-const emits = defineEmits(['newFile', 'openFile', 'saveFile', 'saveFileAs', 'nav']);
+const emits = defineEmits();
 
+//we pass the callbacks received as an emitted event, so we can implement them properly in the parent component
+//that uses this one, keeping code more sorted
 const executeCallback = (callback, args) => {
-    switch (callback) {
-        case 'newFile': emits('newFile'); break;
-        case 'openFile': emits('openFile'); break;
-        case 'saveFile': emits('saveFile'); break;
-        case 'saveFileAs': emits('saveFileAs'); break;
-        case 'nav': emits('nav', args.path); break;
-    }
+    emits(callback, args);
 };
 
 </script>
@@ -41,7 +37,6 @@ const executeCallback = (callback, args) => {
 
 <style scoped>
 .horizontal-navbar {
-    min-width: 300px;
     height: 100%;
     display: flex;
     align-items: center;
