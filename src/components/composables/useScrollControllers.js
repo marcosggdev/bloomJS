@@ -3,10 +3,11 @@
  * To that elements, the script removes that class and adds the effective animation class that is contained
  * only when the element appears on the screen. After doing the animation, the window scroll event is eliminated
  * to avoid waste of resources
+ * @element Html container node within which we will look for animated elements
  */
-export function useScrollControllers () {
+export function useScrollControllers (element) {
 
-    const nodes = document.querySelectorAll("*[class*='scroll-control']");
+    const nodes = element.querySelectorAll("*[class*='scroll-control']");
 
     Array.from(nodes).forEach(node => {
 

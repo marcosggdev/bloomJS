@@ -1,5 +1,5 @@
 <template>
-    <div class="logo-container mid-emerge">
+    <div class="logo-container">
         <div class="logo-image"></div>
         <div class="logo-js"></div>
     </div>

@@ -25,6 +25,7 @@ export default class Model2D {
         this.createVertices();
         this.createUVCoords();
         this.mMat = new Matrix4x4();
+
     }
 
     static async create2DModel (xPos, yPos, zPos, xAngle, yAngle, zAngle, xFactor, yFactor, texturePath,

@@ -10,8 +10,13 @@
         "description": "3D Scene editor. The user can edit here his own scene, add 3D Models on the fly and manipulate position, illumination, shading code, animations..."
     },
     {
-        "name": "blog",
+        "name": "Blog",
         "href": "/blog",
         "description": "Information about the project. Documentation. Forum in which users can share ideas, assets, scenes..."
+    },
+    {
+        "name": "Test",
+        "href": "/test",
+        "description": "Page for testing purposes. If you see this page and you are not a developer, go back"
     }
 ]

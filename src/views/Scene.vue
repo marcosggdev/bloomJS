@@ -1,6 +1,6 @@
 <script setup>
 //vue general
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
 
 //components
 import SceneHorizontalNavbar from '@/components/scene/SceneHorizontalNavbar.vue'
@@ -23,7 +23,9 @@ const emits = defineEmits(['handleStateChange']);
 //vars
 const canvas = ref(null);
 const gl = ref(null);
+const renderer = ref(null);
 const animationId = ref(null);
+const webglLoaded = ref(false);
 
 onMounted(() => {
 
@@ -52,10 +54,12 @@ onMounted(() => {
 
     //bloomjs_glib objects
     let camera = new ArcballCamera(0, 0, 0, 30, 0, 30);
-    let renderer = new Renderer(canvas.value, gl.value, camera, Color.GREY);
+    renderer.value = new Renderer(canvas.value, gl.value, camera, Color.GREY);
     let scene = new Scene();
-    renderer.scene = scene;
-    animationId.value = requestAnimationFrame(() => { renderer.cycle() });
+    renderer.value.scene = scene;
+    animationId.value = requestAnimationFrame(() => { renderer.value.cycle() });
+
+    webglLoaded.value = true;
 
 });
 
@@ -63,7 +67,7 @@ onBeforeUnmount(() => {
     //clean up webgl resources until component is mounted again (currently app pops errors when reloading the component)
     //current error: WebGL: INVALID_OPERATION: useProgram: object does not belong to this context, for every webgl object 
     //that uses drawing program
-
+    
 });
 </script>
 
@@ -74,7 +78,7 @@ onBeforeUnmount(() => {
         </div>
         <div class="row">
             <div class="canvas-container"><canvas ref="canvas" :width="1920" :height="1080"></canvas></div>
-            <ObjectMenu />
+            <ObjectMenu v-if="webglLoaded" :renderer="renderer" />
         </div>
     </div>
 </template>

@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue'
 import TextCarousel from '@/components/TextCarousel.vue';
 import Navbar from '@/components/Navbar.vue'
 import HorizontalCards from '@/components/blog/HorizontalCards.vue'
@@ -7,19 +6,19 @@ import Card from '@/components/blog/Card.vue'
 import ImgWithHorizontalText from '@/components/blog/ImgWithHorizontalText.vue';
 import MyHeader from '@/views/MyHeader.vue'
 import MyFooter from '@/views/MyFooter.vue'
+
+import { ref } from 'vue'
+import { onMounted } from 'vue'
 import { useScrollControllers } from '@/components/composables/useScrollControllers'
-
-const emits = defineEmits(['load']);
-
+const root = ref(null);
 onMounted(() => {
-  emits('load');
-  useScrollControllers();
+  useScrollControllers(root.value);
 });
 </script>
 
 <template>
   <div class="page-background-fixed" src="/src/assets/img/background/night_street.jpeg" alt=""></div>
-  <div class="home">
+  <div ref="root" class="home">
     <MyHeader />
     <aside id="navbar">
       <Navbar :routes="[

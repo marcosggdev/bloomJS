@@ -1,42 +1,23 @@
 <script setup>
-import { ref, watch, onMounted, defineExpose } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
 import Logo from '@/components/graphics/Logo.vue'
+import MyNav from '@/components/MyNav.vue'
 
-const slide_1 = ref(null);
-const slide_2 = ref(null);
-const slide_3 = ref(null);
-const loaded = ref(false);
-
+import { onMounted } from 'vue'
+import { useScrollControllers } from '@/components/composables/useScrollControllers'
+const root = ref(null);
 onMounted(() => {
-  const slides = [slide_1, slide_2, slide_3];
-  for (let i = 0; i < slides.length; i++) {
-    setTimeout(() => {
-      slides[i].value.classList.add('slide-down');
-    }, i * 500);
-  }
-  loaded.value = true;
-});
-
-const emits = defineEmits(['load']);
-watch(loaded, () => {
-    if (loaded.value) {
-        emits('load');
-    }
+  useScrollControllers(root.value);
 });
 </script>
 
 <template>
-    <header>
-        <Logo />
-        <div class="wrapper">
-            <h1 ref="slide_1" class="animated-opacity">BloomJS</h1>
-            <p ref="slide_2" class="animated-opacity">Project migrated from simple PHP to Vite + Vue 3</p>
-            <nav ref="slide_3" class="animated-opacity">
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/scene">Scene</RouterLink>
-                <RouterLink to="/blog">Blog</RouterLink>
-            </nav>
+    <header ref="root">
+        <Logo class="scroll-control-slide-down" />
+        <div class="scroll-control-slide-down">
+            <h1>BloomJS</h1>
+            <p>Project migrated from simple PHP to Vite + Vue 3</p>
+            <MyNav />
         </div>
     </header>
 </template>
@@ -55,23 +36,6 @@ header {
     z-index: 0;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--primary);
-    padding: 10px;
-}
-
-nav a {
-    color: var(--light);
-    text-decoration: none;
-}
-
-nav a.router-link-active {
-    color: rgb(191, 191, 191);
-    cursor: default;
-}
 
 #title {
     display: flex;

@@ -1,15 +1,18 @@
 <script setup>
-import { onMounted } from 'vue'
 import SocialsCarousel from '@/components/SocialsCarousel.vue'
 import UnfoldCarousel from '@/components/UnfoldCarousel.vue'
 
-const emits = defineEmits(['load']);
-
-onMounted(() => { emits('load') });
+import { ref } from 'vue'
+import { onMounted } from 'vue'
+import { useScrollControllers } from '@/components/composables/useScrollControllers'
+const root = ref(null);
+onMounted(() => {
+  useScrollControllers(root.value);
+});
 </script>
 
 <template>
-    <footer>
+    <footer ref="root">
         <div id="socials" class="scroll-control-slide-right">
             <section id="contact">
                 <div class="title">
