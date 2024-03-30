@@ -1,11 +1,14 @@
 <script setup>
-import Dropdown from '@/components/composables/useDropdown.vue'
+import Dropdown from '@/components/HoverDropdown.vue'
 </script>
 
 <template>
 <div>
-    <div class="dropdown-control">
-        <div class="dropdown-content">
+    <Dropdown>
+        <template #triggerText>
+            Dropdown
+        </template>
+        <template #content>
             <p>hello world!</p>
             <ul>
                 <li>hello world!</li>
@@ -14,7 +17,7 @@ import Dropdown from '@/components/composables/useDropdown.vue'
                 <li>hello world!</li>
                 <li>hello world!</li>
             </ul>
-        </div>
-    </div>
+        </template>
+    </Dropdown>
 </div>
 </template>

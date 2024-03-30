@@ -1,6 +1,6 @@
 <script setup>
 //vue general
-import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 //components
 import SceneHorizontalNavbar from '@/components/scene/SceneHorizontalNavbar.vue'

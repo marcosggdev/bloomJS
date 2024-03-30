@@ -1,63 +1,73 @@
 <script setup>
+import Dropdown from '@/components/HoverDropdown.vue'
 const props = defineProps(['model']);
 </script>
 
 <template>
     <div class="model">
         <ul class="col">
-            <li class="row position">
-                <div class="title">Position</div>
-                <div class="content">
-                    <div class="group row">
-                        <h3 class="key">x:</h3>
-                        <p class="value">{{ props.model.xPos }}</p>
-                    </div>
-                    <div class="group row">
-                        <h3 class="key">y:</h3>
-                        <p class="value">{{ props.model.yPos }}</p>
-                    </div>
-                    <div class="group row">
-                        <h3 class="key">z:</h3>
-                        <p class="value">{{ props.model.zPos }}</p>
-                    </div>
-                </div>
-            </li>
-            <li class="row rotation">
-                <div class="title">Rotation</div>
-                <div class="content">
-                    <div class="group row">
-                        <h3 class="key">&alpha;<sub>x</sub>:</h3>
-                        <p class="value">{{ props.model.xAngle }}</p>
-                    </div>
-                    <div class="group row">
-                        <h3 class="key">&alpha;<sub>y</sub>:</h3>
-                        <p class="value">{{ props.model.yAngle }}</p>
-                    </div>
-                </div>
-            </li>
-            <li class="row scale">
-                <div class="title">Scale</div>
-                <div class="content">
-                    <div class="group row">
-                        <h3 class="key">s<sub>x</sub>:</h3>
-                        <p class="value">{{ props.model.xFactor }}</p>
-                    </div>
-                    <div class="group row">
-                        <h3 class="key">s<sub>y</sub>:</h3>
-                        <p class="value">{{ props.model.yFactor }}</p>
-                    </div>
-                    <div class="group row">
-                        <h3 class="key">s<sub>z</sub>:</h3>
-                        <p class="value">{{ props.model.zFactor }}</p>
-                    </div>
-                </div>
+            <li>
+                <Dropdown>
+                    <template #triggerText>
+                        <h3 class="key">Coords.</h3>
+                    </template>
+                    <template #content>
+                        <div class="row">
+                            <div class="title">Position</div>
+                            <div class="content">
+                                <div class="group row">
+                                    <h3 class="key">x:</h3>
+                                    <p class="value">{{ props.model.xPos }}</p>
+                                </div>
+                                <div class="group row">
+                                    <h3 class="key">y:</h3>
+                                    <p class="value">{{ props.model.yPos }}</p>
+                                </div>
+                                <div class="group row">
+                                    <h3 class="key">z:</h3>
+                                    <p class="value">{{ props.model.zPos }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <div class="title">Rotation</div>
+                            <div class="content">
+                                <div class="group row">
+                                    <h3 class="key">&alpha;<sub>x</sub>:</h3>
+                                    <p class="value">{{ props.model.xAngle }}</p>
+                                </div>
+                                <div class="group row">
+                                    <h3 class="key">&alpha;<sub>y</sub>:</h3>
+                                    <p class="value">{{ props.model.yAngle }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="title">Scale</div>
+                            <div class="content">
+                                <div class="group row">
+                                    <h3 class="key">s<sub>x</sub>:</h3>
+                                    <p class="value">{{ props.model.xFactor }}</p>
+                                </div>
+                                <div class="group row">
+                                    <h3 class="key">s<sub>y</sub>:</h3>
+                                    <p class="value">{{ props.model.yFactor }}</p>
+                                </div>
+                                <div class="group row">
+                                    <h3 class="key">s<sub>z</sub>:</h3>
+                                    <p class="value">{{ props.model.zFactor }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </Dropdown>
             </li>
             <li class="row scale">
                 <div class="title">Class</div>
                 <div class="content">
                     <div class="group row">
-                    <p>{{ props.model.constructor.name }}</p>
-                </div>
+                        <p>{{ props.model.constructor.name }}</p>
+                    </div>
                 </div>
             </li>
         </ul>

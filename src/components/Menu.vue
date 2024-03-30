@@ -1,17 +1,18 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useScrollControllers } from '@/components/composables/useScrollControllers'
 import Submenu from '@/components/Submenu.vue'
 
+const root = ref(null);
 const props = defineProps(['title']);
 
 onMounted(() => {
-  useScrollControllers();
+  useScrollControllers(root.value);
 });
 </script>
 
 <template>
-    <div class="menu">
+    <div ref="root" class="menu">
         <slot name="header"></slot>
         <slot name="content"></slot>
     </div>

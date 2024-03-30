@@ -2,7 +2,6 @@
 import Model2DObjectDataMenu from '@/components/scene/Model2DObjectDataMenu.vue'
 
 const props = defineProps(['drawable']);
-console.log(props.drawable.constructor.name);
 </script>
 
 <template>

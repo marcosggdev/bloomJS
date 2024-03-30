@@ -1,5 +1,5 @@
 <script setup>
-import Dropdown from '@/components/Dropdown.vue'
+import HoverDropdown from '@/components/HoverDropdown.vue'
 
 const props = defineProps(['links']);
 const emits = defineEmits();
@@ -16,7 +16,7 @@ const executeCallback = (callback, args) => {
     <ul class="horizontal-navbar">
         <li v-for="linkObj in links">
             <template v-if="linkObj.dropdown">
-                <Dropdown>
+                <HoverDropdown>
                     <template #triggerText>
                         {{ linkObj.name }}
                     </template>
@@ -26,7 +26,7 @@ const executeCallback = (callback, args) => {
                             link.name }}</button></li>
                         </ul>
                     </template>
-                </Dropdown>
+                </HoverDropdown>
             </template>
             <template v-else>
                 <button class="navbar-button" @click="linkObj.callback">{{ linkObj.name }}</button>
