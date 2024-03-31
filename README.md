@@ -12,7 +12,8 @@ he could embed that BloomJS scene in his own page.
 The idea was to let the user generate more types of graphics and formats, but the time was too much limited for that.
 
 This project was made public in 31/03/2024 and i will still try to make progress in my free time, but this is not the only project in which i am investing time.
-
+Currently, im migrating the old plain PHP + JS code to work with Vue components, so i made the old code not tracked anymore. For the viewer of this project, you can
+see that if you look on older commits. 
 I hope this is sometype of useful to web developers some day or at least a good resource of information about 3D graphics web apps with WebGL.
 
 Project developed with Vue 3 in Vite.
