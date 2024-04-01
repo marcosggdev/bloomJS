@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
 <template>
     <div id="window" class="window show">
         <div class="upper-bar">
-            <SceneHorizontalNavbar :links="navbar" />
+            <SceneHorizontalNavbar :renderer="renderer" :links="navbar" />
         </div>
         <div class="row">
             <div class="canvas-container"><canvas ref="canvas" :width="1920" :height="1080"></canvas></div>

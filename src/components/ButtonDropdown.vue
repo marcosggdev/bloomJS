@@ -1,18 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-const triggerText = ref(null);
+const triggerButton = ref(null);
+const unfolded = ref(false);
 onMounted(() => {
-    const dropdownMenu = triggerText.value.parentNode.querySelector('.dropdown-menu');
-    triggerText.value.addEventListener('mouseenter', () => { dropdownMenu.classList.add('unfolded') });
-    triggerText.value.addEventListener('mouseleave', () => { dropdownMenu.classList.remove('unfolded') });
+    triggerButton.value.addEventListener('click', () => {
+        unfolded.value = !unfolded.value;
+    });
 });
 </script>
 
 <template>
     <div class="dropdown-control">
-        <div class="trigger" ref="triggerText">
-            <slot name="triggerText"></slot>
-            <div class="dropdown-menu">
+        <div class="trigger">
+            <button ref="triggerButton" class="trigger-button"><slot name="triggerText"></slot></button>
+            <div class="dropdown-menu" :class="{'unfolded': unfolded}">
                 <slot name="content"></slot>
             </div>
         </div>
@@ -27,7 +28,24 @@ onMounted(() => {
     height: 100%;
     align-items: center;
 }
-
+.trigger-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light);
+    transition: all 0.25s;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.trigger-button:hover {
+    background-color: white;
+    color: rebeccapurple;
+    box-shadow: inset 0px 0px 20px rebeccapurple;
+}
 .trigger {
     display: flex;
     width: 100%;
@@ -38,8 +56,6 @@ onMounted(() => {
     background-color: var(--light);
     color: var(--dark-darker);
     z-index: 1;
-    padding-left: 2em;
-    padding-right: 2em;
     cursor: default;
 }
 
@@ -55,7 +71,7 @@ onMounted(() => {
     flex-direction: column;
     background-color: rebeccapurple;
     transition: all 0.25s;
-    z-index: 0;
+    z-index: -1;
     cursor: default;
     transform: translateX(-50%);
     pointer-events: none;

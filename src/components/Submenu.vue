@@ -18,7 +18,7 @@ const handleUnfold = () => {
         <button @click="handleUnfold" class="arrow-container"><span class="arrow material-symbols-outlined">{{ symbol }}</span></button>
         <slot name="header"></slot>
     </div>
-    <div ref="content" class="content" :class="{'unfolded': !unfolded}">
+    <div ref="content" class="content" :class="{'unfolded': unfolded}">
         <slot name="content"></slot>
     </div>
 </div>
@@ -30,10 +30,15 @@ const handleUnfold = () => {
 }
 
 .submenu {
-    background-color: var(--light);
+    background-color: var(--dark);
     color: var(--dark-darker);
     box-shadow: 0px 1px 15px black;
+    transition: all 0.25s;
 }
+.submenu:has(.content.unfolded) {
+    flex-grow: 1;
+}
+
 .header {
     position: relative;
     display: flex;
@@ -44,18 +49,20 @@ const handleUnfold = () => {
 
 .content {
     overflow: hidden;
-    height: 0;
+    height: 100%;
     padding: 0;
     transition: all 0.25s;
-    background-color: var(--dark);
     color: var(--light);
     overflow-y: scroll;
-    max-height: 250px;
+    flex-grow: 1;   
+    padding: 10px;
 }
 
 .content:not(.unfolded) {
-    height: auto;
-    padding: 10px;
+    height: 0;
+    flex-grow: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .arrow-container {

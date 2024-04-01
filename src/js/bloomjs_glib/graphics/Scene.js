@@ -10,6 +10,14 @@ export default class Scene {
         this.illumination = illumination;
     }
 
+    clearScene () {
+        for (let i = 0; i < this.drawables.length; i++) {
+            if (this.drawables[i].constructor.name !== 'Grid') {
+                this.removeDrawable(this.drawables[i]);
+            }
+        }
+    }
+
     addDrawable (drawable) {
         this.drawables.push(drawable);
     }

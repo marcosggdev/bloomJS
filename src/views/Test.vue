@@ -1,10 +1,12 @@
 <script setup>
-import Dropdown from '@/components/HoverDropdown.vue'
+import ButtonDropdown from '@/components/ButtonDropdown.vue'
+import MyHeader from '@/views/MyHeader.vue'
 </script>
 
 <template>
 <div>
-    <Dropdown>
+    <MyHeader />
+    <ButtonDropdown>
         <template #triggerText>
             Dropdown
         </template>
@@ -18,6 +20,6 @@ import Dropdown from '@/components/HoverDropdown.vue'
                 <li>hello world!</li>
             </ul>
         </template>
-    </Dropdown>
+    </ButtonDropdown>
 </div>
 </template>

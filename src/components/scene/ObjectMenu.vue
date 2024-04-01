@@ -4,6 +4,10 @@ import Submenu from '@/components/Submenu.vue'
 import Drawable from '@/components/scene/Drawable.vue'
 
 const props = defineProps(['renderer']);
+
+const selectObject = (c) => {
+    console.log('asd');
+};
 </script>
 
 <template>
