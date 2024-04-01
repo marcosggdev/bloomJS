@@ -1,14 +1,22 @@
 # bloomjs
 
-This template should help get you started developing with Vue 3 in Vite.
+BloomJS is a project with the objective of creating an online tool for 3D graphics generation which developers can use in their pages. The code has totally been
+written by marcosggdev, since this is his final project for an Advanced Vocational Training in web development.
 
-## Recommended IDE Setup
+The project was developed until the deadline indicated in the AVT. At that moment, the tool offered a 3D environment with basic functions to add models to a scene,
+modify their general properties like position and rotation, and export the scene which could be loaded after that with a custom lib that acted like a client.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+The user could use the page, generate a scene with models, then download a folder with the assets and a lib to load them, and with a simple div with a custom id
+he could embed that BloomJS scene in his own page.
 
-## Customize configuration
+The idea was to let the user generate more types of graphics and formats, but the time was too much limited for that.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+This project was made public in 31/03/2024 and i will still try to make progress in my free time, but this is not the only project in which i am investing time.
+Currently, im migrating the old plain PHP + JS code to work with Vue components, so i made the old code not tracked anymore. For the viewer of this project, you can
+see that if you look on older commits. 
+I hope this is sometype of useful to web developers some day or at least a good resource of information about 3D graphics web apps with WebGL.
+
+Project developed with Vue 3 in Vite.
 
 ## Project Setup
 
